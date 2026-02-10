@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">MySite</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <h1>Welcome to MySite</h1>
+    <p>A clean, simple website built with just HTML and CSS.</p>
+    <a href="#about" class="btn">Learn More</a>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>We believe in simplicity and clarity. Great websites don't need complex frameworks — they need thoughtful design and clean code.</p>
+        <p>This site is built with nothing but HTML and CSS, proving that beautiful, responsive websites can be created with the basics.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">HTML & CSS</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">0</span>
+          <span class="stat-label">Frameworks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">Fast</span>
+          <span class="stat-label">Load Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <h2>Services</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">&#9998;</div>
+        <h3>Web Design</h3>
+        <p>Clean, modern designs that put your content first and look great on every device.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9881;</div>
+        <h3>Development</h3>
+        <p>Hand-crafted code that loads fast and works reliably across all browsers.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9733;</div>
+        <h3>Branding</h3>
+        <p>Memorable brand identities that help you stand out and connect with your audience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Get In Touch</h2>
+    <form onsubmit="return false;">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 MySite. All rights reserved.</p>
+  </footer>
+</body>
+</html>
