@@ -3,167 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aloha Crater Lodge | DIRECT BOOKING ASSET</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --canvas-bg: #f4f1ea; --text-dark: #2c2c2c; --text-muted: #666; --magma-accent: #ff4d00; --magma-dark: #cc3d00; --card-ridge: #8b5a2b; --card-summit: #4a5d41; --card-caldera: #4f6372; --font-head: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--canvas-bg); color: var(--text-dark); font-family: var(--font-body); line-height: 1.6; min-height: 100vh; position: relative; overflow-x: hidden; }
-
-        /* FX LAYERS */
-        .fx-layer { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; overflow: hidden; }
-        .fx-fog { position: fixed; height: 100vh; z-index: -1; opacity: 0.6; background-image: url("https://images.unsplash.com/photo-1541849909-1785f750d990?q=80&w=2070&auto=format&fit=crop"); background-size: cover; filter: grayscale(100%) contrast(1.5) brightness(1.2); animation: fogDrift 60s ease-in-out infinite alternate; -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 70%); mask-image: linear-gradient(to bottom, black 0%, transparent 70%); }
-        .fx-embers-sparse { height: 100%; z-index: 9998; opacity: 0.7; background-image: radial-gradient(2px 2px at 50px 50px, #ff4d00, transparent), radial-gradient(2px 2px at 150px 250px, #ff8c00, transparent); background-size: 300px 300px; animation: emberRise 15s linear infinite; }
-        .fx-embers-dense { height: 100%; z-index: 9999; opacity: 0.9; background-image: radial-gradient(2px 2px at 20px 30px, #ff4d00, transparent), radial-gradient(2px 2px at 60px 10px, #ff4d00, transparent); background-size: 200px 200px; animation: emberRise 15s linear infinite; }
-        @keyframes fogDrift { 0% { background-position: 40% 50%; } 100% { background-position: 60% 50%; } }
-        @keyframes emberRise { 0% { background-position: 0 300px; } 100% { background-position: 0 0; } }
-
-        /* NAVIGATION */
-        .nav-bar { position: absolute; top: 0; left: 0; width: 100%; padding: 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; color: #fff; }
-        .logo { font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; letter-spacing: 2px; }
-        .status-indicator { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-        .status-dot { width: 8px; height: 8px; background: #ff4d00; border-radius: 50%; box-shadow: 0 0 10px #ff4d00; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* HERO */
-        .hero { position: relative; height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; border-bottom: 1px solid rgba(0,0,0,0.2); }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.55) contrast(1.1); }
-        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 2rem; display: flex; flex-direction: column; align-items: center; }
-        .hero-headline { font-family: var(--font-head); font-size: 4.5rem; line-height: 0.95; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 1.5rem; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .hero-subhead { font-size: 1.35rem; font-weight: 300; margin-bottom: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-
-        /* BUTTONS (DIVs) */
-        .btn-main { display: inline-block; background-color: var(--magma-accent); color: #fff; padding: 1.2rem 3rem; font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; cursor: pointer; user-select: none; }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 77, 0, 0.4); background-color: #ff6624; }
-
-        .btn-book { display: block; width: 100%; background-color: var(--magma-accent); color: #fff; padding: 1rem; border-radius: 6px; font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-bottom: 4px solid var(--magma-dark); cursor: pointer; user-select: none; text-align: center; }
-        .btn-book:hover { background-color: #ff5e1a; transform: translateY(2px); border-bottom: 2px solid var(--magma-dark); }
-
-        /* SECTIONS */
-        .sector-accommodations { padding: 6rem 1rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-        .sector-header { text-align: center; margin-bottom: 4rem; }
-        .sector-title { font-family: var(--font-head); font-size: 2.5rem; text-transform: uppercase; color: var(--text-dark); margin-bottom: 0.5rem; letter-spacing: 1px; }
-        .sector-subtitle { color: var(--text-muted); font-size: 1.1rem; }
-
-        .adventure-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .adventure-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); display: flex; flex-direction: column; transition: transform 0.3s ease; }
-        .adventure-card:hover { transform: translateY(-5px); }
-
-        .card-ridge .card-top-bar { background-color: var(--card-ridge); }
-        .card-summit .card-top-bar { background-color: var(--card-summit); }
-        .card-caldera .card-top-bar { background-color: var(--card-caldera); }
-        .card-top-bar { padding: 1.5rem; color: #fff; text-align: center; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; }
-        .card-image { width: 100%; height: 240px; object-fit: cover; }
-        .card-footer { padding: 1.5rem; margin-top: auto; text-align: center; }
-        .scarcity-text { display: block; margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); font-style: italic; }
-
-        /* E-BIKE GEAR */
-        .sector-gear { padding: 4rem 1rem 6rem 1rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-        .gear-container { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(0,0,0,0.1); }
-        .gear-visual { background: #333; position: relative; min-height: 400px; }
-        .gear-img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1); }
-        .gear-content { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
-        .gear-badge { display: inline-block; background: var(--magma-accent); color: #fff; padding: 0.4rem 1rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border-radius: 50px; margin-bottom: 1.5rem; align-self: flex-start; }
-        .gear-title { font-family: var(--font-head); font-size: 2.2rem; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; }
-        .gear-desc { color: var(--text-muted); margin-bottom: 2rem; max-width: 400px; }
-        .gear-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-        .gear-spec-item { border-left: 3px solid var(--magma-dark); padding-left: 1rem; }
-        .spec-val { display: block; font-weight: 700; font-size: 1.2rem; color: var(--text-dark); }
-        .spec-lbl { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); }
-        .btn-gear { background: transparent; border: 2px solid var(--text-dark); color: var(--text-dark); padding: 0.8rem 2rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.2s; display: inline-block; text-align: center; }
-        .btn-gear:hover { background: var(--text-dark); color: #fff; }
-
-        /* MODAL */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-        .modal-overlay.active { display: flex; }
-        .modal-card { background: #fff; width: 90%; max-width: 800px; height: auto; border-radius: 8px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-        .modal-header { background: #f0f0f0; padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; }
-        .modal-title { font-weight: 700; color: #333; font-size: 0.9rem; letter-spacing: 0.5px; }
-        .close-modal { cursor: pointer; font-size: 1.2rem; padding: 0 0.5rem; color: #333; }
-        .modal-body { background: #fff; display: flex; align-items: center; justify-content: center; padding: 0; }
-        .fake-cal-img { width: 100%; height: auto; object-fit: contain; display: block; }
-
-        @media (max-width: 800px) { .gear-container { grid-template-columns: 1fr; } .gear-visual { height: 250px; min-height: auto; } .gear-content { padding: 2rem; } .hero-headline { font-size: 2.8rem; } .nav-bar { padding: 1rem; } }
-    </style>
+    <title>Aloha Crater Lodge | Rainforest Basecamp</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="fx-layer fx-fog"></div>
-    <div class="fx-layer fx-embers-sparse"></div>
-    <div class="fx-layer fx-embers-dense"></div>
-
-    <div id="bookingModal" class="modal-overlay">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title">SECURE RESERVATION | ALOHA CRATER LODGE</div>
-                <div class="close-modal" onclick="closeModal()">✕</div>
-            </div>
-            <div class="modal-body">
-                <img src="https://cdn.dribbble.com/users/1615584/screenshots/15710288/media/6c7a05d5d677a2cb1dc7db5665476a8d.jpg?resize=800x600&vertical=center" alt="Calendar Widget" class="fake-cal-img">
-            </div>
-        </div>
+    <div class="kilauea-pulse">
+        <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
+        <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
+        <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
     </div>
-
-    <nav class="nav-bar">
+    <nav>
         <div class="logo">ALOHA CRATER LODGE</div>
-        <div class="status-indicator"><span class="status-dot"></span>VOLCANO STATUS: ACTIVE</div>
+        <div class="nav-links">
+            <a href="#rooms">The Rooms</a>
+            <a href="#wellness">Work & Wellness</a>
+            <a href="#location">Volcano & Stars</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
+        </div>
     </nav>
-    <header class="hero">
-        <img src="hero-volcano.jpg" alt="Kilauea Volcano Crater at Night" class="hero-bg">
+    <header class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
         <div class="hero-content">
-            <h1 class="hero-headline">Witness the Power of Nature</h1>
-            <p class="hero-subhead">Your front-row seat to the active eruption. Secure your basecamp before the window closes.</p>
-            <div class="btn-main" onclick="openModal()">Explore Dates</div>
+            <h1>Your High-Authority Rainforest Basecamp.</h1>
+            <p>Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.</p>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
         </div>
     </header>
-
-    <section id="accommodations" class="sector-accommodations">
-        <div class="sector-header"><h2 class="sector-title">Basecamp Lodging</h2><p class="sector-subtitle">Choose your equipment level for the expedition.</p></div>
-        <div class="adventure-grid">
-            <article class="adventure-card card-ridge">
-                <div class="card-top-bar">THE RIDGE</div>
-                <img src="room-ridge.jpg" alt="Room View" class="card-image">
-                <div class="card-footer"><div class="btn-book" onclick="openModal()">Secure Dates</div><span class="scarcity-text">⚠ Window Filling Fast</span></div>
-            </article>
-            <article class="adventure-card card-summit">
-                <div class="card-top-bar">THE SUMMIT</div>
-                <img src="room-summit.webp" alt="Room View" class="card-image">
-                <div class="card-footer"><div class="btn-book" onclick="openModal()">Secure Dates</div><span class="scarcity-text">⚠ Only 1 unit remaining</span></div>
-            </article>
-            <article class="adventure-card card-caldera">
-                <div class="card-top-bar">THE CALDERA</div>
-                <img src="room-caldera.jpg" alt="Room View" class="card-image">
-                <div class="card-footer"><div class="btn-book" onclick="openModal()">Secure Dates</div><span class="scarcity-text">⚠ High demand for groups</span></div>
-            </article>
-        </div>
-    </section>
-
-    <section class="sector-gear">
-        <div class="gear-container">
-            <div class="gear-visual">
-                <img src="ebike-image.jpg" alt="Aloha Crater Lodge Electric Fleet" class="gear-img">
+    <section id="rooms" class="section">
+        <h2>The Basecamps</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="room-caldera.jpg" alt="Premium Suite">
+                <h3>Premium Suites</h3>
+                <p>Featuring dedicated recovery zones (whirlpool/terrarium) and full kitchenettes for ultimate post-hike decompression.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
-            <div class="gear-content">
-                <div class="gear-badge">Direct Booking Exclusive</div>
-                <h2 class="gear-title">Crater Mobility Units</h2>
-                <p class="gear-desc">Navigate the Steam Vents and Crater Rim without the windshield barrier. Bypass rental car lines and traffic with our high-torque electric fleet.</p>
-                <div class="gear-specs">
-                    <div class="gear-spec-item">
-                        <span class="spec-val">$100 / Day</span>
-                        <span class="spec-lbl">Guest Rate</span>
-                    </div>
-                    <div class="gear-spec-item">
-                        <span class="spec-val">40 Mile</span>
-                        <span class="spec-lbl">Range</span>
-                    </div>
-                </div>
-                <div class="btn-gear" onclick="openModal()">Reserve Equipment</div>
+            <div class="card">
+                <img src="room-summit.webp" alt="Family Module">
+                <h3>Family Modules</h3>
+                <p>Spacious, multi-bed configurations designed for group expeditions and spring break deployments.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-ridge.jpg" alt="Budget Basecamp">
+                <h3>Budget Basecamp</h3>
+                <p>Streamlined and efficient. The perfect launchpad for solo hikers and active explorers.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
         </div>
     </section>
-
-    <script>
-        function openModal() { document.getElementById('bookingModal').classList.add('active'); }
-        function closeModal() { document.getElementById('bookingModal').classList.remove('active'); }
-    </script>
+    <section id="wellness" class="section dark-bg">
+        <h2>Work & Wellness Recovery</h2>
+        <div class="grid wellness-grid">
+            <div class="wellness-text">
+                <h3>E-Bike Fleet Recon</h3>
+                <p>Bypass the national park traffic. Rent our dedicated E-bikes for deep crater exploration.</p>
+                <p><strong>Rates:</strong> $50/day (Guests) | $100/day (Non-Guests)</p>
+                <h3 style="margin-top: 2rem;">OlyLife P90 Terahertz Recovery</h3>
+                <p>Accelerate your physical recovery after the caldera hike with cellular-level therapy.</p>
+                <ul>
+                    <li><strong>Full Session:</strong> 20 min (Foot pad + Red Light Arm/Eye Mask) - $20</li>
+                    <li><strong>Quick Flush:</strong> Whole Body Vibration Plate (10 min) - $10</li>
+                </ul>
+            </div>
+            <div class="wellness-image">
+                <img src="ebike-image.jpg" alt="E-Bikes at the Lodge">
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+                <p><small>TAT: [Placeholder]</small></p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">TikTok: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
