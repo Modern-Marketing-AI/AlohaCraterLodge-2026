@@ -1,14 +1,18 @@
-# MySite - Static Website
+# Aloha Crater Lodge - Static Website
 
 ## Overview
-A simple, clean static website built with only HTML and CSS. No frameworks or JavaScript dependencies.
+A static website for Aloha Crater Lodge, a rainforest basecamp near Kīlauea volcano in Hawaii. Built with only HTML and CSS — no frameworks or JavaScript.
 
 ## Project Structure
-- `index.html` - Main HTML page with header, hero, about, services, contact sections, and footer
+- `index.html` - Main public-facing page with Kīlauea status banner, hero, room cards, wellness section, and footer
 - `style.css` - All styles including responsive design for mobile
+- `guest-intel.html` - Internal guest intelligence/concierge data page
+- `hero-volcano.jpg` - Hero background image
+- `room-caldera.jpg`, `room-summit.webp`, `room-ridge.jpg` - Room card images
+- `ebike-image.jpg` - E-bike section image
 
 ## Running
-Served via Python's built-in HTTP server on port 5000.
+Served as a static site on port 5000.
 
-## Deployment
-Configured as a static site deployment serving from the root directory.
+## External Links
+- Booking: Cloudbeds reservation system (https://hotels.cloudbeds.com/en/reservation/ifCVNX)
