@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Reports | Aloha Crater Lodge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- REUSING CORE THEME --- */
+        :root {
+            --canvas-bg: #f4f1ea;
+            --text-dark: #2c2c2c;
+            --text-muted: #5a5a5a;
+            --magma-accent: #ff4d00;
+            --card-border: #e0ddd5;
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--canvas-bg);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        /* --- NAV BAR (Mini Version) --- */
+        .nav-bar {
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* --- HEADER --- */
+        .reports-header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: #e8e4db;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .page-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-family: var(--font-body);
+            color: var(--text-muted);
+        }
+
+        /* --- REPORTS GRID --- */
+        .reports-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .report-entry {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .report-entry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-color: var(--magma-accent);
+        }
+
+        .report-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--magma-accent);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .report-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .report-excerpt {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .btn-read {
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+            font-weight: 700;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--magma-accent);
+            width: fit-content;
+            padding-bottom: 2px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="logo">Aloha Crater Lodge</a>
+        <a href="index.html" class="back-link">← Return to Basecamp</a>
+    </nav>
+
+    <header class="reports-header">
+        <h1 class="page-title">Field Reports</h1>
+        <p class="page-subtitle">Observation logs, trail updates, and eruption data.</p>
+    </header>
+
+    <main class="reports-container">
+
+        <article class="report-entry">
+            <div class="report-meta">
+                <span>Feb 08, 2026</span> • <span>Seismic Update</span>
+            </div>
+            <h2 class="report-title">Inflation Detected: Why Episode 42 is Different</h2>
+            <p class="report-excerpt">
+                The summit tiltmeters have jumped 12 microradians in the last 24 hours. Here is what that means for your upcoming stay and viewing safety.
+            </p>
+            <a href="#" class="btn-read">Read Full Report</a>
+        </article>
+
+        <article class="report-entry">
+            <div class="report-meta">
+                <span>Jan 28, 2026</span> • <span>Trail Guide</span>
+            </div>
+            <h2 class="report-title">The Secret Lava Tube Hike</h2>
+            <p class="report-excerpt">
+                Most tourists go to Thurston. We recommend a lesser-known tube system that's only a 15-minute drive from the lodge. Flashlights required.
+            </p>
+            <a href="#" class="btn-read">Read Full Report</a>
+        </article>
+
+        <article class="report-entry">
+            <div class="report-meta">
+                <span>Jan 15, 2026</span> • <span>Lodge News</span>
+            </div>
+            <h2 class="report-title">Renovations Complete: The Caldera House</h2>
+            <p class="report-excerpt">
+                We have just finished upgrading the kitchen in our family unit. New appliances and a clearer view of the fern forest.
+            </p>
+            <a href="#" class="btn-read">Read Full Report</a>
+        </article>
+
+    </main>
+
+</body>
+</html>
