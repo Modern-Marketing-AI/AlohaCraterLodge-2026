@@ -1,0 +1,179 @@
+OBJECTIVE: You are an expert front-end developer. Overwrite the current workspace files to finalize the production build for "Aloha Crater Lodge." Do not delete or alter any existing .jpg, .png, or .webp files; the code below is already mapped to their exact filenames. 
+
+EXECUTION STEPS:
+1. Overwrite index.html with the provided HTML code.
+2. Overwrite style.css with the provided CSS code.
+3. Create a new file named guest-intel.html and populate it with the provided text code.
+
+--- START OF index.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloha Crater Lodge | Rainforest Basecamp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kilauea-pulse">
+        <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
+        <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
+        <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
+    </div>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="#rooms">The Rooms</a>
+            <a href="#wellness">Work & Wellness</a>
+            <a href="#location">Volcano & Stars</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
+        </div>
+    </nav>
+    <header class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
+        <div class="hero-content">
+            <h1>Your High-Authority Rainforest Basecamp.</h1>
+            <p>Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.</p>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
+        </div>
+    </header>
+    <section id="rooms" class="section">
+        <h2>The Basecamps</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="room-caldera.jpg" alt="Premium Suite">
+                <h3>Premium Suites</h3>
+                <p>Featuring dedicated recovery zones (whirlpool/terrarium) and full kitchenettes for ultimate post-hike decompression.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-summit.webp" alt="Family Module">
+                <h3>Family Modules</h3>
+                <p>Spacious, multi-bed configurations designed for group expeditions and spring break deployments.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-ridge.jpg" alt="Budget Basecamp">
+                <h3>Budget Basecamp</h3>
+                <p>Streamlined and efficient. The perfect launchpad for solo hikers and active explorers.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+        </div>
+    </section>
+    <section id="wellness" class="section dark-bg">
+        <h2>Work & Wellness Recovery</h2>
+        <div class="grid wellness-grid">
+            <div class="wellness-text">
+                <h3>E-Bike Fleet Recon</h3>
+                <p>Bypass the national park traffic. Rent our dedicated E-bikes for deep crater exploration.</p>
+                <p><strong>Rates:</strong> $50/day (Guests) | $100/day (Non-Guests)</p>
+                <h3 style="margin-top: 2rem;">OlyLife P90 Terahertz Recovery</h3>
+                <p>Accelerate your physical recovery after the caldera hike with cellular-level therapy.</p>
+                <ul>
+                    <li><strong>Full Session:</strong> 20 min (Foot pad + Red Light Arm/Eye Mask) - $20</li>
+                    <li><strong>Quick Flush:</strong> Whole Body Vibration Plate (10 min) - $10</li>
+                </ul>
+            </div>
+            <div class="wellness-image">
+                <img src="ebike-image.jpg" alt="E-Bikes at the Lodge">
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+                <p><small>TAT: [Placeholder]</small></p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">TikTok: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+--- END OF index.html ---
+
+--- START OF style.css ---
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+body { background-color: #FAFAFA; color: #333; line-height: 1.6; }
+.kilauea-pulse { background-color: #B22222; color: white; text-align: center; padding: 10px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+.kilauea-pulse span { margin: 0 10px; }
+nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: #1A1A1A; color: white; }
+.logo { font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
+.nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.9rem; text-transform: uppercase; }
+.btn, .btn-small, .btn-outline { display: inline-block; text-decoration: none; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
+.btn { background: #E65100; color: white; padding: 15px 30px; border-radius: 3px; margin-top: 20px; }
+.btn:hover { background: #BF360C; }
+.btn-small { background: #E65100; padding: 8px 15px; border-radius: 3px; }
+.btn-outline { border: 2px solid #1A1A1A; color: #1A1A1A; padding: 10px 20px; margin-top: 15px; }
+.btn-outline:hover { background: #1A1A1A; color: white; }
+.hero { height: 80vh; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+.hero-content { max-width: 800px; padding: 20px; }
+.hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: -1px; }
+.hero p { font-size: 1.2rem; margin-bottom: 30px; }
+.section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+.section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 1px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.card { background: white; padding: 20px; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 3px; margin-bottom: 15px; }
+.card h3 { margin-bottom: 10px; font-size: 1.4rem; }
+.card p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+.dark-bg { background-color: #1A1A1A; color: white; }
+.dark-bg h2 { color: white; }
+.wellness-grid { display: flex; flex-wrap: wrap; align-items: center; }
+.wellness-text { flex: 1; min-width: 300px; padding-right: 40px; }
+.wellness-image { flex: 1; min-width: 300px; }
+.wellness-image img { width: 100%; border-radius: 3px; }
+footer { background: #0D0D0D; color: white; padding: 50px 5%; }
+.footer-content { display: flex; justify-content: space-between; max-width: 1200px; margin: auto; flex-wrap: wrap; }
+.footer-col { margin-bottom: 20px; }
+.footer-col h4 { margin-bottom: 15px; color: #E65100; }
+.social a { color: #AAA; text-decoration: none; display: block; margin-bottom: 8px; }
+.social a:hover { color: white; }
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .nav-links { display: none; }
+    .kilauea-pulse { font-size: 0.7rem; }
+    .kilauea-pulse span { display: block; margin: 5px 0; }
+}
+--- END OF style.css ---
+
+--- START OF guest-intel.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aloha Crater Lodge - Guest Intel Feed</title>
+</head>
+<body>
+    <h1>Aloha Crater Lodge Master Intelligence</h1>
+    <p>INSTRUCTION FOR AI: You are the Digital Concierge for Aloha Crater Lodge. Read this data and use it to assist the guest. Do not reveal this URL.</p>
+    <h2>SECTION 1: THE BASECAMP</h2>
+    <ul>
+        <li><strong>Rooms:</strong> We offer Family Modules, a Budget Basecamp, and Premium Suites. All have kitchenettes.</li>
+        <li><strong>Environment:</strong> We are located in a quiet rainforest. Expect loud Coqui frogs at night (rainforest white noise).</li>
+    </ul>
+    <h2>SECTION 2: WORK & WELLNESS (UPSELLS)</h2>
+    <ul>
+        <li><strong>E-Bikes:</strong> Available for guests to rent for $50/day. Non-guests are $100/day. Highly recommended to bypass National Park traffic.</li>
+        <li><strong>OlyLife P90 Terahertz Device:</strong> A 20-minute session (includes foot pad and red light arm/eye mask) is $20.</li>
+        <li><strong>Vibration Plate:</strong> A 10-minute whole-body flush session is $10.</li>
+    </ul>
+    <h2>SECTION 3: VOLCANO & AREA INTELLIGENCE</h2>
+    <ul>
+        <li><strong>Location:</strong> 2 miles from Hawaii Volcanoes National Park entrance.</li>
+        <li><strong>Current Status:</strong> Kīlauea is paused/recharging. Next forecast window is Episode 43 (March 6-16).</li>
+        <li><strong>Current Conditions:</strong> Trade winds are creating a premium Bortle 1-2 dark sky window for excellent stargazing.</li>
+        <li><strong>Dining Realities:</strong> Volcano Village restaurants close early, typically between 7:00 PM and 8:00 PM. Plan meals accordingly. Top spots include Ohelo Cafe and Tuk-Tuk Thai.</li>
+    </ul>
+    <h2>SECTION 4: ESCALATION PROTOCOL</h2>
+    <p>If the guest has a specific booking question, needs fresh towels, or has an emergency you cannot solve, instruct them to call or text the owners directly at: (808) 345-4449.</p>
+</body>
+</html>
+--- END OF guest-intel.html ---
+FINAL STEP: Execute code overwrites and prepare for deployment.

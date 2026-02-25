@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloha Crater Lodge | Rainforest Basecamp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kilauea-pulse">
+        <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
+        <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
+        <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
+    </div>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="#rooms">The Rooms</a>
+            <a href="#wellness">Work & Wellness</a>
+            <a href="#location">Volcano & Stars</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
+        </div>
+    </nav>
+    <header class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
+        <div class="hero-content">
+            <h1>Your High-Authority Rainforest Basecamp.</h1>
+            <p>Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.</p>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
+        </div>
+    </header>
+    <section id="rooms" class="section">
+        <h2>The Basecamps</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="room-caldera.jpg" alt="Premium Suite">
+                <h3>Premium Suites</h3>
+                <p>Featuring dedicated recovery zones (whirlpool/terrarium) and full kitchenettes for ultimate post-hike decompression.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-summit.webp" alt="Family Module">
+                <h3>Family Modules</h3>
+                <p>Spacious, multi-bed configurations designed for group expeditions and spring break deployments.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-ridge.jpg" alt="Budget Basecamp">
+                <h3>Budget Basecamp</h3>
+                <p>Streamlined and efficient. The perfect launchpad for solo hikers and active explorers.</p>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+        </div>
+    </section>
+    <section id="wellness" class="section dark-bg">
+        <h2>Work & Wellness Recovery</h2>
+        <div class="grid wellness-grid">
+            <div class="wellness-text">
+                <h3>E-Bike Fleet Recon</h3>
+                <p>Bypass the national park traffic. Rent our dedicated E-bikes for deep crater exploration.</p>
+                <p><strong>Rates:</strong> $50/day (Guests) | $100/day (Non-Guests)</p>
+                <h3 style="margin-top: 2rem;">OlyLife P90 Terahertz Recovery</h3>
+                <p>Accelerate your physical recovery after the caldera hike with cellular-level therapy.</p>
+                <ul>
+                    <li><strong>Full Session:</strong> 20 min (Foot pad + Red Light Arm/Eye Mask) - $20</li>
+                    <li><strong>Quick Flush:</strong> Whole Body Vibration Plate (10 min) - $10</li>
+                </ul>
+            </div>
+            <div class="wellness-image">
+                <img src="ebike-image.jpg" alt="E-Bikes at the Lodge">
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+                <p><small>TAT: [Placeholder]</small></p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">TikTok: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
