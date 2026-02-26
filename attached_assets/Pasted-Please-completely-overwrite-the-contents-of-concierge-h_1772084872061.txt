@@ -1,3 +1,6 @@
+Please completely overwrite the contents of concierge.html with the code below. We are removing the QR code logic entirely to simplify the UX. The "Copy AI Priming Message" button will now be the sole focus for all devices.
+
+--- START OF CONCIERGE.HTML ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,3 +78,4 @@ Confirm activation with: "Basecamp Command Active. How can I optimize your stay 
     </script>
 </body>
 </html>
+--- END OF CONCIERGE.HTML ---
