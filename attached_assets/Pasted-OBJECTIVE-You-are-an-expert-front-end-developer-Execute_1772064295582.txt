@@ -1,0 +1,216 @@
+OBJECTIVE: You are an expert front-end developer. Execute a massive architectural expansion for "Aloha Crater Lodge". Do not delete any existing image files. 
+
+EXECUTION STEPS:
+1. Overwrite index.html with the provided code (incorporating SVG room icons and updated navigation).
+2. Append the provided CSS code to the bottom of the existing style.css file.
+3. Create a new file named wellness.html and populate it with the provided code.
+4. Create a new file named ebikes.html and populate it with the provided code.
+5. Create a new file named _redirects and populate it with the provided text.
+
+--- START OF index.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloha Crater Lodge | Rainforest Basecamp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kilauea-pulse">
+        <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
+        <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
+        <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
+    </div>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="index.html#rooms">The Rooms</a>
+            <a href="ebikes.html">E-Bikes</a>
+            <a href="wellness.html">Recovery Protocols</a>
+            <a href="guide.html">The Volcano Guide</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
+        </div>
+    </nav>
+    <header id="location" class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
+        <div class="hero-content">
+            <h1>Your High-Authority Rainforest Basecamp.</h1>
+            <p>Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.</p>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
+        </div>
+    </header>
+    <section id="rooms" class="section">
+        <h2>The Basecamps</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="room-caldera.jpg" alt="Premium Suite">
+                <h3>Premium Suites</h3>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Max 2 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line></svg> Full Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 12c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4z"></path><path d="M4 10V6c0-1.1.9-2 2-2h4"></path><line x1="8" y1="4" x2="8" y2="10"></line></svg> Whirlpool / Terrarium</li>
+                </ul>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-summit.webp" alt="Family Module">
+                <h3>Family Modules</h3>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Max 4 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Full Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Front Patio Access</li>
+                </ul>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+            <div class="card">
+                <img src="room-ridge.jpg" alt="Budget Basecamp">
+                <h3>Budget Basecamp</h3>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg> Max 3 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Efficiency Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> High-Utility Focus</li>
+                </ul>
+                <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+--- END OF index.html ---
+
+--- START OF CSS APPEND (Add to bottom of style.css) ---
+
+/* Icon Lists for Room Cards */
+.room-features { list-style: none; padding: 0; margin: 0 0 20px 0; text-align: left; display: inline-block; }
+.room-features li { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: #555; margin-bottom: 8px; }
+.room-features li svg { color: #E65100; }
+
+/* Interior Pages Hero */
+.interior-hero { height: 40vh; background-color: #1A1A1A; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding-top: 60px; }
+.interior-hero h1 { font-size: 3rem; letter-spacing: -1px; }
+
+/* Sales Funnel Content */
+.funnel-section { padding: 60px 5%; max-width: 900px; margin: auto; }
+.funnel-section h2 { color: #E65100; margin-bottom: 20px; font-size: 2rem; }
+.funnel-section h3 { margin-top: 30px; margin-bottom: 10px; font-size: 1.4rem; }
+.funnel-section p { font-size: 1.1rem; margin-bottom: 20px; }
+.price-box { background: #FAFAFA; border-left: 4px solid #E65100; padding: 20px; margin: 30px 0; font-weight: bold; }
+--- END OF CSS APPEND ---
+
+--- START OF wellness.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-Regeneration Protocols | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="ebikes.html">E-Bikes</a>
+            <a href="guide.html">The Volcano Guide</a>
+        </div>
+    </nav>
+
+    <header class="interior-hero">
+        <div class="hero-content">
+            <h1>Cellular Recovery Protocols</h1>
+        </div>
+    </header>
+
+    <section class="funnel-section">
+        <h2>OlyLife P90 Terahertz Therapy</h2>
+        <p>After a grueling hike across the Kīlauea caldera floor, standard rest isn't enough. We utilize the OlyLife P90 device, engineered to heat tissues from the inside out using 1 MHz bioelectromagnetic and terahertz energy (3-3000μm).</p>
+        
+        <h3>The Science of Recovery</h3>
+        <p>This targeted therapy promotes deep microcirculation, dredges meridians, and aggressively targets cold, dampness, and post-hike inflammation. By flushing out lactic acid at the cellular level, you recover faster for your next expedition.</p>
+        
+        <div class="price-box">
+            Basecamp Session: $20 for 20 Minutes (Includes targeted foot pad and red light arm/eye mask). 
+        </div>
+
+        <h2>Gravity Conditioning & Lymphatic Flush</h2>
+        <p>Our Whole Body Vibration Plate isn't just a massage tool; it is designed for rapid lymphatic drainage and muscle activation through Gravity Conditioning.</p>
+        
+        <div class="price-box">
+            Quick Flush Session: $10 for 10 Minutes.
+        </div>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <h2>Deploy This Technology At Home</h2>
+        <p>Many of our guests experience such a profound shift in their mobility and recovery that they want to integrate this technology into their daily lives. We are authorized educators and distributors for OlyLife.</p>
+        <p>If you are interested in acquiring an OlyLife unit for your own home basecamp, we offer dedicated consultations to explain the science and get you properly outfitted.</p>
+        <a href="sms:+18083454449" class="btn">Text Us to Inquire About Ownership</a>
+    </section>
+</body>
+</html>
+--- END OF wellness.html ---
+
+--- START OF ebikes.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Bike Fleet | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="wellness.html">Recovery Protocols</a>
+            <a href="guide.html">The Volcano Guide</a>
+        </div>
+    </nav>
+
+    <header class="interior-hero">
+        <div class="hero-content">
+            <h1>Crater Mobility Units</h1>
+        </div>
+    </header>
+
+    <section class="funnel-section">
+        <h2>Bypass The Gridlock</h2>
+        <p>During active fountaining windows, the Hawaiʻi Volcanoes National Park experiences severe vehicle congestion and parking gridlock. Our Basecamp E-Bikes are your tactical advantage.</p>
+        
+        <h3>The Tactical Advantage</h3>
+        <p>Located just 2 miles from the park entrance, you can deploy directly from the lodge, bypass the line of cars, and ride right up to the caldera viewing areas. Save hours of waiting and secure the best vantage points.</p>
+        
+        <div class="price-box">
+            Guest Rate: $50 / Day<br>
+            Non-Guest Rate: $100 / Day
+        </div>
+
+        <a href="sms:+18083454449" class="btn">Reserve Your E-Bike</a>
+    </section>
+</body>
+</html>
+--- END OF ebikes.html ---
+
+--- START OF _redirects ---
+# Aloha Crater Lodge SEO Lifeboat
+# Replace the left side with your old Cloudbeds blog URLs later
+/blog/* /guide.html  301
+--- END OF _redirects ---
+FINAL STEP: Execute all changes.
