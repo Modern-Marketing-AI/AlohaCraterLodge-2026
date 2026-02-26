@@ -7,23 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="kilauea-pulse">
         <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
         <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
         <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
     </div>
-
     <nav>
         <div class="logo">ALOHA CRATER LODGE</div>
         <div class="nav-links">
-            <a href="#rooms">The Rooms</a>
-            <a href="#wellness">Work & Wellness</a>
-            <a href="#location">Volcano & Stars</a>
+            <a href="index.html#rooms">The Rooms</a>
+            <a href="ebikes.html">E-Bikes</a>
+            <a href="wellness.html">Recovery Protocols</a>
+            <a href="guide.html">The Volcano Guide</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
         </div>
     </nav>
-
     <header id="location" class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
         <div class="hero-content">
             <h1>Your High-Authority Rainforest Basecamp.</h1>
@@ -31,68 +29,54 @@
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
         </div>
     </header>
-
     <section id="rooms" class="section">
         <h2>The Basecamps</h2>
         <div class="grid">
             <div class="card">
                 <img src="room-caldera.jpg" alt="Premium Suite">
                 <h3>Premium Suites</h3>
-                <p>Featuring dedicated recovery zones (whirlpool/terrarium) and full kitchenettes for ultimate post-hike decompression.</p>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Max 2 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line></svg> Full Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 12c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4z"></path><path d="M4 10V6c0-1.1.9-2 2-2h4"></path><line x1="8" y1="4" x2="8" y2="10"></line></svg> Whirlpool / Terrarium</li>
+                </ul>
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
             <div class="card">
                 <img src="room-summit.webp" alt="Family Module">
                 <h3>Family Modules</h3>
-                <p>Spacious, multi-bed configurations designed for group expeditions and spring break deployments.</p>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Max 4 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Full Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Front Patio Access</li>
+                </ul>
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
             <div class="card">
                 <img src="room-ridge.jpg" alt="Budget Basecamp">
                 <h3>Budget Basecamp</h3>
-                <p>Streamlined and efficient. The perfect launchpad for solo hikers and active explorers.</p>
+                <ul class="room-features">
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg> Max 3 Guests</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Efficiency Kitchenette</li>
+                    <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> High-Utility Focus</li>
+                </ul>
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
         </div>
     </section>
-
-    <section id="wellness" class="section dark-bg">
-        <h2>Work & Wellness Recovery</h2>
-        <div class="grid wellness-grid">
-            <div class="wellness-text">
-                <h3>E-Bike Fleet Recon</h3>
-                <p>Bypass the national park traffic. Rent our dedicated E-bikes for deep crater exploration.</p>
-                <p><strong>Rates:</strong> $50/day (Guests) | $100/day (Non-Guests)</p>
-
-                <h3 style="margin-top: 2rem;">OlyLife P90 Terahertz Recovery</h3>
-                <p>Accelerate your physical recovery after the caldera hike with cellular-level therapy.</p>
-                <ul>
-                    <li><strong>Full Session:</strong> 20 min (Foot pad + Red Light Arm/Eye Mask) - $20</li>
-                    <li><strong>Quick Flush:</strong> Whole Body Vibration Plate (10 min) - $10</li>
-                </ul>
-            </div>
-            <div class="wellness-image">
-                <img src="ebike-image.jpg" alt="E-Bikes at the Lodge">
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Aloha Crater Lodge</h4>
                 <p>Volcano Village, HI</p>
                 <p>Text/Call: (808) 345-4449</p>
-                <p><small>TAT: [Placeholder]</small></p>
             </div>
             <div class="footer-col social">
                 <h4>Intel Feeds</h4>
                 <a href="#">Instagram: @alohacraterlodge</a><br>
-                <a href="#">TikTok: @alohacraterlodge</a><br>
                 <a href="#">YouTube: Volcano Insider</a>
             </div>
         </div>
     </footer>
-
 </body>
 </html>
