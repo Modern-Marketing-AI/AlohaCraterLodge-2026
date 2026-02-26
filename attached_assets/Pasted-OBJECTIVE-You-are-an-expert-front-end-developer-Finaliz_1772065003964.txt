@@ -1,0 +1,83 @@
+OBJECTIVE: You are an expert front-end developer. Finalize the Aloha Crater Lodge architecture by creating the required auxiliary pages. Do not alter index.html, style.css, wellness.html, or ebikes.html.
+
+EXECUTION STEPS:
+1. Create a new file named guide.html and populate it with the provided code.
+2. Create a new file named 404.html and populate it with the provided code.
+
+--- START OF guide.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Volcano Guide | Aloha Crater Lodge</title>
+    <meta name="description" content="Read the latest Kīlauea eruption intel, Volcano National Park itineraries, and local dining guides from the experts at Aloha Crater Lodge.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="wellness.html">Recovery Protocols</a>
+            <a href="ebikes.html">E-Bikes</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
+        </div>
+    </nav>
+
+    <header class="interior-hero">
+        <div class="hero-content">
+            <h1>The Volcano Guide</h1>
+            <p>Field Notes, Itineraries, and Tactical Intel for your Rainforest Deployment.</p>
+        </div>
+    </header>
+
+    <section class="funnel-section" style="text-align: center; padding-top: 100px; padding-bottom: 100px;">
+        <h2>Establishing Secure Uplink...</h2>
+        <p>Our latest Kīlauea itineraries and local intelligence reports are currently being migrated to this terminal. Check back shortly.</p>
+        <a href="index.html" class="btn-outline">Return to Basecamp</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+--- END OF guide.html ---
+
+--- START OF 404.html ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Off the Trail | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ALOHA CRATER LODGE</div>
+    </nav>
+
+    <header class="hero" style="background-color: #1A1A1A; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+        <div class="hero-content">
+            <h1 style="color: #E65100;">You've Wandered Off The Trail.</h1>
+            <p>The coordinates you are looking for do not exist or have been relocated.</p>
+            <a href="index.html" class="btn">Return to Basecamp</a>
+        </div>
+    </header>
+</body>
+</html>
+--- END OF 404.html ---
+FINAL STEP: Build these files without overwriting the existing environment.
