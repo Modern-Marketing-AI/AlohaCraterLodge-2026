@@ -3,38 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Bike Fleet | Aloha Crater Lodge</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mobility Units | Aloha Crater Lodge</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f5; color: #18181b; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 40px 0 20px; }
+        .header h1 { margin: 0; font-size: 28px; color: #27272a; }
+        .header p { color: #52525b; margin-top: 10px; }
+        .card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .card img { width: 100%; height: auto; display: block; border-bottom: 1px solid #e4e4e7; }
+        .card-content { padding: 24px; }
+        .card h2 { margin: 0 0 10px; font-size: 22px; color: #27272a; }
+        .card p { margin: 0 0 20px; color: #52525b; line-height: 1.5; }
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .price-box { background: #f4f4f5; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #e4e4e7; }
+        .price-box.guest { border-color: #10b981; background: #ecfdf5; }
+        .price-label { font-size: 12px; text-transform: uppercase; color: #52525b; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .price-amount { font-size: 20px; font-weight: bold; color: #18181b; }
+        .cta-button { display: block; width: 100%; text-align: center; background: #18181b; color: #ffffff; padding: 16px 0; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 16px; transition: background 0.2s; }
+        .cta-button:hover { background: #27272a; }
+    </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">ALOHA CRATER LODGE</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="wellness.html">Recovery Protocols</a>
-            <a href="guide.html">The Volcano Guide</a>
+    <div class="container">
+        <div class="header">
+            <h1>Tactical E-Bikes</h1>
+            <p>Extend your operational range. Silent, powerful, and built for the volcano district.</p>
         </div>
-    </nav>
-
-    <header class="interior-hero">
-        <div class="hero-content">
-            <h1>Crater Mobility Units</h1>
+        <div class="card">
+            <img src="E-bike%20update.png" alt="Aloha Crater Lodge E-Bikes" loading="lazy">
+            <div class="card-content">
+                <h2>All-Terrain Mobility Units</h2>
+                <p>Bypass the traffic and explore the local trails with high-capacity pedal-assist e-bikes. Fully charged and staged at basecamp.</p>
+                <div class="pricing-grid">
+                    <div class="price-box guest">
+                        <div class="price-label">Lodge Guests</div>
+                        <div class="price-amount">$50 / Day</div>
+                    </div>
+                    <div class="price-box">
+                        <div class="price-label">Non-Guests</div>
+                        <div class="price-amount">$100 / Day</div>
+                    </div>
+                </div>
+                <a href="tel:808-345-4449" class="cta-button">Text Concierge to Unlock</a>
+            </div>
         </div>
-    </header>
-
-    <section class="funnel-section">
-        <h2>Bypass The Gridlock</h2>
-        <p>During active fountaining windows, the Hawaiʻi Volcanoes National Park experiences severe vehicle congestion and parking gridlock. Our Basecamp E-Bikes are your tactical advantage.</p>
-        
-        <h3>The Tactical Advantage</h3>
-        <p>Located just 2 miles from the park entrance, you can deploy directly from the lodge, bypass the line of cars, and ride right up to the caldera viewing areas. Save hours of waiting and secure the best vantage points.</p>
-        
-        <div class="price-box">
-            Guest Rate: $50 / Day<br>
-            Non-Guest Rate: $100 / Day
-        </div>
-
-        <a href="sms:+18083454449" class="btn">Reserve Your E-Bike</a>
-    </section>
+    </div>
 </body>
 </html>
