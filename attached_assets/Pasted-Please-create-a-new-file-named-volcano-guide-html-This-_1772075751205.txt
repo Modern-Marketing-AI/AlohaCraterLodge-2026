@@ -1,0 +1,55 @@
+Please create a new file named `volcano-guide.html`. This will be our first standalone article migrated from Medium. Use the exact code below to maintain the rainforest basecamp aesthetic.
+
+--- START OF VOLCANO-GUIDE.HTML ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volcano Insider Guide | Aloha Crater Lodge</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f5; color: #18181b; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .nav-back { padding: 20px 0; }
+        .nav-back a { color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .article-header { padding-bottom: 30px; border-bottom: 1px solid #e4e4e7; margin-bottom: 30px; }
+        .article-header h1 { font-size: 32px; color: #27272a; margin: 0; }
+        .article-header p { color: #71717a; margin-top: 10px; font-style: italic; }
+        .content h2 { color: #27272a; margin-top: 30px; }
+        .content p { margin-bottom: 20px; color: #3f3f46; }
+        .tactical-note { background: #18181b; color: #f4f4f5; padding: 20px; border-radius: 12px; margin: 30px 0; }
+        .tactical-note h3 { color: #10b981; margin-top: 0; }
+        .cta-footer { text-align: center; padding: 40px 0; border-top: 1px solid #e4e4e7; margin-top: 40px; }
+        .cta-button { display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-back"><a href="guide.html">← Back to Terminal</a></div>
+        
+        <article class="article-header">
+            <h1>The Volcano Insider Guide</h1>
+            <p>Field notes for navigating the Kīlauea summit and beyond.</p>
+        </article>
+
+        <section class="content">
+            <h2>Optimal Deployment Times</h2>
+            <p>The volcano district is a dynamic environment. To avoid the standard tourist bloat, we recommend "Low-Light Operations." Arrive at the Kīlauea overlook either 45 minutes before sunrise or 2 hours after sunset for maximum visibility of the glow with minimum crowds.</p>
+
+            <div class="tactical-note">
+                <h3>CONCIERGE INTEL</h3>
+                <p>Did you know? Guests at Aloha Crater Lodge can bypass the main entrance traffic by utilizing our e-bikes. Ask the AI Concierge for the "Backdoor Trail" coordinates.</p>
+            </div>
+
+            <h2>Gear Checklist</h2>
+            <p>Precision is key. Even in Hawaii, the summit sits at 4,000 feet. Temperatures drop rapidly after dusk. Ensure you have a windbreaker, sturdy closed-toe boots, and a high-lumen headlamp (avoid using your phone flashlight as your primary source).</p>
+        </section>
+
+        <div class="cta-footer">
+            <p>Ready to explore further?</p>
+            <a href="ebikes.html" class="cta-button">Reserve Mobility Units</a>
+        </div>
+    </div>
+</body>
+</html>
+--- END OF VOLCANO-GUIDE.HTML ---
