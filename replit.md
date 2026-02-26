@@ -9,7 +9,8 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `wellness.html` - OlyLife P90 Terahertz therapy and Vibration Plate recovery protocols page
 - `ebikes.html` - E-Bike fleet rental page with pricing
 - `guest-intel.html` - Internal AI concierge intelligence data (6 sections)
-- `guide.html` - Volcano guide (referenced in nav, not yet created)
+- `guide.html` - Volcano guide placeholder page with nav, interior hero, and "coming soon" content
+- `404.html` - Custom 404 error page with themed "Off The Trail" messaging
 
 ### Assets
 - `style.css` - All styles: base layout, room feature icons, interior page heroes, funnel sections, price boxes, responsive design
