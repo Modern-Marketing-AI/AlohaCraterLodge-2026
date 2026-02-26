@@ -40,3 +40,16 @@ footer { background: #0D0D0D; color: white; padding: 50px 5%; }
     .kilauea-pulse { font-size: 0.7rem; }
     .kilauea-pulse span { display: block; margin: 5px 0; }
 }
+
+.room-features { list-style: none; padding: 0; margin: 0 0 20px 0; text-align: left; display: inline-block; }
+.room-features li { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: #555; margin-bottom: 8px; }
+.room-features li svg { color: #E65100; }
+
+.interior-hero { height: 40vh; background-color: #1A1A1A; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding-top: 60px; }
+.interior-hero h1 { font-size: 3rem; letter-spacing: -1px; }
+
+.funnel-section { padding: 60px 5%; max-width: 900px; margin: auto; }
+.funnel-section h2 { color: #E65100; margin-bottom: 20px; font-size: 2rem; }
+.funnel-section h3 { margin-top: 30px; margin-bottom: 10px; font-size: 1.4rem; }
+.funnel-section p { font-size: 1.1rem; margin-bottom: 20px; }
+.price-box { background: #FAFAFA; border-left: 4px solid #E65100; padding: 20px; margin: 30px 0; font-weight: bold; }

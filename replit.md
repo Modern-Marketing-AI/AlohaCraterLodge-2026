@@ -1,18 +1,28 @@
 # Aloha Crater Lodge - Static Website
 
 ## Overview
-A static website for Aloha Crater Lodge, a rainforest basecamp near Kīlauea volcano in Hawaii. Built with only HTML and CSS — no frameworks or JavaScript.
+A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near Kīlauea volcano in Hawaii. Built with only HTML and CSS — no frameworks or JavaScript.
 
 ## Project Structure
-- `index.html` - Main public-facing page with Kīlauea status banner, hero, room cards, wellness section, and footer
-- `style.css` - All styles including responsive design for mobile
-- `guest-intel.html` - Internal guest intelligence/concierge data page
+### Pages
+- `index.html` - Main page with Kīlauea status banner, hero, room cards with SVG feature icons, and footer
+- `wellness.html` - OlyLife P90 Terahertz therapy and Vibration Plate recovery protocols page
+- `ebikes.html` - E-Bike fleet rental page with pricing
+- `guest-intel.html` - Internal AI concierge intelligence data (6 sections)
+- `guide.html` - Volcano guide (referenced in nav, not yet created)
+
+### Assets
+- `style.css` - All styles: base layout, room feature icons, interior page heroes, funnel sections, price boxes, responsive design
 - `hero-volcano.jpg` - Hero background image
 - `room-caldera.jpg`, `room-summit.webp`, `room-ridge.jpg` - Room card images
-- `ebike-image.jpg` - E-bike section image
+- `ebike-image.jpg` - E-bike image
+
+### Configuration
+- `_redirects` - SEO redirect rules for blog URLs to guide.html
 
 ## Running
-Served as a static site on port 5000.
+Served as a static site via Python HTTP server on port 5000.
 
 ## External Links
 - Booking: Cloudbeds reservation system (https://hotels.cloudbeds.com/en/reservation/ifCVNX)
+- SMS contact: (808) 345-4449
