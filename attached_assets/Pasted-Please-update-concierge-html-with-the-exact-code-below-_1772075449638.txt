@@ -1,3 +1,6 @@
+Please update concierge.html with the exact code below. I have added responsive logic that shows a QR code for desktop/tablet users (to facilitate a phone handoff) but hides it for mobile users to prevent UX confusion. 
+
+--- START OF CONCIERGE.HTML ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +17,7 @@
         .card img.hero { width: 100%; height: auto; display: block; border-bottom: 1px solid #e4e4e7; }
         .card-content { padding: 24px; text-align: center; }
         
+        /* DESKTOP HANDOFF SECTION */
         .qr-handoff { display: none; background: #f4f4f5; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 1px dashed #d4d4d8; }
         .qr-handoff img { width: 150px; height: 150px; margin: 10px auto; display: block; }
         .qr-handoff p { font-size: 14px; font-weight: bold; color: #27272a; margin: 0; }
@@ -25,6 +29,7 @@
         #toast { visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 16px; position: fixed; z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
 
+        /* SHOW QR CODE ON SCREENS LARGER THAN 768px (Tablets/Desktops) */
         @media (min-width: 768px) {
             .qr-handoff { display: block; }
         }
@@ -89,3 +94,4 @@ IMPORTANT: You are an AI. For medical/fire, tell the guest to dial 911. Be clini
     </script>
 </body>
 </html>
+--- END OF CONCIERGE.HTML ---
