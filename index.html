@@ -11,11 +11,11 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        .ember-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 5; }
-        .ember { position: absolute; bottom: -10px; background: #ff4500; border-radius: 50%; box-shadow: 0 0 10px #ff4500, 0 0 15px #ff0000; animation: floatUp linear infinite; }
+        #ember-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 5; }
+        .ember { position: absolute; background: #ff4500; border-radius: 50%; box-shadow: 0 0 10px #ff4500, 0 0 15px #ff0000; animation: floatUp linear forwards; }
         @keyframes floatUp {
             0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(0.2); opacity: 0; }
+            100% { transform: translateY(-300px) scale(0.2); opacity: 0; }
         }
     </style>
 </head>
@@ -35,8 +35,8 @@
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
         </div>
     </nav>
+    <div id="ember-container"></div>
     <header id="location" class="hero" style="position: relative; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
-        <div class="ember-container" id="ember-container"></div>
         <div class="hero-content">
             <h1>Your High-Authority Rainforest Basecamp.</h1>
             <p>Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.</p>
@@ -93,21 +93,62 @@
         </div>
     </footer>
 <script>
-function createEmber() {
-    const container = document.getElementById('ember-container');
+(function() {
+    var container = document.getElementById('ember-container');
     if (!container) return;
-    const ember = document.createElement('div');
-    ember.classList.add('ember');
-    ember.style.left = Math.random() * 100 + '%';
-    const size = Math.random() * 4 + 2; 
-    ember.style.width = size + 'px';
-    ember.style.height = size + 'px';
-    ember.style.animationDuration = (Math.random() * 4 + 2) + 's';
-    ember.style.opacity = Math.random() * 0.8 + 0.2;
-    container.appendChild(ember);
-    setTimeout(() => ember.remove(), 6000);
-}
-setInterval(createEmber, 150);
+
+    var baseInterval = 200;
+    var minInterval = 40;
+    var currentTimer = null;
+
+    function getScrollDepth() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return 0;
+        return Math.min(scrollTop / docHeight, 1);
+    }
+
+    function createEmber() {
+        var depth = getScrollDepth();
+        var viewTop = window.pageYOffset || document.documentElement.scrollTop;
+        var viewHeight = window.innerHeight;
+        var spawnY = viewTop + viewHeight + 10;
+
+        var ember = document.createElement('div');
+        ember.classList.add('ember');
+        ember.style.left = Math.random() * 100 + '%';
+        ember.style.top = spawnY + 'px';
+        var size = Math.random() * 4 + 2 + (depth * 3);
+        ember.style.width = size + 'px';
+        ember.style.height = size + 'px';
+        var duration = (Math.random() * 3 + 2) - (depth * 1.5);
+        ember.style.animationDuration = Math.max(duration, 1) + 's';
+        ember.style.opacity = Math.random() * 0.6 + 0.2 + (depth * 0.2);
+        container.appendChild(ember);
+        var lifetime = (Math.max(duration, 1) * 1000) + 500;
+        setTimeout(function() { ember.remove(); }, lifetime);
+    }
+
+    function updateDensity() {
+        var depth = getScrollDepth();
+        var interval = baseInterval - (depth * (baseInterval - minInterval));
+        if (currentTimer) clearInterval(currentTimer);
+        currentTimer = setInterval(createEmber, Math.round(interval));
+    }
+
+    container.style.position = 'absolute';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.width = '100%';
+    container.style.height = document.documentElement.scrollHeight + 'px';
+
+    window.addEventListener('resize', function() {
+        container.style.height = document.documentElement.scrollHeight + 'px';
+    });
+
+    updateDensity();
+    window.addEventListener('scroll', updateDensity);
+})();
 </script>
 <script>
   if ('serviceWorker' in navigator) {
