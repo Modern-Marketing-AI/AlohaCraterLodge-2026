@@ -1,0 +1,33 @@
+Act as a Senior Front-End Developer. You are updating a Vanilla HTML/CSS/JS web application (PWA) for "Aloha Crater Lodge." Execute the following 5 tasks in one single shot to conserve compute credits. 
+
+GLOBAL CONSTRAINTS & RULES:
+1. Do NOT overwrite existing structural HTML, strip `<img>` tags, alter toast message CSS, or change existing button hover effects.
+2. Maintain PWA "Standalone" headers and the dark mode (`#18181b`) / emerald green (`#10b981`) color palette across all files.
+3. CRITICAL SAFETY RULE: Under no circumstances may any code, copy, metadata, or images mention, allude to, or promote a "lava tube" or "cave." This is a strict safety embargo.
+4. Tone: Warm, professional, "Lodge Guide." Zero military/clinical jargon.
+
+TASK 1: SEO & ACCESSIBILITY INJECTIONS (Existing Files)
+- index.html: Inject this exact JSON-LD script into the <head>: <script type="application/ld+json">{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Aloha Crater Lodge","description":"A Premium Volcanic Basecamp offering Bio-Regeneration suites, communal hot tubs, and all-terrain e-bike rentals near Kīlauea.","url":"https://alohacraterlodge.netlify.app","telephone":"+1-808-345-4449","address":{"@type":"PostalAddress","streetAddress":"11-3966 Kalani Honua Rd","addressLocality":"Volcano","addressRegion":"HI","postalCode":"96785","addressCountry":"US"},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Bio-Regeneration Suites","value":"True"},{"@type":"LocationFeatureSpecification","name":"Communal Hot Tub","value":"True"},{"@type":"LocationFeatureSpecification","name":"All-Terrain E-Bike Rentals","value":"True"}]}</script>
+- wellness.html: Update existing images with these exact alt tags: hottub.png (alt="Communal thermal hydrotherapy hot tub at Aloha Crater Lodge"), p90.png (alt="OlyLife P90 bio-regeneration device for physical recovery"), vibration.png (alt="Vibration plate for muscle relaxation and recovery"), eye-massager.png (alt="Galaxy G-one Eye Massager for deep relaxation").
+- ebikes.html: Update ebike-hero.png with (alt="Premium all-terrain e-bike available for guest rental to explore Volcano").
+- concierge.html: Add `aria-label="Copy Concierge Instructions"` to the copy AI priming message button.
+
+TASK 2: UI POLISH (Ember Glow CSS)
+- index.html: Add this to the <style> block to create a heat signature pulse on `.nav-card-button` elements:
+`.nav-card-button { transition: all 0.3s ease; box-shadow: 0 0 5px rgba(255, 69, 0, 0.3); border: 1px solid rgba(16, 185, 129, 0.2); } .nav-card-button:hover { animation: heat-pulse 2s infinite alternate; border-color: #10b981; } @keyframes heat-pulse { 0% { box-shadow: 0 0 8px rgba(255, 69, 0, 0.4), inset 0 0 5px rgba(255, 69, 0, 0.1); } 100% { box-shadow: 0 0 18px rgba(255, 69, 0, 0.8), inset 0 0 10px rgba(255, 69, 0, 0.2); transform: translateY(-2px); } }`
+
+TASK 3: NETLIFY REDIRECTS
+- Create a new file named exactly `_redirects` (no extension) in the root directory.
+- Add `/* /index.html 200` to ensure SPA/PWA routing fallback, plus standard 301 redirects mapping any legacy .html paths to current paths.
+
+TASK 4: CREATE premium-suites.html (Honeymoon Portal)
+- Design: "Atmospheric Gradient" (Cool/Mysterious fog particle system at the top, transitioning to Hot/Action deep blacks with ember-orange accents down page). Chiaroscuro lighting for imagery.
+- Content: Feature Room 4 (Deluxe suite, in-room whirlpool) and Room 6 (Private patio, fish terrarium). 
+- Copy: Headline: "Experience the edge of the earth, together." Frame the morning as an exclusive e-bike mission to the crater edge for sunrise. Frame the return as a profound, private reset flushing the summit chill in the whirlpool or reflecting in rainforest isolation. 
+- UX: Use a custom "Magma Modal" popup for the "Secure Your Dates" CTA to prevent cart abandonment (do not link to an external booking engine).
+
+TASK 5: CREATE basecamp.html (Budget Portal)
+- Design: "Fog and Rainforest" aesthetic. Crisp, bright morning visuals, active lighting.
+- Content: Feature Room 3 (3-person capacity, high-utility kitchenette, no patio).
+- Copy: Headline: "Your high-value launchpad for the ultimate island expedition." Validate the desire to be out in the wild. Position Room 3 as a streamlined basecamp for prepping rations and quick deployment. Emphasize physical reset via the complimentary communal hot tub.
+- UX: Use the "Magma Modal" popup for the "Secure Your Basecamp" CTA.
