@@ -5,15 +5,16 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 
 ## Project Structure
 ### Pages
-- `index.html` - Main page with Kīlauea status banner, ember particle effect, hero, room cards, JSON-LD structured data; header nav has 4 ember-glow links (THE ROOMS, E-BIKES, WELLNESS & RECOVERY, THE VOLCANO GUIDE)
+- `index.html` - Main page with Kīlauea status banner, ember particle effect, hero, room cards, JSON-LD structured data
+- `rooms.html` - "The Basecamp Menu" — rooms index gateway with atmospheric gradient (fog→ember), 3 tier cards linking to room portals, ember-glow hover borders
+- `family-suites.html` - Tier 1: "The Family-Friendly Basecamps" — Rooms 1 & 2 (4 guests, kitchenette, patio), dark/emerald theme, Magma Modal
+- `basecamp.html` - Tier 2: "The Budget-Friendly Basecamp" — Room 3 (3-person, kitchenette, no patio), Magma Modal
+- `premium-suites.html` - Tier 3: "Honeymoon & Premium Suites" — Room 4 (whirlpool) & Room 6 (patio/terrarium), fog particle CSS, atmospheric gradient, Magma Modal
 - `wellness.html` - 4 wellness cards: Thermal Hydrotherapy, OlyLife P90, Vibration Plate, Galaxy G-one Eye Massager (SEO alt tags)
 - `ebikes.html` - E-Bike rental page with ebike-hero.png, specs (750W/40mi/fat-tires), pricing grid, green CTA
 - `concierge.html` - AI Concierge clipboard tool: "Lodge Guide" persona prompt, toast notification, aria-label on button
 - `guide.html` - Volcano Guide terminal with link to volcano-guide.html article
 - `volcano-guide.html` - Standalone article: "The Volcano Insider Guide"
-- `family-suites.html` - Tier 1: "The Family-Friendly Basecamps" — Rooms 1 & 2 (4 guests, kitchenette, patio), dark/emerald theme, Magma Modal
-- `premium-suites.html` - Tier 3: "Honeymoon & Premium Suites" — Room 4 (whirlpool) & Room 6 (patio/terrarium), fog particle CSS, atmospheric gradient, Magma Modal
-- `basecamp.html` - Tier 2: "The Budget-Friendly Basecamp" — Room 3 (3-person, kitchenette, no patio), Magma Modal
 - `guest-intel.html` - Internal AI concierge intelligence data (6 sections, NOT publicly linked)
 - `404.html` - Custom 404 error page with themed "Off The Trail" messaging
 
@@ -30,19 +31,22 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `apple-touch-icon.png` - PWA apple touch icon
 
 ### Navigation
-- Header nav (index.html): 4 ember-glow links — no "Book Basecamp" button
-- All sub-pages have a green "← Back to Basecamp" link to index.html
-- guide.html uses the shared nav bar with Home link
+- Consistent header nav on: index.html, rooms.html, family-suites.html, basecamp.html, premium-suites.html
+- Header contains: ALOHA CRATER LODGE logo + 4 ember-glow links (THE ROOMS → rooms.html, E-BIKES, WELLNESS & RECOVERY, THE VOLCANO GUIDE)
+- Header nav CSS: `.site-header` flex layout, `.header-links` with ember border/box-shadow + hover flare
+- guide.html uses its own shared nav bar
+- wellness.html, ebikes.html, concierge.html, volcano-guide.html still use "← Back to Basecamp" pattern
 - guest-intel.html is intentionally not linked from public navigation
 
 ### Configuration
-- `_redirects` - Netlify redirects: legacy 301s for /wellness, /ebikes, /concierge, /guide, /premium-suites, /basecamp, /family-suites, /blog/*; SPA fallback (/* /index.html 200) as last rule
+- `_redirects` - Netlify redirects: legacy 301s for /rooms, /wellness, /ebikes, /concierge, /guide, /premium-suites, /basecamp, /family-suites, /blog/*; SPA fallback (/* /index.html 200) as last rule
 
 ## Design Notes
 - Dark theme (#18181b body, #1A1A1A nav, #B22222 status banner), ember accents (rgba(255,69,0)), emerald CTAs (#10b981)
-- Header nav links have ember glow CSS: resting orange border + hover flare with box-shadow/text-shadow
+- Header nav links: resting orange border + hover flare with box-shadow/text-shadow/translateY
+- rooms.html cards: ember-glow hover borders with emerald CTA that fills on hover
 - Tone: Warm, professional "Lodge Guide" — no military/clinical jargon
-- Inline styles on: wellness, ebikes, concierge, volcano-guide, premium-suites, basecamp, family-suites
+- Inline styles on: rooms, wellness, ebikes, concierge, volcano-guide, premium-suites, basecamp, family-suites
 - Shared style.css on: index, guide, 404
 - Image filenames have spaces/caps — use URL encoding (e.g., `Vibration%20plate.png`)
 - SAFETY EMBARGO: No lava tube or cave references anywhere
