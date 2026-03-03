@@ -1,0 +1,53 @@
+Act as a Senior Front-End Developer. You are updating a Vanilla HTML/CSS/JS web application (PWA) for "Aloha Crater Lodge." We are building out the volcano-guide.html page based on newly approved, brand-compliant copy.
+
+GLOBAL CONSTRAINTS & RULES:
+
+Maintain PWA "Standalone" headers and the dark mode (#18181b) / emerald green (#10b981) color palette.
+
+CRITICAL SAFETY RULE: Under no circumstances may any code, copy, metadata, or images mention, allude to, or promote a "lava tube" or "cave." This is a strict safety embargo.
+
+Tone Constraint: Warm, professional, "Lodge Guide." All military and clinical jargon has been scrubbed from the provided copy. Do not reintroduce it.
+
+Ensure the header navigation perfectly matches the index.html structure (THE ROOMS, E-BIKES, WELLNESS & RECOVERY, THE VOLCANO GUIDE) with the Ember Glow hover CSS.
+
+TASK 1: BUILD volcano-guide.html
+
+Design: Use the "Atmospheric Gradient" (Cool/Mysterious fog particle system at the top, transitioning to Hot/Action deep blacks with ember-orange accents down page).
+
+Page Title/Header (H1): Things to Do Near Hawaiʻi Volcanoes National Park: Your Basecamp Itinerary
+
+The Hook (Intro text): "Don't just visit the mountain; experience it fully. The Big Island is wild and beautiful, but we have designed your Basecamp to ensure you spend your time feeling the awe of the crater, not fighting for parking or struggling to recover. Here is your guide to exploring Volcano."
+
+Section 1: Bypass the Gridlock at the Crater
+
+"Standing at the edge of Halemaʻumaʻu crater is a profound, grounding experience. However, National Park parking lots are frequently full by 10:00 AM. Don't waste your morning circling for a spot. Ride directly from the Lodge on our All-Terrain E-Bikes. These bikes allow you to glide past the vehicle lines, feel the cool rainforest air, and secure front-row access to the caldera."
+
+Section 2: Refuel at Volcano Village Restaurants
+
+"We consider our local dining options essential partners in your daily recovery. Operating hours in the rainforest are strict, so we recommend planning early dinners."
+
+Ohelo Café: Artisan, wood-fired pizzas (including the blueberry and gorgonzola "Berry" or the "Salsiccia") and locally caught Furikake Crusted Ahi.
+
+The Rim at Volcano House: Dine against the backdrop of the Kīlauea caldera with freshly caught fish or grass-fed beef. Dinner service concludes at 8:30 PM.
+
+Kilauea Lodge Restaurant: A historic setting featuring Hawaiian-infused cuisine and local ingredients, serving dinner until 8:00 PM.
+
+Quick Bites: For a quick meal, try Tuk-Tuk Thai or the Volcano General Store for trail supplies.
+
+Section 3: Witness Pristine Dark Skies
+
+"The Big Island offers some of the clearest stargazing on Earth. High altitude and the Tropical Inversion Layer completely clear the atmosphere of water vapor, eliminating the twinkling effect of stars and allowing you to see deep space phenomena like the Zodiacal Light with the naked eye. Turn off the lights in your room and use red-light settings to preserve your night vision."
+
+Section 4: Deep Physical Recovery
+
+"The Kīlauea crater trails demand incredible physical endurance. Passive sleep isn't always enough; you need active recovery. Utilize our Wellness suites equipped with the OlyLife P90 to soothe inflammation in your legs using terahertz energy. Follow up with the Vibration Plates to ensure you wake up fully refreshed for tomorrow's hike."
+
+Section 5: Choose Your Basecamp Itinerary
+
+Tier 1: The Family-Friendly Itinerary (Rooms 1 & 2). "7:00 AM: Enjoy locally sourced Kaʻū Estate Coffee on your front patio. 9:00 AM: Ride E-Bikes to the park to bypass traffic. 6:00 PM: Enjoy artisan wood-fired pizza at Ohelo Café."
+
+Tier 2: The Agile Explorer (Room 3). "6:00 AM: Prep trail snacks in your kitchenette before an early hike. 1:00 PM: Spend the full day exploring the broader Big Island. 7:00 PM: Grab dinner at Tuk-Tuk Thai, then relax in the communal hot tub."
+
+Tier 3: The Honeymoon & Premium Suites (Rooms 4 & 6). "8:00 AM: Wake up in complete rainforest isolation. 5:00 PM: Secure a window-side table at The Rim for dinner overlooking the caldera. 8:00 PM: Private recovery in your in-room whirlpool tub and OlyLife P90."
+
+CTA: "The mountain is waiting. Secure Your Dates." (Link this directly to the custom "Magma Modal" popup to ensure we retain the guest in the booking flow).
