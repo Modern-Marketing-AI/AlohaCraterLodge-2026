@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Suites | Aloha Crater Lodge</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; overflow-x: hidden; }
+
+        .nav-back { padding: 20px 5%; position: relative; z-index: 10; }
+        .nav-back a { color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .nav-back a:hover { color: #34d399; }
+
+        .hero-section {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(180deg, #2d3a4a 0%, #1a2332 20%, #111a24 40%, #0a0a0a 70%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .hero-section::before,
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .hero-section::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(200, 210, 220, 0.4) 0%, transparent 60%);
+            animation: fogDrift1 18s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            background: radial-gradient(ellipse at 70% 40%, rgba(180, 195, 210, 0.3) 0%, transparent 55%);
+            animation: fogDrift2 22s ease-in-out infinite;
+        }
+
+        @keyframes fogDrift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(5%, 3%) scale(1.05); }
+            50% { transform: translate(-3%, -2%) scale(0.95); }
+            75% { transform: translate(2%, -4%) scale(1.02); }
+        }
+
+        @keyframes fogDrift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-4%, 2%) scale(1.08); }
+            66% { transform: translate(3%, -3%) scale(0.97); }
+        }
+
+        .fog-layer {
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .fog-layer::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: radial-gradient(ellipse at center, rgba(160, 180, 200, 0.12) 0%, transparent 70%);
+            animation: fogWisp1 15s ease-in-out infinite;
+        }
+
+        .fog-layer::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 0;
+            width: 80%;
+            height: 30%;
+            background: radial-gradient(ellipse at center, rgba(140, 160, 180, 0.08) 0%, transparent 65%);
+            animation: fogWisp2 20s ease-in-out infinite;
+        }
+
+        @keyframes fogWisp1 {
+            0%, 100% { transform: translateX(0); opacity: 0.6; }
+            50% { transform: translateX(8%); opacity: 1; }
+        }
+
+        @keyframes fogWisp2 {
+            0%, 100% { transform: translateX(0); opacity: 0.4; }
+            50% { transform: translateX(-6%); opacity: 0.9; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 700px;
+            padding: 40px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #b0bec5;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .narrative-section {
+            padding: 80px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .narrative-section h2 {
+            font-size: 2rem;
+            color: #ff6d00;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .narrative-section p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .ember-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6d00, #ff3d00);
+            margin: 60px auto;
+            border-radius: 2px;
+        }
+
+        .rooms-section {
+            padding: 60px 5% 80px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .rooms-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background: #141414;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(255, 109, 0, 0.15);
+        }
+
+        .room-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .room-card-content {
+            padding: 24px;
+        }
+
+        .room-card-content h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .room-card-content p {
+            font-size: 0.95rem;
+            color: #999;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .room-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 20px;
+        }
+
+        .room-features-list li {
+            font-size: 0.9rem;
+            color: #aaa;
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .room-features-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #ff6d00;
+        }
+
+        .btn-magma {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6d00, #e65100);
+            color: #ffffff;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-magma:hover {
+            background: linear-gradient(135deg, #ff8f00, #ff6d00);
+            box-shadow: 0 4px 20px rgba(255, 109, 0, 0.4);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 5% 100px;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-box h2 {
+            font-size: 1.6rem;
+            color: #ff6d00;
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover { color: #fff; }
+
+        .modal-form label {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-form input {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        .modal-form input:focus {
+            outline: none;
+            border-color: #ff6d00;
+        }
+
+        .modal-form button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff6d00, #e65100);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .modal-form button:hover {
+            background: linear-gradient(135deg, #ff8f00, #ff6d00);
+            box-shadow: 0 4px 20px rgba(255, 109, 0, 0.4);
+        }
+
+        footer {
+            background: #0D0D0D;
+            color: white;
+            padding: 50px 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+
+        .footer-col { margin-bottom: 20px; }
+        .footer-col h4 { margin-bottom: 15px; color: #E65100; }
+        .footer-col p { color: #aaa; }
+        .social a { color: #AAA; text-decoration: none; display: block; margin-bottom: 8px; }
+        .social a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .rooms-grid { grid-template-columns: 1fr; }
+            .narrative-section { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-back">
+        <a href="index.html">← Back to Basecamp</a>
+    </div>
+
+    <section class="hero-section">
+        <div class="fog-layer"></div>
+        <div class="hero-content">
+            <h1>Experience the edge of the earth, together.</h1>
+            <p>Two premium suites designed for couples seeking an intimate encounter with the world's most active volcanic landscape.</p>
+        </div>
+    </section>
+
+    <div class="ember-divider"></div>
+
+    <section class="narrative-section">
+        <h2>The Morning</h2>
+        <p>Before dawn, the rainforest awakens. You and your partner roll out on premium all-terrain e-bikes, tracing quiet roads through native ōhiʻa forest toward the crater's edge. The sunrise spills across the caldera — a private spectacle of light and geological power, witnessed from the most privileged vantage point on Earth.</p>
+        <p>No crowds. No tour buses. Just you, the summit, and the slow pulse of the planet beneath your feet.</p>
+    </section>
+
+    <div class="ember-divider"></div>
+
+    <section class="narrative-section">
+        <h2>The Return</h2>
+        <p>Back at the Lodge, the day shifts into a private reset. Sink into your in-room whirlpool tub as rainforest canopy filters the afternoon light. The soundtrack is rainfall on broad leaves, birdsong from the ōhiʻa canopy, and silence — deep, restorative silence.</p>
+        <p>No spa reservation required. No shared spaces. Your suite is your sanctuary, wrapped in the isolation of a living rainforest.</p>
+    </section>
+
+    <div class="ember-divider"></div>
+
+    <section class="rooms-section">
+        <h2>The Suites</h2>
+        <div class="rooms-grid">
+            <div class="room-card">
+                <img src="room-caldera.jpg" alt="Room 4 Deluxe Suite with in-room whirlpool at Aloha Crater Lodge">
+                <div class="room-card-content">
+                    <h3>Room 4 — Deluxe Suite</h3>
+                    <p>The flagship retreat. Designed for couples who demand complete privacy and in-room indulgence.</p>
+                    <ul class="room-features-list">
+                        <li>Private in-room whirlpool tub</li>
+                        <li>Full kitchenette</li>
+                        <li>Max 2 guests</li>
+                        <li>Rainforest-facing windows</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="room-card">
+                <img src="room-caldera.jpg" alt="Room 6 Private Patio Suite with fish terrarium at Aloha Crater Lodge">
+                <div class="room-card-content">
+                    <h3>Room 6 — Patio Suite</h3>
+                    <p>A living space that blurs the line between indoors and the surrounding rainforest ecosystem.</p>
+                    <ul class="room-features-list">
+                        <li>Private patio with rainforest access</li>
+                        <li>In-room fish terrarium</li>
+                        <li>Full kitchenette</li>
+                        <li>Max 2 guests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <p>Ready to secure your private volcanic retreat?</p>
+        <button class="btn-magma" onclick="openModal()">Secure Your Dates</button>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>Volcano Village, HI</p>
+                <p>Text/Call: (808) 345-4449</p>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="#">Instagram: @alohacraterlodge</a><br>
+                <a href="#">YouTube: Volcano Insider</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="magmaModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>Secure Your Dates</h2>
+            <p>Tell us when you'd like to experience the edge. We'll confirm availability within 24 hours.</p>
+            <form class="modal-form" onsubmit="handleSubmit(event)">
+                <label for="modal-name">Name</label>
+                <input type="text" id="modal-name" name="name" placeholder="Your full name" required>
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" name="email" placeholder="you@example.com" required>
+                <label for="modal-dates">Preferred Dates</label>
+                <input type="text" id="modal-dates" name="dates" placeholder="e.g. Mar 10–14">
+                <button type="submit">Secure Your Dates</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+        document.getElementById('magmaModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        function handleSubmit(e) {
+            e.preventDefault();
+            var name = document.getElementById('modal-name').value;
+            alert('Thank you, ' + name + '! We will confirm your dates within 24 hours.');
+            closeModal();
+            e.target.reset();
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+</body>
+</html>

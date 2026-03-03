@@ -9,6 +9,36 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Aloha Crater Lodge",
+      "description": "Rainforest basecamp positioned 2 miles from Kīlauea volcano in Volcano Village, Hawaii.",
+      "url": "https://alohacraterlodge.com",
+      "telephone": "+1-808-345-4449",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11-3966 Kalani Honua Rd",
+        "addressLocality": "Volcano",
+        "addressRegion": "HI",
+        "postalCode": "96785",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.4622,
+        "longitude": -155.2339
+      },
+      "image": "https://alohacraterlodge.com/hero-volcano.jpg",
+      "priceRange": "$$",
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Communal Hot Tub", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "E-Bike Rentals", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Wellness Recovery Protocols", "value": true }
+      ]
+    }
+    </script>
     <link rel="stylesheet" href="style.css">
     <style>
         #ember-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 5; }
@@ -16,6 +46,29 @@
         @keyframes floatUp {
             0% { transform: translateY(0) scale(1); opacity: 1; }
             100% { transform: translateY(-300px) scale(0.2); opacity: 0; }
+        }
+        .nav-card-button {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            border-radius: 6px;
+            background: transparent;
+            color: #ff4500;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.15);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-card-button:hover {
+            border-color: rgba(255, 69, 0, 0.8);
+            box-shadow: 0 0 18px rgba(255, 69, 0, 0.4), 0 0 40px rgba(255, 69, 0, 0.15);
+            animation: heat-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes heat-pulse {
+            0% { box-shadow: 0 0 8px rgba(255, 69, 0, 0.3); transform: translateY(0); }
+            50% { box-shadow: 0 0 22px rgba(255, 69, 0, 0.6), 0 0 44px rgba(255, 69, 0, 0.2); transform: translateY(-2px); }
+            100% { box-shadow: 0 0 8px rgba(255, 69, 0, 0.3); transform: translateY(0); }
         }
     </style>
 </head>
