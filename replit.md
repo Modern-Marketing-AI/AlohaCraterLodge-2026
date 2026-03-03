@@ -33,7 +33,8 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 
 ### Navigation
 - Consistent header nav on ALL public pages: index, rooms, family-suites, basecamp, premium-suites, things-to-do, wellness, ebikes, concierge, volcano-guide
-- Header contains: ALOHA CRATER LODGE logo + 5 ember-glow links (THE ROOMS, E-BIKES, WELLNESS & RECOVERY, THINGS TO DO, THE VOLCANO GUIDE)
+- index.html header: ALOHA CRATER LODGE logo + 4 ember-glow links (THE ROOMS → #rooms anchor, E-BIKES, WELLNESS & RECOVERY, THE VOLCANO GUIDE) — no THINGS TO DO link, no "Book Basecamp" button
+- All other public pages: 5 ember-glow links (THE ROOMS → rooms.html, E-BIKES, WELLNESS & RECOVERY, THINGS TO DO, THE VOLCANO GUIDE)
 - Header nav CSS: `.site-header` flex layout, `.header-links` with ember border/box-shadow + hover flare
 - guide.html uses its own shared nav bar (legacy)
 - guest-intel.html is intentionally not linked from public navigation
