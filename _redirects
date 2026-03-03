@@ -1,3 +1,8 @@
-# Aloha Crater Lodge SEO Lifeboat
-# Replace the left side with your old Cloudbeds blog URLs later
-/blog/* /guide.html  301
+/blog/* /guide.html 301
+/wellness /wellness.html 301
+/ebikes /ebikes.html 301
+/concierge /concierge.html 301
+/guide /guide.html 301
+/premium-suites /premium-suites.html 301
+/basecamp /basecamp.html 301
+/* /index.html 200
