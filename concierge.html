@@ -27,11 +27,26 @@
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
+        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .site-header .logo a { color: #fff; text-decoration: none; }
+        .header-links { display: flex; align-items: center; gap: 12px; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
+        <nav class="header-links">
+            <a href="rooms.html">THE ROOMS</a>
+            <a href="ebikes.html">E-BIKES</a>
+            <a href="wellness.html">WELLNESS & RECOVERY</a>
+            <a href="things-to-do.html">THINGS TO DO</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+        </nav>
+    </header>
     <div class="container">
-        <div class="nav-back" style="padding: 20px 0;"><a href="index.html" style="color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px;">← Back to Basecamp</a></div>
         <div class="header">
             <h1>AI Concierge Link</h1>
             <p>Prime your personal AI assistant with Lodge intelligence.</p>

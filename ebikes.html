@@ -12,8 +12,12 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f5; color: #18181b; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .nav-back { padding: 20px 0; }
-        .nav-back a { color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
+        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .site-header .logo a { color: #fff; text-decoration: none; }
+        .header-links { display: flex; align-items: center; gap: 12px; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
         .header { text-align: center; padding: 20px 0 20px; }
         .header h1 { margin: 0; font-size: 28px; color: #27272a; }
         .header p { color: #52525b; margin-top: 10px; }
@@ -35,8 +39,17 @@
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
+        <nav class="header-links">
+            <a href="rooms.html">THE ROOMS</a>
+            <a href="ebikes.html">E-BIKES</a>
+            <a href="wellness.html">WELLNESS & RECOVERY</a>
+            <a href="things-to-do.html">THINGS TO DO</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+        </nav>
+    </header>
     <div class="container">
-        <div class="nav-back"><a href="index.html">← Back to Basecamp</a></div>
         <div class="header">
             <h1>E-Bike Rentals</h1>
             <p>Discover the beauty of Volcano Village and beyond on two wheels.</p>
