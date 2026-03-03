@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Do Near Hawaiʻi Volcanoes National Park — Aloha Crater Lodge</title>
+    <meta name="description" content="Your basecamp itinerary for exploring Kīlauea and Volcano Village. E-bike crater access, local dining, dark sky stargazing, and active recovery.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Basecamp Command">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #18181b; color: #e0e0e0; line-height: 1.7; overflow-x: hidden; }
+
+        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10; }
+        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .site-header .logo a { color: #fff; text-decoration: none; }
+        .header-links { display: flex; align-items: center; gap: 12px; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+
+        .hero-section {
+            position: relative;
+            text-align: center;
+            padding: 100px 5% 80px;
+            background: linear-gradient(180deg, #2d3a4a 0%, #1a1a2e 35%, #18181b 65%, #1a0e00 100%);
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -50%;
+            width: 200%; height: 100%;
+            background: radial-gradient(ellipse at 25% 15%, rgba(200,220,240,0.07) 0%, transparent 55%),
+                        radial-gradient(ellipse at 75% 25%, rgba(180,200,220,0.05) 0%, transparent 50%);
+            animation: fogDrift 22s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 35%;
+            background: radial-gradient(ellipse at 50% 100%, rgba(255,69,0,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        @keyframes fogDrift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(4%); }
+        }
+
+        .hero-section h1 {
+            position: relative; z-index: 1;
+            font-size: 2.6rem; font-weight: 800; color: #fff;
+            max-width: 800px; margin: 0 auto 20px;
+        }
+
+        .hero-section .hook {
+            position: relative; z-index: 1;
+            font-size: 1.1rem; color: rgba(255,255,255,0.65);
+            max-width: 680px; margin: 0 auto;
+        }
+
+        .content-wrapper {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .section-block {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .section-block:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-block h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+
+        .section-block p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 16px;
+        }
+
+        .restaurant-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .restaurant-list li {
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid #10b981;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .restaurant-list li strong {
+            color: #10b981;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+
+        .restaurant-list li span {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+        }
+
+        .itinerary-section {
+            padding: 80px 0 60px;
+        }
+
+        .itinerary-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tier-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .tier-card {
+            background: #1f1f23;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid rgba(255,69,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover {
+            border-color: rgba(255,69,0,0.4);
+            box-shadow: 0 0 16px rgba(255,69,0,0.12);
+        }
+
+        .tier-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        .tier-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .tier-card .schedule-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .schedule-item .time {
+            color: #ff6d00;
+            font-weight: 700;
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+
+        .schedule-item .activity {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 5%;
+            background: linear-gradient(180deg, #18181b 0%, #1a0e00 100%);
+        }
+
+        .cta-section p {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .btn-magma {
+            display: inline-block;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #ff6d00, #ff4500);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255,69,0,0.3);
+        }
+
+        .btn-magma:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(255,69,0,0.5);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: #1f1f23;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 440px;
+            width: 90%;
+            position: relative;
+            border: 1px solid rgba(255,69,0,0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 16px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover { color: #fff; }
+
+        .modal-box h2 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .modal-form label {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            margin-top: 12px;
+        }
+
+        .modal-form input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #18181b;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .modal-form input:focus { outline: none; border-color: #ff6d00; }
+
+        .modal-form button[type="submit"] {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff6d00, #ff4500);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-form button[type="submit"]:hover {
+            box-shadow: 0 4px 16px rgba(255,69,0,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 1.8rem; }
+            .hero-section { padding: 60px 5% 50px; }
+            .section-block { padding: 40px 0; }
+            .tier-card { padding: 24px; }
+            .header-links { gap: 6px; flex-wrap: wrap; }
+            .header-links a { padding: 6px 10px; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
+        <nav class="header-links">
+            <a href="rooms.html">THE ROOMS</a>
+            <a href="ebikes.html">E-BIKES</a>
+            <a href="wellness.html">WELLNESS & RECOVERY</a>
+            <a href="things-to-do.html">THINGS TO DO</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <h1>Things to Do Near Hawaiʻi Volcanoes National Park: Your Basecamp Itinerary</h1>
+        <p class="hook">Don't just visit the mountain; experience it fully. The Big Island is wild and beautiful, but we have designed your Basecamp to ensure you spend your time feeling the awe of the crater, not fighting for parking or struggling to recover. Here is your guide to exploring Volcano.</p>
+    </section>
+
+    <div class="content-wrapper">
+        <div class="section-block">
+            <h2>Bypass the Gridlock at the Crater</h2>
+            <p>Standing at the edge of Halemaʻumaʻu crater is a profound, grounding experience. However, National Park parking lots are frequently full by 10:00 AM. Don't waste your morning circling for a spot. Ride directly from the Lodge on our All-Terrain E-Bikes. These bikes allow you to glide past the vehicle lines, feel the cool rainforest air, and secure front-row access to the caldera.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Refuel at Volcano Village Restaurants</h2>
+            <p>We consider our local dining options essential partners in your daily recovery. Operating hours in the rainforest are strict, so we recommend planning early dinners.</p>
+            <ul class="restaurant-list">
+                <li>
+                    <strong>Ohelo Café</strong>
+                    <span>Artisan, wood-fired pizzas (including the blueberry and gorgonzola "Berry" or the "Salsiccia") and locally caught Furikake Crusted Ahi.</span>
+                </li>
+                <li>
+                    <strong>The Rim at Volcano House</strong>
+                    <span>Dine against the backdrop of the Kīlauea caldera with freshly caught fish or grass-fed beef. Dinner service concludes at 8:30 PM.</span>
+                </li>
+                <li>
+                    <strong>Kilauea Lodge Restaurant</strong>
+                    <span>A historic setting featuring Hawaiian-infused cuisine and local ingredients, serving dinner until 8:00 PM.</span>
+                </li>
+                <li>
+                    <strong>Quick Bites</strong>
+                    <span>For a quick meal, try Tuk-Tuk Thai or the Volcano General Store for trail supplies.</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2>Witness Pristine Dark Skies</h2>
+            <p>The Big Island offers some of the clearest stargazing on Earth. High altitude and the Tropical Inversion Layer completely clear the atmosphere of water vapor, eliminating the twinkling effect of stars and allowing you to see deep space phenomena like the Zodiacal Light with the naked eye. Turn off the lights in your room and use red-light settings to preserve your night vision.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Deep Physical Recovery</h2>
+            <p>The Kīlauea crater trails demand incredible physical endurance. Passive sleep isn't always enough; you need active recovery. Utilize our Wellness suites equipped with the OlyLife P90 to soothe inflammation in your legs using terahertz energy. Follow up with the Vibration Plates to ensure you wake up fully refreshed for tomorrow's hike.</p>
+        </div>
+
+        <div class="itinerary-section">
+            <h2>Choose Your Basecamp Itinerary</h2>
+            <div class="tier-cards">
+                <div class="tier-card">
+                    <span class="tier-label">Tier 1 — Groups</span>
+                    <h3>The Family-Friendly Itinerary (Rooms 1 & 2)</h3>
+                    <div class="schedule-item">
+                        <span class="time">7:00 AM</span>
+                        <span class="activity">Enjoy locally sourced Kaʻū Estate Coffee on your front patio.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">9:00 AM</span>
+                        <span class="activity">Ride E-Bikes to the park to bypass traffic.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">6:00 PM</span>
+                        <span class="activity">Enjoy artisan wood-fired pizza at Ohelo Café.</span>
+                    </div>
+                </div>
+
+                <div class="tier-card">
+                    <span class="tier-label">Tier 2 — Explorers</span>
+                    <h3>The Agile Explorer (Room 3)</h3>
+                    <div class="schedule-item">
+                        <span class="time">6:00 AM</span>
+                        <span class="activity">Prep trail snacks in your kitchenette before an early hike.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">1:00 PM</span>
+                        <span class="activity">Spend the full day exploring the broader Big Island.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">7:00 PM</span>
+                        <span class="activity">Grab dinner at Tuk-Tuk Thai, then relax in the communal hot tub.</span>
+                    </div>
+                </div>
+
+                <div class="tier-card">
+                    <span class="tier-label">Tier 3 — Premium</span>
+                    <h3>The Honeymoon & Premium Suites (Rooms 4 & 6)</h3>
+                    <div class="schedule-item">
+                        <span class="time">8:00 AM</span>
+                        <span class="activity">Wake up in complete rainforest isolation.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">5:00 PM</span>
+                        <span class="activity">Secure a window-side table at The Rim for dinner overlooking the caldera.</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">8:00 PM</span>
+                        <span class="activity">Private recovery in your in-room whirlpool tub and OlyLife P90.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <p>The mountain is waiting. Secure Your Dates.</p>
+        <button class="btn-magma" onclick="openModal()">Secure Dates</button>
+    </section>
+
+    <div class="modal-overlay" id="magmaModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>Secure Dates</h2>
+            <p>Tell us when you're arriving. We'll confirm availability and lock in your dates.</p>
+            <form class="modal-form" onsubmit="handleSubmit(event)">
+                <label for="modal-name">Full Name</label>
+                <input type="text" id="modal-name" name="name" required placeholder="Your name">
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" name="email" required placeholder="you@example.com">
+                <label for="modal-dates">Preferred Dates</label>
+                <input type="text" id="modal-dates" name="dates" required placeholder="e.g. Mar 10–14">
+                <button type="submit">Secure Dates</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+        document.getElementById('magmaModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! We will confirm your dates shortly.');
+            closeModal();
+        }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+</body>
+</html>

@@ -23,11 +23,26 @@
         .tactical-note h3 { color: #10b981; margin-top: 0; }
         .cta-footer { text-align: center; padding: 40px 0; border-top: 1px solid #e4e4e7; margin-top: 40px; }
         .cta-button { display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
+        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .site-header .logo a { color: #fff; text-decoration: none; }
+        .header-links { display: flex; align-items: center; gap: 12px; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
+        <nav class="header-links">
+            <a href="rooms.html">THE ROOMS</a>
+            <a href="ebikes.html">E-BIKES</a>
+            <a href="wellness.html">WELLNESS & RECOVERY</a>
+            <a href="things-to-do.html">THINGS TO DO</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+        </nav>
+    </header>
     <div class="container">
-        <div class="nav-back"><a href="index.html">← Back to Basecamp</a></div>
         
         <article class="article-header">
             <h1>The Volcano Insider Guide</h1>
