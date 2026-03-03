@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family-Friendly Basecamps | Aloha Crater Lodge</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #18181b; color: #e0e0e0; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+
+        .nav-back { padding: 20px 5%; position: relative; z-index: 10; }
+        .nav-back a { color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px; transition: color 0.2s; }
+        .nav-back a:hover { color: #34d399; }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 5% 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-section h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        .hero-section .body-copy {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .ember-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            margin: 50px auto;
+            border-radius: 2px;
+        }
+
+        .rooms-section {
+            padding: 20px 5% 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .rooms-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .room-card {
+            background: #1f1f23;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2a2a2e;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
+        }
+        .room-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+        .room-card-content {
+            padding: 24px;
+        }
+        .room-card-content h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        .room-card-content p {
+            font-size: 0.95rem;
+            color: #999;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .room-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 20px;
+        }
+        .room-features-list li {
+            font-size: 0.9rem;
+            color: #aaa;
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        .room-features-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px 5% 100px;
+        }
+        .cta-section p {
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        .btn-magma {
+            display: inline-block;
+            background: linear-gradient(135deg, #e65100, #bf360c);
+            color: #ffffff;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(230,81,0,0.3);
+        }
+        .btn-magma:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(230,81,0,0.45);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal-box h2 {
+            font-size: 1.6rem;
+            color: #ff6d00;
+            margin-bottom: 8px;
+        }
+        .modal-box p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: #fff; }
+        .modal-form label {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .modal-form input {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .modal-form input:focus {
+            border-color: #e65100;
+        }
+        .modal-form button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #e65100, #bf360c);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .modal-form button:hover {
+            box-shadow: 0 4px 20px rgba(230,81,0,0.5);
+        }
+
+        footer {
+            background: #0d0d0d;
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
+        }
+        footer p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .rooms-grid { grid-template-columns: 1fr; }
+            .modal-box { padding: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-back">
+        <a href="index.html">← Back to Basecamp</a>
+    </div>
+
+    <section class="hero-section">
+        <h1>The Family-Friendly Basecamps</h1>
+        <p class="body-copy">Our Family-Friendly suites are the perfect starting point for your group's volcano adventure. Accommodating up to four guests, these spacious rooms provide the comfort needed to rest and reconnect. Each space features a convenient kitchenette for easy morning prep and a private front patio to enjoy the rainforest air before heading to the crater edge.</p>
+    </section>
+
+    <div class="ember-divider"></div>
+
+    <section class="rooms-section">
+        <h2>The Rooms</h2>
+        <div class="rooms-grid">
+            <div class="room-card">
+                <img src="room-summit.webp" alt="Room 1 Family Suite at Aloha Crater Lodge">
+                <div class="room-card-content">
+                    <h3>Room 1 — Family Suite</h3>
+                    <p>A spacious basecamp built for families ready to explore the volcano together.</p>
+                    <ul class="room-features-list">
+                        <li>Up to 4 guests</li>
+                        <li>Private kitchenette</li>
+                        <li>Private front patio</li>
+                        <li>Rainforest setting</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="room-card">
+                <img src="room-ridge.jpg" alt="Room 2 Family Suite at Aloha Crater Lodge">
+                <div class="room-card-content">
+                    <h3>Room 2 — Family Suite</h3>
+                    <p>Comfortable quarters designed for rest and reconnection between adventures.</p>
+                    <ul class="room-features-list">
+                        <li>Up to 4 guests</li>
+                        <li>Private kitchenette</li>
+                        <li>Private front patio</li>
+                        <li>Rainforest setting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <p>Ready to secure your family's volcano adventure?</p>
+        <button class="btn-magma" onclick="openModal()">Secure Dates</button>
+    </section>
+
+    <footer>
+        <p>Aloha Crater Lodge — Volcano Village, Hawai'i &nbsp;|&nbsp; <a href="tel:808-345-4449">(808) 345-4449</a></p>
+    </footer>
+
+    <div class="modal-overlay" id="magmaModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>Secure Dates</h2>
+            <p>Tell us when you're arriving. We'll confirm availability and lock in your dates.</p>
+            <form class="modal-form" onsubmit="handleSubmit(event)">
+                <label for="modal-name">Name</label>
+                <input type="text" id="modal-name" name="name" required placeholder="Your full name">
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" name="email" required placeholder="you@example.com">
+                <label for="modal-dates">Preferred Dates</label>
+                <input type="text" id="modal-dates" name="dates" required placeholder="e.g. Mar 10–14">
+                <button type="submit">Secure Dates</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+        document.getElementById('magmaModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        function handleSubmit(e) {
+            e.preventDefault();
+            var name = document.getElementById('modal-name').value;
+            alert('Mahalo, ' + name + '! Your reservation request has been received. We will be in touch shortly.');
+            closeModal();
+            e.target.reset();
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+</body>
+</html>

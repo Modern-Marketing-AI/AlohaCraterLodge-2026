@@ -70,6 +70,28 @@
             50% { box-shadow: 0 0 22px rgba(255, 69, 0, 0.6), 0 0 44px rgba(255, 69, 0, 0.2); transform: translateY(-2px); }
             100% { box-shadow: 0 0 8px rgba(255, 69, 0, 0.3); transform: translateY(0); }
         }
+        header nav a, .header-links a {
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 0 6px rgba(255, 69, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        header nav a:hover, .header-links a:hover {
+            border-color: #ff4500;
+            box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.2), inset 0 0 8px rgba(255, 69, 0, 0.15);
+            transform: translateY(-1px);
+            text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);
+        }
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
     </style>
 </head>
 <body>
@@ -80,13 +102,12 @@
     </div>
     <nav>
         <div class="logo">ALOHA CRATER LODGE</div>
-        <div class="nav-links">
-            <a href="index.html#rooms">The Rooms</a>
-            <a href="ebikes.html">E-Bikes</a>
-            <a href="wellness.html">Recovery Protocols</a>
-            <a href="guide.html">The Volcano Guide</a>
-            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-small" target="_blank">Book Basecamp</a>
-        </div>
+        <nav class="header-links">
+            <a href="#rooms">THE ROOMS</a>
+            <a href="ebikes.html">E-BIKES</a>
+            <a href="wellness.html">WELLNESS & RECOVERY</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+        </nav>
     </nav>
     <div id="ember-container"></div>
     <header id="location" class="hero" style="position: relative; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
