@@ -1,0 +1,32 @@
+Act as a Senior Front-End Developer. We need to update the "Itineraries" section of things-to-do.html for "Aloha Crater Lodge" to clarify that these are suggested schedules, not bookable packages, and to remove specific room numbers.
+
+GLOBAL CONSTRAINTS & RULES:
+
+Maintain PWA "Standalone" headers and the dark mode (#18181b) / emerald green (#10b981) color palette.
+
+CRITICAL SAFETY RULE: Under no circumstances may any code, copy, metadata, or images mention, allude to, or promote a "lava tube" or "cave." This is a strict safety embargo.
+
+Tone Constraint: Warm, professional, "Lodge Guide." Zero military or clinical jargon.
+
+Do NOT alter the header navigation or any other sections (Sections 1-4) of things-to-do.html.
+
+TASK 1: UPDATE SECTION 5 IN things-to-do.html
+Locate "Section 5: Choose Your Basecamp Itinerary" and replace its header, introductory text, and the three tier cards with the following exact structure and copy:
+
+Section Header (H2/H3): Sample Basecamp Itineraries
+
+Introductory Text: "To help you make the most of your time on the mountain, we have outlined a few sample itineraries based on how you prefer to travel. These are purely suggestions to inspire your own unique Volcano experience—your time here is entirely your own."
+
+Card 1: The Family-Friendly Itinerary (Remove any mention of Rooms 1 & 2)
+
+"7:00 AM: Enjoy locally sourced Kaʻū Estate Coffee on your front patio. 9:00 AM: Ride E-Bikes to the park to bypass the morning gate traffic. 6:00 PM: Enjoy artisan wood-fired pizza at Ohelo Café."
+
+Card 2: The Agile Explorer (Remove any mention of Room 3)
+
+"6:00 AM: Prep trail snacks in your kitchenette before an early hike. 1:00 PM: Spend the full day exploring the broader Big Island. 7:00 PM: Grab dinner at Tuk-Tuk Thai, then relax in the communal hot tub."
+
+Card 3: The Couple Getaway (Change title from Premium Suites, remove any mention of Rooms 4 & 6)
+
+"8:00 AM: Wake up in complete rainforest isolation. 5:00 PM: Secure a window-side table at The Rim for dinner overlooking the caldera. 8:00 PM: Private recovery in your in-room whirlpool tub and OlyLife P90."
+
+CTA: Keep the existing "The mountain is waiting. Secure Your Dates." button linked to the Magma Modal exactly as it is.
