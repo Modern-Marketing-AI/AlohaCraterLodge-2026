@@ -1,0 +1,49 @@
+Act as a Senior Front-End Developer updating a Vanilla HTML/CSS/JS web application (PWA) for "Aloha Crater Lodge." Execute the following 4 tasks in one single shot to conserve compute credits.
+
+GLOBAL CONSTRAINTS & RULES:
+
+Do NOT overwrite existing structural HTML outside of the targeted header, strip <img> tags, or alter existing script logic.
+
+Maintain PWA "Standalone" headers and the dark mode (#18181b) / emerald green (#10b981) color palette across all new files.
+
+CRITICAL SAFETY RULE: Under no circumstances may any code, copy, metadata, or images mention, allude to, or promote a "lava tube" or "cave." This is a strict safety embargo.
+
+Tone Constraint: Warm, professional, "Lodge Guide." Zero military or clinical jargon.
+
+TASK 1: HEADER NAVIGATION REFACTOR & EMBER GLOW CSS (index.html)
+
+Locate the main header navigation menu. Replace the existing links and remove the "Book Basecamp" button entirely. Inject this exact HTML structure:
+<nav class="header-links"> <a href="#rooms">THE ROOMS</a> <a href="ebikes.html">E-BIKES</a> <a href="wellness.html">WELLNESS & RECOVERY</a> <a href="volcano-guide.html">THE VOLCANO GUIDE</a> </nav>
+
+Inject the following CSS into the existing <style> block to create a resting ember border that flares on hover for these specific links:
+header nav a, .header-links a { display: inline-block; padding: 8px 16px; margin: 0 4px; color: #ffffff; text-decoration: none; border: 1px solid rgba(255, 69, 0, 0.3); border-radius: 4px; background-color: transparent; box-shadow: 0 0 5px rgba(255, 69, 0, 0.1); transition: all 0.3s ease; } header nav a:hover, .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 15px rgba(255, 69, 0, 0.7), inset 0 0 8px rgba(255, 69, 0, 0.2); transform: translateY(-1px); text-shadow: 0 0 4px rgba(255, 255, 255, 0.3); }
+
+TASK 2: CREATE family-suites.html (Tier 1)
+
+Build a new landing page for Rooms 1 & 2.
+
+Title: The Family-Friendly Basecamps
+
+Body Copy: "Our Family-Friendly suites are the perfect starting point for your group's volcano adventure. Accommodating up to four guests, these spacious rooms provide the comfort needed to rest and reconnect. Each space features a convenient kitchenette for easy morning prep and a private front patio to enjoy the rainforest air before heading to the crater edge."
+
+CTA: "Secure Dates" (Link to the custom Magma Modal popup).
+
+TASK 3: CREATE basecamp.html (Tier 2)
+
+Build a new landing page for Room 3.
+
+Title: The Budget-Friendly Basecamp
+
+Body Copy: "A highly functional, value-focused basecamp designed for the agile explorer. If your goal is maximizing your time out on the trails, this streamlined room is your perfect fit. Accommodating up to three guests, it features a kitchenette for essential fueling before early morning hikes. Optimize your travel budget without sacrificing your proximity to the volcano. (Note: To maximize value, this specific room does not feature exterior patio access)."
+
+CTA: "Secure Dates" (Link to the custom Magma Modal popup).
+
+TASK 4: CREATE premium-suites.html (Tier 3)
+
+Build a new landing page for Rooms 4 & 6.
+
+Title: Honeymoon & Premium Suites
+
+Body Copy: "Our premium suites are designed for intimate connection and complete rejuvenation. After a long day exploring the crater trails, these spaces offer a profound physical reset. Room 4, located on the second floor, features an in-room whirlpool tub to melt away trail fatigue. Room 6 offers a secluded retreat with a private exterior patio and a calming interior fish terrarium. Both suites include private kitchenettes, allowing you to relax and recover in total privacy."
+
+CTA: "Secure Dates" (Link to the custom Magma Modal popup).
