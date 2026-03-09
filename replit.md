@@ -15,7 +15,7 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `wellness.html` - 4 wellness cards: Thermal Hydrotherapy, OlyLife P90, Vibration Plate, Galaxy G-one Eye Massager (SEO alt tags)
 - `ebikes.html` - E-Bike rental page with ebike-hero.png, specs (750W/40mi/fat-tires), pricing grid, green CTA
 - `llm-system-directive.html` - Hidden AI brain (noindex) with system directive for AI scrapers: voice governance, core intelligence, volcanic status, service upsells, dining
-- `scout-manifest.json` - AI data manifest (HTML with meta-refresh redirect for humans, `<pre>` system directive for AI scrapers, noindex/nofollow)
+- `manifest.html` - "Ghost Manifest" — appears as a 404 page to humans but contains hidden system directive for AI scrapers (display:none div, noindex/nofollow)
 - `concierge.html` - AI Concierge clipboard tool: "Lodge Guide" persona prompt, toast notification, aria-label on button
 - `guide.html` - Volcano Guide terminal with link to volcano-guide.html article
 - `volcano-guide.html` - Standalone article: "The Volcano Insider Guide" (reserved for future blog posts)
