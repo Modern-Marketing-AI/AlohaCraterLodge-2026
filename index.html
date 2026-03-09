@@ -121,15 +121,11 @@
     </style>
 </head>
 <body>
-    <div class="kilauea-pulse">
-        <span><strong>STATUS:</strong> RECHARGING (+17.2μrad)</span> | 
-        <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
-        <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
-    </div>
+    <div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;"><a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
 
-    <nav class="universal-nav">
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <div class="logo">ALOHA CRATER LODGE</div>
-        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <p class="subtitle" style="flex: 1; text-align: center; min-width: 200px; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
         <div class="header-links" style="justify-content: center; flex-wrap: wrap;">
             <a href="index.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">BASECAMP (HOME)</a>
             <a href="suites.html">PREMIUM SUITES</a>
@@ -145,12 +141,20 @@
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
         </div>
     </header>
+    <div class="concierge-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
+        <h2 style="color: #fff;">Your 24/7 Digital Trail Scout</h2>
+        <p style="color: #ccc; margin-bottom: 1.5rem;">Instantly access our custom AI-powered concierge for real-time dining recommendations, trail packing lists, and Big Island itineraries. (Note: For immediate lodge assistance or booking changes, please message our local staff directly).</p>
+        <a href="https://chatgpt.com/?q=Act%20as%20the%20digital%20concierge%20for%20Aloha%20Crater%20Lodge.%20Provide%20me%20with%20trail%20recommendations%20and%20dining%20options." target="_blank" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH DIGITAL SCOUT ]</a><br>
+        <p style="color: #888; font-size: 0.9em;">Using Gemini or Claude? <a href="#" onclick="navigator.clipboard.writeText('Act as the digital concierge for Aloha Crater Lodge. Provide me with trail recommendations and dining options.'); alert('Prompt Copied! Open your preferred AI app to paste and begin.'); return false;" style="color: #ff4500; text-decoration: underline;">[ Copy Prompt & Choose AI ]</a></p>
+    </div>
     <section id="rooms" class="section">
         <h2>The Basecamps</h2>
         <div class="grid">
             <div class="card">
-                <img src="room-caldera.jpg" alt="Premium Suite">
-                <h3>Premium Suites</h3>
+                <a href="suites.html" style="text-decoration: none; color: inherit;">
+                    <img src="room-caldera.jpg" alt="Premium Suite">
+                    <h3>Premium Suites</h3>
+                </a>
                 <ul class="room-features">
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Max 2 Guests</li>
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line></svg> Full Kitchenette</li>
@@ -159,8 +163,10 @@
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
             <div class="card">
-                <img src="room-summit.webp" alt="Family Module">
-                <h3>Family Modules</h3>
+                <a href="suites.html" style="text-decoration: none; color: inherit;">
+                    <img src="room-summit.webp" alt="Family Module">
+                    <h3>Family Modules</h3>
+                </a>
                 <ul class="room-features">
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Max 4 Guests</li>
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Full Kitchenette</li>
@@ -169,8 +175,10 @@
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-outline" target="_blank">Check Availability</a>
             </div>
             <div class="card">
-                <img src="room-ridge.jpg" alt="Budget Basecamp">
-                <h3>Budget Basecamp</h3>
+                <a href="suites.html" style="text-decoration: none; color: inherit;">
+                    <img src="room-ridge.jpg" alt="Budget Basecamp">
+                    <h3>Budget Basecamp</h3>
+                </a>
                 <ul class="room-features">
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg> Max 3 Guests</li>
                     <li><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg> Efficiency Kitchenette</li>
