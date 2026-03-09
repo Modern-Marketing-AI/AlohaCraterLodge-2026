@@ -1,0 +1,43 @@
+SYSTEM DIRECTIVE:
+You are to execute a batch of 5 architectural and content updates for the "Aloha Crater Lodge" static HTML/CSS/JS website. Prioritize dark-mode aesthetics (#18181b backgrounds, #ff4500 accents) and ensure all internal routing works perfectly. Do not alter the overarching CSS architecture; only add or modify as explicitly instructed below.
+
+TASK 1: CREATE NEW ASSET (live-feed.html)
+Create a new file named live-feed.html. Use the existing index.html as your structural template (keep the head, styles, universal nav, and footer), but replace the main body content with a responsive video embed container for the USGS summit camera.
+
+Insert this exact iframe into the main content area:
+<div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;"><iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/tk0tfYDxrUA?si=SmKUv_PgbEWFJyQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+Add a simple header above the video: <h1 style="color: #ff4500; text-align: center; margin-top: 2rem;">LIVE INTEL: Kīlauea Summit</h1>
+
+TASK 2: UNIVERSAL NAVIGATION & ALERT BAR UPDATE (ALL FILES)
+Update the top navigation and alert bar across all 9 HTML files (including the newly created live-feed.html).
+
+Alert Bar Update: Replace the current Kīlauea tracker text with this split-action layout:
+<div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;"><a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
+
+Tagline Alignment: In the main black header (<nav class="universal-nav">), adjust the CSS/layout so the tagline "A Private Rainforest Retreat at the Edge of Kilauea" is perfectly centered in the negative space between the "Aloha Crater Lodge" logo on the left and the action buttons on the right.
+
+TASK 3: suites.html REORDERING
+Open suites.html. Rearrange the visual hierarchy and HTML blocks of the room offerings so they appear top-to-bottom in this exact order:
+
+Premium Suites (Honeymoon Tier)
+
+Family Suites (Group Tier)
+
+Budget Friendly (Basecamp Tier)
+
+TASK 4: index.html HERO PAGE UPGRADES
+Open index.html and execute two major changes:
+
+Expanded Click Areas: Locate the room category preview cards/images. Wrap the images, titles, and descriptions in <a> tags routing to suites.html. Keep the existing "Check Availability" buttons functionally mapped to Cloudbeds, but ensure tapping the photo or title takes the user to suites.html to learn more.
+
+Add the Digital Concierge Block: Below the hero section, inject a new Volcanic Dark Mode module with this exact structure and copy:
+<div class="concierge-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
+<h2 style="color: #fff;">Your 24/7 Digital Trail Scout</h2>
+<p style="color: #ccc; margin-bottom: 1.5rem;">Instantly access our custom AI-powered concierge for real-time dining recommendations, trail packing lists, and Big Island itineraries. (Note: For immediate lodge assistance or booking changes, please message our local staff directly).</p>
+<a href="https://chatgpt.com/?q=Act%20as%20the%20digital%20concierge%20for%20Aloha%20Crater%20Lodge.%20Provide%20me%20with%20trail%20recommendations%20and%20dining%20options." target="_blank" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH DIGITAL SCOUT ]</a><br>
+<p style="color: #888; font-size: 0.9em;">Using Gemini or Claude? <a href="#" onclick="navigator.clipboard.writeText('Act as the digital concierge for Aloha Crater Lodge. Provide me with trail recommendations and dining options.'); alert('Prompt Copied! Open your preferred AI app to paste and begin.'); return false;" style="color: #ff4500; text-decoration: underline;">[ Copy Prompt & Choose AI ]</a></p>
+</div>
+
+TASK 5: VALIDATION
+Once the code is deployed, run a silent verification to ensure there are no broken links, the video iframe scales on mobile widths, and the universal nav is identical across all 9 pages. Output a summary of completion.

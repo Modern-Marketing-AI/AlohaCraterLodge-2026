@@ -57,12 +57,36 @@
             z-index: 1;
         }
 
-        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10; }
-        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
-        .site-header .logo a { color: #fff; text-decoration: none; }
-        .header-links { display: flex; align-items: center; gap: 12px; }
+        /* NEW UNIVERSAL NAV SPACING */
+        .universal-nav { 
+            background: #1a1a1a; 
+            text-align: center; 
+            padding: 25px 5% 25px 5%; 
+            position: relative; 
+            z-index: 10; 
+            border-bottom: 1px solid rgba(255,69,0,0.2);
+        }
+        .universal-nav .logo { 
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px; 
+            display: block;
+            text-decoration: none;
+        }
+        .universal-nav .subtitle { 
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+        }
+        .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
         .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+        .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
 
         .hero-section {
             text-align: center;
@@ -308,28 +332,29 @@
             .hero-section h1 { font-size: 2rem; }
             .room-card img { height: 200px; }
             .modal-content { padding: 28px; }
+            .header-links { gap: 6px; flex-wrap: wrap; }
+            .header-links a { padding: 6px 10px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
     <div class="fog-layer"></div>
     <div class="page-wrapper">
-    <header class="site-header">
-        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
-        <nav class="header-links">
-            <a href="rooms.html">THE ROOMS</a>
-            <a href="ebikes.html">E-BIKES</a>
-            <a href="wellness.html">WELLNESS & RECOVERY</a>
-            <a href="things-to-do.html">THINGS TO DO</a>
-            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
-        </nav>
-    </header>
 
-        <section class="hero-section">
+    <nav class="universal-nav">
+        <a href="index.html" class="logo">ALOHA CRATER LODGE</a>
+        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">PREMIUM SUITES</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
+    <section class="hero-section">
             <h1>The Budget-Friendly Basecamp</h1>
             <p class="subtitle">A highly functional, value-focused basecamp designed for the agile explorer. If your goal is maximizing your time out on the trails, this streamlined room is your perfect fit. Accommodating up to three guests, it features a kitchenette for essential fueling before early morning hikes. Optimize your travel budget without sacrificing your proximity to the volcano. (Note: To maximize value, this specific room does not feature exterior patio access).</p>
         </section>
-
 
         <section class="room-card-section">
             <h2>The Room</h2>

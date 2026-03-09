@@ -92,6 +92,32 @@
             align-items: center;
             gap: 12px;
         }
+
+        /* NEW UNIVERSAL NAV SPACING */
+        .universal-nav {
+            text-align: center; 
+            padding: 25px 0 25px 0; 
+            position: relative; 
+            z-index: 10;
+        }
+        .universal-nav .logo {
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px;
+        }
+        .universal-nav .subtitle {
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px;
+        }
+        .nav-reserve-btn {
+            background: rgba(255, 69, 0, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -100,15 +126,16 @@
         <span><strong>FORECAST:</strong> EPISODE 43 (MAR 6-16)</span> | 
         <span><strong>CONDITIONS:</strong> CLEAR (BORTLE 1-2)</span>
     </div>
-    <nav>
+
+    <nav class="universal-nav">
         <div class="logo">ALOHA CRATER LODGE</div>
-        <nav class="header-links">
-            <a href="rooms.html">THE ROOMS</a>
-            <a href="ebikes.html">E-BIKES</a>
-            <a href="wellness.html">WELLNESS & RECOVERY</a>
-            <a href="things-to-do.html">THINGS TO DO</a>
+        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links" style="justify-content: center; flex-wrap: wrap;">
+            <a href="index.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">BASECAMP (HOME)</a>
+            <a href="suites.html">PREMIUM SUITES</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
-        </nav>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
     </nav>
     <div id="ember-container"></div>
     <header id="location" class="hero" style="position: relative; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('hero-volcano.jpg');">
