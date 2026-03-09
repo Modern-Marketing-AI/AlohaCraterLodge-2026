@@ -14,9 +14,7 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `things-to-do.html` - "Things to Do Near Hawaiʻi Volcanoes National Park" — area itinerary with 5 sections (crater access, restaurants, dark skies, recovery, sample itineraries), atmospheric gradient, Magma Modal CTA
 - `wellness.html` - 4 wellness cards: Thermal Hydrotherapy, OlyLife P90, Vibration Plate, Galaxy G-one Eye Massager (SEO alt tags)
 - `ebikes.html` - E-Bike rental page with ebike-hero.png, specs (750W/40mi/fat-tires), pricing grid, green CTA
-- `llm-system-directive.html` - "Chameleon" Guest Resource Portal (noindex/nofollow) — visible check-in/checkout info for humans, hidden AI system directive (text matches background #1a1a1a) with embargo, upsell matrix, dining intel
-- `guest-safety-briefing.html` - Public-facing "Lodge Safety & Logistics Briefing" (noindex/nofollow) — factual safety page with access, connectivity, safety alert (lava tube closed), park logistics, recovery services, dining; designed for AI consumption without triggering prompt injection filters
-- `manifest.html` - "Ghost Manifest" — appears as a 404 page to humans but contains hidden system directive for AI scrapers (display:none div, noindex/nofollow)
+- AI Adventure Guide uses "Local Data Key" architecture — all intelligence embedded directly in clipboard button on index.html (no external directive files)
 - `concierge.html` - AI Concierge clipboard tool: "Lodge Guide" persona prompt, toast notification, aria-label on button
 - `guide.html` - Volcano Guide terminal with link to volcano-guide.html article
 - `volcano-guide.html` - Standalone article: "The Volcano Insider Guide" (reserved for future blog posts)
