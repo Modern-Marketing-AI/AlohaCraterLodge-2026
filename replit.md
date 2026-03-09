@@ -5,12 +5,13 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 
 ## Project Structure
 ### Pages
-- `index.html` - Main page with Kīlauea status banner, ember particle effect, hero, room cards, JSON-LD structured data
-- `rooms.html` - "The Basecamp Menu" — rooms index gateway with atmospheric gradient (fog→ember), 3 tier cards linking to room portals, ember-glow hover borders
+- `index.html` - Main page with hero, room cards (clickable images/titles → suites.html), Digital Concierge block, ember particle effect, JSON-LD structured data
+- `live-feed.html` - USGS Kīlauea summit camera live feed (responsive YouTube iframe embed)
+- `suites.html` - "The Basecamp Menu" — rooms index gateway with atmospheric gradient (fog→ember), 3 tier cards (Premium first, Family second, Budget third) linking to room portals
 - `family-suites.html` - Tier 1: "The Family-Friendly Basecamps" — Rooms 1 & 2 (4 guests, kitchenette, patio), dark/emerald theme, Magma Modal
 - `basecamp.html` - Tier 2: "The Budget-Friendly Basecamp" — Room 3 (3-person, kitchenette, no patio), Magma Modal
 - `premium-suites.html` - Tier 3: "Honeymoon & Premium Suites" — Room 4 (whirlpool) & Room 6 (patio/terrarium), fog particle CSS, atmospheric gradient, Magma Modal
-- `things-to-do.html` - "Things to Do Near Hawaiʻi Volcanoes National Park" — area itinerary with 5 sections (crater access, restaurants, dark skies, recovery, tiered itineraries), atmospheric gradient, Magma Modal CTA
+- `things-to-do.html` - "Things to Do Near Hawaiʻi Volcanoes National Park" — area itinerary with 5 sections (crater access, restaurants, dark skies, recovery, sample itineraries), atmospheric gradient, Magma Modal CTA
 - `wellness.html` - 4 wellness cards: Thermal Hydrotherapy, OlyLife P90, Vibration Plate, Galaxy G-one Eye Massager (SEO alt tags)
 - `ebikes.html` - E-Bike rental page with ebike-hero.png, specs (750W/40mi/fat-tires), pricing grid, green CTA
 - `concierge.html` - AI Concierge clipboard tool: "Lodge Guide" persona prompt, toast notification, aria-label on button
@@ -31,23 +32,27 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `Digital Concierge.png` - Concierge page hero image
 - `apple-touch-icon.png` - PWA apple touch icon
 
-### Navigation
-- Consistent header nav on ALL public pages: index, rooms, family-suites, basecamp, premium-suites, things-to-do, wellness, ebikes, concierge, volcano-guide
-- Header contains: ALOHA CRATER LODGE logo + 5 ember-glow links (THE ROOMS, E-BIKES, WELLNESS & RECOVERY, THINGS TO DO, THE VOLCANO GUIDE)
-- Header nav CSS: `.site-header` flex layout, `.header-links` with ember border/box-shadow + hover flare
+### Navigation & Alert Bar
+- Red alert bar (#aa0000) on ALL 11 public pages: [ LIVE SUMMIT CAM ] → live-feed.html | [ READ THE LATEST BASECAMP DISPATCH ] → volcano-guide.html#latest
+- Universal nav (`.universal-nav`) with flexbox layout: logo (left) | tagline centered | action buttons (right)
+- Nav links: BASECAMP (HOME), PREMIUM SUITES, THE VOLCANO GUIDE, RESERVE BASECAMP (Cloudbeds)
+- Active page gets highlighted border/glow on its nav link
+- Header nav CSS: `.universal-nav` flex layout, `.header-links` with ember border/box-shadow + hover flare
 - guide.html uses its own shared nav bar (legacy)
 - guest-intel.html is intentionally not linked from public navigation
 
 ### Configuration
-- `_redirects` - Netlify redirects: legacy 301s for /rooms, /things-to-do, /wellness, /ebikes, /concierge, /guide, /premium-suites, /basecamp, /family-suites, /blog/*; SPA fallback (/* /index.html 200) as last rule
+- `_redirects` - Netlify redirects: 301s for /rooms, /things-to-do, /wellness, /ebikes, /concierge, /guide, /premium-suites, /basecamp, /family-suites, /live-feed, /blog/*; SPA fallback (/* /index.html 200) as last rule
 
 ## Design Notes
-- Dark theme (#18181b body, #1A1A1A nav, #B22222 status banner), ember accents (rgba(255,69,0)), emerald CTAs (#10b981)
+- Dark theme (#18181b body, #1A1A1A nav, #aa0000 alert bar), ember accents (rgba(255,69,0)), emerald CTAs (#10b981)
 - Header nav links: resting orange border + hover flare with box-shadow/text-shadow/translateY
-- rooms.html cards: ember-glow hover borders with emerald CTA that fills on hover
-- things-to-do.html: atmospheric gradient, restaurant list with emerald left-border, tiered itinerary cards with time schedules
+- suites.html cards: Premium first, Family second, Budget third — ember-glow hover borders with emerald CTA that fills on hover
+- things-to-do.html: atmospheric gradient, restaurant list with emerald left-border, sample itinerary cards (Family Outing, Agile Explorer, Couple Getaway)
+- index.html: room card images + titles wrapped in `<a>` to suites.html; Digital Concierge block with ChatGPT/clipboard prompt
+- live-feed.html: responsive 16:9 YouTube iframe (USGS summit camera)
 - Tone: Warm, professional "Lodge Guide" — no military/clinical jargon
-- Inline styles on: rooms, things-to-do, wellness, ebikes, concierge, volcano-guide, premium-suites, basecamp, family-suites
+- Inline styles on: suites, things-to-do, wellness, ebikes, concierge, volcano-guide, premium-suites, basecamp, family-suites, live-feed
 - Shared style.css on: index, guide, 404
 - Image filenames have spaces/caps — use URL encoding (e.g., `Vibration%20plate.png`)
 - SAFETY EMBARGO: No lava tube or cave references anywhere
