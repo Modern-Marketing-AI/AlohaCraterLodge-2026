@@ -3,74 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volcano Insider Guide | Aloha Crater Lodge</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <title>The Volcano Village Guide | Aloha Crater Lodge</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f5; color: #18181b; line-height: 1.6; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .nav-back { padding: 20px 0; }
-        .nav-back a { color: #10b981; text-decoration: none; font-weight: bold; font-size: 14px; }
-        .article-header { padding-bottom: 30px; border-bottom: 1px solid #e4e4e7; margin-bottom: 30px; }
-        .article-header h1 { font-size: 32px; color: #27272a; margin: 0; }
-        .article-header p { color: #71717a; margin-top: 10px; font-style: italic; }
-        .content h2 { color: #27272a; margin-top: 30px; }
-        .content p { margin-bottom: 20px; color: #3f3f46; }
-        .tactical-note { background: #18181b; color: #f4f4f5; padding: 20px; border-radius: 12px; margin: 30px 0; }
-        .tactical-note h3 { color: #10b981; margin-top: 0; }
-        .cta-footer { text-align: center; padding: 40px 0; border-top: 1px solid #e4e4e7; margin-top: 40px; }
-        .cta-button { display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; }
-        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
-        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
-        .site-header .logo a { color: #fff; text-decoration: none; }
-        .header-links { display: flex; align-items: center; gap: 12px; }
+        body { font-family: 'Georgia', serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background: #fffcf9; }
+
+        /* UNIVERSAL NAV SPACING */
+        .universal-nav { 
+            background: #1a1a1a; 
+            text-align: center; 
+            padding: 25px 5% 25px 5%; 
+            position: relative; 
+            z-index: 10; 
+            border-bottom: 3px solid #a41c1c;
+            margin-top: -20px;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: 30px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .universal-nav .logo { 
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px; 
+            display: block;
+            text-decoration: none;
+        }
+        .universal-nav .subtitle { 
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+        }
+        .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
         .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+        .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
+
+        /* PAGE SPECIFIC HEADER */
+        .page-header { text-align: center; margin-bottom: 40px; margin-top: 20px; }
+        h1 { color: #a41c1c; text-transform: uppercase; letter-spacing: 2px; font-size: 2.2em; margin-bottom: 5px; }
+        .page-header p { font-style: italic; color: #666; font-size: 1.1em; }
+
+        h2 { color: #a41c1c; font-size: 1.6em; margin-top: 0; }
+        h3 { color: #444; font-size: 1.2em; margin-top: 25px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+
+        .back-btn { display: inline-block; color: #a41c1c; text-decoration: none; font-weight: bold; font-family: sans-serif; font-size: 0.85em; border: 2px solid #a41c1c; padding: 10px 24px; border-radius: 30px; text-transform: uppercase; transition: 0.3s; margin-bottom: 20px; }
+        .back-btn:hover { background: #a41c1c; color: #fff; }
+
+        .feed-item { border-bottom: 1px solid #e0e0e0; padding: 40px 0; }
+        .feed-item:first-of-type { background: #fff; padding: 40px; border: 1px solid #dcdcdc; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .label-current { background: #a41c1c; color: #fff; padding: 5px 12px; font-size: 0.8em; font-weight: bold; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-family: sans-serif; }
+
+        .post-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; object-fit: cover; max-height: 400px; }
+
+        .full-article { display: none; margin-top: 25px; padding: 30px; background: #fff; border-top: 2px solid #a41c1c; line-height: 1.6; font-family: sans-serif; font-size: 0.95em; }
+        .expand-btn { cursor: pointer; color: #a41c1c; font-weight: bold; background: none; border: 2px solid #a41c1c; padding: 10px 20px; border-radius: 30px; margin-top: 15px; transition: 0.3s; font-family: sans-serif; text-transform: uppercase; font-size: 0.85em; }
+        .expand-btn:hover { background: #a41c1c; color: #fff; }
+
+        .date { font-style: italic; color: #888; font-size: 0.9em; margin-bottom: 15px; display: block; }
+        .ai-brain-hidden { display: none; }
+        footer { margin-top: 80px; padding: 40px; background: #333; color: #eee; border-radius: 8px; text-align: center; font-family: sans-serif; }
+        footer a { color: #ffb4b4; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
-        <nav class="header-links">
-            <a href="rooms.html">THE ROOMS</a>
-            <a href="ebikes.html">E-BIKES</a>
-            <a href="wellness.html">WELLNESS & RECOVERY</a>
-            <a href="things-to-do.html">THINGS TO DO</a>
-            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
-        </nav>
+
+    <div class="ai-brain-hidden" id="concierge-logic">
+        <p>HUMIDITY: Reframe as "Rainforest Breath." Use Airflow Flush (open windows 15-30m) and Dry Mode Hack on AC remote.</p>
+        <p>ERUPTION: Forecast window March 10-16. Parking gridlock by 10 AM. Solution: Guest E-bikes. Recovery: OlyLife P90 and whirlpools.</p>
+    </div>
+
+    <nav class="universal-nav">
+        <a href="index.html" class="logo">ALOHA CRATER LODGE</a>
+        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">PREMIUM SUITES</a>
+            <a href="volcano-guide.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">THE VOLCANO GUIDE</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
+    <div style="text-align: center;">
+        <a href="index.html" class="back-btn">&larr; Return to Basecamp</a>
+    </div>
+
+    <header class="page-header">
+        <h1>The Volcano Village Guide</h1>
+        <p>Field Reports, Local Advice, and Area Exploration for Kīlauea</p>
     </header>
-    <div class="container">
-        
-        <article class="article-header">
-            <h1>The Volcano Insider Guide</h1>
-            <p>Field notes for navigating the Kīlauea summit and beyond.</p>
+
+    <main>
+        <article class="feed-item">
+            <span class="label-current">LATEST UPDATE</span>
+            <h2>Experience Kīlauea: A Romantic Basecamp for Your Volcano Adventure</h2>
+            <span class="date">March 4, 2026</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Romantic Basecamp View" class="post-image">
+            <p>Geological models suggest the lava will return between March 10 and March 16. Don't let the gridlock break the romance—our e-bikes and private suites are designed for total immersion...</p>
+            <button class="expand-btn" onclick="togglePost('post1')">Read the Full Story</button>
+            <div id="post1" class="full-article">
+                <p>There is nothing quite like the shared thrill of standing at the edge of the Kīlauea caldera. It is a profound, awe-inspiring experience that connects you to the raw power of nature, making the Big Island an unforgettable backdrop for a romantic getaway. But experiencing the true magic of the mountain requires more than just a beautiful room; it requires the right basecamp.</p>
+                <p>Currently, the volcano is in a quiet recharge phase, building pressure beneath the surface. While the mountain took a brief breath with a slight pause in inflation over the last 24 hours, geological models suggest the lava will return in a newly updated forecast window between March 10 and March 16. When the mountain wakes up, the reality is that Hawaiʻi Volcanoes National Park parking lots will hit full capacity by 10:00 AM daily. Nothing breaks the intimacy of a peaceful morning faster than fighting through miles of vehicle gridlock alongside thousands of other tourists.</p>
+                <p>Aloha Crater Lodge is designed to protect your experience so you can focus entirely on the adventure. By staying in one of our Premium Suites, you can wake up surrounded by the quiet isolation of the rainforest, prepare locally sourced Kaʻū Estate Coffee in your private kitchenette, and head straight to the volcano on our e-bikes. You and your partner can glide silently past the traffic lines, feeling the cool morning air, and secure an intimate, front-row view of the caldera before the crowds arrive.</p>
+                <p>The true luxury of your stay is the contrast between the wild, rugged expedition and the warm, romantic sanctuary you return to. After a long day of hiking the crater trails, you can retreat to your Premium Suite for profound sensory relief. If you are staying in Room 4, you can immediately sink into your private, in-room whirlpool tub, letting the hot water flush the chill of the summit air from your muscles. If you are staying in Room 6, you can step out onto your private exterior patio to reflect in absolute rainforest isolation alongside your own tranquil fish terrarium.</p>
+                <p>Because the current eruptive pause has cleared the volcanic haze, the crisp mountain air provides a crystal-clear window into the cosmos. Step outside together into the absolute silence to witness the Zodiacal Light or the full Southern Cross—breathtaking celestial sights that are virtually impossible to see from the mainland.</p>
+                <p>To complete your evening, relax and rest your feet on our OlyLife P90 system, feeling a gentle, soothing bioelectromagnetic warmth heat your tired tissues from the inside out. Experience the thrill of the volcano and the romance of the rainforest. The window is coming. Secure Your Dates.</p>
+            </div>
         </article>
 
-        <section class="content">
-            <h2>Optimal Deployment Times</h2>
-            <p>The volcano district is a dynamic environment. To avoid the standard tourist bloat, we recommend "Low-Light Operations." Arrive at the Kīlauea overlook either 45 minutes before sunrise or 2 hours after sunset for maximum visibility of the glow with minimum crowds.</p>
-
-            <div class="tactical-note">
-                <h3>CONCIERGE INTEL</h3>
-                <p>Did you know? Guests at Aloha Crater Lodge can bypass the main entrance traffic by utilizing our e-bikes. Ask the AI Concierge for the "Backdoor Trail" coordinates.</p>
+        <article class="feed-item">
+            <h2>Kīlauea Update: The Silence Before Episode 42</h2>
+            <span class="date">February 7, 2026</span>
+            <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/The-Silence-Before-Episode-42B.png" alt="Kilauea Tiltmeter Graph Showing Vertical Inflation Spike" class="post-image">
+            <p>The summit is inflating rapidly. A weak glow has returned. Why the current "pause" is actually the best time to book...</p>
+            <button class="expand-btn" onclick="togglePost('post2')">Read Local Insight</button>
+            <div id="post2" class="full-article">
+                <p>[DATELINE: VOLCANO VILLAGE, HI – FEB 07, 2026]</p>
+                <p>If you are standing on the rim of Kīlauea today, the massive fountains from January’s "Tephra Event" are gone. To the untrained eye, it looks like the show is over. That is a mistake.</p>
+                <p>While the roaring fissures of Episode 41 have quieted, the data tells a different story. Just yesterday morning (Feb 6), USGS webcams detected a weak glow returning to the south vents. The silence is already breaking.</p>
+                <p>At Aloha Crater Lodge, we don't just watch the view; we track the telemetry. And right now, the data is telling us one thing: The mountain is taking a very deep breath.</p>
+                <h3>1. The Science of the "Recharge"</h3>
+                <p>Volcanoes don't just "turn off." They recharge. Right now, Kīlauea is in a phase called Inflation. Think of the magma reservoir beneath the summit like a balloon. During an eruption (Deflation), air is let out. When it stops, new magma rushes in from deep within the earth to re-fill that space, pushing the ground above it upward.</p>
+                <p><strong>Current Status (Feb 7):</strong> Tiltmeters: Our monitors are showing a sharp, near-vertical upward trend. The ground is swelling fast. Seismicity: We are seeing signs of "gas pistoning"—rhythmic pulses that indicate pressurization below the surface. The pressure is building faster than many anticipated. The "silence" you hear out there is actually the sound of a massive geological spring being coiled tight.</p>
+                <h3>2. The Forecast: Feb 11–16</h3>
+                <p>We look at historical patterns and current deformation rates. When the pressure gets too high, the "lid" has to pop. Based on the intervals between previous pauses, our internal "Volcano Insider" models—aligned with general forecasts—suggest the window for the start of Episode 42 could open as early as Wednesday, February 11th through Monday, February 16th. This is your window.</p>
+                <p>If you wait for the national news to report "ERUPTION STARTED" before you book your flight, you will miss the most spectacular phase: the initial fissure opening. That first crack, where fountains can reach their peak height in the first 6–12 hours, is what the true adventure travelers chase.</p>
+                <h3>3. Why You Want "Suspense," Not Just "Lava"</h3>
+                <p>There is a difference between seeing a picture of a volcano and feeling the ground shift beneath your boots. Staying at Aloha Crater Lodge during this pre-eruption window is an electric experience. You aren't just a tourist waiting for a show; you are part of the expedition. You get the morning data breakdowns over coffee. You feel the anticipation in the village. And when the alert hits, you are minutes from the park entrance, not hours away in a resort tower.</p>
+                <p>The Bottom Line: Don't wait for the full show to start. Chase the physics that cause the show. The mountain is ready. The question is: Will you be here when it exhales? [CHECK AVAILABILITY FOR FEB 11–16 WINDOW]</p>
             </div>
+        </article>
 
-            <h2>Gear Checklist</h2>
-            <p>Precision is key. Even in Hawaii, the summit sits at 4,000 feet. Temperatures drop rapidly after dusk. Ensure you have a windbreaker, sturdy closed-toe boots, and a high-lumen headlamp (avoid using your phone flashlight as your primary source).</p>
-        </section>
+        <article class="feed-item">
+            <h2>The "Strategic Refuel": How to Skip the 2-Hour Dinner Wait</h2>
+            <span class="date">January 25, 2026</span>
+            <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/The+8+Hour+Window+Why+Commuters+Missed+History.png" alt="Sunrise over volcanic caldera" class="post-image">
+            <p>The volcano has paused, but the village is gridlocked. Don't get stuck in line while the mountain recharges. Here is why the kitchenette is your best tactical asset tonight...</p>
+            <button class="expand-btn" onclick="togglePost('post3')">Read Local Insight</button>
+            <div id="post3" class="full-article">
+                <p><strong>FIELD REPORT #5</strong> DATE: Sunday, January 25, 2026 (5:00 PM HST) LOCATION: Volcano Village Basecamp STATUS: Intermission / Gridlock Alert</p>
+                <p><strong>The Situation Report:</strong> The mountain has hit the "Pause" button. Episode 41 ended last night, and Kīlauea is currently inflating and recharging for the next round. But while the crater floor is quiet, Volcano Village is not. Right now, thousands of visitors who drove up for the weekend are realizing the same thing at the same time: they are hungry. The result? Two-hour wait times at the few restaurants in town.</p>
+                <p><strong>The Tactical Error: The "Restaurant Hostage"</strong> Most visitors treat a trip to Volcano like a standard vacation. They rely on hotel dining rooms or local cafes for every meal. Tonight, that strategy is a trap. If you are staying at the big hotels, you are likely standing in a lobby right now, buzzer in hand, waiting for a table while your hiking window closes. You are burning valuable recovery time standing in line.</p>
+                <p><strong>The Basecamp Advantage: The Kitchenette</strong> This is why we equipped Aloha Crater Lodge with kitchenettes and dining areas. It wasn't just for "convenience"—it was for autonomy. While the crowds are gridlocked at the bistro, our Basecamp guests are executing the "Strategic Refuel":</p>
+                <ul>
+                    <li><strong>Zero Wait Time:</strong> Dinner is ready when you are.</li>
+                    <li><strong>Total Silence:</strong> Enjoy your meal on your private lanai surrounded by ferns, not the noise of a crowded dining hall.</li>
+                    <li><strong>Immediate Recovery:</strong> Move straight from dinner to the hot tub to flush out the lactic acid from today’s hike.</li>
+                </ul>
+                <p><strong>The Commander’s Verdict:</strong> Volcano is an active environment, not a resort. You need to control your own schedule, not be at the mercy of restaurant hours. The tiltmeters are rising. Episode 42 could start at 3:00 AM. The guests who spent 3 hours at dinner will be too tired to wake up. The guests who refueled at Basecamp will be rested, caffeinated, and first on the rim.</p>
+                <p>Don't get held hostage. Book the Basecamp that gives you your freedom back.</p>
+            </div>
+        </article>
 
-        <div class="cta-footer">
-            <p>Ready to explore further?</p>
-            <a href="ebikes.html" class="cta-button">Reserve Mobility Units</a>
-        </div>
-    </div>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-</script>
+        <article class="feed-item">
+            <h2>The "8-Hour Window": Why Commuters Missed History</h2>
+            <span class="date">January 25, 2026</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Aloha Crater Lodge Basecamp" class="post-image">
+            <p>Episode 41 was historic, but it was over before most tourists finished their drive. Here is the data on why staying at 'Basecamp' is the only way to catch a Flash Eruption...</p>
+            <button class="expand-btn" onclick="togglePost('post4')">Read the Full Story</button>
+            <div id="post4" class="full-article">
+                <p><strong>FIELD REPORT #4</strong> DATE: Sunday, January 25, 2026 (8:15 AM HST) LOCATION: Volcano Village Basecamp STATUS: Episode 41 Concluded / Rapid Recharge in Progress</p>
+                <p><strong>The "Basecamp" Intel:</strong> The show is over. The massive, 1,500-foot fountains that defined yesterday’s eruption ceased last night at 7:29 PM. This morning, the crater floor is quiet, steaming under a beautiful sunrise.</p>
+                <p>If you were driving in from Kona or Hilo last night when you saw the alert, you probably saw more tail lights than lava. Episode 41 was historic in intensity, but it was incredibly brief. This is the new tactical reality of Kīlauea, and it proves a critical point about how to travel here.</p>
+                <p><strong>The Hard Data: Why the "Day Trip" Strategy Failed</strong><br>Here is the after-action report based on USGS data: The total runtime of this massive event was just <strong>8 hours and 18 minutes</strong>. Do the tactical math. If you were at a resort on the Kona side when the alert went out at 11:00 AM:</p>
+                <ol>
+                    <li>You packed the car (30 mins).</li>
+                    <li>You drove across the Saddle Road (2.5 hours).</li>
+                    <li>You hit the gridlock at the Park entrance because everyone else did the same thing (1+ hour).</li>
+                </ol>
+                <p>By the time many commuters reached the rim, the peak had passed. They spent their vacation window stuck in traffic.</p>
+                <p><strong>The Basecamp Advantage:</strong> Our guests here at the lodge didn't panic. They were located 5 minutes from the rim. When the main roads clogged with traffic, they deployed on our E-Bikes, bypassed the gridlock, and were at the rail witnessing history while others were still circling for parking. <strong>Proximity is the only strategy that works for flash eruptions.</strong></p>
+                <p><strong>The Commander’s Verdict:</strong> Don't mourn the missed opportunity; prepare for the next one. The USGS tiltmeters are already recording inflation this morning. The mountain is immediately recharging. Episode 42 is coming—it could be tomorrow, or next weekend. If you want to catch a tight, 8-hour window, you cannot rely on a 3-hour commute. You need to be stationed within striking distance. Establish your basecamp now, before the next siren goes off.</p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>RED ALERT: Episode 41 Has Begun (1,600-Foot Fountains)</h2>
+            <span class="date">January 24, 2026</span>
+            <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/Episode-41-Has-Begun.png" alt="Massive Lava Fountains" class="post-image">
+            <p>The silence is broken. Fountains are topping the Empire State Building. Here is your tactical guide to viewing—and avoiding the 'Pele’s Hair' falling in the Village...</p>
+            <button class="expand-btn" onclick="togglePost('post5')">Read Local Insight</button>
+            <div id="post5" class="full-article">
+                <p><strong>FIELD REPORT #3</strong> (LIVE UPDATE) DATE: January 24, 2026 (2:20 PM HST) LOCATION: Volcano Village HQ STATUS: RED ALERT / ERUPTION IN PROGRESS / HAZARD WARNING</p>
+                <p>The "Basecamp" Intel: The wait is over. The USGS has confirmed that Episode 41 kicked off at 11:10 AM this morning. Forget the polite "glow" you see in standard travel brochures. We are currently witnessing sustained fountains hitting 1,640 feet (500 meters).</p>
+                <p>Let me put that number in tactical perspective: That is taller than the Empire State Building. This isn't just an eruption; this is a historic display of power. The seismic tremors we reported yesterday were the prelude to this main event.</p>
+                <p><strong>The Critical Safety Warning (Read This Before You Drive Up):</strong> Here is the intel the generic news feeds are missing, and it is vital for your safety: What goes up must come down. The USGS has confirmed tephra fall—specifically "Pele's Hair"—in public viewing areas inside the Park and right here in Volcano Village.</p>
+                <p>This is not confetti. It is sharp, volcanic glass strands. It can damage eyes, irritate skin, and ruin camera lenses.</p>
+                <p><strong>Tactical Orders for Inbound Travelers:</strong> This is a world-class spectacle, but it demands respect. If you are inbound or already on the ground, execute the following:</p>
+                <p>Eye Protection is Mandatory: Sunglasses are minimum requirements, even at night, to block drifting glass strands. If you have wrap-around safety glasses or goggles, wear them.</p>
+                <p>Cover Your Skin: Wear a brimmed hat and long sleeves. Do not wipe strands off your skin with your hand; rinse them off.</p>
+                <p>DO NOT Use Your Windshield Wipers: If you see fine ash or golden strands on your rental car windshield, do not hit the wipers. You will instantly scratch the glass. Rinse it with water first.</p>
+                <p>The Commander’s Verdict: Get up here. This is the event of the decade. But gear up, stay situationally aware of wind shifts, and respect the perimeter. Standby for updates on viewing logistics and crowd movements.</p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>The USGS Just Named the Date: Why This Weekend (Jan 23-25) is the "Episode 41" Window</h2>
+            <span class="date">January 24, 2026</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Volcano Village Scenery" class="post-image">
+            <p>The science says the "pause" is ending. Here is why you don't want to be stuck in Hilo when the show starts...</p>
+            <button class="expand-btn" onclick="togglePost('post6')">Read the Full Story</button>
+            <div id="post6" class="full-article">
+                <p>Kīlauea doesn’t usually run on a schedule, but right now, she’s giving us a rare heads-up. As of this morning (Jan 23), the <strong>USGS Hawaiian Volcano Observatory</strong> has pinpointed the window for "Episode 41" to begin between <strong>today, January 23, and Sunday, January 25.</strong></p>
+                <h3>The Signs are Already Here</h3>
+                <p>Overnight, the summit webcams picked up a "consistent strong glow" and "weak spattering" from the North Vent. But the real story is in the ground deformation. The summit is "inflating" rapidly—think of it like a balloon filling with air. When that pressure hits its limit, the system releases. That release is the eruption.</p>
+                <h3>What This Means for You</h3>
+                <p>If you have been waiting for the "perfect time" to visit, this is it. The official "Watch" alert is active. The glow is visible at night even before the main fountains start, creating that signature moody, orange-lit atmosphere that photographers love.</p>
+                <p><strong>Don't wait for the Instagram videos to go viral on Monday morning.</strong> By the time the massive fountains are all over social media, the crowds will be here, and the best viewing spots will be packed. Be here for the opening act.</p>
+                <h3>The "Basecamp" Advantage</h3>
+                <p>Eruptions often start in the middle of the night.</p>
+                <ul>
+                    <li><strong>Drive from Hilo:</strong> 45 minutes (best case).</li>
+                    <li><strong>Drive from Kona:</strong> 2.5 hours.</li>
+                    <li><strong>Drive from Aloha Crater Lodge:</strong> 5 minutes.</li>
+                </ul>
+                <p>When the sky turns red at 2:00 AM, you want to be the one grabbing a coffee and driving 5 minutes down the road—not the one stuck on the highway.</p>
+                <p><strong>Check our availability for the weekend window immediately. The mountain is waking up.</strong></p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>Why the Ground is Shaking in Volcano Village (And Why That’s a Good Thing)</h2>
+            <span class="date">January 24, 2026</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Volcano Village Tremor Map" class="post-image">
+            <p>The red dots on your earthquake app aren't a warning to leave—they're a signal to get ready. Here is how to read the geology like a local...</p>
+            <button class="expand-btn" onclick="togglePost('post7')">Read Local Insight</button>
+            <div id="post7" class="full-article">
+                <p>If you have checked the USGS app or any earthquake tracker on your phone recently, you might see a cluster of red dots near Kīlauea summit. For the average tourist, seeing a swarm of earthquakes looks terrifying. For us at the Basecamp, it’s the dinner bell.</p>
+                <h3>The "Balloon" Analogy</h3>
+                <p>To understand why we get excited when the ground shakes, you have to understand how Kīlauea breathes. The USGS calls the current phase "inflation." Think of the volcano like a giant, rigid balloon buried under miles of rock. When the eruption pauses, magma from deep within the earth rushes up to refill that balloon. As the chamber swells, it stretches the surrounding rock, causing little pops and cracks. Those pops are the earthquakes you see on the map.</p>
+                <h3>Why "Swarms" Are Good News</h3>
+                <p>The recent activity described by geologists—short bursts of small earthquakes 1.5 to 4 miles deep—isn't the ground falling apart. It’s the system pressurizing. When it’s quiet, it’s refueling. When the earthquakes cluster like this, it means the tank is getting full. It’s the earth’s way of announcing that the next episode is loading.</p>
+                <h3>Safe Viewing from the Rainforest</h3>
+                <p>We get asked constantly: "Is it safe?" These quakes are deep underground and centered squarely under the National Park crater, not under the Village. This is the safe, vibrating pulse of the planet. There is no better place to feel the raw power of geology than right here, safely perched in the rainforest, waiting for the release.</p>
+                <p><strong>Don't fear the shake. Track it. It means the show is about to start.</strong></p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>Your 2026 E-Bike Adventure: A Guide to the Steam Vents from Aloha Crater Lodge</h2>
+            <span class="date">December 15, 2025</span>
+            <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/636112853233965211-test.webp" alt="E-Bike Guest Adventure" class="post-image">
+            <p>One of the most magical and accessible wonders of Hawaiʻi Volcanoes National Park is the sight of the earth breathing at the Steam Vents. Here is how to experience it on two wheels...</p>
+            <button class="expand-btn" onclick="togglePost('post8')">Read the Full Guide</button>
+            <div id="post8" class="full-article">
+                <p><strong>One of the most magical and accessible wonders of Hawaiʻi Volcanoes National Park is the sight of the earth breathing at the Steam Vents. For guests of Aloha Crater Lodge, experiencing this phenomenon can be part of a uniquely immersive adventure. This guide will walk you through how to use one of the lodge's popular amenities—guest e-bikes—to journey from your private rainforest retreat to these iconic park landmarks on two wheels.</strong></p>
+                <p><strong>Why an E-Bike Adventure is the Perfect Way to Explore</strong></p>
+                <p>While driving to the park is straightforward, exploring by e-bike offers a completely different, more connected experience. The quiet, electric-assisted ride allows you to travel at the perfect pace, gliding effortlessly along Crater Rim Drive. You'll feel the cool, misty air of the 4,000-foot summit and can pull over instantly at any intriguing overlook without worrying about parking. The pedal assist makes a trip that combines distance and elevation into a pleasant, accessible ride, letting you cover more ground than you might on foot and connect deeply with the landscape.</p>
+                <p><strong>Your E-Bike Adventure Itinerary: From Lodge to Steam Vents</strong></p>
+                <p>Here is a step-by-step plan for your half-day adventure.</p>
+                <p><strong>Part 1: Morning Preparation at the Lodge</strong></p>
+                <p>Your journey begins with a good start. Enjoy the in-room convenience of your continental breakfast before you head out. A great first stop is to inquire about securing an e-bike for your journey—our front desk can help with availability. Pack a light daypack with water, a warm layer (the summit is significantly cooler), and your National Park pass or payment for the entrance fee. Don't forget sunscreen; the high-altitude sun is strong.</p>
+                <p><strong>Part 2: The Scenic Ride to the Park</strong></p>
+                <p>From Aloha Crater Lodge, your ride to the park entrance is a short, beautiful journey through the lush canopy of Volcano Village. The e-bike's assist will make the inclines feel easy. Once you enter the park via Crater Rim Drive, you're just a steady, scenic 10-minute ride from the Steam Vents area. The total ride from the lodge is an enjoyable 15-20 minutes each way.</p>
+                <p><strong>Part 3: Experiencing the Steam Vents & Sulphur Banks</strong></p>
+                <p>Once you arrive, a short, paved path leads directly to the Steam Vents. Here, groundwater seeps down to hot volcanic rocks, returning to the surface as billowing clouds of steam. You can often feel the warm, moist air—a surreal sensation. Just next door, follow the boardwalk through the Sulphur Banks (Haʻakulamanu). Here, volcanic gases rise through cracks, depositing colorful crystals of yellow, white, and green sulphur against the red earth. The distinct smell is a potent reminder of the active forces beneath your feet.</p>
+                <p><strong>Part 4: Optional Ride Extension to Kīlauea Overlook</strong></p>
+                <p>If you have energy to spare, your e-bike makes it easy to continue about half a mile west on Crater Rim Drive to the Kīlauea Overlook. This offers one of the most comprehensive panoramic views of the vast Kīlauea caldera—a perfect capstone to your volcanic exploration before the easy ride back.</p>
+                <p><strong>Part 5: The Easy Return & Evening Relaxation</strong></p>
+                <p>One of the best features of an e-bike is the effortless return. Enjoy the downhill coast back to Volcano Village. Upon returning to the lodge, you can relax on your private lanai, recounting the day's sights, and soak in the serene atmosphere of the rainforest.</p>
+                <p><strong>Ready for Your Adventure?</strong></p>
+                <p>This e-bike journey transforms a simple visit into a hands-on adventure. It’s about the journey as much as the destination—the smell of the fern forest, the freedom of the open road, and the awe of standing where the earth’s inner heat meets the surface. It’s an unforgettable way to experience the park right from your doorstep at Aloha Crater Lodge.</p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>Where Should You Stay Near Hawaiʻi Volcanoes National Park? Comparing 2026 Options</h2>
+            <span class="date">December 15, 2025</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Palm trees at Aloha Crater Lodge" class="post-image">
+            <p>Comparing your options, from historic lodges inside the park to private rainforest getaways in the village...</p>
+            <button class="expand-btn" onclick="togglePost('post9')">Read the Comparison</button>
+            <div id="post9" class="full-article">
+                <p>Planning your visit to Hawaiʻi Volcanoes National Park is thrilling, and choosing the right place to stay is a key part of the adventure. Your accommodation sets the tone for your entire trip, offering a home base between days of exploring dramatic craters and ancient lava landscapes. The good news is that you have several excellent options, each offering a distinctly different experience. This guide will walk you through the pros and cons of staying inside the park, in the nearby Volcano Village, or in larger nearby towns, helping you find the perfect match for your travel style.</p>
+                <p><strong>Staying Inside the Park: The Historic Choice</strong></p>
+                <p>For the most iconic and convenient experience, you can stay at the Historic Volcano House, the only hotel located within the boundaries of Hawaiʻi Volcanoes National Park. Perched directly on the rim of the Kīlauea caldera, this hotel offers a front-row seat to one of the world's most active volcanoes. Waking up to a view of the Halemaʻumaʻu crater steaming in the morning light is an unforgettable experience. The rich history, dating back to 1846, and the on-site restaurant with panoramic views are major draws. It’s important to note that due to its unique location and limited number of rooms, it books up exceptionally far in advance and represents a specific, often bustling, park hotel experience.</p>
+                <p><strong>The Volcano Village Alternative: Serenity in the Rainforest</strong></p>
+                <p>Just a minute's drive from the park entrance, you'll find Volcano Village, a small, rustic community nestled in a cool, misty Hawaiian Rainforest. This area is the heart of the alternative lodging scene, known for its bed and breakfasts, vacation rentals, and intimate lodges. Choosing Volcano Village means trading the direct crater view for a profound sense of peace and immersion in nature. The atmosphere here is quiet and restorative, with evenings meant for stargazing and listening to the sounds of the forest. The climate is notably cooler and fresher than the coast, providing a perfect respite after a day of hiking.</p>
+                <p>For travelers who prioritize privacy and a personalized experience, a Volcano Village stay is often the preferred choice. This is where you can truly disconnect and enjoy the unique ambiance of the island's upland forests.</p>
+                <p><strong>Aloha Crater Lodge: Your Private Rainforest Retreat</strong></p>
+                <p>A premier example of the Volcano Village experience is Aloha Crater Lodge. This lodge is specifically designed as a sanctuary of privacy and relaxation. Instead of a large hotel corridor, guests enjoy independent accommodations, often with private entrances, creating a true sense of having your own secluded haven in the rainforest.</p>
+                <p>The focus here is on thoughtful details that enhance your stay. Guests are treated to a daily in-room continental breakfast featuring 100% Hawaiian coffee, allowing you to start your day at your own pace. The lodge prides itself on offering more than just a room; it’s a curated experience. They can assist in arranging unique local activities, such as private hula lessons with a respected kumu (teacher), adding a layer of cultural connection to your trip.</p>
+                <p>Whether you’re a couple seeking a romantic getaway in a cozy room with a whirlpool tub or a family needing a spacious suite with separate bedrooms and a full kitchen, the lodge provides a comfortable and personal home base that feels distinctly removed from the ordinary.</p>
+                <p><strong>Considering Other Towns: Hilo and Keaʻau</strong></p>
+                <p>If you prefer a wider range of dining and shopping options, or are combining your volcano visit with other east-side attractions, you might consider staying in a larger town.</p>
+                <p>Keaʻau: Located about a 30-minute drive from the park, this town offers practical, budget-friendly options with essential stores and local eateries. It’s a functional base for visitors who prioritize value and don’t mind a commute.</p>
+                <p>Hilo: The largest city on the east side, roughly 45-60 minutes from the park. Hilo provides the widest selection of hotels, B&Bs, restaurants, and attractions like the Pacific Tsunami Museum and Rainbow Falls. This is the best choice for those who want an urban center with plenty to do after park hours.</p>
+                <p><strong>Making the Right Choice for Your Trip</strong></p>
+                <p>To decide, consider what matters most to you:</p>
+                <p>Atmosphere: Do you want the dramatic, historic energy of being on the crater's edge, or the peaceful, private serenity of a rainforest retreat?</p>
+                <p>Convenience vs. Space: Is walking to a crater viewpoint your top priority, or do you value more spacious, homelike accommodations where you can truly spread out and relax?</p>
+                <p>Experience: Are you looking for a full-service hotel, or a more intimate stay where personalized touches and local insights are part of the package?</p>
+                <p>No matter where you choose, book as early as possible, as lodging fills quickly. And remember to pack warm layers—the summit is nearly 4,000 feet high and can be surprisingly cool and wet.</p>
+                <p>For those seeking the perfect balance of easy park access and the profound tranquility of Hawaii’s unique rainforest environment, a stay at a retreat like Aloha Crater Lodge in Volcano Village offers an deeply immersive way to experience the magic of the Big Island.</p>
+            </div>
+        </article>
+
+        <article class="feed-item">
+            <h2>2026 Guide: Birdwatching & Stargazing at Volcano National Park</h2>
+            <span class="date">December 15, 2025</span>
+            <img src="https://irt-cdn.multiscreensite.com/md/dmtmpl/dms3rep/multi/blog_post_image.png" alt="Palm trees against sky" class="post-image">
+            <p>Enhance your adventure with our guest binoculars. Discover the rare birds and pristine dark skies that make our rainforest home truly magical...</p>
+            <button class="expand-btn" onclick="togglePost('post10')">Read the Full Guide</button>
+            <div id="post10" class="full-article">
+                <p>Aloha and welcome!</p>
+                <p>As your hosts at Aloha Crater Lodge, we’re excited to share the unique wonders of our home in 2026. Nestled in the native ʻōhiʻa lehua fern forest on the edge of the volcanic plateau, our lodge is more than just a place to stay—it's your private gateway to intimate encounters with nature found nowhere else on Earth.</p>
+                <p>To help you connect deeply with this majestic environment, we offer binoculars for our guests to use. Whether you're tracking the flight of a rare honeycreeper at dawn or marveling at the Milky Way from our gardens, we provide the tools for an unforgettable 2026 adventure.</p>
+                <p><strong>Part 1: Birdwatching in a Living 2026 Sanctuary</strong></p>
+                <p>The forests surrounding Aloha Crater Lodge are a vital sanctuary for native Hawaiian birds, many of which are endangered and found only here. The higher elevation and native vegetation create a critical refuge for these rare species, offering a birdwatching experience distinct from anywhere else on the island.</p>
+                <p>Native Birds to Look For in 2026:</p>
+                <ul>
+                    <li><strong>ʻApapane:</strong> The bird you’re most likely to see! Listen for their distinctive, raspy call and watch for flashes of crimson as they visit the bright red lehua blossoms right outside your door.</li>
+                    <li><strong>ʻIʻiwi:</strong> A vibrant scarlet jewel with a curved salmon-colored bill perfectly adapted for sipping nectar. Spotting one is a special and memorable moment.</li>
+                    <li><strong>ʻŌmaʻo (Hawaiian Thrush):</strong> A quieter, soft-gray resident of the forest canopy. Be sure to listen for its beautiful, flute-like song at dawn or dusk.</li>
+                    <li><strong>Pueo (Hawaiian Short-eared Owl):</strong> Keep an eye on open grasslands, especially at twilight. This sacred guardian spirit (‘aumakua) in Hawaiian culture can sometimes be seen hovering gracefully while hunting.</li>
+                </ul>
+                <p><strong>Your 2026 Viewing Tips from the Lodge:</strong></p>
+                <p>The Early Advantage: Bird activity peaks at first light. Enjoy your in-room Ka'u coffee on your private entrance, binoculars in hand, and simply observe.</p>
+                <p>Move with Mindfulness: Slow, quiet movements will reward you with better sightings. Often, you’ll hear our native birds before you see them.</p>
+                <p>Start at Home Base: You don't need to go far. The native plantings around Aloha Crater Lodge itself attract ʻApapane and others. Your birdwatching can begin the moment you step outside.</p>
+                <p><strong>Part 2: A 2026 Sky Like No Other: Stargazing & Volcanic Vistas</strong></p>
+                <p>As the sun sets, a new spectacle emerges. Far from the light pollution of major towns, the skies above Volcano offer some of the clearest celestial views in Hawaii. After a relaxing soak in our outdoor jetted tub, the cosmic show begins.</p>
+                <p><strong>The "Aloha Crater Lodge" Night Sky Advantage:</strong></p>
+                <p>Our location on the quiet volcanic plateau provides exceptionally dark skies. On a clear 2026 night, step outside and use your binoculars to: See the craters and maria of the moon in stunning detail. Spot the four largest moons of Jupiter. Trace the dense star fields of the Milky Way as it arches overhead, a sight that feels profoundly close here.</p>
+                <p><strong>Daytime "Sky" Watching – The Volcanic Landscape:</strong></p>
+                <p>Our most dramatic vistas are shaped by the earth itself. While volcanic activity conditions change, the powerful landscape of Pele is always present. Binoculars for Detail: Use them to safely scan the vast, dramatic cliffs of the Kīlauea caldera from official park overlooks, bringing the intricate textures and colors of the volcanic rock into clear view. The Steam Vents: Just minutes from the lodge, binoculars can enhance your view of the park's mystical steam vents, especially on cooler mornings when the plumes rise dramatically from the earth.</p>
+                <p><strong>Why Your 2026 Base at Aloha Crater Lodge Makes the Difference</strong></p>
+                <p>After a day filled with exploration, the privacy and tranquility of our lodge allow the experience to truly sink in. Here, you can: Debrief in Private: Relax in your secluded room with a kitchenette, recounting the day's sightings. Rejuvenate Fully: Soothe muscles from hiking in our outdoor jetted tub, surrounded by the sounds of the fern forest. Start Immediately: With the park less than two miles away, your 2026 adventure begins the moment you step outside your door. Our location is your strategic advantage.</p>
+                <p>We invite you to experience this deep, quiet connection with nature in the coming year. Book your 2026 stay at Aloha Crater Lodge, enhance your adventure with our guest binoculars, and discover the rare birds and pristine skies that make our Volcano home truly magical.</p>
+                <p>Ready to focus on your 2026 adventure? <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" style="color: #a41c1c;">[Book Your Stay at Aloha Crater Lodge]</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <h3>The March 2026 Expedition Window</h3>
+        <p>We are currently monitoring the <strong>March 10–16 fountaining window</strong>. Guests have exclusive access to our e-bike fleet and the <strong>OlyLife P90</strong> recovery system.</p>
+        <p><a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank">View Suite Availability & Secure Your Basecamp</a></p>
+        <p style="font-size: 0.8em; margin-top: 20px;">&copy; 2026 Aloha Crater Lodge | Volcano, Hawaiʻi</p>
+    </footer>
+
+    <script>
+        function togglePost(id) {
+            var post = document.getElementById(id);
+            var btn = post.previousElementSibling;
+            if (post.style.display === "block") {
+                post.style.display = "none";
+                btn.innerText = "READ THE FULL STORY";
+            } else {
+                post.style.display = "block";
+                btn.innerText = "CLOSE STORY";
+            }
+        }
+    </script>
 </body>
 </html>

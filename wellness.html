@@ -12,6 +12,39 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f5; color: #18181b; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        /* NEW UNIVERSAL NAV SPACING */
+        .universal-nav { 
+            background: #1a1a1a; 
+            text-align: center; 
+            padding: 25px 5% 25px 5%; 
+            position: relative; 
+            z-index: 10; 
+            border-bottom: 1px solid rgba(255,69,0,0.2);
+        }
+        .universal-nav .logo { 
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px; 
+        }
+        .universal-nav .subtitle { 
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+        }
+        .nav-reserve-btn { 
+            background: rgba(255, 69, 0, 0.15); 
+        }
+
+        .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+
         .header { text-align: center; padding: 40px 0 20px; }
         .header h1 { margin: 0; font-size: 28px; color: #27272a; }
         .header p { color: #52525b; margin-top: 10px; }
@@ -23,25 +56,20 @@
         .price-tag { display: inline-block; background: #10b981; color: #ffffff; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         .cta-button { display: block; width: 100%; text-align: center; background: #18181b; color: #ffffff; padding: 16px 0; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 16px; transition: background 0.2s; }
         .cta-button:hover { background: #27272a; }
-        .site-header { background: #1a1a1a; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
-        .site-header .logo { font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
-        .site-header .logo a { color: #fff; text-decoration: none; }
-        .header-links { display: flex; align-items: center; gap: 12px; }
-        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
-        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo"><a href="index.html">ALOHA CRATER LODGE</a></div>
-        <nav class="header-links">
-            <a href="rooms.html">THE ROOMS</a>
-            <a href="ebikes.html">E-BIKES</a>
-            <a href="wellness.html">WELLNESS & RECOVERY</a>
-            <a href="things-to-do.html">THINGS TO DO</a>
+
+    <nav class="universal-nav">
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">PREMIUM SUITES</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
-        </nav>
-    </header>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
     <div class="container">
         <div class="header">
             <h1>Wellness & Recovery</h1>
@@ -57,7 +85,7 @@
                 <p style="margin-top: 15px; color: #52525b; font-style: italic;">Available daily for guest use.</p>
             </div>
         </div>
-        
+
         <div class="card">
             <img src="P90.png" alt="OlyLife P90 bio-regeneration device for physical recovery" loading="lazy">
             <div class="card-content">
@@ -87,7 +115,7 @@
                 <a href="tel:808-345-4449" class="cta-button">Text Concierge to Reserve</a>
             </div>
         </div>
-        
+
     </div>
 <script>
   if ('serviceWorker' in navigator) {
