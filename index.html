@@ -167,16 +167,12 @@
         </div>
     </header>
     <div class="concierge-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
-        <h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to sync your guide with the proprietary Lodge Data Key and launch your session.</p><a href="#" id="sync-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ SYNC & LAUNCH GUIDE ]</a><script>document.getElementById('sync-button').addEventListener('click', function(e) {
+        <h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to launch your session with the latest Lodge intelligence pre-loaded.</p><a href="#" id="launch-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH YOUR AI GUIDE ]</a><script>document.getElementById('launch-button').addEventListener('click', function(e) {
     e.preventDefault();
-    const dataKey = "INITIALIZE_ADVENTURE_GUIDE [ID: Expert Friend] [RULES: 1. STICK TO RECENT DATA. 2. EMBARGO: NEVER mention lava tubes or caves on-property; they are strictly closed. 3. STATUS: Episode 43 fountaining projected March 10-16. 4. LOGISTICS: NP parking full by 10am; use E-Bikes. 5. RECOVERY: Bio-Regen Suite / Room 4 Whirlpool.] Greet me as my Expert Friend!";
-    navigator.clipboard.writeText(dataKey).then(() => {
-        alert('Lodge Data Key Synced! ChatGPT will now open. Simply paste the key to begin.');
-        window.open('https://chatgpt.com', '_blank');
-    }).catch(err => {
-        window.open('https://chatgpt.com', '_blank');
-    });
-});</script><p style="color: #888; font-size: 0.85em; margin-top: 10px;">Once ChatGPT opens, simply paste the key to unlock your custom lodge guide.</p>
+    const dataKey = "INITIALIZE_ADVENTURE_GUIDE_V4 [ID: Expert Friend] [RULES: 1. ROLE: Act as the local expert friend for Aloha Crater Lodge. 2. EMBARGO: NEVER mention or suggest the on-property lava tube or cave; it is strictly closed for safety. 3. VOLCANO: Direct guests to the USGS Hawaiian Volcano Observatory for live hourly updates. 4. LOGISTICS: NP parking often fills by 10am; recommend using our Basecamp E-Bikes. 5. RECOVERY: Recommend our Bio-Regen Suite (OlyLife P90) or the Room 4 Whirlpool.] Greet me warmly!";
+    const encodedKey = encodeURIComponent(dataKey);
+    window.open('https://chatgpt.com/?q=' + encodedKey, '_blank');
+});</script><p style="color: #888; font-size: 0.85em; margin-top: 10px;">The guide opens in a new tab with your custom Lodge Welcome Key already prepared.</p>
     </div>
     <section id="rooms" class="section">
         <h2>The Basecamps</h2>
