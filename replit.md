@@ -35,7 +35,7 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 ### Navigation & Alert Bar
 - Red alert bar (#aa0000) on ALL 11 public pages: [ LIVE SUMMIT CAM ] → live-feed.html | [ READ THE LATEST BASECAMP DISPATCH ] → volcano-guide.html#latest
 - Universal nav (`.universal-nav`) with flexbox layout: logo (left) | tagline centered | action buttons (right)
-- Nav links: BASECAMP (HOME), PREMIUM SUITES, THE VOLCANO GUIDE, RESERVE BASECAMP (Cloudbeds)
+- Nav links: BASECAMP (HOME), SUITES, THE VOLCANO GUIDE, RESERVE BASECAMP (Cloudbeds)
 - Active page gets highlighted border/glow on its nav link
 - Header nav CSS: `.universal-nav` flex layout, `.header-links` with ember border/box-shadow + hover flare
 - guide.html uses its own shared nav bar (legacy)
