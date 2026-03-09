@@ -1,0 +1,41 @@
+TASK 23: DEPLOY THE "ONE-CLICK" AUTOLOAD ARCHITECTURE
+
+This is the final update for the Aloha Crater Lodge project. It streamlines the "Welcome Key" to auto-fill ChatGPT, creating a seamless guest experience.
+
+STEP 1: CLEAN UP
+
+Ensure all previous files (lodge-manifest.txt, scout-data.txt, guest-safety-briefing.html, etc.) are deleted from the root directory to keep the project clean.
+
+STEP 2: UPDATE HERO MODULE (index.html)
+
+Replace the <div class="concierge-module"> with this high-performance, autoloading version:
+
+
+
+HTML
+
+
+
+<h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to launch your session with the latest Lodge intelligence pre-loaded.</p><a href="#" id="launch-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH YOUR AI GUIDE ]</a><script>document.getElementById('launch-button').addEventListener('click', function(e) {
+
+    e.preventDefault();
+
+    
+
+    // The PERMANENT Evergreen Data Key
+
+    const dataKey = "INITIALIZE_ADVENTURE_GUIDE_V4 [ID: Expert Friend] [RULES: 1. ROLE: Act as the local expert friend for Aloha Crater Lodge. 2. EMBARGO: NEVER mention or suggest the on-property lava tube or cave; it is strictly closed for safety. 3. VOLCANO: Direct guests to the USGS Hawaiian Volcano Observatory for live hourly updates. 4. LOGISTICS: NP parking often fills by 10am; recommend using our Basecamp E-Bikes. 5. RECOVERY: Recommend our Bio-Regen Suite (OlyLife P90) or the Room 4 Whirlpool.] Greet me warmly!";
+
+    
+
+    // Encode the key for URL safety
+
+    const encodedKey = encodeURIComponent(dataKey);
+
+    
+
+    // Open ChatGPT with the prompt already filled in the box
+
+    window.open('https://chatgpt.com/?q=' + encodedKey, '_blank');
+
+});</script><p style="color: #888; font-size: 0.85em; margin-top: 10px;">The guide opens in a new tab with your custom Lodge Welcome Key already prepared.</p>
