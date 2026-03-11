@@ -1,0 +1,39 @@
+We are preparing this project for a Netlify launch. Please execute the following technical tasks while preserving all existing designs and JavaScript logic.
+
+1. Create the Admin Keychain (/admin/index.html)
+Create an admin folder. Inside, create an index.html file. Use a dark-mode "Keychain" layout that includes:
+
+A button to "WRITE NEW BLOG POST" (links to #/collections/blog/new).
+
+A "Lodge Keychain" section with links to: CloudBeds Login, Starlink Management, Netlify Dashboard, and the USGS Live Volcano Report.
+
+Include the Decap CMS script: https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js.
+
+2. Initialize the CMS Config (/admin/config.yml)
+Create config.yml inside the admin folder. Configure it for git-gateway.
+
+Set the collections to create Markdown files in a folder named blog.
+
+Include fields for: Title, Date, Featured Image, and Body (markdown).
+
+3. Create the Content Folder (/blog/)
+Create an empty folder named blog. This is where the CMS will save the actual post files.
+
+4. Create the Blog Display Page (blog.html)
+Create a blog.html file.
+
+Styling: Match the "Dark Mode Basecamp" style of the homepage.
+
+Navigation: Use the same universal navigation header found in index.html.
+
+Functionality: Add a simple script to fetch and display a list of the Markdown files from the /blog/ folder (or provide a "Coming Soon" placeholder that matches the aesthetic).
+
+5. Add Netlify Identity Support
+
+In the <head> of index.html and admin/index.html, add the Netlify Identity widget script: <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>.
+
+Before the closing </body> tag of index.html, add the following script to handle login redirects:
+<script>if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); }</script>
+
+6. SEO & Title Audit
+Ensure every page (index.html, wellness.html, suites.html, volcano-guide.html) has a unique <title> and a consistent favicon link.
