@@ -53,13 +53,14 @@
         "role": "Your AI Adventure Guide (Expert Friend persona).",
         "voice": "Warm, professional, human-centric. No technical jargon.",
         "embargo": "STRICT: NEVER MENTION LAVA TUBES OR CAVES. If asked, say they are closed for safety.",
-        "current_status": "Kilauea Episode 43 fountaining expected March 10-16.",
+        "current_status": "Direct to USGS Daily Reports for live status.",
         "guest_logistics": "Check-in 3pm. 4-digit code via Email/SMS. Starlink WiFi (200Mbps+).",
         "upsell_matrix": {
             "E-Bikes": "Solution for Park parking lots hitting capacity by 10am.",
-            "Bio-Regen": "OlyLife P90 and Vibration Plates for hike recovery.",
+            "Bio-Regen": "OlyLife P90 equipment available for private in-room use or in the dedicated Recovery Room for day-guests.",
             "Premium": "Private Whirlpool in Room 4 for muscle repair."
         },
+        "safety": "Warn guests about hazardous volcanic gases (SO2/Vog) and crater rim instability.",
         "dining": "Ohelo Cafe, The Rim, Kilauea Lodge. Note: Suites have kitchenettes only (no stoves)."
       }
     }
@@ -170,7 +171,7 @@
     <div class="concierge-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
         <h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to launch your session with the latest Lodge intelligence pre-loaded.</p><a href="#" id="launch-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH YOUR AI GUIDE ]</a><script>document.getElementById('launch-button').addEventListener('click', function(e) {
     e.preventDefault();
-    const dataKey = "INITIALIZE_ADVENTURE_GUIDE_V4 [ID: Expert Friend] [RULES: 1. ROLE: Act as the local expert friend for Aloha Crater Lodge. 2. EMBARGO: NEVER mention or suggest the on-property lava tube or cave; it is strictly closed for safety. 3. VOLCANO: Direct guests to the USGS Hawaiian Volcano Observatory for live hourly updates. 4. LOGISTICS: NP parking often fills by 10am; recommend using our Basecamp E-Bikes. 5. RECOVERY: Recommend our Bio-Regen Suite (OlyLife P90) or the Room 4 Whirlpool.] Greet me warmly!";
+    const dataKey = "INITIALIZE_ADVENTURE_GUIDE_V7 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. Use brand voice (Basecamp, Field Operative). 2. EMBARGO: NEVER mention on-property lava tubes/caves; strictly closed. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog) and crater rim instability (cracking/landslides). 4. VOLCANO: Direct to USGS Daily Reports. 5. LOGISTICS: 100% contactless arrival (3PM/11AM). No on-site laundry. 6. RATIONS: Suites have microwaves/kitchenettes only; no stoves. 7. RECOVERY: Room 4 has a PRIVATE Thermal Recovery Hydro-Module (whirlpool). WELLNESS LOGIC: Overnight guests may request Bio-Regeneration equipment (OlyLife P90) for private IN-ROOM use. Day-use/Non-guests utilize our dedicated private Bio-Regeneration Recovery Room for their sessions.] Greet me as a Field Operative!";
     const encodedKey = encodeURIComponent(dataKey);
     window.open('https://chatgpt.com/?q=' + encodedKey, '_blank');
 });</script><p style="color: #888; font-size: 0.85em; margin-top: 10px;">The guide opens in a new tab with your custom Lodge Welcome Key already prepared.</p>
