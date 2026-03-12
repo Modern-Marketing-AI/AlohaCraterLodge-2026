@@ -154,6 +154,7 @@
             margin-top: 20px;
             display: inline-block;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
         .admin-login-link:hover {
             color: #ff4500;
@@ -237,7 +238,7 @@
                 <h4>Aloha Crater Lodge</h4>
                 <p>Volcano Village, HI</p>
                 <p>Text/Call: (808) 345-4449</p>
-                <a href="#" class="admin-login-link" onclick="netlifyIdentity.open(); return false;">[ Admin Login ]</a>
+                <a href="#" class="admin-login-link" id="admin-trigger">[ Admin Login ]</a>
             </div>
             <div class="footer-col social">
                 <h4>Intel Feeds</h4>
@@ -312,13 +313,26 @@
 </script>
 
 <script>
+  const adminTrigger = document.getElementById('admin-trigger');
+
   if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
+    // 1. Handle clicking the link
+    adminTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const user = netlifyIdentity.currentUser();
+
+      if (user) {
+        // Paul is already logged in, send him through the door
+        window.location.href = "/admin/";
+      } else {
+        // Not logged in, show the box
+        netlifyIdentity.open();
       }
+    });
+
+    // 2. Handle a NEW login
+    netlifyIdentity.on("login", () => {
+      window.location.href = "/admin/";
     });
   }
 </script>
