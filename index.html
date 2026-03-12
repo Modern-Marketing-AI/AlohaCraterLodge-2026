@@ -9,6 +9,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -295,6 +298,18 @@
     navigator.serviceWorker.register('/sw.js');
   }
 </script>
-<script>if (typeof netlifyIdentity !== 'undefined') { netlifyIdentity.on("init", user => { if (!user) { netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); }</script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
