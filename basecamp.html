@@ -394,7 +394,7 @@
         </section>
 
         <footer>
-            <p>Aloha Crater Lodge — Volcano Village, Hawai'i &nbsp;|&nbsp; <a href="tel:808-345-4449">(808) 345-4449</a></p>
+            <p>Aloha Crater Lodge — Volcano Village, Hawai'i &nbsp;|&nbsp; <a href="#" class="reveal-phone-btn" style="color:#10b981;border:1px solid #10b981;padding:4px 12px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;transition:all 0.2s;">Text Concierge</a></p>
             <p style="font-size:0.78rem; color:#555; margin-top:0.4rem;">Located 2 miles from Hawaii Volcanoes National Park.</p>
             <p style="font-size:0.78rem; color:#555; margin-top:0.2rem;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
         </footer>
@@ -439,6 +439,20 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
+    </script>
+    <script>
+        (function() {
+            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    if (this.dataset.revealed !== 'true') {
+                        e.preventDefault();
+                        this.textContent = 'Text or Call (808) 345-4449';
+                        this.href = 'tel:+18083454449';
+                        this.dataset.revealed = 'true';
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
