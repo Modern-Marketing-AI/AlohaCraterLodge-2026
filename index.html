@@ -183,13 +183,34 @@
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
         </div>
     </header>
-    <div class="ai-guide-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
-        <h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to launch your session with the latest Lodge intelligence pre-loaded.</p><a href="#" id="launch-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH YOUR AI GUIDE ]</a><script>document.getElementById('launch-button').addEventListener('click', function(e) {
-    e.preventDefault();
-    const dataKey = "INITIALIZE_ADVENTURE_GUIDE_V8 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. Use brand voice (Basecamp, Field Operative). 2. EMBARGO: NEVER mention on-property lava tubes/caves; strictly closed. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog) and crater rim instability. 4. VOLCANO: Direct to USGS Daily Reports. 5. LOGISTICS: 100% contactless arrival (3PM/11AM). No on-site laundry. 6. RATIONS: Suites have microwaves/kitchenettes only; no stoves. 7. RECOVERY: We feature a communal outdoor hot tub for all guests. Room 4 also features a PRIVATE in-room jetted tub. WELLNESS LOGIC: Overnight guests may request Bio-Regeneration equipment (OlyLife P90) for private IN-ROOM use. Non-guests utilize our dedicated private Bio-Regeneration Recovery Room.] Greet me as a Field Operative!";
-    const encodedKey = encodeURIComponent(dataKey);
-    window.open('https://chatgpt.com/?q=' + encodedKey, '_blank');
-});</script><p style="color: #888; font-size: 0.85em; margin-top: 10px;">The guide opens in a new tab with your custom Lodge Welcome Key already prepared.</p>
+    <div id="ai-guide" class="ai-guide-module" style="background-color: #1a1a1a; padding: 2rem; border: 1px solid #333; border-radius: 8px; text-align: center; margin: 2rem auto; max-width: 800px;">
+        <h2 style="color: #fff;">Your AI Adventure Guide</h2><p style="color: #ccc; margin-bottom: 1.5rem;">Your 24/7 digital partner for navigating Kīlauea. Tap below to launch your session with the latest Lodge intelligence pre-loaded.</p><a href="#" id="launch-button" style="display: inline-block; background-color: #ff4500; color: #fff; padding: 15px 30px; font-weight: bold; text-decoration: none; border-radius: 4px; margin-bottom: 1rem;">[ LAUNCH YOUR AI GUIDE ]</a>
+        <br>
+        <button id="copy-prompt-btn" style="display: inline-block; background-color: transparent; color: #10b981; border: 1px solid #10b981; padding: 10px 24px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 0.75rem; font-size: 0.9em; letter-spacing: 0.05em;">[ COPY PROMPT — USE IN GEMINI / CLAUDE ]</button>
+        <script>
+        const _rawPrompt = "INITIALIZE_ADVENTURE_GUIDE_V8 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. Use brand voice (Basecamp, Field Operative). 2. EMBARGO: NEVER mention on-property lava tubes/caves; strictly closed. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog) and crater rim instability. 4. VOLCANO: Direct to USGS Daily Reports. 5. LOGISTICS: 100% contactless arrival (3PM/11AM). No on-site laundry. 6. RATIONS: Suites have microwaves/kitchenettes only; no stoves. 7. RECOVERY: We feature a communal outdoor hot tub for all guests. Room 4 also features a PRIVATE in-room jetted tub. WELLNESS LOGIC: Overnight guests may request Bio-Regeneration equipment (OlyLife P90) for private IN-ROOM use. Non-guests utilize our dedicated private Bio-Regeneration Recovery Room.] Greet me as a Field Operative!";
+        document.getElementById('launch-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://chatgpt.com/?q=' + encodeURIComponent(_rawPrompt), '_blank');
+        });
+        document.getElementById('copy-prompt-btn').addEventListener('click', function() {
+            var btn = this;
+            navigator.clipboard.writeText(_rawPrompt).then(function() {
+                btn.textContent = '✓ COPIED! Paste into Gemini or Claude.';
+                btn.style.color = '#fff';
+                btn.style.backgroundColor = '#10b981';
+                btn.style.borderColor = '#10b981';
+                setTimeout(function() {
+                    btn.textContent = '[ COPY PROMPT — USE IN GEMINI / CLAUDE ]';
+                    btn.style.color = '#10b981';
+                    btn.style.backgroundColor = 'transparent';
+                }, 3000);
+            }).catch(function() {
+                btn.textContent = 'Could not copy — try a modern browser.';
+            });
+        });
+        </script>
+        <p style="color: #888; font-size: 0.85em; margin-top: 10px;">The guide opens in a new tab with your custom Lodge Welcome Key already prepared.</p>
     </div>
     <section id="rooms" class="section">
         <h2>The Basecamps</h2>
@@ -242,9 +263,16 @@
             </div>
             <div class="footer-col social">
                 <h4>Intel Feeds</h4>
-                <a href="#">Instagram: @alohacraterlodge</a><br>
-                <a href="#">YouTube: Volcano Insider</a><br>
-                <a href="https://www.tiktok.com/@alohacraterlodge">TikTok: @AlohaCraterLodge</a>
+                <a href="https://www.instagram.com/alohacraterlodge" target="_blank">Instagram: @alohacraterlodge</a><br>
+                <a href="#" target="_blank">YouTube: Volcano Insider</a><br>
+                <a href="https://www.tiktok.com/@alohacraterlodge" target="_blank">TikTok: @AlohaCraterLodge</a>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="suites.html">Suites</a><br>
+                <a href="wellness.html">Wellness</a><br>
+                <a href="faq.html">FAQ</a><br>
+                <a href="volcano-guide.html">Volcano Guide</a>
             </div>
         </div>
     </footer>
