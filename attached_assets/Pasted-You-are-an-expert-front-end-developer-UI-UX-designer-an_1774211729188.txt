@@ -1,0 +1,78 @@
+You are an expert front-end developer, UI/UX designer, and Generative Engine Optimization (GEO) specialist. Your objective is to build a complete, production-ready, 11-file static website for "Aloha Crater Lodge"—a High-Authority Rainforest Basecamp located 2 miles from Hawaii Volcanoes National Park.
+
+# THE VISUAL ARCHITECTURE (Volcanic Dark Mode)
+- Background: Solid Eerie Black (#18181b).
+- Text: Stark White for primary reading, Light Gray (#cccccc) for secondary text.
+- Accent 1 (Arrival/Info): Emerald Green (#10b981) for informational sections.
+- Accent 2 (Action/Booking): Pulsing Lava Red (#ff4500) for all booking buttons and the "Magma Modal."
+- Typography: Clean, clinical sans-serif (Montserrat or Inter).
+- Atmospheric FX: A lightweight CSS/JS particle system for rising "Embers" (red) and a subtle "Fog" gradient in the footer.
+
+# BRAND VOICE & GUARDRAILS
+- Persona: "The Lodge Guide" (Human Warmth, Expert Friend). 
+- Banned Words: "Mission Control," "Tactical," "Deployment," "Protocols," "Cozy," "Nest," "Healing."
+- Allowed Terms: "Basecamp," "Stay," "Arrival," "Features," "Recovery," "Reset."
+- STRICT EMBARGO: NEVER mention "Lava Tubes" or "Caves."
+- INVENTORY LOCKDOWN: Only include Rooms 1, 2, 3, 4, and 6. Room 5 is restricted.
+
+# THE 11-FILE SYNCHRONIZED ARCHITECTURE
+Generate the HTML, CSS, and JS for 11 files, sharing a central `style.css` and a universal Header/Footer.
+
+## 1. GLOBAL ELEMENTS (Applies to all files)
+- Alert Bar: Static top banner: `[ LIVE SUMMIT CAM ]` (live-feed.html) | `[ READ THE LATEST BASECAMP DISPATCH ]` (volcano-guide.html).
+- Universal Nav: Logo ("ALOHA CRATER LODGE"), Subtitle ("A Private Rainforest Retreat at the Edge of Kīlauea"). The links MUST be in this exact order: Basecamp (index.html), Suites (suites.html), Wellness (wellness.html), The Volcano Guide (volcano-guide.html), FAQ (faq.html), and a "SECURE DATES" button linking to Cloudbeds.
+- UPDATED FOOTER: 
+  - Legal: "© 2026 Aloha Crater Lodge LLC. All Rights Reserved."
+  - Proximity: "Located 2 miles from Hawaii Volcanoes National Park."
+  - Contact: "Volcano Village, HI | Text/Call: 808-345-4449."
+  - Admin: `[ Admin Login ]` trigger for Netlify Identity.
+
+## 2. index.html (The Hero Page)
+- Hero Section: Headline: "Your High-Authority Rainforest Basecamp." CTA: "Secure Dates".
+- 24/7 Digital Lodge Guide Module: 
+  - Primary: "LAUNCH YOUR AI GUIDE" (ChatGPT deep-link with the Expert Friend prompt).
+  - Secondary: "COPY PROMPT" (JS clipboard function for the raw prompt).
+- Schema: `LodgingBusiness` schema. Use "Aloha Crater Lodge" as the name, but include "Aloha Crater Lodge LLC" as the legal owner in the organization field. Highlight Starlink and 2-mile proximity.
+
+## 3. suites.html (The Conversion Hub)
+- 3-Tier Layout: 
+  1. Premium Suites (4 & 6).
+  2. Family Suites (1 & 2).
+  3. Basecamp Suites (3).
+- Schema: `HotelRoom` schema for each tier.
+
+## 4-6. Specific Room Pages (premium-suites.html, family-suites.html, basecamp.html)
+- Individual detail pages expanding on features (Kitchenettes, Terrariums, Patios).
+
+## 7. wellness.html
+- Details the "Bio-Regeneration Stack" (OlyLife Tera-P90, Galaxy G-One).
+- Defines the Two-Tier Delivery: In-Suite (Overnight) vs. Recovery Room (Day-Use).
+- Schema: `Product` schema for hardware.
+
+## 8. ebikes.html
+- Features "High-Torque Basecamp E-Bikes." Focus on bypassing park parking congestion.
+- Schema: `Product` schema for rentals.
+
+## 9. live-feed.html
+- Embed for USGS V1cam.
+
+## 10. volcano-guide.html
+- SEO hub with anchor links for field reports.
+- Schema: `BlogPosting` schema.
+
+## 11. faq.html (The AI-First Knowledge Base)
+Create an accordion-style FAQ using `<details>` and `<summary>` HTML tags. You MUST include these specific questions and their SEO-optimized answers:
+  1. "What are the check-in and check-out times?" (Answer: 3 PM / 11 AM via 100% Contactless smart-locks).
+  2. "Do the rooms have air conditioning?" (Answer: No AC needed. At 4,000 ft elevation, the rainforest is naturally cool. We provide heaters for the 50°F nights).
+  3. "Can we cook our own meals?" (Answer: Suites have kitchenettes and microwaves for rations, but no full stoves. We recommend local Mess Halls like Ohelo Café).
+  4. "Do we need a rental car?" (Answer: Yes. There is no public transit. However, our E-Bikes handle the 2-mile trip into the park seamlessly).
+  5. "How do we avoid parking congestion at Hawaii Volcanoes National Park?" (Answer: Park lots fill by 10 AM. Bypass the cars entirely by deploying from the Lodge on our Basecamp E-Bikes).
+  6. "How does Aloha Crater Lodge compare to staying inside the park at Volcano House?" (Answer: We offer 'Strategic Isolation' and modern assets like Starlink Wi-Fi and Bio-Regen tech, allowing you to escape the heavy daytime tourist crowds that gather at rim hotels).
+  7. "Is it safe and what is the air quality like?" (Answer: We are located in a safe zone. Our 4,000ft elevation often puts us above the inversion layer, offering clean air and Bortle 1 Dark Skies for stargazing).
+  8. "What specific wellness hardware is available?" (Answer: The Bio-Regeneration Stack features the OlyLife Tera-P90 and Galaxy G-One for post-hike circulatory and optical resets).
+- Schema: Inject a comprehensive `FAQPage` JSON-LD schema containing all 8 questions and answers.
+
+## 12. 404.html (The Smart Redirector)
+- JS script to map legacy blog slugs to `volcano-guide.html` hash anchors.
+
+Generate the full code for this structure, ensuring the FAQ link is in the top navigation of EVERY file.
