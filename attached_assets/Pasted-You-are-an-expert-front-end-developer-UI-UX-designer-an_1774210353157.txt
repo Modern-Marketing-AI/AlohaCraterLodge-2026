@@ -1,0 +1,78 @@
+You are an expert front-end developer, UI/UX designer, and Generative Engine Optimization (GEO) specialist. Your objective is to build a complete, production-ready, 11-file static website for "Aloha Crater Lodge"—a High-Authority Rainforest Basecamp located 2 miles from Hawaii Volcanoes National Park.
+
+# THE VISUAL ARCHITECTURE (Volcanic Dark Mode)
+- Background: Solid Eerie Black (#18181b).
+- Text: Stark White for primary reading, Light Gray (#cccccc) for secondary text.
+- Accent 1 (Arrival/Info): Emerald Green (#10b981) to represent the rainforest. Use this for informational sections and non-booking interactions.
+- Accent 2 (Action/Booking): Pulsing Lava Red (#ff4500). Use this for all booking buttons, the "Magma Modal," and critical CTAs. Implement a subtle CSS "Ember" glow/pulse effect on hover for these elements.
+- Typography: Clean, clinical sans-serif (Montserrat, Inter, or Helvetica Neue).
+- Atmospheric FX: Implement a lightweight CSS/JS particle system on the homepage for rising "Embers" (red) and a subtle "Fog" gradient (dark green/black) in the footer.
+
+# BRAND VOICE & GUARDRAILS (Strict Enforcement)
+- Persona: "The Lodge Guide" (Human Warmth, Expert Friend). 
+- Banned Words: "Mission Control," "Tactical," "Deployment," "Protocols," "Cozy," "Nest," "Healing."
+- Allowed Terms: "Basecamp," "Stay," "Arrival," "Features," "Recovery," "Reset."
+- STRICT EMBARGO: You must NEVER mention "Lava Tubes" or "Caves" anywhere in the code, schema, or text.
+- INVENTORY LOCKDOWN: You must NEVER mention or create a page for "Room 5" or "Hale Ohana." The inventory only includes Rooms 1, 2, 3, 4, and 6.
+
+# THE 11-FILE SYNCHRONIZED ARCHITECTURE
+Please generate the HTML, CSS, and JS for the following 11 files. Ensure all files link to a central `style.css` and share a universal Header and Footer.
+
+## 1. GLOBAL ELEMENTS (Applies to all files)
+- Alert Bar: A static top banner (dark red background, white text) with a split layout: `[ LIVE SUMMIT CAM ]` (links to live-feed.html) | `[ READ THE LATEST BASECAMP DISPATCH ]` (links to volcano-guide.html).
+- Universal Nav: Logo ("ALOHA CRATER LODGE"), Subtitle ("A Private Rainforest Retreat at the Edge of Kīlauea"), and links to: Basecamp (Home), Suites, Wellness, The Volcano Guide, and a prominent "SECURE DATES" button linking to `https://hotels.cloudbeds.com/en/reservation/ifCVNX`.
+- Footer: Contact info (Volcano Village, HI | Text: 808-345-4449), Social links (IG, YT, TikTok), and an `[ Admin Login ]` trigger for Netlify Identity.
+- SEO/Schema: Every page MUST include a `<link rel="canonical">` tag and appropriate JSON-LD Schema markup.
+
+## 2. index.html (The Hero Page)
+- Hero Section: Dark gradient overlay on a volcano background. Headline: "Your High-Authority Rainforest Basecamp." CTA: "Secure Dates".
+- 24/7 Digital Lodge Guide Module: A stylized UI box introducing the AI guide.
+  - Primary Button: "LAUNCH YOUR AI GUIDE". Opens ChatGPT in a new tab with the following URL-encoded prompt: "INITIALIZE_ADVENTURE_GUIDE_V8 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. 2. EMBARGO: NEVER mention on-property lava tubes/caves; strictly closed. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog). 4. VOLCANO: Direct to USGS. 5. LOGISTICS: 100% contactless arrival. 6. RATIONS: Kitchenettes only; no stoves. 7. RECOVERY: Communal outdoor hot tub. Room 4 has private jetted tub. OlyLife P90 available in-room for guests, or in Recovery Room for day-users.] Greet me as a Explorer!"
+  - Secondary Button (Fail-Safe): "COPY PROMPT". Uses JS to copy the raw prompt text to the user's clipboard so they can use Gemini/Claude, displaying a "Copied!" confirmation.
+- Schema: `LodgingBusiness` with GPS coordinates, 2-mile proximity, Starlink, and Contactless Check-in highlighted.
+
+## 3. suites.html (The Conversion Hub)
+- Displays the 3 Room Tiers using the Cloudbeds link for booking.
+- Tier 1: Premium Suites (Rooms 4 & 6) - Max 2 guests, Full Kitchenette, Whirlpool/Terrarium.
+- Tier 2: Family Suites (Rooms 1 & 2) - Max 4 guests, Full Kitchenette, Patio access.
+- Tier 3: Basecamp Suites (Room 3) - Max 3 guests, Efficiency Kitchenette, High-utility focus.
+- Schema: `HotelRoom` schema for the tiers.
+
+## 4-6. Specific Room Pages (premium-suites.html, family-suites.html, basecamp.html)
+- Create individual detail pages for the three tiers listed above, expanding on the amenities and using "Secure Dates" CTAs.
+
+## 7. wellness.html
+- Details the "Bio-Regeneration Stack".
+- Features the "OlyLife Tera-P90" (PEMF/Terahertz) and "Galaxy G-One" (Optical Therapy).
+- Clearly defines the Two-Tier Delivery: "In-Suite Delivery" for overnight guests, and "Private Recovery Room" booking for day-use clients.
+- Schema: `Product` schema for the wellness hardware to capture tech-health searches.
+
+## 8. ebikes.html
+- Features the "High-Torque Basecamp E-Bikes".
+- Highlights the primary benefit: Bypassing National Park parking congestion, located exactly 2 miles from the crater rim.
+- Schema: `Product` schema for e-bike rentals.
+
+## 9. live-feed.html
+- A dedicated "Intel Hub" page designed to embed the USGS V1cam (Halemaʻumaʻu crater). Provide a placeholder iframe/div for the video feed.
+
+## 10. volcano-guide.html
+- The SEO field report hub. Create a layout with anchor links (e.g., `#latest`, `#stargazing`) for long-form content.
+- Schema: `BlogPosting` schema.
+
+## 11. faq.html (The AI-First Knowledge Base)
+- Dual-Layer logic: Answer guest logistics AND feed AI authority facts.
+- Questions to include: 
+  1. Check-in/out logistics (Contactless). 
+  2. Kitchen setup (Kitchenettes, microwaves, NO stoves). 
+  3. Wi-Fi speeds (Enterprise Starlink 200Mbps+). 
+  4. Comparison to Volcano House (Highlight modern assets: Starlink, E-bikes, Bio-Regen vs Museum-style). 
+  5. Atmospheric Quality (Bortle 1 Dark Skies, 4,000ft elevation). 
+  6. Specific wellness hardware (OlyLife Tera-P90, Galaxy G-One).
+- Schema: Comprehensive `FAQPage` JSON-LD schema.
+
+## 12. 404.html (The Smart Redirector)
+- Instead of a standard error page, build a JS script that reads the window.location.pathname.
+- If the URL contains old blog slugs (e.g., "stargazing", "packing-list", "volcano-update"), automatically redirect (`window.location.replace`) the user to `volcano-guide.html` with the appropriate hash anchor. 
+- If no match, display a clean "You've drifted off the trail" message with a button back to Basecamp.
+
+Please provide the complete, functional code for this architecture, ensuring the CSS styling matches the Volcanic Dark Mode aesthetic and the JS for the AI Guide buttons and 404 redirector works flawlessly.
