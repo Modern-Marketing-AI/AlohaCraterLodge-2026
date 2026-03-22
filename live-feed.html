@@ -110,7 +110,7 @@
             <div class="footer-col">
                 <h4>Aloha Crater Lodge</h4>
                 <p>Volcano Village, HI</p>
-                <p>Text/Call: (808) 345-4449</p>
+                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
             </div>
             <div class="footer-col social">
                 <h4>Intel Feeds</h4>
@@ -129,6 +129,20 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
+    </script>
+    <script>
+        (function() {
+            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    if (this.dataset.revealed !== 'true') {
+                        e.preventDefault();
+                        this.textContent = 'Text or Call (808) 345-4449';
+                        this.href = 'tel:+18083454449';
+                        this.dataset.revealed = 'true';
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>

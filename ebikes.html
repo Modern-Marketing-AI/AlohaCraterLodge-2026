@@ -109,12 +109,12 @@
                         <div class="price-amount">$100 / Day</div>
                     </div>
                 </div>
-                <a href="tel:808-345-4449" class="cta-button">Text Concierge to Reserve</a>
+                <a href="#" class="cta-button reveal-phone-btn">Text Concierge</a>
             </div>
         </div>
     </div>
 <footer style="background:#111; border-top:1px solid #222; padding:2rem; text-align:center; color:#888; font-size:0.85rem; margin-top:3rem;">
-    <p style="margin:0 0 0.4rem;">Aloha Crater Lodge &mdash; Volcano Village, HI &nbsp;|&nbsp; Text/Call: (808) 345-4449</p>
+    <p style="margin:0 0 0.6rem;">Aloha Crater Lodge &mdash; Volcano Village, HI &nbsp;|&nbsp; <a href="#" class="reveal-phone-btn" style="color:#10b981;border:1px solid #10b981;padding:4px 12px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;transition:all 0.2s;">Text Concierge</a></p>
     <p style="margin:0 0 0.3rem; font-size:0.78rem; color:#555;">Located 2 miles from Hawaii Volcanoes National Park.</p>
     <p style="margin:0; font-size:0.78rem; color:#555;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
 </footer>
@@ -123,5 +123,19 @@
     navigator.serviceWorker.register('/sw.js');
   }
 </script>
+    <script>
+        (function() {
+            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    if (this.dataset.revealed !== 'true') {
+                        e.preventDefault();
+                        this.textContent = 'Text or Call (808) 345-4449';
+                        this.href = 'tel:+18083454449';
+                        this.dataset.revealed = 'true';
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>

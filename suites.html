@@ -271,6 +271,7 @@
 
     <div class="ember-footer">
         <p>Aloha Crater Lodge — 2 miles from Kīlauea Crater Rim</p>
+        <p style="margin-top:0.6rem;"><a href="#" class="reveal-phone-btn" style="color:#10b981;border:1px solid #10b981;padding:5px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;transition:all 0.2s;">Text Concierge</a></p>
         <p style="margin-top:0.5rem; font-size:0.78rem; color:#555;">Located 2 miles from Hawaii Volcanoes National Park. &nbsp;&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
     </div>
 
@@ -278,6 +279,20 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
+    </script>
+    <script>
+        (function() {
+            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    if (this.dataset.revealed !== 'true') {
+                        e.preventDefault();
+                        this.textContent = 'Text or Call (808) 345-4449';
+                        this.href = 'tel:+18083454449';
+                        this.dataset.revealed = 'true';
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
