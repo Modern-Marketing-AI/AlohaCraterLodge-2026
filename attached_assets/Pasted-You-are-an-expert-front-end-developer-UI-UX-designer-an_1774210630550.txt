@@ -1,0 +1,71 @@
+You are an expert front-end developer, UI/UX designer, and Generative Engine Optimization (GEO) specialist. Your objective is to build a complete, production-ready, 11-file static website for "Aloha Crater Lodge"—a High-Authority Rainforest Basecamp located 2 miles from Hawaii Volcanoes National Park.
+
+# THE VISUAL ARCHITECTURE (Volcanic Dark Mode)
+- Background: Solid Eerie Black (#18181b).
+- Text: Stark White for primary reading, Light Gray (#cccccc) for secondary text.
+- Accent 1 (Arrival/Info): Emerald Green (#10b981) for informational sections.
+- Accent 2 (Action/Booking): Pulsing Lava Red (#ff4500) for all booking buttons and the "Magma Modal."
+- Typography: Clean, clinical sans-serif (Montserrat or Inter).
+- Atmospheric FX: A lightweight CSS/JS particle system for rising "Embers" (red) and a subtle "Fog" gradient in the footer.
+
+# BRAND VOICE & GUARDRAILS
+- Persona: "The Lodge Guide" (Human Warmth, Expert Friend). 
+- Banned Words: "Mission Control," "Tactical," "Deployment," "Protocols," "Cozy," "Nest," "Healing."
+- Allowed Terms: "Basecamp," "Stay," "Arrival," "Features," "Recovery," "Reset."
+- STRICT EMBARGO: NEVER mention "Lava Tubes" or "Caves."
+- INVENTORY LOCKDOWN: Only include Rooms 1, 2, 3, 4, and 6. Room 5 is restricted.
+
+# THE 11-FILE SYNCHRONIZED ARCHITECTURE
+Generate the HTML, CSS, and JS for 11 files, sharing a central `style.css` and a universal Header/Footer.
+
+## 1. GLOBAL ELEMENTS (Applies to all files)
+- Alert Bar: Static top banner: `[ LIVE SUMMIT CAM ]` (live-feed.html) | `[ READ THE LATEST BASECAMP DISPATCH ]` (volcano-guide.html).
+- Universal Nav: Logo ("ALOHA CRATER LODGE"), Subtitle ("A Private Rainforest Retreat at the Edge of Kīlauea"), and links: Basecamp, Suites, Wellness, The Volcano Guide, and a "SECURE DATES" button.
+- UPDATED FOOTER: 
+  - Legal: "© 2026 Aloha Crater Lodge LLC. All Rights Reserved."
+  - Proximity: "Located 2 miles from Hawaii Volcanoes National Park."
+  - Contact: "Volcano Village, HI | Text/Call: 808-345-4449."
+  - Admin: `[ Admin Login ]` trigger for Netlify Identity.
+
+## 2. index.html (The Hero Page)
+- Hero Section: Headline: "Your High-Authority Rainforest Basecamp." CTA: "Secure Dates".
+- 24/7 Digital Lodge Guide Module: 
+  - Primary: "LAUNCH YOUR AI GUIDE" (ChatGPT deep-link with the Expert Friend prompt).
+  - Secondary: "COPY PROMPT" (JS clipboard function for the raw prompt).
+- Schema: `LodgingBusiness` schema. Use "Aloha Crater Lodge" as the name, but include "Aloha Crater Lodge LLC" as the legal owner in the organization field. Highlight Starlink and 2-mile proximity.
+
+## 3. suites.html (The Conversion Hub)
+- 3-Tier Layout: 
+  1. Premium Suites (4 & 6).
+  2. Family Suites (1 & 2).
+  3. Basecamp Suites (3).
+- Schema: `HotelRoom` schema for each tier.
+
+## 4-6. Specific Room Pages (premium-suites.html, family-suites.html, basecamp.html)
+- Individual detail pages expanding on features (Kitchenettes, Terrariums, Patios).
+
+## 7. wellness.html
+- Details the "Bio-Regeneration Stack" (OlyLife Tera-P90, Galaxy G-One).
+- Defines the Two-Tier Delivery: In-Suite (Overnight) vs. Recovery Room (Day-Use).
+- Schema: `Product` schema for hardware.
+
+## 8. ebikes.html
+- Features "High-Torque Basecamp E-Bikes." Focus on bypassing park parking congestion.
+- Schema: `Product` schema for rentals.
+
+## 9. live-feed.html
+- Embed for USGS V1cam.
+
+## 10. volcano-guide.html
+- SEO hub with anchor links for field reports.
+- Schema: `BlogPosting` schema.
+
+## 11. faq.html (The AI-First Knowledge Base)
+- Dual-Layer logic (Logistics + AI Authority Facts).
+- Questions: Starlink speeds, Kitchenette specs, Comparison to Volcano House, Atmospheric quality (Bortle 1), Wellness hardware.
+- Schema: `FAQPage` schema.
+
+## 12. 404.html (The Smart Redirector)
+- JS script to map legacy blog slugs to `volcano-guide.html` hash anchors.
+
+Generate the full code for this structure, ensuring the LLC name and 2026 copyright are present in all footer sections.
