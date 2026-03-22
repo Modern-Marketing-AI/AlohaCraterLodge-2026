@@ -3,86 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Summit Cam — Aloha Crater Lodge</title>
-    <meta name="description" content="Watch the USGS Kīlauea summit camera live from Aloha Crater Lodge — your rainforest basecamp 2 miles from the crater.">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Basecamp Command">
+    <title>Live Summit Intel | Aloha Crater Lodge</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Live V3cam feed of the south Halemaʻumaʻu crater at Kīlauea. Monitor the volcanic activity from your Rainforest Basecamp at Aloha Crater Lodge.">
+    
+    <link rel="canonical" href="https://alohacraterlodge.com/live-feed.html">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #18181b;
-            color: #e0e0e0;
-            line-height: 1.7;
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: #18181b;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        .alert-bar { background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold; }
-        .alert-bar a { color: white; text-decoration: none; }
-
+        .alert-bar {
+            background-color: #aa0000;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .alert-bar a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .alert-bar a:hover {
+            color: #ff4500;
+        }
         .universal-nav {
-            background: #1a1a1a;
-            padding: 25px 5%;
-            position: relative;
-            z-index: 10;
-            border-bottom: 1px solid rgba(255,69,0,0.2);
+            text-align: center; 
+            padding: 25px 20px; 
+            border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+        }
+        .universal-nav .logo {
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px;
+        }
+        .universal-nav .subtitle {
+            font-style: italic; 
+            color: #10b981; /* Emerald Green Accent */
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px;
+        }
+        .header-links {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
         }
-        .universal-nav .logo {
-            font-family: 'Georgia', serif;
-            font-size: 1.6em;
+        .header-links a {
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .header-links a:hover {
+            border-color: #ff4500;
+            box-shadow: 0 0 12px rgba(255, 69, 0, 0.6);
+            transform: translateY(-1px);
+        }
+        .header-links .nav-reserve-btn {
+            background-color: rgba(255, 69, 0, 0.15);
+            font-weight: bold;
             color: #ff4500;
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
-            letter-spacing: 2px;
-            flex-shrink: 0;
         }
-        .universal-nav .subtitle {
-            font-style: italic;
-            color: #ccc;
-            font-family: 'Georgia', serif;
-            margin: 0;
-            flex: 1;
+        
+        /* Feed Content Area */
+        .intel-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 20px;
             text-align: center;
-            min-width: 200px;
         }
-        .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
-        .header-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
-        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
-        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
-
-        .live-content {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 5% 60px;
+        .intel-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+        .intel-container p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            border: 1px solid #10b981;
         }
 
+        /* Footer */
         footer {
-            background: #111;
-            padding: 40px 5%;
-            border-top: 1px solid rgba(255,69,0,0.2);
+            background: linear-gradient(to top, #0a0a0c, #18181b);
+            border-top: 1px solid #333;
+            padding: 3rem 20px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 4rem;
         }
-        .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-        .footer-col h4 { color: #ff4500; margin-bottom: 8px; }
-        .footer-col p, .footer-col a { color: #999; font-size: 0.9rem; text-decoration: none; }
-
-        @media (max-width: 768px) {
-            .universal-nav { flex-direction: column; text-align: center; }
-            .header-links { justify-content: center; gap: 6px; }
-            .header-links a { padding: 6px 10px; font-size: 0.75rem; }
+        footer a { color: #10b981; text-decoration: none; }
+        footer a:hover { color: #ff4500; }
+        .admin-login-link { font-size: 0.75rem; margin-top: 20px; display: inline-block; cursor: pointer; }
+        
+        /* The Comms Reveal Button */
+        .reveal-phone-btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 15px 0;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .reveal-phone-btn:hover {
+            background-color: #444;
         }
     </style>
 </head>
 <body>
-    <div class="alert-bar"><a href="live-feed.html">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
+
+    <div class="alert-bar">
+        <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest">[ READ THE LATEST BASECAMP DISPATCH ]</a>
+    </div>
 
     <nav class="universal-nav">
         <div class="logo">ALOHA CRATER LODGE</div>
@@ -93,56 +159,75 @@
             <a href="wellness.html">WELLNESS</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
             <a href="faq.html">FAQ</a>
-            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">SECURE DATES</a>
         </div>
     </nav>
 
-    <h1 style="color: #ff4500; text-align: center; margin-top: 2rem;">LIVE INTEL: Kīlauea Summit</h1>
-
-    <div class="live-content">
-        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-top: 2rem;">
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/tk0tfYDxrUA?si=SmKUv_PgbEWFJyQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <main class="intel-container">
+        <h1>Live Summit Intel</h1>
+        <div class="status-badge">● USGS V3cam Online</div>
+        <p>Monitor the south Halemaʻumaʻu crater directly from Basecamp. This real-time telemetry from the Hawaiian Volcano Observatory (HVO) allows our Field Operatives to track summit inflation, gas-pistoning, and fountaining activity 24/7.</p>
+        
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border: 1px solid #333; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.8);">
+            <iframe 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                src="https://www.youtube.com/embed/gXKuUyKt8mc?autoplay=1&mute=1&rel=0" 
+                title="USGS [V3cam] Kīlauea Live Feed" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
-    </div>
+    </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>Aloha Crater Lodge</h4>
-                <p>Volcano Village, HI</p>
-                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
-            </div>
-            <div class="footer-col social">
-                <h4>Intel Feeds</h4>
-                <a href="https://www.instagram.com/alohacraterlodge" target="_blank">Instagram: @alohacraterlodge</a><br>
-                <a href="#" target="_blank">YouTube: Volcano Insider</a><br>
-                <a href="https://www.tiktok.com/@alohacraterlodge" target="_blank">TikTok: @AlohaCraterLodge</a>
-            </div>
-        </div>
-        <div style="text-align:center; border-top:1px solid #2a2a2a; margin-top:1.5rem; padding-top:1rem; color:#555; font-size:0.78rem; line-height:1.7;">
-            <p style="margin:0;">Located 2 miles from Hawaii Volcanoes National Park.</p>
-            <p style="margin:0;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
-        </div>
+        <p><strong>© 2026 Aloha Crater Lodge LLC. All Rights Reserved.</strong></p>
+        <p>Located 2 miles from Hawaii Volcanoes National Park.</p>
+        <p>Volcano Village, HI</p>
+        
+        <a href="#" class="reveal-phone-btn">Text Concierge</a>
+        
+        <br>
+        <a href="#" class="admin-login-link" id="admin-trigger">[ Admin Login ]</a>
     </footer>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
-        }
-    </script>
-    <script>
-        (function() {
-            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneBtns = document.querySelectorAll('.reveal-phone-btn');
+            
+            phoneBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
-                    if (this.dataset.revealed !== 'true') {
-                        e.preventDefault();
+                    // Check if it's the first click by looking at the text
+                    if (this.textContent.trim() === 'Text Concierge') {
+                        e.preventDefault(); // Stop it from following the empty link
                         this.textContent = 'Text or Call (808) 345-4449';
                         this.href = 'tel:+18083454449';
-                        this.dataset.revealed = 'true';
+                        this.style.backgroundColor = '#10b981'; // Turn green to show it's active
+                        this.style.color = '#fff';
                     }
+                    // On the second click, it will function as a normal 'tel:' link
                 });
             });
-        })();
+        });
     </script>
+
+    <script>
+        const adminTrigger = document.getElementById('admin-trigger');
+        if (window.netlifyIdentity) {
+            adminTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const user = netlifyIdentity.currentUser();
+                if (user) {
+                    window.location.href = "/admin/";
+                } else {
+                    netlifyIdentity.open();
+                }
+            });
+            netlifyIdentity.on("login", () => {
+                window.location.href = "/admin/";
+            });
+        }
+    </script>
+
 </body>
 </html>
