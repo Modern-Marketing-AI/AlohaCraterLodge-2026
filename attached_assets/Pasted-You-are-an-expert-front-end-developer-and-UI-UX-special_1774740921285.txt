@@ -1,0 +1,92 @@
+You are an expert front-end developer and UI/UX specialist. We need to implement a global "Magma Modal" transition screen across the 11-file Aloha Crater Lodge architecture to intercept outbound booking links and display a high-authority Readiness Checklist before redirecting.
+
+Please execute the following three tasks carefully without altering any other existing layout or logic:
+
+TASK 1: ADD CSS TO style.css
+Append the following Magma Modal styling to the very bottom of the style.css file:
+
+/* --- MAGMA MODAL STYLES --- */
+.magma-modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); z-index: 9999;
+    align-items: center; justify-content: center; backdrop-filter: blur(4px);
+    opacity: 0; transition: opacity 0.3s ease;
+}
+.magma-modal-overlay.active { display: flex; opacity: 1; }
+.magma-modal {
+    background: #18181b; max-width: 600px; width: 90%; padding: 2.5rem;
+    border-radius: 8px; border: 2px solid #ff4500;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2);
+    animation: magma-pulse 2s infinite alternate; position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+@keyframes magma-pulse {
+    0% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.3), inset 0 0 8px rgba(255, 69, 0, 0.1); }
+    100% { box-shadow: 0 0 30px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 69, 0, 0.3); }
+}
+.magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; }
+.magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; }
+.magma-modal h3 { color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; font-size: 1.2rem; }
+.magma-list { list-style: none; padding: 0; margin-bottom: 2.5rem; }
+.magma-list li { margin-bottom: 1.2rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px; color: #ddd; }
+.magma-list li svg { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+.magma-close { position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.8rem; transition: color 0.2s; line-height: 1; }
+.magma-close:hover { color: #ff4500; }
+.magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; }
+.magma-btn:hover { background: #e03e00; }
+
+
+TASK 2: INJECT HTML & JS INTO ALL HTML FILES
+Scan all 11 HTML files. Right before the closing </body> tag in each file, inject the following HTML structure and JavaScript block:
+
+<div class="magma-modal-overlay" id="magmaModal">
+    <div class="magma-modal">
+        <span class="magma-close" id="magmaClose">&times;</span>
+        <h2>Confirming Your Basecamp Vantage.</h2>
+        <p class="subtitle">Just a few final details before we generate your secure arrival manifest.</p>
+        
+        <h3>Basecamp Readiness Checklist</h3>
+        <ul class="magma-list">
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">2. Connectivity Guaranteed.</strong> Enterprise Starlink (200Mbps+) is active and included.</div>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
+            </li>
+        </ul>
+        
+        <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('magmaModal');
+    var closeBtn = document.getElementById('magmaClose');
+    if(!modal) return;
+
+    // Intercept all Cloudbeds links on the page
+    var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
+    bookLinks.forEach(function(link) {
+        // Ignore the final proceed button inside the modal
+        if(link.id === 'magmaProceedBtn') return; 
+        
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+    });
+
+    closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+});
+</script>
+Ensure that this injection does not overwrite any existing scripts (like the ember particles or the comms reveal logic).
