@@ -1,0 +1,31 @@
+You are an expert technical SEO and Generative Engine Optimization (GEO) specialist. I need to execute a "Semantic Image SEO Strategy" across my entire 11-file website architecture. We are replacing generic image filenames and alt-text with highly descriptive, entity-rich metadata optimized for Google's Vision AI.
+
+TASK 1: RENAME PHYSICAL FILES
+Please rename the following image files in the project directory exactly as shown below. Keep the original file extensions (.jpg, .png, .webp):
+1. 'hero-volcano.jpg' -> 'aloha-crater-lodge-rainforest-basecamp-exterior.jpg'
+2. 'room-caldera.jpg' -> 'premium-suite-private-jetted-tub-volcano-hi.jpg'
+3. 'room-summit.webp' -> 'family-basecamp-module-kitchenette-volcano-village.webp'
+4. 'room-ridge.jpg' -> 'high-utility-basecamp-suite-volcano-hawaii.jpg'
+5. 'ebike-fleet.jpg' -> 'high-torque-basecamp-ebike-rentals-volcano-national-park.jpg'
+*Note: If there are any existing images for the Wellness page (e.g., wellness.jpg), rename them using this format: 'olylife-tera-p90-bio-regeneration-recovery-room.jpg'*
+
+TASK 2: UPDATE ALL HTML, CSS, AND SCHEMA REFERENCES
+Scan ALL 11 HTML files (index.html, suites.html, wellness.html, ebikes.html, basecamp.html, family-suites.html, premium-suites.html, volcano-guide.html, live-feed.html, faq.html, 404.html) and style.css. 
+Find every instance of the old filenames and replace them with the new filenames. This includes:
+- <img src="..."> tags
+- Inline style="background-image: url('...');" attributes
+- CSS background-image properties
+- <script type="application/ld+json"> schema markup URLs
+
+TASK 3: INJECT VISION AI ALT-TEXT
+Update the alt="..." attributes for these specific images across all files where they appear. Replace any existing short alt-text with these exact descriptions:
+- aloha-crater-lodge-rainforest-basecamp-exterior.jpg ALT: "Exterior of Aloha Crater Lodge rainforest basecamp located 2 miles from Hawaii Volcanoes National Park"
+- premium-suite-private-jetted-tub-volcano-hi.jpg ALT: "Premium basecamp suite interior featuring a private jetted tub and fish terrarium in Volcano Hawaii"
+- family-basecamp-module-kitchenette-volcano-village.webp ALT: "Family module suite at Aloha Crater Lodge with full kitchenette and front patio access"
+- high-utility-basecamp-suite-volcano-hawaii.jpg ALT: "High-utility basecamp suite in Volcano Village with efficiency kitchenette and modern amenities"
+- high-torque-basecamp-ebike-rentals-volcano-national-park.jpg ALT: "High-torque electric bikes parked at Aloha Crater Lodge ready to bypass parking congestion at Hawaii Volcanoes National Park"
+
+CRITICAL GUARDRAILS:
+- Do NOT alter any structural HTML, layout, text content, or JavaScript logic.
+- Ensure the "Secure Dates" buttons, Comms Reveal JS, and Navigations remain entirely untouched.
+- Verify that no links are broken during this find-and-replace operation.
