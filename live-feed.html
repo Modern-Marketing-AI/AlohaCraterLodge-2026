@@ -229,5 +229,46 @@
         }
     </script>
 
+
+<div class="magma-modal-overlay" id="magmaModal">
+    <div class="magma-modal">
+        <span class="magma-close" id="magmaClose">&times;</span>
+        <h2>Confirming Your Basecamp Vantage.</h2>
+        <p class="subtitle">Just a few final details before we generate your secure arrival manifest.</p>
+        <h3>Basecamp Readiness Checklist</h3>
+        <ul class="magma-list">
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">2. Connectivity Guaranteed.</strong> Enterprise Starlink (200Mbps+) is active and included.</div>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
+            </li>
+        </ul>
+        <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('magmaModal');
+    var closeBtn = document.getElementById('magmaClose');
+    if(!modal) return;
+    var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
+    bookLinks.forEach(function(link) {
+        if(link.id === 'magmaProceedBtn') return;
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+    });
+    closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
+    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
+});
+</script>
 </body>
 </html>
