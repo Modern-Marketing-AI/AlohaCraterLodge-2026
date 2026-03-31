@@ -13,6 +13,7 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         print(f"{self.address_string()} - {format % args}")
 
+socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("0.0.0.0", PORT), NoCacheHandler) as httpd:
     print(f"Serving on port {PORT} with no-cache headers")
     httpd.serve_forever()
