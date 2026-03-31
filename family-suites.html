@@ -307,7 +307,7 @@
                     <li>Private kitchenette with Kaʻū Estate coffee</li>
                     <li>Private front patio — rainforest air on arrival</li>
                     <li>Enterprise Starlink (200Mbps+) included</li>
-                    <li>Contactless deployment via SMS entry code</li>
+                    <li>Your entry code arrives by text, 24 hours before arrival</li>
                 </ul>
             </div>
         </div>
@@ -386,6 +386,14 @@
             ]
         });
     </script>
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+    </script>
 
     <div class="magma-modal-overlay" id="magmaModal">
         <div class="magma-modal">
@@ -412,14 +420,20 @@
     </div>
 
     <script>
-        function openModal() {
-            document.getElementById('magmaModal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('magmaModal').classList.remove('active');
-        }
-        document.getElementById('magmaModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('magmaModal');
+            var closeBtn = document.getElementById('magmaClose');
+            if(!modal) return;
+            modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+            var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
+            bookLinks.forEach(function(link) {
+                if(link.id === 'magmaProceedBtn') return;
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                });
+            });
+            closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
         });
     </script>
     <script>
@@ -440,23 +454,6 @@
                 });
             });
         })();
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modal = document.getElementById('magmaModal');
-            var closeBtn = document.getElementById('magmaClose');
-            if(!modal) return;
-            var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
-            bookLinks.forEach(function(link) {
-                if(link.id === 'magmaProceedBtn') return;
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    modal.classList.add('active');
-                });
-            });
-            closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
-            modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
-        });
     </script>
 
 </body>
