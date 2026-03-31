@@ -1,0 +1,194 @@
+Update the basecamp.html file using the Total Replacement Protocol. Ensure the Volcanic Dark Mode palette is maintained (#18181b background, #10b981 accents, and #ff4500 for buttons).Key Requirements:360 Recon Viewer: Implement the Pannellum interactive viewer for Room 3 (The High-Efficiency Basecamp) using the asset path /assets/360/room-3-high-efficiency-basecamp.jpg.Human-Centric Voice: Use the 'Expert Friend' persona—focus on 'Sanctuary,' 'Reset,' and 'Utility'.Strategic Framing: Frame the room's high-utility focus as a 'Rescue Sanctuary' for explorers prioritizing recovery after caldera hikes.Universal Navigation: Maintain the static split-action alert bar and the unified 11-file navigation menu.Strict Guardrail: Ensure zero mentions of the on-property lava tube or cave."Full Code: basecamp.htmlHTML<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Efficiency Basecamp | Room 3 | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <style>
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+        }
+        body {
+            background-color: var(--eerie-black);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        /* Static Split-Action Alert Bar */
+        .alert-bar {
+            background: var(--lava-red);
+            text-align: center;
+            padding: 0.6rem;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .alert-bar a { color: white; text-decoration: none; border-bottom: 1px solid white; margin: 0 10px; }
+
+        /* Universal Navigation */
+        nav {
+            background: rgba(24, 24, 27, 0.98);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            border-bottom: 1px solid var(--emerald-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+        nav a:hover { color: var(--emerald-green); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1, h2 { text-transform: uppercase; letter-spacing: 3px; color: var(--emerald-green); }
+
+        /* 360 Viewer Styling */
+        .immersive-recon-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #000;
+            border: 1px solid #333;
+            margin: 2.5rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        #panorama-room-3 { width: 100%; height: 100%; }
+
+        .viewer-ui-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+        .info-card {
+            background: rgba(10, 10, 12, 0.9);
+            padding: 25px;
+            border-left: 5px solid var(--emerald-green);
+            pointer-events: auto;
+            max-width: 420px;
+            backdrop-filter: blur(10px);
+        }
+        .btn-secure-dates {
+            background: var(--lava-red);
+            color: white;
+            padding: 18px 36px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: auto;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-secure-dates:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.6);
+        }
+
+        .amenities-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        .matrix-item {
+            border: 1px solid #222;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a1d, #141417);
+        }
+        .matrix-item h4 { color: var(--emerald-green); margin-top: 0; text-transform: uppercase; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar">
+        <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a> | <a href="volcano-guide.html#latest">[ LATEST BASECAMP DISPATCH ]</a>
+    </div>
+
+    <nav>
+        <a href="index.html">Basecamp</a>
+        <a href="suites.html">Suites</a>
+        <a href="volcano-guide.html">Volcano Guide</a>
+        <a href="wellness.html">Wellness</a>
+        <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK">Reserve</a>
+    </nav>
+
+    <div class="container">
+        <h1>The Explorer's Sanctuary (Room 3)</h1>
+        <p style="font-size: 1.1rem; color: #a1a1aa; max-width: 800px;">A high-efficiency landing pad for those who prioritize the journey[cite: 48]. Lumi Anela is designed as a quiet sanctuary for deep recovery after intense days exploring the Kīlauea caldera.</p>
+
+        <section id="room-3" style="margin-top: 4rem;">
+            <h2>Room 3 Walkthrough</h2>
+            
+            <div class="immersive-recon-container">
+                <div id="panorama-room-3"></div>
+
+                <div class="viewer-ui-overlay">
+                    <div class="info-card">
+                        <h3 style="margin:0; color:var(--emerald-green); font-size: 1.4rem;">High-Efficiency Basecamp</h3>
+                        <p style="margin: 12px 0 0; font-size: 0.95rem; color: #d1d1d6;">Step inside your recovery hub. Experience the focused layout designed for autonomous stay and strategic reset[cite: 49, 167].</p>
+                    </div>
+                    <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK" class="btn-secure-dates">Secure Dates</a>
+                </div>
+            </div>
+
+            <div class="amenities-matrix">
+                <div class="matrix-item">
+                    <h4>Capacity & Intent</h4>
+                    Optimized for up to 3 guests[cite: 345]. A focused environment designed for the self-sufficient explorer seeking a grounded reset[cite: 211].
+                </div>
+                <div class="matrix-item">
+                    <h4>The Vantage Workspace</h4>
+                    Equipped with dedicated Starlink satellite uplink (200Mbps+) and ergonomic seating for high-output digital synthesis[cite: 298, 300].
+                </div>
+                <div class="matrix-item">
+                    <h4>Ration Center</h4>
+                    Private kitchenette featuring Kaʻū Estate coffee, refrigerator, and microwave service for autonomous morning protocols[cite: 305, 345].
+                </div>
+            </div>
+        </section>
+
+        <div style="margin-top: 6rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center; color: #52525b; font-size: 0.8rem;">
+            &copy; 2026 ALOHA CRATER LODGE LLC | RECONNAISSANCE BY S26 ULTRA
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-3', {
+            "type": "equirectangular",
+            "panorama": "/assets/360/room-3-high-efficiency-basecamp.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "title": "Lumi Anela Sanctuary Tour",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                {
+                    "pitch": -15, "yaw": 140, "type": "info",
+                    "text": "Ration Center: Refrigerator and microwave for autonomous stay management."
+                },
+                {
+                    "pitch": 0, "yaw": 40, "type": "info",
+                    "text": "The Vantage: Optimized workspace with 200Mbps+ Starlink uplink."
+                }
+            ]
+        });
+    </script>
+</body>
+</html>
