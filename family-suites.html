@@ -3,47 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family-Friendly Basecamps | Aloha Crater Lodge</title>
+    <title>Collective Retreats | Aloha Crater Lodge</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #18181b; color: #e0e0e0; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+            --forest-shadow: #141417;
+        }
 
-        /* NEW UNIVERSAL NAV SPACING */
-        .universal-nav { 
-            background: #1a1a1a; 
-            text-align: center; 
-            padding: 25px 5% 25px 5%; 
-            position: relative; 
-            z-index: 10; 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--eerie-black); color: #e0e0e0; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+
+        /* Universal Nav */
+        .universal-nav {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 25px 5% 25px 5%;
+            position: relative;
+            z-index: 10;
             border-bottom: 1px solid rgba(255,69,0,0.2);
         }
-        .universal-nav .logo { 
-            font-family: 'Georgia', serif; 
-            font-size: 2.2em; 
-            color: #ff4500; 
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
-            letter-spacing: 2px; 
-            margin-bottom: 5px; 
+        .universal-nav .logo {
+            font-family: 'Georgia', serif;
+            font-size: 2.2em;
+            color: var(--lava-red);
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
             display: block;
             text-decoration: none;
         }
-        .universal-nav .subtitle { 
-            font-style: italic; 
-            color: #ccc; 
-            font-family: 'Georgia', serif; 
-            margin-top: 0; 
-            margin-bottom: 20px; 
+        .universal-nav .subtitle {
+            font-style: italic;
+            color: #ccc;
+            font-family: 'Georgia', serif;
+            margin-top: 0;
+            margin-bottom: 20px;
         }
         .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
-        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+        .header-links a:hover { border-color: var(--lava-red); box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+        .nav-active { border-color: var(--lava-red) !important; box-shadow: 0 0 12px rgba(255,69,0,0.6), inset 0 0 8px rgba(255,69,0,0.15) !important; text-shadow: 0 0 8px rgba(255,69,0,0.6) !important; }
         .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
 
+        /* Hero */
         .hero-section {
             text-align: center;
             padding: 60px 5% 40px;
@@ -65,17 +75,19 @@
             line-height: 1.8;
         }
 
+        /* Divider */
         .ember-divider {
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #10b981, #059669);
+            background: linear-gradient(90deg, var(--emerald-green), #059669);
             margin: 50px auto;
             border-radius: 2px;
         }
 
+        /* Rooms section */
         .rooms-section {
-            padding: 20px 5% 60px;
-            max-width: 1000px;
+            padding: 20px 5% 0;
+            max-width: 1100px;
             margin: 0 auto;
         }
         .rooms-section h2 {
@@ -86,17 +98,16 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+
+        /* Room 1 card */
         .room-card {
             background: #1f1f23;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #2a2a2e;
             transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 560px;
+            margin: 0 auto 60px;
         }
         .room-card:hover {
             transform: translateY(-4px);
@@ -104,52 +115,118 @@
         }
         .room-card img {
             width: 100%;
-            height: 240px;
+            height: 280px;
             object-fit: cover;
             display: block;
         }
-        .room-card-content {
-            padding: 24px;
+        .room-card-content { padding: 28px; }
+        .room-card-content h3 { font-size: 1.4rem; color: #ffffff; margin-bottom: 12px; }
+        .room-card-content p { font-size: 0.95rem; color: #999; margin-bottom: 8px; line-height: 1.6; }
+        .room-features-list { list-style: none; padding: 0; margin: 15px 0 20px; }
+        .room-features-list li { font-size: 0.9rem; color: #aaa; padding: 4px 0; padding-left: 18px; position: relative; }
+        .room-features-list li::before { content: '▸'; position: absolute; left: 0; color: var(--emerald-green); }
+
+        /* Room 2 section */
+        .room-2-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5% 60px;
         }
-        .room-card-content h3 {
-            font-size: 1.4rem;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-        .room-card-content p {
-            font-size: 0.95rem;
-            color: #999;
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-        .room-features-list {
-            list-style: none;
-            padding: 0;
-            margin: 15px 0 20px;
-        }
-        .room-features-list li {
-            font-size: 0.9rem;
-            color: #aaa;
-            padding: 4px 0;
-            padding-left: 18px;
-            position: relative;
-        }
-        .room-features-list li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #10b981;
+        .room-2-section h2 {
+            font-size: 2rem;
+            color: var(--emerald-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
         }
 
+        /* 360 Viewer */
+        .immersive-recon-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #000;
+            border: 1px solid #333;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #panorama-room-2 { width: 100%; height: 100%; }
+
+        .viewer-ui-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+            gap: 20px;
+        }
+        .info-card {
+            background: rgba(10, 10, 12, 0.9);
+            padding: 22px 26px;
+            border-left: 5px solid var(--emerald-green);
+            pointer-events: auto;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            border-radius: 2px;
+        }
+        .info-card h3 { margin: 0 0 10px; color: var(--emerald-green); font-size: 1.3rem; }
+        .info-card p { margin: 0; font-size: 0.9rem; color: #d1d1d6; line-height: 1.5; }
+
+        .btn-secure-dates {
+            display: inline-block;
+            background: var(--lava-red);
+            color: #fff;
+            padding: 18px 32px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            pointer-events: auto;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        .btn-secure-dates:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.6);
+        }
+
+        /* Amenities grid */
+        .amenities-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .matrix-item {
+            border: 1px solid #222;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a1d, var(--forest-shadow));
+            border-radius: 4px;
+        }
+        .matrix-item h4 {
+            color: var(--emerald-green);
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+        .matrix-item p { font-size: 0.95rem; color: #a0a0aa; line-height: 1.7; }
+
+        /* CTA section */
         .cta-section {
             text-align: center;
-            padding: 40px 5% 100px;
+            padding: 50px 5% 80px;
         }
-        .cta-section p {
-            color: #888;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
+        .cta-section p { color: #888; margin-bottom: 25px; font-size: 1.1rem; }
         .btn-magma {
             display: inline-block;
             background: linear-gradient(135deg, #e65100, #bf360c);
@@ -170,112 +247,24 @@
             box-shadow: 0 6px 25px rgba(230,81,0,0.45);
         }
 
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-        .modal-box h2 {
-            font-size: 1.6rem;
-            color: #ff6d00;
-            margin-bottom: 8px;
-        }
-        .modal-box p {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 24px;
-        }
-        .modal-close {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: #666;
-            font-size: 1.6rem;
-            cursor: pointer;
-            line-height: 1;
-            transition: color 0.2s;
-        }
-        .modal-close:hover { color: #fff; }
-        .modal-form label {
-            display: block;
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .modal-form input {
-            width: 100%;
-            padding: 12px 14px;
-            margin-bottom: 18px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 6px;
-            color: #e0e0e0;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .modal-form input:focus {
-            border-color: #e65100;
-        }
-        .modal-form button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #e65100, #bf360c);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: box-shadow 0.2s;
-        }
-        .modal-form button:hover {
-            box-shadow: 0 4px 20px rgba(230,81,0,0.5);
-        }
-
+        /* Footer */
         footer {
             background: #0d0d0d;
             color: #fff;
             padding: 40px 5%;
             text-align: center;
         }
-        footer p {
-            color: #888;
-            font-size: 0.9rem;
-        }
-        footer a {
-            color: #10b981;
-            text-decoration: none;
-        }
+        footer p { color: #888; font-size: 0.9rem; }
+        footer a { color: var(--emerald-green); text-decoration: none; }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2rem; }
-            .rooms-grid { grid-template-columns: 1fr; }
-            .modal-box { padding: 28px; }
+            .immersive-recon-container { height: 320px; }
+            .viewer-ui-overlay { flex-direction: column; align-items: flex-start; bottom: 16px; left: 16px; right: 16px; }
+            .info-card { max-width: 100%; }
+            .btn-secure-dates { width: 100%; text-align: center; }
+            .amenities-matrix { grid-template-columns: 1fr; }
             .header-links { gap: 6px; flex-wrap: wrap; }
             .header-links a { padding: 6px 10px; font-size: 0.75rem; }
         }
@@ -290,54 +279,77 @@
         <p class="subtitle" style="flex: 1; text-align: center; min-width: 200px; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
         <div class="header-links">
             <a href="index.html">BASECAMP (HOME)</a>
-            <a href="suites.html">SUITES</a>
+            <a href="suites.html" class="nav-active">SUITES</a>
             <a href="wellness.html">WELLNESS</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
             <a href="faq.html">FAQ</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
         </div>
     </nav>
+
     <section class="hero-section">
-        <h1>The Family-Friendly Basecamps</h1>
-        <p class="body-copy">Our Family-Friendly suites are the perfect starting point for your group's volcano adventure. Accommodating up to four guests, these spacious rooms provide the comfort needed to rest and reconnect. Each space features a convenient kitchenette for easy morning prep and a private front patio to enjoy the rainforest air before heading to the crater edge.</p>
+        <h1>The Collective Retreats</h1>
+        <p class="body-copy">Some arrivals are better shared. These two sanctuaries are designed for families and small groups who want the room to breathe, to cook a slow morning breakfast, and to step directly onto a private patio into the sound of the rainforest. The caldera is two miles away. The reset begins the moment you unlock the door.</p>
     </section>
 
     <div class="ember-divider"></div>
 
     <section class="rooms-section">
         <h2>The Rooms</h2>
-        <div class="rooms-grid">
-            <div class="room-card">
-                <img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Family module suite at Aloha Crater Lodge with full kitchenette and front patio access">
-                <div class="room-card-content">
-                    <h3>Room 1 — Family Suite</h3>
-                    <p>A spacious basecamp built for families ready to explore the volcano together.</p>
-                    <ul class="room-features-list">
-                        <li>Up to 4 guests</li>
-                        <li>Private kitchenette</li>
-                        <li>Private front patio</li>
-                        <li>Rainforest setting</li>
-                    </ul>
-                </div>
+
+        <div class="room-card">
+            <img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Room 1 Collective Retreat at Aloha Crater Lodge — queen bed, private kitchenette, and rainforest-facing window in Volcano Village, Hawai'i">
+            <div class="room-card-content">
+                <h3>Room 1 — The Collective Retreat</h3>
+                <p>Your sanctuary after the crater. A clean, open room built for groups who want space to decompress and a kitchen to fuel the next morning's adventure.</p>
+                <ul class="room-features-list">
+                    <li>Up to 4 guests</li>
+                    <li>Private kitchenette with Kaʻū Estate coffee</li>
+                    <li>Private front patio — rainforest air on arrival</li>
+                    <li>Enterprise Starlink (200Mbps+) included</li>
+                    <li>Contactless deployment via SMS entry code</li>
+                </ul>
             </div>
-            <div class="room-card">
-                <img src="high-utility-basecamp-suite-volcano-hawaii.jpg" alt="High-utility basecamp suite in Volcano Village with efficiency kitchenette and modern amenities">
-                <div class="room-card-content">
-                    <h3>Room 2 — Family Suite</h3>
-                    <p>Comfortable quarters designed for rest and reconnection between adventures.</p>
-                    <ul class="room-features-list">
-                        <li>Up to 4 guests</li>
-                        <li>Private kitchenette</li>
-                        <li>Private front patio</li>
-                        <li>Rainforest setting</li>
-                    </ul>
+        </div>
+    </section>
+
+    <section class="room-2-section">
+        <h2>Room 2 — A Glimpse Inside</h2>
+
+        <div class="immersive-recon-container">
+            <img src="assets/360/room-2-collective-retreat-family-suite-kitchenette-aloha-crater-lodge.jpg"
+                 alt="360-degree equirectangular panorama of Room 2 at Aloha Crater Lodge — The Collective Retreat family suite in Volcano Village, Hawai'i, featuring two queen beds, private kitchenette, ceiling fan, vaulted ceiling, and sliding glass doors opening onto a rainforest-facing private patio. Starlink workspace visible. Interior photographed in natural light with 200Mbps+ high-speed connectivity active."
+                 style="display: none;" />
+
+            <div id="panorama-room-2"></div>
+
+            <div class="viewer-ui-overlay">
+                <div class="info-card">
+                    <h3>The Collective Retreat</h3>
+                    <p>Drag to explore your sanctuary. Two beds, a full private kitchen, and a patio that opens straight into the rainforest. This is your basecamp for the caldera.</p>
                 </div>
+                <a href="#" class="btn-secure-dates" onclick="openModal(); return false;">Secure Dates</a>
+            </div>
+        </div>
+
+        <div class="amenities-matrix">
+            <div class="matrix-item">
+                <h4>Capacity &amp; Comfort</h4>
+                <p>Two queen rest platforms accommodate up to 4 guests. Vaulted ceilings, ceiling fan, and climate management keep the space comfortable even when the rainforest runs warm.</p>
+            </div>
+            <div class="matrix-item">
+                <h4>The Vantage Workspace</h4>
+                <p>Enterprise Starlink uplink delivers 200Mbps+ — sufficient for remote work, video calls, or editing footage from the crater. Your connection is included, no throttling.</p>
+            </div>
+            <div class="matrix-item">
+                <h4>Sustenance &amp; Sanctuary</h4>
+                <p>Private kitchenette stocked with locally sourced Kaʻū Estate coffee. A forest-facing patio provides your evening reset — the sound of the 'ōhi'a canopy, no agenda.</p>
             </div>
         </div>
     </section>
 
     <section class="cta-section">
-        <p>Ready to secure your family's volcano adventure?</p>
+        <p>Ready to secure your group's arrival?</p>
         <button class="btn-magma" onclick="openModal()">Secure Dates</button>
     </section>
 
@@ -347,30 +359,57 @@
         <p style="font-size:0.78rem; color:#555; margin-top:0.2rem;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-2', {
+            "type": "equirectangular",
+            "panorama": "assets/360/room-2-collective-retreat-family-suite-kitchenette-aloha-crater-lodge.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "showZoomCtrl": true,
+            "showFullscreenCtrl": true,
+            "title": "Room 2 — The Collective Retreat",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                {
+                    "pitch": -10, "yaw": 110, "type": "info",
+                    "text": "Private Kitchenette: Kaʻū Estate coffee and all the space you need for a slow morning."
+                },
+                {
+                    "pitch": 0, "yaw": 10, "type": "info",
+                    "text": "The Vantage: Enterprise Starlink (200Mbps+) — your creative output, uninterrupted."
+                },
+                {
+                    "pitch": -5, "yaw": -160, "type": "info",
+                    "text": "Rainforest Patio: Slide the door open and the 'ōhi'a canopy comes to you."
+                }
+            ]
+        });
+    </script>
 
-<div class="magma-modal-overlay" id="magmaModal">
-    <div class="magma-modal">
-        <span class="magma-close" id="magmaClose">&times;</span>
-        <h2>Confirming Your Basecamp Vantage.</h2>
-        <p class="subtitle">Just a few final details before we generate your secure arrival manifest.</p>
-        <h3>Basecamp Readiness Checklist</h3>
-        <ul class="magma-list">
-            <li>
-                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
-            </li>
-            <li>
-                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <div><strong style="color:#fff;">2. Connectivity Guaranteed.</strong> Enterprise Starlink (200Mbps+) is active and included.</div>
-            </li>
-            <li>
-                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
-            </li>
-        </ul>
-        <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+    <div class="magma-modal-overlay" id="magmaModal">
+        <div class="magma-modal">
+            <span class="magma-close" id="magmaClose">&times;</span>
+            <h2>Confirming Your Basecamp Vantage.</h2>
+            <p class="subtitle">Just a few final details before we generate your secure arrival manifest.</p>
+            <h3>Basecamp Readiness Checklist</h3>
+            <ul class="magma-list">
+                <li>
+                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <div><strong style="color:#fff;">2. Connectivity Guaranteed.</strong> Enterprise Starlink (200Mbps+) is active and included.</div>
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
+                </li>
+            </ul>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+        </div>
     </div>
-</div>
 
     <script>
         function openModal() {
@@ -382,13 +421,6 @@
         document.getElementById('magmaModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
-        function handleSubmit(e) {
-            e.preventDefault();
-            var name = document.getElementById('modal-name').value;
-            alert('Mahalo, ' + name + '! Your reservation request has been received. We will be in touch shortly.');
-            closeModal();
-            e.target.reset();
-        }
     </script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -409,23 +441,23 @@
             });
         })();
     </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('magmaModal');
-    var closeBtn = document.getElementById('magmaClose');
-    if(!modal) return;
-    var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
-    bookLinks.forEach(function(link) {
-        if(link.id === 'magmaProceedBtn') return;
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('magmaModal');
+            var closeBtn = document.getElementById('magmaClose');
+            if(!modal) return;
+            var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
+            bookLinks.forEach(function(link) {
+                if(link.id === 'magmaProceedBtn') return;
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                });
+            });
+            closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
+            modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
         });
-    });
-    closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
-    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
-});
-</script>
+    </script>
+
 </body>
 </html>
