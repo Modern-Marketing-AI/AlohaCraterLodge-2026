@@ -1,0 +1,204 @@
+Update the family-suites.html file using the Total Replacement Protocol. Ensure the Volcanic Dark Mode palette is maintained (#18181b backgrounds, #10b981 accents, and #ff4500 for interactive elements).Key Requirements:360 Recon Viewer: Implement the Pannellum interactive viewer for Room 2 (The Collective Retreat) using the asset path /assets/360/room-2-collective-retreat.jpg.Vision AI Verification: Include the hidden <img> tag with descriptive alt-text to satisfy 2026 AI Search requirements.Human-Centric Voice: Use the 'Expert Friend' persona—focus on 'Sanctuary,' 'Reset,' and 'Arrival' rather than tactical jargon.Universal Navigation: Maintain the static split-action alert bar and the unified navigation menu.Strict Guardrail: Ensure zero mentions of the on-property lava tube or cave."Full Code: family-suites.htmlHTML<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collective Retreats | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <style>
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+            --forest-shadow: #141417;
+        }
+        body {
+            background-color: var(--eerie-black);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        /* Static Split-Action Alert Bar */
+        .alert-bar {
+            background: var(--lava-red);
+            text-align: center;
+            padding: 0.6rem;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .alert-bar a { color: white; text-decoration: none; border-bottom: 1px solid white; margin: 0 10px; }
+
+        /* Universal Navigation */
+        nav {
+            background: rgba(24, 24, 27, 0.98);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            border-bottom: 1px solid var(--emerald-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--emerald-green); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1, h2 { text-transform: uppercase; letter-spacing: 3px; color: var(--emerald-green); }
+
+        /* 360 Viewer Styling */
+        .immersive-recon-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #000;
+            border: 1px solid #333;
+            margin: 2.5rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        #panorama-room-2 { width: 100%; height: 100%; }
+
+        .viewer-ui-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+        .info-card {
+            background: rgba(10, 10, 12, 0.9);
+            padding: 25px;
+            border-left: 5px solid var(--emerald-green);
+            pointer-events: auto;
+            max-width: 420px;
+            backdrop-filter: blur(10px);
+        }
+        .btn-secure-dates {
+            background: var(--lava-red);
+            color: white;
+            padding: 18px 36px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: auto;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-secure-dates:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.6);
+        }
+
+        .amenities-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        .matrix-item {
+            border: 1px solid #222;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a1d, #141417);
+        }
+        .matrix-item h4 { color: var(--emerald-green); margin-top: 0; text-transform: uppercase; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar">
+        <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a> | <a href="volcano-guide.html#latest">[ LATEST BASECAMP DISPATCH ]</a>
+    </div>
+
+    <nav>
+        <a href="index.html">Basecamp</a>
+        <a href="suites.html">Suites</a>
+        <a href="volcano-guide.html">Volcano Guide</a>
+        <a href="wellness.html">Wellness</a>
+        <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK">Reserve</a>
+    </nav>
+
+    <div class="container">
+        <h1>The Collective Retreats</h1>
+        <p style="font-size: 1.1rem; color: #a1a1aa; max-width: 800px;">Spacious sanctuaries designed for shared experiences. Whether you are traveling as a family or a team of explorers, these suites provide the breathing room needed to process the awe of the caldera.</p>
+
+        <section id="room-2" style="margin-top: 4rem;">
+            <h2>Room 2: A Glimpse Inside</h2>
+            
+            <div class="immersive-recon-container">
+                <img src="/assets/360/room-2-collective-retreat.jpg" 
+                     alt="360-degree view of the Collective Retreat (Room 2) family suite featuring dual high-capacity rest platforms, forest-facing patio, and high-speed Starlink workspace." 
+                     style="display: none;" />
+
+                <div id="panorama-room-2"></div>
+
+                <div class="viewer-ui-overlay">
+                    <div class="info-card">
+                        <h3 style="margin:0; color:var(--emerald-green); font-size: 1.4rem;">The Collective Retreat</h3>
+                        <p style="margin: 12px 0 0; font-size: 0.95rem; color: #d1d1d6;">Virtually walk through your stay. Experience the open flow, private kitchenette, and direct window to the rainforest floor.</p>
+                    </div>
+                    <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK" class="btn-secure-dates">Secure Dates</a>
+                </div>
+            </div>
+
+            <div class="amenities-matrix">
+                <div class="matrix-item">
+                    <h4>Capacity & Comfort</h4>
+                    Accommodates up to 4 guests with high-capacity rest platforms and high-altitude climate management[cite: 304, 344].
+                </div>
+                <div class="matrix-item">
+                    <h4>The Vantage Workspace</h4>
+                    Stay connected with a dedicated Starlink uplink (200Mbps+) and ergonomic seating for focused work[cite: 147, 300].
+                </div>
+                <div class="matrix-item">
+                    <h4>Sustenance & Sanctuary</h4>
+                    Private kitchenette featuring Kaʻū Estate coffee and a forest-facing patio for evening resets[cite: 142, 305].
+                </div>
+            </div>
+        </section>
+
+        <div style="margin-top: 6rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center; color: #52525b; font-size: 0.8rem;">
+            &copy; 2026 ALOHA CRATER LODGE LLC | RECONNAISSANCE BY S26 ULTRA
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-2', {
+            "type": "equirectangular",
+            "panorama": "/assets/360/room-2-collective-retreat.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "title": "Room 2 Sanctuary Tour",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                {
+                    "pitch": -10, "yaw": 110, "type": "info",
+                    "text": "Self-Sustaining Kitchenette: Refresh with locally sourced Kaʻū coffee."
+                },
+                {
+                    "pitch": 0, "yaw": 10, "type": "info",
+                    "text": "The Vantage: High-speed Starlink workspace for your creative output."
+                },
+                {
+                    "pitch": -5, "yaw": -160, "type": "info",
+                    "text": "Rainforest Access: Direct patio flow for peaceful immersion."
+                }
+            ]
+        });
+    </script>
+</body>
+</html>
