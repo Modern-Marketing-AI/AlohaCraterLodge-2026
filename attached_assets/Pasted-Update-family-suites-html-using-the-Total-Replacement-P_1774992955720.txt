@@ -1,0 +1,138 @@
+Update family-suites.html using the Total Replacement Protocol. This page now features TWO interactive 360 walkthroughs under 'The Collective Retreats' tier.Key Requirements:Dual 360 Viewers: * Room 2: Uses /assets/360/room-2-collective-retreat.jpg.Room 5: Uses /assets/360/room-5-collective-retreat-hale-ohana.jpg.Narrative Shift for Room 5: Highlight the Full Chef's Station (stove/oven) and the Gathering Table as unique luxury assets for families.Human-Centric Voice: Maintain the 'Expert Friend' persona—focus on 'Connection,' 'Reset,' and 'Space.'Visual Language: Volcanic Dark Mode (#18181b background, #10b981 accents, #ff4500 interactive buttons).Strict Guardrail: No mentions of the lava tube or cave."Full Code: family-suites.htmlHTML<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Collective Retreats | Aloha Crater Lodge</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <style>
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+        }
+        body {
+            background-color: var(--eerie-black);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        .alert-bar { background: var(--lava-red); text-align: center; padding: 0.6rem; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; }
+        .alert-bar a { color: white; text-decoration: none; border-bottom: 1px solid white; margin: 0 10px; }
+
+        nav { background: rgba(24, 24, 27, 0.98); padding: 1.2rem; display: flex; justify-content: center; gap: 2.5rem; border-bottom: 1px solid var(--emerald-green); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; }
+        nav a:hover { color: var(--emerald-green); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1, h2 { text-transform: uppercase; letter-spacing: 3px; color: var(--emerald-green); }
+
+        .immersive-recon-container { position: relative; width: 100%; height: 600px; background: #000; border: 1px solid #333; margin: 2.5rem 0; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .panorama-view { width: 100%; height: 100%; }
+
+        .viewer-ui-overlay { position: absolute; bottom: 30px; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
+        .info-card { background: rgba(10, 10, 12, 0.9); padding: 25px; border-left: 5px solid var(--emerald-green); pointer-events: auto; max-width: 420px; backdrop-filter: blur(10px); }
+        .btn-secure-dates { background: var(--lava-red); color: white; padding: 18px 36px; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; pointer-events: auto; box-shadow: 0 0 20px rgba(255, 69, 0, 0.4); transition: all 0.3s ease; }
+        .btn-secure-dates:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 69, 0, 0.6); }
+
+        .amenities-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem; margin-bottom: 5rem; }
+        .matrix-item { border: 1px solid #222; padding: 2rem; background: linear-gradient(145deg, #1a1a1d, #141417); }
+        .matrix-item h4 { color: var(--emerald-green); margin-top: 0; text-transform: uppercase; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar">
+        <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a> | <a href="volcano-guide.html#latest">[ LATEST BASECAMP DISPATCH ]</a>
+    </div>
+
+    <nav>
+        <a href="index.html">Basecamp</a>
+        <a href="suites.html">Suites</a>
+        <a href="volcano-guide.html">Volcano Guide</a>
+        <a href="wellness.html">Wellness</a>
+        <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK">Reserve</a>
+    </nav>
+
+    <div class="container">
+        <h1>The Collective Retreats</h1>
+        <p style="font-size: 1.1rem; color: #a1a1aa; max-width: 800px;">Spacious sanctuaries engineered for connection. These high-capacity suites provide families and groups the intentional space needed to process the raw power of the Kīlauea summit.</p>
+
+        <section id="room-2" style="margin-top: 4rem;">
+            <h2>Room 2: A Glimpse Inside</h2>
+            <div class="immersive-recon-container">
+                <div id="panorama-room-2" class="panorama-view"></div>
+                <div class="viewer-ui-overlay">
+                    <div class="info-card">
+                        <h3 style="margin:0; color:var(--emerald-green); font-size: 1.4rem;">The Collective Retreat</h3>
+                        <p style="margin: 12px 0 0; font-size: 0.95rem; color: #d1d1d6;">Virtually explore your family base. Note the open flow, private kitchenette, and the seamless transition to your forest patio.</p>
+                    </div>
+                    <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK" class="btn-secure-dates">Secure Dates</a>
+                </div>
+            </div>
+            <div class="amenities-matrix">
+                <div class="matrix-item"><h4>Capacity</h4>Accommodates up to 4 guests with high-capacity rest platforms.</div>
+                <div class="matrix-item"><h4>The Vantage</h4>Dedicated workspace with Starlink satellite uplink (200Mbps+).</div>
+                <div class="matrix-item"><h4>Ration Center</h4>Private kitchenette featuring Kaʻū Estate coffee and meal-prep essentials.</div>
+            </div>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid #222; margin: 4rem 0;">
+
+        <section id="room-5">
+            <h2>Room 5: Hale Ohana Sanctuary</h2>
+            <div class="immersive-recon-container">
+                <div id="panorama-room-5" class="panorama-view"></div>
+                <div class="viewer-ui-overlay">
+                    <div class="info-card">
+                        <h3 style="margin:0; color:var(--emerald-green); font-size: 1.4rem;">The Gathering Point</h3>
+                        <p style="margin: 12px 0 0; font-size: 0.95rem; color: #d1d1d6;">Experience our most expansive suite. Featuring a full Chef's Station and a large live-edge table for shared meals and nightly mission debriefs.</p>
+                    </div>
+                    <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK" class="btn-secure-dates">Secure Dates</a>
+                </div>
+            </div>
+            <div class="amenities-matrix">
+                <div class="matrix-item"><h4>Full Chef's Station</h4>Equipped with a full-size range and oven for comprehensive meal management during extended stays.</div>
+                <div class="matrix-item"><h4>The Gathering Table</h4>Expansive dining area designed for community connection and group planning.</div>
+                <div class="matrix-item"><h4>Extended Capacity</h4>Our highest occupancy retreat, optimized for larger family units or group expeditions.</div>
+            </div>
+        </section>
+
+        <div style="margin-top: 6rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center; color: #52525b; font-size: 0.8rem;">
+            &copy; 2026 ALOHA CRATER LODGE LLC | RECONNAISSANCE BY S26 ULTRA
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        // Room 2 Viewer
+        pannellum.viewer('panorama-room-2', {
+            "type": "equirectangular",
+            "panorama": "/assets/360/room-2-collective-retreat.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "title": "Room 2 Sanctuary",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                { "pitch": -10, "yaw": 110, "type": "info", "text": "Ration Center: Kitchenette with Kaʻū Estate coffee." },
+                { "pitch": 0, "yaw": 10, "type": "info", "text": "The Vantage: 200Mbps+ Starlink workspace." }
+            ]
+        });
+
+        // Room 5 Viewer
+        pannellum.viewer('panorama-room-5', {
+            "type": "equirectangular",
+            "panorama": "/assets/360/room-5-collective-retreat-hale-ohana.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "title": "Hale Ohana Walkthrough",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                { "pitch": -15, "yaw": 160, "type": "info", "text": "Chef's Station: Full-size range and oven for complete meal prep." },
+                { "pitch": -10, "yaw": -20, "type": "info", "text": "Gathering Table: Spacious live-edge dining for group connection." }
+            ]
+        });
+    </script>
+</body>
+</html>
