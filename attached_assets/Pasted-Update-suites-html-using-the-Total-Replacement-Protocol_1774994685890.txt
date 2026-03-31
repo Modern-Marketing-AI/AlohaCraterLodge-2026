@@ -1,0 +1,154 @@
+Update suites.html using the Total Replacement Protocol. Relocate the 'Basecamp Readiness Checklist' from the footer into a hidden modal div with an ID of magmaModal. Write a JavaScript function to trigger this modal when any 'Secure Dates' button is clicked. Maintain the Volcanic Dark Mode palette and ensure the 'Proceed' button in the modal links to the external booking engine."
+
+Updated Code: suites.html
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Suites Gateway | Aloha Crater Lodge</title>
+    <style>
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+        }
+        body {
+            background-color: var(--eerie-black);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Modal Background Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Magma Modal Content */
+        .magma-modal {
+            background: #141417;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            border-left: 5px solid var(--emerald-green);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #52525b;
+            font-size: 1.5rem;
+        }
+
+        .checklist-item {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .check-mark { color: var(--emerald-green); font-weight: bold; font-size: 1.2rem; }
+
+        .btn-finalize {
+            display: block;
+            background: var(--lava-red);
+            color: white;
+            text-align: center;
+            padding: 1.2rem;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2.5rem;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+        }
+
+        /* Page Content Styles */
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .suite-card { border-bottom: 1px solid #222; padding: 3rem 0; }
+        .btn-trigger { background: var(--lava-red); color: white; padding: 1rem 2rem; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Confirming Your Basecamp Vantage.</h1>
+        <p>Choose your sanctuary level below to begin your restoration journey.</p>
+
+        <div class="suite-card">
+            <h2>The Premium Restoration Suites (Tier 3)</h2>
+            <p>Rooms 4 & 6. Intimate, spa-inspired recovery.</p>
+            <button class="btn-trigger" onclick="openMagmaModal()">Secure Dates</button>
+        </div>
+        
+        </div>
+
+    <div id="magmaModal" class="modal-overlay">
+        <div class="magma-modal">
+            <span class="modal-close" onclick="closeMagmaModal()">&times;</span>
+            <h2 style="color: var(--emerald-green); margin-top: 0;">Confirming Your Basecamp Vantage.</h2>
+            <p style="color: #a1a1aa; font-size: 0.9rem;">Just a few final details before we generate your secure arrival manifest.</p>
+            
+            <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1rem;">Basecamp Readiness Checklist</h3>
+
+            <div class="checklist-item">
+                <span class="check-mark">✓</span>
+                <div>
+                    <strong>1. Contactless Deployment.</strong>
+                    <p style="margin: 5px 0; font-size: 0.85rem;">You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</p>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <span class="check-mark">✓</span>
+                <div>
+                    <strong>2. Connectivity Guaranteed.</strong>
+                    <p style="margin: 5px 0; font-size: 0.85rem;">Enterprise Starlink (200Mbps+) is active and included in your stay.</p>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <span class="check-mark">✓</span>
+                <div>
+                    <strong>3. Gear Reservations.</strong>
+                    <p style="margin: 5px 0; font-size: 0.85rem;">E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</p>
+                </div>
+            </div>
+
+            <a href="REPLACE_WITH_LITTLE_HOTELIER_LINK" class="btn-finalize">[ PROCEED TO FINALIZE BOOKING ]</a>
+        </div>
+    </div>
+    <script>
+        function openMagmaModal() {
+            document.getElementById('magmaModal').style.display = 'flex';
+        }
+        function closeMagmaModal() {
+            document.getElementById('magmaModal').style.display = 'none';
+        }
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            let modal = document.getElementById('magmaModal');
+            if (event.target == modal) {
+                closeMagmaModal();
+            }
+        }
+    </script>
+</body>
+</html>
