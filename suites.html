@@ -265,20 +265,14 @@
         /* MAGMA MODAL — canonical inline block (no style.css on this dark-mode page) */
         .magma-modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); z-index: 9999;
-            align-items: center; justify-content: center; backdrop-filter: blur(4px);
-            opacity: 0; transition: opacity 0.3s ease;
+            background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center;
+            align-items: center; backdrop-filter: blur(4px);
         }
         .magma-modal-overlay.active { display: flex; opacity: 1; }
         .magma-modal {
-            background: #18181b; max-width: 600px; width: 90%; padding: 2.5rem;
-            border-radius: 8px; border: 2px solid #ff4500;
-            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2);
-            animation: magma-pulse 2s infinite alternate; position: relative;
-        }
-        @keyframes magma-pulse {
-            0% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.3), inset 0 0 8px rgba(255, 69, 0, 0.1); }
-            100% { box-shadow: 0 0 30px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 69, 0, 0.3); }
+            background: #141417; padding: 2.5rem; max-width: 560px; width: 92%;
+            border-left: 4px solid #10b981; position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.7);
         }
         .magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; }
         .magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; }
