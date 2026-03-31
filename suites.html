@@ -232,6 +232,15 @@
             color: #18181b;
         }
 
+        .secure-dates-btn {
+            display: inline-block; margin-top: 12px; padding: 10px 24px;
+            background: #ff4500; color: #fff; border: none; border-radius: 6px;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; transition: background 0.3s ease;
+            align-self: flex-start;
+        }
+        .secure-dates-btn:hover { background: #e03e00; }
+
         .ember-footer {
             text-align: center;
             padding: 60px 5%;
@@ -252,6 +261,35 @@
             .header-links { gap: 6px; flex-wrap: wrap; }
             .header-links a { padding: 6px 10px; font-size: 0.75rem; }
         }
+
+        /* MAGMA MODAL — canonical inline block (no style.css on this dark-mode page) */
+        .magma-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); z-index: 9999;
+            align-items: center; justify-content: center; backdrop-filter: blur(4px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .magma-modal-overlay.active { display: flex; opacity: 1; }
+        .magma-modal {
+            background: #18181b; max-width: 600px; width: 90%; padding: 2.5rem;
+            border-radius: 8px; border: 2px solid #ff4500;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2);
+            animation: magma-pulse 2s infinite alternate; position: relative;
+        }
+        @keyframes magma-pulse {
+            0% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.3), inset 0 0 8px rgba(255, 69, 0, 0.1); }
+            100% { box-shadow: 0 0 30px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 69, 0, 0.3); }
+        }
+        .magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; }
+        .magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; }
+        .magma-modal h3 { color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; font-size: 1.2rem; }
+        .magma-list { list-style: none; padding: 0; margin-bottom: 2.5rem; }
+        .magma-list li { margin-bottom: 1.2rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px; color: #ddd; }
+        .magma-list li svg { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+        .magma-close { position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.8rem; transition: color 0.2s; line-height: 1; }
+        .magma-close:hover { color: #ff4500; }
+        .magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; }
+        .magma-btn:hover { background: #e03e00; }
     </style>
 </head>
 <body>
@@ -283,6 +321,7 @@
                 <h2 class="card-title">Honeymoon & Premium Suites</h2>
                 <p class="card-desc">Exclusive assets for paired restoration and private recovery. In-room whirlpool, secluded patio retreats, and calming interior fish terrariums — designed for intimate connection and complete rejuvenation.</p>
                 <span class="card-cta">Explore This Tier →</span>
+                <button class="secure-dates-btn" onclick="event.stopPropagation(); openModal()">Secure Dates</button>
             </div>
         </a>
 
@@ -293,6 +332,7 @@
                 <h2 class="card-title">Family-Friendly Basecamps</h2>
                 <p class="card-desc">High-capacity group modules for expedition teams. Spacious rooms accommodating up to four guests, each with a private kitchenette and front patio overlooking the rainforest canopy.</p>
                 <span class="card-cta">Explore This Tier →</span>
+                <button class="secure-dates-btn" onclick="event.stopPropagation(); openModal()">Secure Dates</button>
             </div>
         </a>
 
@@ -303,6 +343,7 @@
                 <h2 class="card-title">The Budget-Friendly Basecamp</h2>
                 <p class="card-desc">High-utility, value-focused module for agile explorers. A streamlined headquarters designed to maximize your time on the trails while keeping you two miles from the crater rim.</p>
                 <span class="card-cta">Explore This Tier →</span>
+                <button class="secure-dates-btn" onclick="event.stopPropagation(); openModal()">Secure Dates</button>
             </div>
         </a>
     </section>
@@ -314,23 +355,12 @@
     </div>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
         }
-    </script>
-    <script>
-        (function() {
-            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    if (this.dataset.revealed !== 'true') {
-                        e.preventDefault();
-                        this.textContent = 'Text or Call (808) 345-4449';
-                        this.href = 'tel:+18083454449';
-                        this.dataset.revealed = 'true';
-                    }
-                });
-            });
-        })();
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
     </script>
 
 <div class="magma-modal-overlay" id="magmaModal">
@@ -366,12 +396,32 @@ document.addEventListener('DOMContentLoaded', function() {
         if(link.id === 'magmaProceedBtn') return;
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            modal.classList.add('active');
+            openModal();
         });
     });
-    closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
-    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
+    closeBtn.addEventListener('click', function() { closeModal(); });
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 });
 </script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+    }
+</script>
+<script>
+    (function() {
+        document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                if (this.dataset.revealed !== 'true') {
+                    e.preventDefault();
+                    this.textContent = 'Text or Call (808) 345-4449';
+                    this.href = 'tel:+18083454449';
+                    this.dataset.revealed = 'true';
+                }
+            });
+        });
+    })();
+</script>
+
 </body>
 </html>
