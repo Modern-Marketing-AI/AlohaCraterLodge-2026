@@ -282,6 +282,16 @@
             .header-links { gap: 6px; flex-wrap: wrap; }
             .header-links a { padding: 6px 10px; font-size: 0.75rem; }
         }
+        .coming-soon-placeholder {
+            width: 100%; aspect-ratio: 4/3; background: #1a1a1a;
+            border: 1px dashed #333; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: #555; gap: 8px;
+        }
+        .coming-soon-label {
+            font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #10b981;
+        }
+        .coming-soon-sub { font-size: 0.85rem; color: #444; }
+        .room-hero-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 6px; margin-bottom: 2rem; display: block; }
     </style>
 </head>
 <body>
@@ -312,7 +322,10 @@
         <h2>The Rooms</h2>
 
         <div class="room-card">
-            <img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Room 1 Collective Retreat at Aloha Crater Lodge — queen bed, private kitchenette, and rainforest-facing window in Volcano Village, Hawai'i">
+            <div class="coming-soon-placeholder" aria-label="Room 1 — Collective Retreat at Aloha Crater Lodge. Hero photography coming soon.">
+                <span class="coming-soon-label">PHOTOGRAPHY INCOMING</span>
+                <p class="coming-soon-sub">Room 1 — Collective Retreat</p>
+            </div>
             <div class="room-card-content">
                 <h3>Room 1 — The Collective Retreat</h3>
                 <p>Your sanctuary after the crater. A clean, open room built for groups who want space to decompress and a kitchen to fuel the next morning's adventure.</p>
@@ -329,6 +342,10 @@
 
     <section class="room-2-section">
         <h2>Room 2 — A Glimpse Inside</h2>
+
+        <img src="assets/images/rooms/room-2-hero.webp"
+             alt="Static hero view of Room 2 — The Collective Retreat at Aloha Crater Lodge, showing the two-queen bedroom with private kitchenette and sliding glass door opening to the rainforest-facing patio in Volcano Village, Hawai'i."
+             class="room-hero-img">
 
         <div class="immersive-recon-container">
             <img src="assets/360/room-2-collective-retreat-family-suite-kitchenette-aloha-crater-lodge.jpg"
@@ -366,6 +383,10 @@
 
     <section class="room-5-section">
         <h2>Room 5 — Hale Ohana Sanctuary</h2>
+
+        <img src="assets/images/rooms/room-5-hero.webp"
+             alt="Static hero view of Room 5 — The Hale Ohana Sanctuary at Aloha Crater Lodge, showing the full Chef's Station, live-edge gathering table, and expanded multi-queen layout designed for group resets in Volcano Village, Hawai'i."
+             class="room-hero-img">
 
         <div class="immersive-recon-container">
             <img src="assets/360/room-5-collective-retreat-hale-ohana-aloha-crater-lodge.jpg"
