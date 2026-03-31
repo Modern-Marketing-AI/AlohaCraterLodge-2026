@@ -577,6 +577,30 @@
     </footer>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-4', {
+            "type": "equirectangular",
+            "panorama": "assets/360/room-4-premium-restoration-hoomale.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "showZoomCtrl": true,
+            "showFullscreenCtrl": true,
+            "hotSpots": [
+                { "pitch": -10, "yaw": 0, "type": "info", "text": "Private In-Room Whirlpool — your primary recovery asset after long days at the caldera rim." },
+                { "pitch": -5, "yaw": 120, "type": "info", "text": "Rainforest-facing window and kitchenette — self-sufficient operations included." }
+            ]
+        });
+    </script>
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+    </script>
+
 <div class="magma-modal-overlay" id="magmaModal">
     <div class="magma-modal">
         <span class="magma-close" id="magmaClose">&times;</span>
@@ -601,38 +625,22 @@
     </div>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script>
-        pannellum.viewer('panorama-room-4', {
-            "type": "equirectangular",
-            "panorama": "assets/360/room-4-premium-restoration-hoomale.jpg",
-            "autoLoad": true,
-            "autoRotate": -1,
-            "showZoomCtrl": true,
-            "showFullscreenCtrl": true,
-            "hotSpots": [
-                { "pitch": -10, "yaw": 0, "type": "info", "text": "Private In-Room Whirlpool — your primary recovery asset after long days at the caldera rim." },
-                { "pitch": -5, "yaw": 120, "type": "info", "text": "Rainforest-facing window and kitchenette — self-sufficient operations included." }
-            ]
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('magmaModal');
+            var closeBtn = document.getElementById('magmaClose');
+            if (!modal) return;
+            var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
+            bookLinks.forEach(function(link) {
+                if (link.id === 'magmaProceedBtn') return;
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                });
+            });
+            closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
+            modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
         });
-    </script>
-    <script>
-        function openModal() {
-            document.getElementById('magmaModal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('magmaModal').classList.remove('active');
-        }
-        document.getElementById('magmaModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-        function handleSubmit(e) {
-            e.preventDefault();
-            var name = document.getElementById('modal-name').value;
-            alert('Thank you, ' + name + '! We will confirm your dates within 24 hours.');
-            closeModal();
-            e.target.reset();
-        }
     </script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -653,23 +661,5 @@
             });
         })();
     </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('magmaModal');
-    var closeBtn = document.getElementById('magmaClose');
-    if(!modal) return;
-    var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
-    bookLinks.forEach(function(link) {
-        if(link.id === 'magmaProceedBtn') return;
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-    });
-    closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
-    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
-});
-</script>
 </body>
 </html>
