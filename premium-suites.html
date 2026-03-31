@@ -419,8 +419,58 @@
             .narrative-section { padding: 50px 5%; }
             .header-links { gap: 6px; flex-wrap: wrap; }
             .header-links a { padding: 6px 10px; font-size: 0.75rem; }
+            .immersive-recon-container { height: 320px; }
+            .viewer-ui-overlay { flex-direction: column; align-items: flex-start; bottom: 16px; left: 16px; right: 16px; }
+            .info-card { max-width: 100%; }
+            .btn-secure-dates { width: 100%; text-align: center; }
         }
+
+        /* Magma Modal */
+        .magma-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center;
+            align-items: center; backdrop-filter: blur(4px);
+        }
+        .magma-modal-overlay.active { display: flex; opacity: 1; }
+        .magma-modal {
+            background: #141417; padding: 2.5rem; max-width: 560px; width: 92%;
+            border-left: 4px solid #10b981; position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.7);
+        }
+        .magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; }
+        .magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; }
+        .magma-modal h3 { color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; font-size: 1.2rem; }
+        .magma-list { list-style: none; padding: 0; margin-bottom: 2.5rem; }
+        .magma-list li { margin-bottom: 1.2rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px; color: #ddd; }
+        .magma-list li svg { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+        .magma-close { position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.8rem; transition: color 0.2s; line-height: 1; }
+        .magma-close:hover { color: #ff4500; }
+        .magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; }
+        .magma-btn:hover { background: #e03e00; }
+
+        /* Coming Soon placeholder */
+        .coming-soon-placeholder {
+            width: 100%; aspect-ratio: 4/3; background: #1a1a1a;
+            border: 1px dashed #333; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: #555; gap: 8px;
+        }
+        .coming-soon-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #10b981; }
+        .coming-soon-sub { font-size: 0.85rem; color: #444; }
+
+        /* Room 4 360 viewer */
+        .room-4-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+        .room-4-section h2 { font-family: 'Georgia', serif; font-size: 2rem; color: #fff; margin-bottom: 2rem; }
+        .immersive-recon-container { position: relative; width: 100%; height: 500px; border-radius: 8px; overflow: hidden; background: #111; }
+        #panorama-room-4 { width: 100%; height: 100%; }
+        .viewer-ui-overlay { position: absolute; bottom: 24px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 10; pointer-events: none; }
+        .info-card { background: rgba(0,0,0,0.75); border-left: 3px solid #10b981; padding: 16px 20px; max-width: 380px; border-radius: 4px; pointer-events: auto; }
+        .info-card h3 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
+        .info-card p { color: #ccc; font-size: 0.85rem; line-height: 1.5; }
+        .btn-secure-dates { background: #ff4500; color: #fff; padding: 14px 28px; font-weight: bold; border-radius: 4px; text-decoration: none; font-size: 0.95rem; letter-spacing: 0.05em; pointer-events: auto; transition: background 0.3s; }
+        .btn-secure-dates:hover { background: #e03e00; }
+        .ember-divider { border: none; border-top: 1px solid rgba(255,69,0,0.2); margin: 0 5%; }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 </head>
 <body>
 
@@ -452,7 +502,7 @@
         <h2>The Suites</h2>
         <div class="rooms-grid">
             <div class="room-card">
-                <img src="premium-suite-private-jetted-tub-volcano-hi.jpg" alt="Premium basecamp suite interior featuring a private jetted tub and fish terrarium in Volcano Hawaii">
+                <img src="assets/images/rooms/room-4-hero.webp" alt="Static hero view of Room 4 — the Premium Restoration Suite at Aloha Crater Lodge, featuring the private in-room whirlpool tub, rainforest-facing windows, and full kitchenette. Designed for paired recovery after extended crater exploration. Volcano Village, Hawai'i.">
                 <div class="room-card-content">
                     <h3>Room 4 — Deluxe Suite</h3>
                     <p>The flagship retreat. Designed for couples who demand complete privacy and in-room indulgence.</p>
@@ -465,7 +515,10 @@
                 </div>
             </div>
             <div class="room-card">
-                <img src="premium-suite-private-jetted-tub-volcano-hi.jpg" alt="Premium basecamp suite interior featuring a private jetted tub and fish terrarium in Volcano Hawaii">
+                <div class="coming-soon-placeholder" aria-label="Room 6 — Patio Suite at Aloha Crater Lodge. Hero photography coming soon.">
+                    <span class="coming-soon-label">PHOTOGRAPHY INCOMING</span>
+                    <p class="coming-soon-sub">Room 6 — Patio Suite</p>
+                </div>
                 <div class="room-card-content">
                     <h3>Room 6 — Patio Suite</h3>
                     <p>A living space that blurs the line between indoors and the surrounding rainforest ecosystem.</p>
@@ -476,6 +529,24 @@
                         <li>Max 2 guests</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ember-divider"></div>
+    <section class="room-4-section">
+        <h2>Room 4 — Step Inside</h2>
+        <div class="immersive-recon-container">
+            <img src="assets/360/room-4-premium-restoration-hoomale.jpg"
+                 alt="360-degree equirectangular panorama of Room 4 at Aloha Crater Lodge — The Premium Restoration Suite in Volcano Village, Hawai'i, featuring the private in-room whirlpool tub positioned for maximum recovery, rainforest-facing windows, full kitchenette, and intimate two-guest layout optimized for deep reset after extended caldera exploration. Interior photographed in warm ambient light."
+                 style="display: none;" />
+            <div id="panorama-room-4"></div>
+            <div class="viewer-ui-overlay">
+                <div class="info-card">
+                    <h3>The Premium Restoration Suite</h3>
+                    <p>Drag to explore your private reset space. Whirlpool, kitchenette, and rainforest views — the full recovery stack in one room.</p>
+                </div>
+                <a href="#" class="btn-secure-dates" onclick="openModal(); return false;">Secure Dates</a>
             </div>
         </div>
     </section>
@@ -530,6 +601,21 @@
     </div>
 </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-4', {
+            "type": "equirectangular",
+            "panorama": "assets/360/room-4-premium-restoration-hoomale.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "showZoomCtrl": true,
+            "showFullscreenCtrl": true,
+            "hotSpots": [
+                { "pitch": -10, "yaw": 0, "type": "info", "text": "Private In-Room Whirlpool — your primary recovery asset after long days at the caldera rim." },
+                { "pitch": -5, "yaw": 120, "type": "info", "text": "Rainforest-facing window and kitchenette — self-sufficient operations included." }
+            ]
+        });
+    </script>
     <script>
         function openModal() {
             document.getElementById('magmaModal').classList.add('active');
