@@ -1,0 +1,29 @@
+We have 6 images in the /assets/360/ folder, but not all of the Pannellum 360 viewers are rendering on the live pages. Execute a strict JavaScript and HTML container fix across family-suites.html, basecamp.html, and premium-suites.html using the Total Replacement Protocol.
+
+1. Verification of HTML Containers:
+Ensure every room section has a designated container for the viewer.
+
+family-suites.html: Must have <div id="panorama-room-1" class="panorama-view"></div>, <div id="panorama-room-2" class="panorama-view"></div>, and <div id="panorama-room-5" class="panorama-view"></div>.
+
+basecamp.html: Must have <div id="panorama-room-3" class="panorama-view"></div>.
+
+premium-suites.html: Must have <div id="panorama-room-4" class="panorama-view"></div> and <div id="panorama-room-6" class="panorama-view"></div>.
+
+2. Missing JavaScript Instantiation:
+Add or update the <script> blocks at the bottom of each respective page (just above the Magma/Exit Modal scripts) to actually initialize the Pannellum viewers. Read the exact filenames currently sitting in the /assets/360/ directory to ensure there are no broken paths.
+
+For family-suites.html inject:
+
+JavaScript
+pannellum.viewer('panorama-room-1', { "type": "equirectangular", "panorama": "/assets/360/room-1-collective-retreat.jpg", "autoLoad": true, "autoRotate": -1 });
+// Make sure scripts for room-2 and room-5 are also present and using the exact filenames from the 360 folder.
+For basecamp.html inject:
+
+JavaScript
+// Make sure the script for room-3 is present and using the exact filename from the 360 folder.
+For premium-suites.html inject:
+
+JavaScript
+// Make sure the script for room-4 is present.
+pannellum.viewer('panorama-room-6', { "type": "equirectangular", "panorama": "/assets/360/room-6-premium-restoration-orchid-suite.jpg", "autoLoad": true, "autoRotate": -1 });
+3. Strict Guardrails: Maintain Volcanic Dark Mode (#18181b / #10b981). Do NOT remove the Magma Modal or Exit Intent logic we just added. Ensure absolutely ZERO mentions of the on-property lava tube or cave.

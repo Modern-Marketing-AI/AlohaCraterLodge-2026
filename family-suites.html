@@ -140,6 +140,20 @@
             margin-bottom: 30px;
         }
 
+        /* Room 1 section */
+        .room-1-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5% 60px;
+        }
+        .room-1-section h2 {
+            font-size: 2rem;
+            color: var(--emerald-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
         /* Room 5 section */
         .room-5-section {
             max-width: 1100px;
@@ -166,7 +180,7 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        #panorama-room-2, #panorama-room-5 { width: 100%; height: 100%; }
+        #panorama-room-1, #panorama-room-2, #panorama-room-5 { width: 100%; height: 100%; }
 
         .viewer-ui-overlay {
             position: absolute;
@@ -368,6 +382,26 @@
         </div>
     </section>
 
+    <section class="room-1-section">
+        <h2>Room 1 — A Glimpse Inside</h2>
+
+        <div class="immersive-recon-container">
+            <img src="assets/360/room-1-collective-retreat.jpg"
+                 alt="360-degree equirectangular panorama of Room 1 at Aloha Crater Lodge — The Collective Retreat in Volcano Village, Hawai'i, featuring a private kitchenette with Kaʻū Estate coffee, rainforest-facing patio access, ceiling fan, and full Starlink workspace optimized for two-to-four-guest arrivals."
+                 style="display: none;" />
+
+            <div id="panorama-room-1" class="panorama-view"></div>
+
+            <div class="viewer-ui-overlay">
+                <div class="info-card">
+                    <h3>The Collective Retreat</h3>
+                    <p>Drag to explore your sanctuary. Private kitchenette, front patio, and Starlink workspace — your basecamp for the caldera.</p>
+                </div>
+                <a href="#" class="btn-secure-dates" data-room-type="collective" onclick="openModal(); return false;">Secure Dates</a>
+            </div>
+        </div>
+    </section>
+
     <section class="room-2-section">
         <h2>Room 2 — A Glimpse Inside</h2>
 
@@ -380,7 +414,7 @@
                  alt="360-degree equirectangular panorama of Room 2 at Aloha Crater Lodge — The Collective Retreat family suite in Volcano Village, Hawai'i, featuring two queen beds, private kitchenette, ceiling fan, vaulted ceiling, and sliding glass doors opening onto a rainforest-facing private patio. Starlink workspace visible. Interior photographed in natural light with 200Mbps+ high-speed connectivity active."
                  style="display: none;" />
 
-            <div id="panorama-room-2"></div>
+            <div id="panorama-room-2" class="panorama-view"></div>
 
             <div class="viewer-ui-overlay">
                 <div class="info-card">
@@ -421,7 +455,7 @@
                  alt="360-degree equirectangular panorama of Room 5 at Aloha Crater Lodge — The Hale Ohana Sanctuary in Volcano Village, Hawai'i, featuring multiple queen beds for extended family groups, a full Chef's Station with stove and oven, a large live-edge gathering table for shared meals and evening planning, private kitchenette, ceiling fan, and Starlink workspace. The most expansive Collective Retreat suite, designed for families who want to cook together, gather together, and reset together after long days at the Kīlauea summit."
                  style="display: none;" />
 
-            <div id="panorama-room-5"></div>
+            <div id="panorama-room-5" class="panorama-view"></div>
 
             <div class="viewer-ui-overlay">
                 <div class="info-card">
@@ -460,6 +494,32 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama-room-1', {
+            "type": "equirectangular",
+            "panorama": "assets/360/room-1-collective-retreat.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "showZoomCtrl": true,
+            "showFullscreenCtrl": true,
+            "title": "Room 1 — The Collective Retreat",
+            "author": "Aloha Crater Lodge",
+            "hotSpots": [
+                {
+                    "pitch": -10, "yaw": 90, "type": "info",
+                    "text": "Private Kitchenette: Kaʻū Estate coffee and counter space for slow morning prep."
+                },
+                {
+                    "pitch": 0, "yaw": -30, "type": "info",
+                    "text": "Front Patio: Step out and the rainforest canopy greets you on arrival."
+                },
+                {
+                    "pitch": -5, "yaw": 170, "type": "info",
+                    "text": "Starlink Workspace: 200Mbps+ — mission command stays operational from base."
+                }
+            ]
+        });
+    </script>
     <script>
         pannellum.viewer('panorama-room-2', {
             "type": "equirectangular",

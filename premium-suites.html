@@ -461,11 +461,11 @@
         .coming-soon-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #10b981; }
         .coming-soon-sub { font-size: 0.85rem; color: #444; }
 
-        /* Room 4 360 viewer */
-        .room-4-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
-        .room-4-section h2 { font-family: 'Georgia', serif; font-size: 2rem; color: #fff; margin-bottom: 2rem; }
+        /* Room 4 & 6 360 viewer */
+        .room-4-section, .room-6-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+        .room-4-section h2, .room-6-section h2 { font-family: 'Georgia', serif; font-size: 2rem; color: #fff; margin-bottom: 2rem; }
         .immersive-recon-container { position: relative; width: 100%; height: 500px; border-radius: 8px; overflow: hidden; background: #111; }
-        #panorama-room-4 { width: 100%; height: 100%; }
+        #panorama-room-4, #panorama-room-6 { width: 100%; height: 100%; }
         .viewer-ui-overlay { position: absolute; bottom: 24px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 10; pointer-events: none; }
         .info-card { background: rgba(0,0,0,0.75); border-left: 3px solid #10b981; padding: 16px 20px; max-width: 380px; border-radius: 4px; pointer-events: auto; }
         .info-card h3 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
@@ -572,11 +572,29 @@
             <img src="assets/360/room-4-premium-restoration-hoomale.jpg"
                  alt="360-degree equirectangular panorama of Room 4 at Aloha Crater Lodge — The Premium Restoration Suite in Volcano Village, Hawai'i, featuring the private in-room whirlpool tub positioned for maximum recovery, rainforest-facing windows, full kitchenette, and intimate two-guest layout optimized for deep reset after extended caldera exploration. Interior photographed in warm ambient light."
                  style="display: none;" />
-            <div id="panorama-room-4"></div>
+            <div id="panorama-room-4" class="panorama-view"></div>
             <div class="viewer-ui-overlay">
                 <div class="info-card">
                     <h3>The Premium Restoration Suite</h3>
                     <p>Drag to explore your private reset space. Whirlpool, kitchenette, and rainforest views — the full recovery stack in one room.</p>
+                </div>
+                <a href="#" class="btn-secure-dates" data-room-type="premium" onclick="openModal(); return false;">Secure Dates</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="ember-divider"></div>
+    <section class="room-6-section">
+        <h2>Room 6 — Step Inside</h2>
+        <div class="immersive-recon-container">
+            <img src="assets/360/room-6-premium-restoration-orchid-suite.jpg"
+                 alt="360-degree equirectangular panorama of Room 6 at Aloha Crater Lodge — The Orchid Suite in Volcano Village, Hawai'i, featuring a private exterior patio opening into the rainforest, in-room fish terrarium, full kitchenette, and intimate two-guest layout designed for deep rest at the caldera's edge."
+                 style="display: none;" />
+            <div id="panorama-room-6" class="panorama-view"></div>
+            <div class="viewer-ui-overlay">
+                <div class="info-card">
+                    <h3>The Orchid Suite</h3>
+                    <p>Drag to explore your private retreat. Patio rainforest access, fish terrarium, and full kitchenette — a living space designed to blur the line between indoors and the canopy.</p>
                 </div>
                 <a href="#" class="btn-secure-dates" data-room-type="premium" onclick="openModal(); return false;">Secure Dates</a>
             </div>
@@ -621,6 +639,20 @@
             "hotSpots": [
                 { "pitch": -10, "yaw": 0, "type": "info", "text": "Private In-Room Whirlpool — your primary recovery asset after long days at the caldera rim." },
                 { "pitch": -5, "yaw": 120, "type": "info", "text": "Rainforest-facing window and kitchenette — self-sufficient operations included." }
+            ]
+        });
+    </script>
+    <script>
+        pannellum.viewer('panorama-room-6', {
+            "type": "equirectangular",
+            "panorama": "assets/360/room-6-premium-restoration-orchid-suite.jpg",
+            "autoLoad": true,
+            "autoRotate": -1,
+            "showZoomCtrl": true,
+            "showFullscreenCtrl": true,
+            "hotSpots": [
+                { "pitch": -5, "yaw": 60, "type": "info", "text": "Private Exterior Patio — direct rainforest access for morning stillness and evening reset." },
+                { "pitch": -10, "yaw": -120, "type": "info", "text": "In-room fish terrarium — a living ecosystem anchoring the suite's restoration design." }
             ]
         });
     </script>
