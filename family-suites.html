@@ -292,7 +292,38 @@
         }
         .coming-soon-sub { font-size: 0.85rem; color: #444; }
         .room-hero-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 6px; margin-bottom: 2rem; display: block; }
+
+        /* Exit Intent Modal */
+        .exit-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2500;
+            justify-content: center; align-items: center; backdrop-filter: blur(8px);
+        }
+        .exit-modal-content {
+            background: linear-gradient(145deg, #1a1a1d, #141417);
+            padding: 3.5rem; max-width: 650px; width: 90%;
+            border-top: 5px solid var(--lava-red);
+            box-shadow: 0 0 60px rgba(255,69,0,0.15);
+            text-align: center; position: relative;
+        }
+        .exit-modal-content .modal-close {
+            position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem;
+            color: #888; cursor: pointer; line-height: 1;
+        }
+        .exit-modal-content .modal-close:hover { color: #fff; }
+        .btn-claim-offer {
+            display: inline-block; background: var(--emerald-green); color: #000;
+            padding: 1.2rem 2.5rem; text-decoration: none; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; margin-top: 2rem;
+            border: none; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-claim-offer:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(16,185,129,0.4); }
     </style>
+    <script>
+        /* PRE-FLIGHT HOOK 1: Global Staging for HotelChamp & Little Hotelier */
+        const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+        const HOTELCHAMP_ID = "PENDING_ID";
+    </script>
 </head>
 <body>
 
@@ -359,7 +390,7 @@
                     <h3>The Collective Retreat</h3>
                     <p>Drag to explore your sanctuary. Two beds, a full private kitchen, and a patio that opens straight into the rainforest. This is your basecamp for the caldera.</p>
                 </div>
-                <a href="#" class="btn-secure-dates" onclick="openModal(); return false;">Secure Dates</a>
+                <a href="#" class="btn-secure-dates" data-room-type="collective" onclick="openModal(); return false;">Secure Dates</a>
             </div>
         </div>
 
@@ -400,7 +431,7 @@
                     <h3>The Gathering Point</h3>
                     <p>Our most expansive sanctuary. A full Chef's Station, a live-edge gathering table, and space wide enough for the whole family to decompress, cook, and plan the next day at the caldera.</p>
                 </div>
-                <a href="#" class="btn-secure-dates" onclick="openModal(); return false;">Secure Dates</a>
+                <a href="#" class="btn-secure-dates" data-room-type="collective" onclick="openModal(); return false;">Secure Dates</a>
             </div>
         </div>
 
@@ -422,7 +453,7 @@
 
     <section class="cta-section">
         <p>Ready to secure your group's arrival?</p>
-        <button class="btn-magma" onclick="openModal()">Secure Dates</button>
+        <button class="btn-magma" data-room-type="collective" onclick="openModal()">Secure Dates</button>
     </section>
 
     <footer>
@@ -509,7 +540,7 @@
                     <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
                 </li>
             </ul>
-            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+            <button onclick="proceedToBooking()" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</button>
         </div>
     </div>
 
@@ -550,5 +581,34 @@
         })();
     </script>
 
+    <div id="exitIntentModal" class="exit-modal-overlay">
+        <div class="exit-modal-content">
+            <span class="modal-close" onclick="closeExitModal()">&times;</span>
+            <h2 style="color: var(--lava-red); margin-top: 0; text-transform: uppercase; letter-spacing: 2px;">Deploy With Full Mobility.</h2>
+            <p style="color: #d1d1d6; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Before you abandon your Basecamp, secure your tactical advantage. Book your dates direct right now and receive a complimentary <strong>4-hour deployment of our Basecamp E-Bike Fleet</strong>.</p>
+            <p style="color: #a1a1aa; font-size: 0.95rem;">Explore the Kīlauea summit trails in complete silence. Bypass the crowds. Zero friction.</p>
+            <button class="btn-claim-offer" onclick="claimOfferAndBook()">[ SECURE DATES & CLAIM FLEET ]</button>
+        </div>
+    </div>
+    <script>
+        function proceedToBooking() {
+            window.location.href = LH_BOOKING_ENGINE;
+        }
+        document.addEventListener('mouseout', function(e) {
+            if (e.clientY < 20) {
+                if (!sessionStorage.getItem('exitIntentTriggered')) {
+                    document.getElementById('exitIntentModal').style.display = 'flex';
+                    sessionStorage.setItem('exitIntentTriggered', 'true');
+                }
+            }
+        });
+        function closeExitModal() {
+            document.getElementById('exitIntentModal').style.display = 'none';
+        }
+        function claimOfferAndBook() {
+            closeExitModal();
+            openModal();
+        }
+    </script>
 </body>
 </html>
