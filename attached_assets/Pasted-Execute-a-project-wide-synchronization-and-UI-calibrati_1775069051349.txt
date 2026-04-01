@@ -1,0 +1,78 @@
+Execute a project-wide synchronization and UI calibration across index.html, suites.html, family-suites.html, basecamp.html, and premium-suites.html using the Total Replacement Protocol.
+
+1. The Pre-Suasion Sub-Headline (index.html):
+Replace the existing sub-headline ('Positioned 2 miles from Kīlauea. Secure your vantage point for the March fountaining window.') with this exact text:
+Where the rainforest canopy meets the caldera's edge. Claim your space.
+
+2. Header & Navigation Centering (UI Fix):
+Update the CSS in the main <header> and <nav> sections across all files. Constrain the width and center the elements to prevent wide-screen stretching.
+
+Add justify-content: center;, align-items: center;, and gap: 2rem; to the top header row containing the 'Aloha Crater Lodge' logo and tagline.
+
+Add justify-content: center;, flex-wrap: wrap;, and gap: 1.5rem; to the <nav> container holding the navigation buttons.
+
+3. Full Asset Mapping (Static & 360):
+Ensure all suite preview cards and detailed tier pages map to /assets/images/rooms/ for static hero shots and /assets/360/ for Pannellum viewers:
+
+Tier 1 (family-suites.html): Room 1 (room-1-hero.webp / room-1-collective-retreat.jpg), Room 2 (room-2-hero.webp / room-2-collective-retreat.jpg), Room 5 (room-5-hero.webp / room-5-collective-retreat-hale-ohana.jpg).
+
+Tier 2 (basecamp.html): Room 3 (room-3-hero.webp / room-3-high-efficiency-basecamp.jpg).
+
+Tier 3 (premium-suites.html): Room 4 (room-4-hero.webp / room-4-premium-restoration-hoomale.jpg), Room 6 (room-6-hero.webp / room-6-premium-restoration-orchid-suite.jpg).
+
+4. Booking Engine & Stack Hooks (JS in <head>):
+Inject these global variables into the <head> of all suite-related pages:
+
+HTML
+<script>
+    const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+    const HOTELCHAMP_ID = "PENDING_ID";
+</script>
+5. The Dual-Modal Protocol (Conversion Stack):
+Inject this HTML, CSS, and JS structure at the bottom of the suite pages just before </body>. Ensure all 'Secure Dates' buttons have data-room-type attributes and trigger openMagmaModal().
+
+HTML
+<style>
+    /* Exit Intent Modal CSS */
+    .exit-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2500; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
+    .exit-modal-content { background: linear-gradient(145deg, #1a1a1d, #141417); padding: 3.5rem; max-width: 650px; width: 90%; border-top: 5px solid var(--lava-red); box-shadow: 0 0 60px rgba(255, 69, 0, 0.15); text-align: center; position: relative; }
+    .btn-claim-offer { display: inline-block; background: var(--emerald-green); color: #000; padding: 1.2rem 2.5rem; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 2rem; border: none; cursor: pointer; transition: all 0.3s ease; }
+    .btn-claim-offer:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); }
+</style>
+
+<div id="exitIntentModal" class="exit-modal-overlay">
+    <div class="exit-modal-content">
+        <span class="modal-close" style="position: absolute; top: 20px; right: 20px; cursor: pointer; color: #52525b; font-size: 1.5rem;" onclick="closeExitModal()">&times;</span>
+        <h2 style="color: var(--lava-red); margin-top: 0; text-transform: uppercase; letter-spacing: 2px;">Deploy With Full Mobility.</h2>
+        <p style="color: #d1d1d6; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Before you abandon your Basecamp, secure your tactical advantage. Book direct right now and receive a complimentary <strong>4-hour deployment of our Basecamp E-Bike Fleet</strong>.</p>
+        <p style="color: #a1a1aa; font-size: 0.95rem;">Explore the Kīlauea summit trails in complete silence. Bypass the crowds. Zero friction.</p>
+        <button class="btn-claim-offer" onclick="claimOfferAndBook()">[ SECURE DATES & CLAIM FLEET ]</button>
+    </div>
+</div>
+
+<script>
+    function proceedToBooking() { window.location.href = LH_BOOKING_ENGINE; }
+    
+    document.addEventListener('mouseout', function(e) {
+        if (e.clientY < 20 && !sessionStorage.getItem('exitIntentTriggered')) {
+            document.getElementById('exitIntentModal').style.display = 'flex';
+            sessionStorage.setItem('exitIntentTriggered', 'true');
+        }
+    });
+
+    function closeExitModal() { document.getElementById('exitIntentModal').style.display = 'none'; }
+
+    function claimOfferAndBook() {
+        const trackedURL = LH_BOOKING_ENGINE + "?promoCode=EBIKE4HR";
+        closeExitModal();
+        
+        // Update the Magma Modal's final confirmation button to include the promo code
+        const finalizeBtn = document.querySelector('.btn-finalize');
+        if (finalizeBtn) {
+            finalizeBtn.setAttribute('onclick', `window.location.href='${trackedURL}'`);
+            finalizeBtn.removeAttribute('href');
+        }
+        openMagmaModal(); 
+    }
+</script>
+6. Strict Guardrails: Maintain the Volcanic Dark Mode aesthetic (#18181b / #10b981). Ensure absolutely ZERO mentions of the on-property lava tube or cave.
