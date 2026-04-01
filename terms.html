@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Aloha Crater Lodge</title>
+    <meta name="description" content="Terms of Service for Aloha Crater Lodge — reservation policies, liability waivers, and property safety guidelines.">
+    <link rel="canonical" href="https://www.alohacraterlodge.com/terms.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        :root {
+            --eerie-black: #18181b;
+            --emerald-green: #10b981;
+            --lava-red: #ff4500;
+            --forest-shadow: #141417;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--eerie-black); color: #e0e0e0; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+
+        /* Universal Nav */
+        .universal-nav {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 25px 5%;
+            position: relative;
+            z-index: 10;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .logo {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            color: #ff4500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            letter-spacing: 1px;
+            font-style: italic;
+            margin-bottom: 18px;
+        }
+        .header-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 14px;
+        }
+        .header-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border: 1px solid #333;
+            transition: all 0.2s;
+        }
+        .header-links a:hover { color: #fff; border-color: #666; }
+        .header-links a.nav-reserve-btn {
+            border-color: #ff4500;
+            color: #ff4500;
+        }
+        .header-links a.nav-reserve-btn:hover {
+            background: #ff4500;
+            color: #fff;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1d 100%);
+            border-bottom: 1px solid #2a2a2a;
+            padding: 60px 5% 50px;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: 2.4rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        .page-hero h1 span { color: var(--emerald-green); }
+        .page-hero p {
+            font-size: 1rem;
+            color: #888;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* Content */
+        .legal-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 60px 5%;
+        }
+        .legal-section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .legal-section:last-child {
+            border-bottom: none;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--emerald-green);
+            margin-bottom: 10px;
+        }
+        .legal-section h2 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .legal-section h3 {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin: 24px 0 10px;
+            font-weight: 600;
+        }
+        .legal-section p {
+            color: #aaa;
+            margin-bottom: 16px;
+            font-size: 0.97rem;
+        }
+        .legal-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px;
+        }
+        .legal-section ul li {
+            color: #aaa;
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.97rem;
+        }
+        .legal-section ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--emerald-green);
+        }
+        .legal-section strong { color: #e0e0e0; }
+        .highlight-box {
+            background: #1a1a1d;
+            border-left: 4px solid var(--emerald-green);
+            padding: 18px 22px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #bbb;
+        }
+        .warning-box {
+            background: #1a1a1d;
+            border-left: 4px solid var(--lava-red);
+            padding: 18px 22px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #bbb;
+        }
+        .meta-note {
+            font-size: 0.85rem;
+            color: #555;
+            font-style: italic;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0d0d;
+            color: #fff;
+            padding: 40px 5%;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto 1.5rem;
+        }
+        .footer-col h4 { color: #ccc; margin: 0 0 0.8rem; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .footer-col p { color: #888; font-size: 0.9rem; margin: 0 0 4px; }
+        .footer-col a { color: #888; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.9rem; }
+        .footer-col a:hover { color: #10b981; }
+        .footer-legal {
+            text-align: center;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 1rem;
+            color: #555;
+            font-size: 0.78rem;
+            line-height: 1.7;
+        }
+        .footer-legal p { margin: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;">
+        <a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a>
+        &nbsp; | &nbsp;
+        <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a>
+    </div>
+
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <p class="subtitle" style="text-align: center; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">SUITES</a>
+            <a href="wellness.html">WELLNESS</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+            <a href="faq.html">FAQ</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Terms of <span>Service</span></h1>
+        <p>Reservation policies, equipment waivers, and property guidelines for all guests of Aloha Crater Lodge.</p>
+    </div>
+
+    <div class="legal-container">
+
+        <div class="legal-section">
+            <p class="section-label">Section 01</p>
+            <h2>Reservation &amp; Cancellation Policies</h2>
+
+            <h3>Booking &amp; Confirmation</h3>
+            <p>Reservations at Aloha Crater Lodge are confirmed upon receipt of a valid payment method through our third-party booking platform, Little Hotelier. A reservation confirmation number and pre-arrival briefing will be delivered to the email address provided at booking. Your secure entry code will be transmitted via SMS approximately 24 hours prior to your scheduled arrival.</p>
+
+            <h3>Cancellation Policy</h3>
+            <div class="highlight-box">
+                <strong>Standard Rate:</strong> Cancellations made more than 7 days prior to arrival are eligible for a full refund minus any applicable processing fees charged by our booking platform. Cancellations within 7 days of arrival are non-refundable.
+            </div>
+            <p>Cancellation requests must be submitted directly through the booking confirmation portal or by contacting the Lodge via text or phone at (808) 345-4449. Email cancellation requests are accepted but may require 1 business day to process.</p>
+
+            <h3>Modifications</h3>
+            <p>Date modifications are permitted subject to availability and must be requested at least 48 hours prior to the original arrival date. The Lodge will make every effort to accommodate requested changes. Rate differences resulting from date changes will be applied at the time of modification.</p>
+
+            <h3>No-Shows</h3>
+            <p>Guests who fail to arrive on their confirmed arrival date without prior cancellation will forfeit the full reservation amount. No refunds will be issued for early departures after check-in has been completed.</p>
+
+            <h3>Force Majeure</h3>
+            <p>In the event of natural disasters, volcanic activity, mandatory government evacuation orders, or other circumstances beyond the Lodge's control that render the property inaccessible, affected reservations will receive a full refund or complimentary rebooking credit at the guest's discretion.</p>
+        </div>
+
+        <div class="legal-section">
+            <p class="section-label">Section 02</p>
+            <h2>E-Bike &amp; Wellness Hardware Liability Waivers</h2>
+
+            <h3>E-Bike Fleet Use</h3>
+            <p>Aloha Crater Lodge offers high-torque e-bikes as an optional service for registered overnight guests. Use of the e-bike fleet is governed by the following conditions:</p>
+            <ul>
+                <li>Riders must be 18 years of age or older, or accompanied by a supervising adult</li>
+                <li>A valid driver's license or government-issued ID is required prior to deployment</li>
+                <li>Helmet use is mandatory and helmets are provided at no additional charge</li>
+                <li>E-bikes are to be operated exclusively on public roads, designated park roads, and approved trail access routes</li>
+                <li>Riders assume full responsibility for compliance with all applicable Hawaii traffic laws and Hawaii Volcanoes National Park regulations</li>
+                <li>The Lodge is not responsible for injury, accident, or damage to personal property arising from e-bike use</li>
+            </ul>
+            <div class="warning-box">
+                By requesting e-bike access, guests acknowledge they have read these conditions and assume all associated risks. Guests with medical conditions affecting balance, vision, or motor function should consult a physician before using the e-bike fleet.
+            </div>
+            <p>E-bike reservations must be made in advance through the post-booking Guest Portal. Fleet availability is limited and subject to maintenance windows. Refunds for unused e-bike time are not provided except in cases of mechanical failure confirmed by Lodge staff.</p>
+
+            <h3>Bio-Regeneration &amp; Wellness Hardware</h3>
+            <p>The Lodge's Bio-Regeneration Stack — including the OlyLife Tera-P90 (PEMF and Terahertz frequency therapy device) and the Galaxy G-One (optical frequency therapy device) — is made available to guests as a wellness amenity for personal use only.</p>
+            <ul>
+                <li>Guests with implanted electronic medical devices (e.g., pacemakers, neurostimulators) must not use PEMF or Terahertz frequency equipment</li>
+                <li>Pregnant guests should consult their physician before using any frequency therapy device</li>
+                <li>These devices are not intended to diagnose, treat, cure, or prevent any medical condition</li>
+                <li>All hardware must be used in accordance with provided written instructions</li>
+                <li>Damage to equipment caused by misuse will be charged to the guest at replacement cost</li>
+            </ul>
+            <p>Aloha Crater Lodge makes no medical claims regarding wellness outcomes. Hardware is provided as a complimentary recovery tool and the Lodge assumes no liability for results or adverse reactions arising from proper or improper use.</p>
+        </div>
+
+        <div class="legal-section">
+            <p class="section-label">Section 03</p>
+            <h2>Property Safety</h2>
+
+            <h3>General Conduct</h3>
+            <p>Aloha Crater Lodge is a private property situated within a sensitive rainforest ecosystem. All guests are expected to conduct themselves in a manner that respects the property, its natural surroundings, and fellow guests. Quiet hours are observed from 10:00 PM to 7:00 AM.</p>
+
+            <h3>Grounds &amp; Natural Areas</h3>
+            <div class="warning-box">
+                Guests must adhere to all posted signage on the property at all times. Entry into unmarked natural areas, areas marked with restricted access signage, or any off-trail terrain on or adjacent to the property is strictly prohibited.
+            </div>
+            <p>The Lodge grounds include natural vegetation, uneven terrain, and active rainforest areas that may present physical hazards in low-light or wet conditions. Guests are advised to use designated pathways between structures and to exercise appropriate caution when moving throughout the property after dark.</p>
+
+            <h3>Volcanic &amp; Environmental Awareness</h3>
+            <p>Aloha Crater Lodge is located approximately 2 miles from Hawaii Volcanoes National Park. While the property is in a designated safe zone, guests should be aware of the following:</p>
+            <ul>
+                <li>Volcanic gas (SO2) and vog levels near the crater rim may vary — always consult the USGS Hawaii Volcano Observatory daily reports before approaching the summit area</li>
+                <li>In the event of a volcanic eruption escalation or official evacuation order, guests must comply immediately with all instructions from Lodge staff and Hawaii County Civil Defense</li>
+                <li>Trail and road conditions in the national park can change rapidly — always obtain current park conditions from National Park Service rangers before deployment</li>
+            </ul>
+
+            <h3>Wildlife &amp; Ecosystem</h3>
+            <p>The Lodge grounds are home to endemic Hawaiian wildlife including nēnē (Hawaiian geese) and native bird species protected under state and federal law. Guests must not feed, approach, or disturb wildlife at any time. Introduction of non-native plants or animals to the property is strictly prohibited.</p>
+
+            <h3>No Smoking Policy</h3>
+            <p>Smoking, vaping, and open flames of any kind are prohibited in all indoor areas of the Lodge and within 25 feet of any structure. Violation of this policy will result in immediate termination of the reservation without refund and may result in assessment of cleaning fees.</p>
+
+            <h3>Pet Policy</h3>
+            <p>Aloha Crater Lodge is a pet-free property. Unauthorized pets on the premises will result in additional cleaning fees and may require early departure at the Lodge's discretion.</p>
+
+            <p class="meta-note">Effective Date: January 1, 2026. These Terms of Service are subject to change. Continued use of Lodge services constitutes acceptance of the then-current Terms. &copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>11-3966 Kalani Honua Rd</p>
+                <p>Volcano Village, HI</p>
+                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
+            </div>
+            <div class="footer-col social">
+                <h4>Intel Feeds</h4>
+                <a href="https://www.instagram.com/alohacraterlodge" target="_blank">Instagram: @alohacraterlodge</a><br>
+                <a href="#" target="_blank">YouTube: Volcano Insider</a><br>
+                <a href="https://www.tiktok.com/@alohacraterlodge" target="_blank">TikTok: @AlohaCraterLodge</a>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="suites.html">Suites</a><br>
+                <a href="wellness.html">Wellness</a><br>
+                <a href="faq.html">FAQ</a><br>
+                <a href="volcano-guide.html">Volcano Guide</a><br>
+                <a href="privacy-policy.html">Privacy Policy</a><br>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>Located 2 miles from Hawaii Volcanoes National Park.</p>
+            <p>&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    if (this.dataset.revealed !== 'true') {
+                        e.preventDefault();
+                        this.textContent = 'Text or Call (808) 345-4449';
+                        this.href = 'tel:+18083454449';
+                        this.dataset.revealed = 'true';
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -144,7 +144,36 @@
         .footer-col a { color: #888; text-decoration: none; display: block; margin-bottom: 4px; }
         .footer-col a:hover { color: #ff4500; }
         .footer-legal { text-align: center; border-top: 1px solid #1e1e1e; padding-top: 1rem; color: #555; font-size: 0.78rem; line-height: 1.7; }
+
+        /* Magma Modal */
+        .magma-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92); z-index: 1000;
+            align-items: center; justify-content: center; backdrop-filter: blur(4px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .magma-modal-overlay.active { display: flex; opacity: 1; }
+        .magma-modal {
+            background: #141417; max-width: 600px; width: 90%; padding: 2.5rem;
+            border-radius: 8px; border-left: 4px solid #10b981;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); position: relative;
+        }
+        .magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; }
+        .magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; }
+        .magma-modal h3 { color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; font-size: 1.2rem; }
+        .magma-list { list-style: none; padding: 0; margin-bottom: 2.5rem; }
+        .magma-list li { margin-bottom: 1.2rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px; color: #ddd; }
+        .magma-list li svg { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+        .magma-close { position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.8rem; transition: color 0.2s; line-height: 1; }
+        .magma-close:hover { color: #ff4500; }
+        .magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; }
+        .magma-btn:hover { background: #e03e00; }
     </style>
+    <script>
+        /* PRE-FLIGHT HOOK: Global Staging for HotelChamp & Little Hotelier */
+        const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+        const HOTELCHAMP_ID = "PENDING_ID";
+    </script>
 </head>
 <body>
     <div class="alert-bar">
@@ -271,7 +300,7 @@
         <div class="faq-cta">
             <h3>Still have questions?</h3>
             <p>Text the Lodge directly or launch your AI Guide for instant answers with full Lodge intel pre-loaded.</p>
-            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="btn-lava">SECURE DATES</a>
+            <a href="#" class="btn-lava" onclick="openMagmaModal(); return false;">SECURE DATES</a>
             <a href="index.html#ai-guide" class="btn-green">LAUNCH AI GUIDE</a>
         </div>
 
@@ -281,6 +310,7 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Aloha Crater Lodge</h4>
+                <p style="color:#888;margin:0 0 2px;">11-3966 Kalani Honua Rd</p>
                 <p>Volcano Village, HI</p>
                 <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
                 <a href="#" id="admin-trigger" style="display:block;color:#888;font-size:0.82rem;text-decoration:none;margin-top:4px;">[ Admin Login ]</a>
@@ -297,6 +327,8 @@
                 <a href="wellness.html">Wellness</a>
                 <a href="faq.html">FAQ</a>
                 <a href="volcano-guide.html">Volcano Guide</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
             </div>
         </div>
         <div class="footer-legal">
@@ -317,6 +349,18 @@
                 });
             });
         })();
+    </script>
+    <script>
+        function openModal() {
+            document.getElementById('magmaModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('magmaModal').classList.remove('active');
+        }
+        function openMagmaModal() { openModal(); }
+        function proceedToBooking() {
+            window.location.href = LH_BOOKING_ENGINE;
+        }
     </script>
 
 <div class="magma-modal-overlay" id="magmaModal">
@@ -339,7 +383,7 @@
                 <div><strong style="color:#fff;">3. Gear Reservations.</strong> E-Bikes and Bio-Regeneration hardware must be reserved inside your post-booking Guest Portal.</div>
             </li>
         </ul>
-        <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</a>
+        <button onclick="proceedToBooking()" class="magma-btn" id="magmaProceedBtn">[ PROCEED TO FINALIZE BOOKING ]</button>
     </div>
 </div>
 <script>
@@ -347,16 +391,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('magmaModal');
     var closeBtn = document.getElementById('magmaClose');
     if(!modal) return;
-    var bookLinks = document.querySelectorAll('a[href*="hotels.cloudbeds.com"]');
-    bookLinks.forEach(function(link) {
-        if(link.id === 'magmaProceedBtn') return;
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-    });
+    modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
     closeBtn.addEventListener('click', function() { modal.classList.remove('active'); });
-    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
 });
 </script>
 </body>
