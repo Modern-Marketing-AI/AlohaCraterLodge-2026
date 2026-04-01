@@ -92,7 +92,7 @@
             background: rgba(255, 69, 0, 0.15); 
         }
 
-        .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .header-links { display: flex; align-items: center; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
         .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
         .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
 
@@ -325,9 +325,9 @@
 
     <div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;"><a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
 
-    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
         <div class="logo">ALOHA CRATER LODGE</div>
-        <p class="subtitle" style="flex: 1; text-align: center; min-width: 200px; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <p class="subtitle" style="text-align: center; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
         <div class="header-links">
             <a href="index.html">BASECAMP (HOME)</a>
             <a href="suites.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">SUITES</a>
@@ -476,9 +476,16 @@ document.addEventListener('DOMContentLoaded', function() {
         function closeExitModal() {
             document.getElementById('exitIntentModal').style.display = 'none';
         }
+        function openMagmaModal() { openModal(); }
         function claimOfferAndBook() {
+            const trackedURL = LH_BOOKING_ENGINE + "?promoCode=EBIKE4HR";
             closeExitModal();
-            openModal();
+            const finalizeBtn = document.querySelector('.btn-finalize');
+            if (finalizeBtn) {
+                finalizeBtn.setAttribute('onclick', `window.location.href='${trackedURL}'`);
+                finalizeBtn.removeAttribute('href');
+            }
+            openMagmaModal();
         }
     </script>
 </body>
