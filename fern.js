@@ -50,7 +50,7 @@
         if (/weather|cold|jacket|temperature|cool|warm|rain|fog|vog/i.test(q)) return FERN_DATA.faqs.weather;
         if (/room.?3|lumi|anela|workspace|angel room|efficient/i.test(q)) return FERN_DATA.faqs.room3;
         if (/room.?4|h[oō][ʻ']?om[aā]lie|hoomalie|whirlpool|jetted|stone shower|forest edge|peace/i.test(q)) return FERN_DATA.faqs.room4;
-        return FERN_DATA.faqs.fallback;
+        return FERN_DATA.fallback;
     }
 
     function injectStyles() {
@@ -225,14 +225,26 @@
         var msgs = document.getElementById('fern-messages');
         var div = document.createElement('div');
         div.className = 'fern-msg ' + (role === 'bot' ? 'fern-msg-bot' : 'fern-msg-user');
-        div.textContent = text;
+        if (role === 'bot') {
+            div.setAttribute('data-raw', text);
+            div.textContent = expertInsightsOn ? text : stripInsights(text);
+        } else {
+            div.textContent = text;
+        }
         msgs.appendChild(div);
         msgs.scrollTop = msgs.scrollHeight;
     }
 
+    function rerenderBotMessages() {
+        var bots = document.querySelectorAll('.fern-msg-bot');
+        for (var i = 0; i < bots.length; i++) {
+            var raw = bots[i].getAttribute('data-raw') || '';
+            bots[i].textContent = expertInsightsOn ? raw : stripInsights(raw);
+        }
+    }
+
     function processAndSend(rawText) {
-        var displayed = expertInsightsOn ? rawText : stripInsights(rawText);
-        appendMessage(displayed, 'bot');
+        appendMessage(rawText, 'bot');
 
         if (hasPhonetic(rawText) && !triggerFired) {
             insightCount++;
@@ -287,6 +299,7 @@
             expertInsightsOn = this.checked;
             toggleValue.textContent = expertInsightsOn ? 'ON' : 'OFF';
             toggleValue.style.color = expertInsightsOn ? '#10b981' : '#666';
+            rerenderBotMessages();
         });
 
         sendBtn.addEventListener('click', handleSend);
