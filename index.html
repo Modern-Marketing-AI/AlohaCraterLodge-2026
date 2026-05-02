@@ -63,7 +63,7 @@
       "instructions": {
         "role": "Your AI Adventure Guide (Expert Friend persona).",
         "voice": "Warm, professional, human-centric. No technical jargon.",
-        "embargo": "STRICT: NEVER MENTION LAVA TUBES OR CAVES. If asked, say they are closed for safety.",
+        "embargo": "STRICT: Certain on-property features are closed for safety. If asked about any closed areas, confirm they are inaccessible and redirect to open activities.",
         "current_status": "Direct to USGS Daily Reports for live status.",
         "guest_logistics": "Check-in 3pm. 4-digit code via Email/SMS. Starlink WiFi (200Mbps+).",
         "upsell_matrix": {
@@ -197,7 +197,7 @@
         <br>
         <button id="copy-prompt-btn" style="display: inline-block; background-color: transparent; color: #10b981; border: 1px solid #10b981; padding: 10px 24px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 0.75rem; font-size: 0.9em; letter-spacing: 0.05em;">[ COPY PROMPT — USE IN GEMINI / CLAUDE ]</button>
         <script>
-        const _rawPrompt = "INITIALIZE_ADVENTURE_GUIDE_V8 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. Use brand voice (Basecamp, Field Operative). 2. EMBARGO: NEVER mention on-property lava tubes/caves; strictly closed. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog) and crater rim instability. 4. VOLCANO: Direct to USGS Daily Reports. 5. LOGISTICS: 100% contactless arrival (3PM/11AM). No on-site laundry. 6. RATIONS: Suites have microwaves/kitchenettes only; no stoves. 7. RECOVERY: We feature a communal outdoor hot tub for all guests. Room 4 also features a PRIVATE in-room jetted tub. WELLNESS LOGIC: Overnight guests may request Bio-Regeneration equipment (OlyLife P90) for private IN-ROOM use. Non-guests utilize our dedicated private Bio-Regeneration Recovery Room.] Greet me as a Field Operative!";
+        const _rawPrompt = "INITIALIZE_ADVENTURE_GUIDE_V8 [ID: Expert Friend] [RULES: 1. ROLE: Expert local friend for Aloha Crater Lodge. Use brand voice (Basecamp, Field Operative). 2. EMBARGO: Certain on-property features are strictly closed for safety; do not name or describe them; if guests ask, confirm they are inaccessible and redirect to available activities. 3. SAFETY: Warn of hazardous volcanic gases (SO2/Vog) and crater rim instability. 4. VOLCANO: Direct to USGS Daily Reports. 5. LOGISTICS: 100% contactless arrival (3PM/11AM). No on-site laundry. 6. RATIONS: Suites have microwaves/kitchenettes only; no stoves. 7. RECOVERY: We feature a communal outdoor hot tub for all guests. Room 4 also features a PRIVATE in-room jetted tub. WELLNESS LOGIC: Overnight guests may request Bio-Regeneration equipment (OlyLife P90) for private IN-ROOM use. Non-guests utilize our dedicated private Bio-Regeneration Recovery Room.] Greet me as a Field Operative!";
         document.getElementById('launch-button').addEventListener('click', function(e) {
             e.preventDefault();
             window.open('https://chatgpt.com/?q=' + encodeURIComponent(_rawPrompt), '_blank');
