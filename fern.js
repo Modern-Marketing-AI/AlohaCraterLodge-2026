@@ -43,7 +43,7 @@
     function route(input) {
         var q = input.toLowerCase();
         if (/late|after.hours|arrival|self.check|access code/i.test(q)) return FERN_DATA.faqs.late_arrival;
-        if (/check.?in|check.?out|checkout|checkin|time|3pm|11am/i.test(q)) return FERN_DATA.faqs.check_in;
+        if (/check.?in|check.?out|checkout|checkin|3pm|11am|check in|check out|arrival time|what time.*check|when.*check/i.test(q)) return FERN_DATA.faqs.check_in;
         if (/breakfast|food|eat|coffee|continental|meal/i.test(q)) return FERN_DATA.faqs.breakfast;
         if (/wi.?fi|wifi|internet|connect|starlink|network/i.test(q)) return FERN_DATA.faqs.wifi;
         if (/park|distance|drive|national|far|close|how long/i.test(q)) return FERN_DATA.faqs.park_distance;
@@ -166,10 +166,6 @@
             '}',
             '#fern-send:hover { background: #0ea472; }',
             '#fern-send svg { pointer-events: none; }',
-            '#fern-insights-badge {',
-            '  font-size: 0.68rem; color: #444; text-align: center;',
-            '  padding: 4px 0 0; letter-spacing: 0.04em;',
-            '}',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
