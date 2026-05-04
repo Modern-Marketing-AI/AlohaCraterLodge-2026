@@ -143,14 +143,29 @@
         if (/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|forest edge/i.test(q)) {
             return data.rooms.room_4;
         }
-        if (/room|suite|linen|fiber|360|virtual tour/i.test(q)) {
+        if (/room|suite|linen|360|virtual tour/i.test(q)) {
             return data.rooms.general;
         }
         if (/check.?in|check.?out|arrival time|3pm|11am|access code|self.check|remote check/i.test(q)) {
             return 'Check-in: ' + data.logistics.check_in + ' Check-out: ' + data.logistics.check_out;
         }
-        if (/breakfast|food|eat|coffee|continental|meal|amenities|tea/i.test(q)) {
-            return data.logistics.amenities;
+        if (/breakfast|food|eat|coffee|continental|meal|amenities|tea|shared.*kitchen|fridge|refrigerator|provisions/i.test(q)) {
+            return data.common_area_etiquette.shared_spaces;
+        }
+        if (/quiet.*hour|noise|loud|etiquette|curfew|after.*9|9pm|9:00 pm/i.test(q)) {
+            return data.common_area_etiquette.quiet_hours;
+        }
+        if (/solar|renewable|energy|power|electric/i.test(q)) {
+            return data.sustainability_and_infrastructure.energy;
+        }
+        if (/water|rainwater|catchment|drinking.*water|tap.*water/i.test(q)) {
+            return data.sustainability_and_infrastructure.water;
+        }
+        if (/fiber|internet|wifi|wi.?fi|connectivity|zoom|remote.*work|starlink|online|connect/i.test(q)) {
+            return data.sustainability_and_infrastructure.connectivity;
+        }
+        if (/sustainability|sustainable|eco|green.*lodge|footprint|environment/i.test(q)) {
+            return data.sustainability_and_infrastructure.energy;
         }
         if (/park|distance|drive|location|where.*lodge|far|how long|miles|minutes/i.test(q)) {
             return data.logistics.location;
@@ -164,8 +179,38 @@
         if (/bike|e.?bike|ebike|cycle|cycling/i.test(q)) {
             return data.add_on_services.e_bikes;
         }
-        if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen/i.test(q)) {
+        if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen|theragun/i.test(q)) {
             return data.add_on_services.wellness_tools;
+        }
+        if (/rainy|raining|misty|cloudy day|what.*do.*rain|stuck.*inside|bad weather|hilo/i.test(q)) {
+            return data.curated_itineraries.rainy_day;
+        }
+        if (/star|stargazing|milky way|night sky|astronomy|dark sky|light pollution/i.test(q)) {
+            return data.curated_itineraries.stargazer;
+        }
+        if (/morning|farmers.*market|cooper center|slow.*day|slow.*morning|coffee.*shop|pastry|cafe/i.test(q)) {
+            return data.curated_itineraries.slow_morning;
+        }
+        if (/itinerary|things.*do|what.*do|activities|suggestions|ideas/i.test(q)) {
+            return data.curated_itineraries.slow_morning;
+        }
+        if (/hapuu|hap[uū]|tree fern|ohia|[oō]hi[aā]|lehua|flora|plant|flower|native.*plant/i.test(q)) {
+            return data.naturalist_guide.flora;
+        }
+        if (/bird|iiwi|[iī][iī]wi|nene|n[eē]n[eē]|goose|fauna|wildlife|animal/i.test(q)) {
+            return data.naturalist_guide.fauna;
+        }
+        if (/frog|coqui|ko.?kee|sound|singing|night.*sound|noise.*night|chorus/i.test(q)) {
+            return data.naturalist_guide.soundscape;
+        }
+        if (/pele|p[eē]l[eē]|deity|goddess|reverence|sacred|respect.*volcano/i.test(q)) {
+            return data.cultural_respect.pele;
+        }
+        if (/rock|lava rock|take.*rock|remove.*rock|souvenir.*rock|[aā]ina|aina|land|native plant.*take|take.*plant/i.test(q)) {
+            return data.cultural_respect.aina;
+        }
+        if (/cultural|culture|hawaiian.*custom|respect/i.test(q)) {
+            return data.cultural_respect.pele;
         }
         return getFallback(data);
     }
