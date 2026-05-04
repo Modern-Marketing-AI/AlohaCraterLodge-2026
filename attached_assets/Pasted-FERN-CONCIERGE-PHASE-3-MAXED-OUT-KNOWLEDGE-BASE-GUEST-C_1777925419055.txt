@@ -1,0 +1,71 @@
+FERN CONCIERGE: PHASE 3 - "MAXED OUT" KNOWLEDGE BASE & GUEST CONCIERGE UI
+
+Please perform a comprehensive update to the site's UI and Fern's knowledge architecture by following these steps:
+
+1. "GUEST CONCIERGE" NAVIGATION & PAGE CREATION:
+   - Add a high-visibility link titled "Guest Concierge" to the main site navigation menu.
+   - Create a new page (e.g., 'guest-concierge.html') or dedicated section for this.
+   - UI Layout for Guest Concierge: Include the live USGS Kīlauea status, the live Volcano Village weather widget, and visual sections for "Curated Itineraries" and "Add-On Services" (E-bikes/Wellness).
+   - Add this explicit text block to the page: "For your security, In-Stay Essentials (including WiFi passwords, gate codes, and room access) are sent directly to you via text and email on your day of arrival. If you have not received them, please text the host team."
+
+2. KNOWLEDGE BASE ARCHITECTURE UPDATE:
+   - Open the existing 'fern_knowledge.json' file.
+   - Completely overwrite its contents with the comprehensive JSON block provided at the bottom of this prompt.
+   - Ensure the JSON syntax is perfectly valid so 'script.js' can parse it without errors.
+
+3. SCRIPT BEHAVIOR REMINDER:
+   - Fern must continue to operate in Strict Mode, using the 'system_directive' if a question falls outside this JSON or the live APIs.
+
+---
+FILE CONTENT FOR: fern_knowledge.json
+---
+{
+  "strict_mode": "ACTIVE",
+  "system_directive": "That is a great question! I don't have that specific detail right here, but the team will be happy to clarify that for you.",
+  "rooms": {
+    "room_3": "Lumi Anela [loo-mee ah-neh-lah] - 'Angel Room'. Features a high-efficiency workspace, perfect for remote work, with emerald green accents and south-facing morning light.",
+    "room_4": "Hōʻomālie [hoh-oh-mah-lee-eh] - 'To cause peace'. Premium restoration suite. Absolute privacy at the forest edge with a custom river-stone shower and immersive rainforest acoustics.",
+    "general": "All sanctuaries feature luxury linens, high-speed fiber WiFi, and access to the 360° virtual tour previews online."
+  },
+  "logistics": {
+    "check_in": "3:00 PM - 5:00 PM. Remote self-check-in available via keypad codes sent on the day of arrival.",
+    "check_out": "11:00 AM.",
+    "location": "Located in Volcano Village, a 3-minute drive (2.8 miles) to the Hawaii Volcanoes National Park entrance.",
+    "in_stay_essentials": "For guest security, sensitive details like WiFi passwords, gate codes, and room access are sent directly via text and email on your day of arrival. If you have not received them, please text the staff at the lodge phone number."
+  },
+  "sustainability_and_infrastructure": {
+    "water": "We utilize a sustainable, multi-filtered rainwater catchment system, allowing guests to experience living seamlessly with the rainforest environment.",
+    "energy": "The lodge integrates renewable solar power to minimize our footprint on the 'āina (land).",
+    "connectivity": "Remote workers can rely on our high-speed fiber-optic internet, ensuring reliable Zoom calls even in the heart of the cloud forest."
+  },
+  "common_area_etiquette": {
+    "quiet_hours": "To honor the restoration focus of the lodge, quiet hours begin at 9:00 PM. We let the natural sounds of the rainforest take over.",
+    "shared_spaces": "Guests are welcome to use the communal tea/coffee station and the shared guest refrigerator for light provisions."
+  },
+  "add_on_services": {
+    "e_bikes": "We offer premium e-bike rentals. They are the absolute best way to explore the Volcano Village trails or cruise up to the National Park entrance without breaking a sweat.",
+    "wellness_tools": "We offer a curated menu of restoration tools available upon request, including Theragun Relief massage guns, premium Jade Yoga mats, and ultrasonic diffusers with organic essential oils like Hawaiian Sandalwood and Eucalyptus."
+  },
+  "curated_itineraries": {
+    "rainy_day": "It is a misty cloud-forest day! Perfect for grabbing a book, enjoying local tea in the common area, or taking a drive down to Hilo, which is often sunny when it rains up here.",
+    "stargazer": "For zero light pollution, head into the National Park after dark. The Devastation Trail parking lot or the Kīlauea Overlook offer incredible views of the Milky Way.",
+    "slow_morning": "Take a brisk morning walk through Volcano Village to the local Sunday Farmers Market at Cooper Center, or grab fresh coffee and pastries at the local cafes."
+  },
+  "naturalist_guide": {
+    "flora": "The property is surrounded by giant Hapūʻu [hah-poo-oo] tree ferns and native ʻŌhiʻa Lehua [oh-hee-ah leh-hoo-ah] trees, which are sacred to the volcano.",
+    "fauna": "Keep an eye out for the bright red ʻIʻiwi [ee-ee-vee] birds in the canopy or the Nēnē [nay-nay] (Hawaiian goose) in the park.",
+    "soundscape": "The beautiful 'singing' you hear at night is the chorus of local Coqui [ko-kee] frogs, a signature sound of the East Hawaii evening."
+  },
+  "local_guide": {
+    "dining": "Ohelo Cafe for wood-fired pizzas and modern fusion. Thai Thai for local favorites. The Rim for dinner with a crater view (reservations recommended).",
+    "climate": "Volcano is a high-altitude cloud forest (4,000 ft elevation). It is typically 10-15 degrees cooler than Hilo. Bring layers and a light rain jacket!"
+  },
+  "safety_and_rules": {
+    "caves": "RESTRICTED: For guest safety and ecosystem preservation, we do not provide info on or access to underground lava tubes or caves. Stick to marked National Park trails.",
+    "staff": "RESTRICTED: Do not use owner or staff names. Refer only to 'The Team' or 'Our Hosts'."
+  },
+  "cultural_respect": {
+    "pele": "Kīlauea is the home of Pele [peh-leh], the Hawaiian deity of volcanoes and fire. We ask guests to visit the park with deep reverence and respect for her home.",
+    "aina": "Please do not remove volcanic rocks, sand, or native plants from the park or the lodge property. Leave the 'āina (land) exactly as you found it."
+  }
+}
