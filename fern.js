@@ -11,14 +11,51 @@
 
     var MAX_INTENTS = 3;
 
-    var TOPIC_CHIPS = [
-        { label: 'Stargazing',     question: 'Tell me about stargazing near the lodge' },
-        { label: 'Rainy Day?',     question: 'What can I do on a rainy day?' },
-        { label: 'Local Birds',    question: 'What birds might I see here?' },
-        { label: 'Sustainability', question: 'How is the lodge sustainable?' },
-        { label: 'Pele & Culture', question: 'Tell me about Pele and Hawaiian culture' },
-        { label: 'Itineraries',    question: 'What are some activity ideas and itineraries?' }
+    var TOPIC_CHIPS_POOL = [
+        { label: 'Stargazing',      question: 'Tell me about stargazing near the lodge' },
+        { label: 'Rainy Day?',      question: 'What can I do on a rainy day?' },
+        { label: 'Local Birds',     question: 'What birds might I see here?' },
+        { label: 'Sustainability',  question: 'How is the lodge sustainable?' },
+        { label: 'Pele & Culture',  question: 'Tell me about Pele and Hawaiian culture' },
+        { label: 'Itineraries',     question: 'What are some activity ideas and itineraries?' },
+        { label: 'Tree Ferns',      question: 'Tell me about the native plants and tree ferns on the property' },
+        { label: 'Night Sounds',    question: 'What is that sound I hear at night?' },
+        { label: 'E-Bikes',         question: 'Tell me about the e-bike rentals' },
+        { label: 'Local Dining',    question: 'What are some good restaurants nearby?' },
+        { label: 'Rainwater',       question: 'How does the rainwater catchment system work?' },
+        { label: 'Farmers Market',  question: 'Is there a farmers market nearby?' }
     ];
+
+    var CHIPS_SESSION_KEY = 'fern_chips_session';
+    var CHIPS_SHOW_COUNT = 6;
+
+    function getSessionChips() {
+        try {
+            var stored = sessionStorage.getItem(CHIPS_SESSION_KEY);
+            if (stored) {
+                var indices = JSON.parse(stored);
+                if (Array.isArray(indices) && indices.length === CHIPS_SHOW_COUNT) {
+                    return indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
+                }
+            }
+        } catch (e) { }
+
+        var pool = TOPIC_CHIPS_POOL.slice();
+        var selected = [];
+        while (selected.length < CHIPS_SHOW_COUNT && pool.length > 0) {
+            var ri = Math.floor(Math.random() * pool.length);
+            selected.push(pool.splice(ri, 1)[0]);
+        }
+
+        var selectedIndices = selected.map(function (chip) {
+            return TOPIC_CHIPS_POOL.indexOf(chip);
+        });
+        try {
+            sessionStorage.setItem(CHIPS_SESSION_KEY, JSON.stringify(selectedIndices));
+        } catch (e) { }
+
+        return selected;
+    }
 
     var GREETING = "Hi, I'm Fern, your Lodge Guide. Aloha! I'm here to help you find your way — whether you're picking the perfect suite, checking on the volcano, or looking for the best trails. How can I help you today?";
     var INSIGHT_TRIGGER_MSG = "I hope these local insights are helping you get a feel for the Lodge! You can flip the 'Expert Insights' switch at the top to 'Off' any time if you'd prefer quick facts only. Should I keep the local tips coming?";
@@ -263,7 +300,7 @@
         if (!msgs) return;
         var row = document.createElement('div');
         row.id = 'fern-chips';
-        TOPIC_CHIPS.forEach(function (chip) {
+        getSessionChips().forEach(function (chip) {
             var btn = document.createElement('button');
             btn.className = 'fern-chip';
             btn.textContent = chip.label;
