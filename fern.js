@@ -1,31 +1,30 @@
 (function () {
     'use strict';
 
-    var FERN_DATA = {
-        bot_name: "Fern",
-        faqs: {
-            late_arrival: "No worries! We offer a seamless self-check-in process. Management will send your specific access codes on the day of your arrival.",
-            check_in: "Check-in is between 3:00 PM and 5:00 PM. Check-out is at 11:00 AM.",
-            breakfast: "A continental selection is provided by the team for you to enjoy at your leisure.",
-            wifi: "We have free high-speed Wi-Fi throughout the lodge so you can stay connected.",
-            park_distance: "We are just about a 3-minute drive from the entrance of Hawaii Volcanoes National Park.",
-            weather: "Volcano is cooler than the coast! I recommend a light jacket for the evening lānais.",
-            room3: "Room 3 is the Lumi Anela [loo-mee ah-neh-lah]. In Hawaiian, it means 'Angel Room'. It features a high-efficiency workspace and incredible natural light.",
-            room4: "Room 4 is the Hōʻomālie [hoh-oh-mah-lee-eh] suite, meaning 'to cause peace'. It is secluded on the forest edge and has a beautiful custom stone shower."
-        },
-        fallback: "That's a great question! I want to make sure I give you the most accurate information. Let me check with the team, and we'll make sure you have everything you need for a perfect stay."
-    };
-
-    var GREETING = "Hi, I'm Fern, your Lodge Guide. Aloha! I'm here to help you find your way—whether you're picking the perfect suite or looking for the best hidden views at the crater. How can I help you today?";
-
-    var INSIGHT_TRIGGER_MSG = "I hope these local insights are helping you get a feel for the Lodge! I'll keep sharing them, but if you're in a hurry and want to stick strictly to the facts, you can always flip the 'Expert Insights' switch at the top of this window to 'Off' at any time. Should I keep the local tips coming for now?";
-
-    var insightCount = 0;
-    var triggerFired = false;
+    var fernData = null;
+    var pendingResponse = false;
     var expertInsightsOn = true;
     var greeted = false;
+    var insightCount = 0;
+    var triggerFired = false;
+
+    var GREETING = "Hi, I'm Fern, your Lodge Guide. Aloha! I'm here to help you find your way — whether you're picking the perfect suite, checking on the volcano, or looking for the best trails. How can I help you today?";
+    var INSIGHT_TRIGGER_MSG = "I hope these local insights are helping you get a feel for the Lodge! You can flip the 'Expert Insights' switch at the top to 'Off' any time if you'd prefer quick facts only. Should I keep the local tips coming?";
+    var GRACEFUL_FAIL = "I can't reach the live sensors right now, but the team can give you the latest updates.";
 
     var PHONETIC_TEST = /\[[^\]]+\]/;
+
+    var WMO_CODES = {
+        0: 'Clear skies',
+        1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Overcast',
+        45: 'Foggy — very typical for Volcano Village!', 48: 'Freezing fog',
+        51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle',
+        61: 'Light rain', 63: 'Rain', 65: 'Heavy rain',
+        71: 'Light snow', 73: 'Snow', 75: 'Heavy snow',
+        77: 'Snow grains', 80: 'Rain showers', 81: 'Rain showers', 82: 'Heavy rain showers',
+        85: 'Snow showers', 86: 'Heavy snow showers',
+        95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Heavy thunderstorm'
+    };
 
     function stripInsights(text) {
         return text
@@ -40,17 +39,213 @@
         return PHONETIC_TEST.test(text);
     }
 
-    function route(input) {
+    function loadKnowledge() {
+        return fetch('/fern_knowledge.json')
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                fernData = data;
+            })
+            .catch(function () {
+                fernData = { _fallback: true, system_directive: "That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you." };
+            });
+    }
+
+    function fetchVolcanoStatus() {
+        return fetch('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO', { mode: 'cors' })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                var level = '';
+                if (Array.isArray(data) && data.length > 0) {
+                    level = (data[0].alert_level || '').toLowerCase();
+                } else if (data && data.alert_level) {
+                    level = data.alert_level.toLowerCase();
+                }
+                var map = {
+                    'normal': 'Resting / Quiet',
+                    'green': 'Resting / Quiet',
+                    'advisory': 'Advisory — Watch the Updates',
+                    'yellow': 'Advisory — Watch the Updates',
+                    'watch': 'Elevated Activity',
+                    'orange': 'Elevated Activity',
+                    'warning': 'Erupting — Check with Ranger Station',
+                    'red': 'Erupting — Check with Ranger Station'
+                };
+                var friendly = map[level] || 'Status available at the USGS Volcano Hazards Program page';
+                return 'Live Kīlauea status: ' + friendly + '. Always verify current conditions at the USGS Volcano Hazards Program page before heading to the crater rim.';
+            })
+            .catch(function () {
+                return GRACEFUL_FAIL;
+            });
+    }
+
+    function fetchWeather() {
+        var url = 'https://api.open-meteo.com/v1/forecast' +
+            '?latitude=19.4294&longitude=-155.2434' +
+            '&current=temperature_2m,weather_code' +
+            '&temperature_unit=fahrenheit' +
+            '&timezone=Pacific%2FHonolulu';
+        return fetch(url)
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                var temp = Math.round(data.current.temperature_2m);
+                var code = data.current.weather_code;
+                var condition = WMO_CODES[code] || 'Mixed cloud and mist';
+                return 'Right now in Volcano Village: ' + temp + '\u00b0F and ' + condition + '. Remember, Volcano is a high-altitude cloud forest — typically 10\u201315\u00b0F cooler than the coast. Pack layers and a light rain jacket!';
+            })
+            .catch(function () {
+                return GRACEFUL_FAIL;
+            });
+    }
+
+    function getUpsells(input, data) {
+        if (!data || data._fallback) return [];
         var q = input.toLowerCase();
-        if (/late|after.hours|arrival|self.check|access code/i.test(q)) return FERN_DATA.faqs.late_arrival;
-        if (/check.?in|check.?out|checkout|checkin|3pm|11am|check in|check out|arrival time|what time.*check|when.*check/i.test(q)) return FERN_DATA.faqs.check_in;
-        if (/breakfast|food|eat|coffee|continental|meal/i.test(q)) return FERN_DATA.faqs.breakfast;
-        if (/wi.?fi|wifi|internet|connect|starlink|network/i.test(q)) return FERN_DATA.faqs.wifi;
-        if (/park|distance|drive|national|far|close|how long/i.test(q)) return FERN_DATA.faqs.park_distance;
-        if (/weather|cold|jacket|temperature|cool|warm|rain|fog|vog/i.test(q)) return FERN_DATA.faqs.weather;
-        if (/room.?3|lumi|anela|workspace|angel room|efficient/i.test(q)) return FERN_DATA.faqs.room3;
-        if (/room.?4|h[oō][ʻ']?om[aā]lie|hoomalie|whirlpool|jetted|stone shower|forest edge|peace/i.test(q)) return FERN_DATA.faqs.room4;
-        return FERN_DATA.fallback;
+        var upsells = [];
+        var primaryIsEbike = /^(bike|e.?bike|ebike|cycle|cycling)/i.test(q.trim());
+        var primaryIsWellness = /^(wellness|massage|yoga|aromatherapy|diffuser|recovery|bio.?regen)/i.test(q.trim());
+        if (!primaryIsEbike && /trail|explore|exploring|hike|hiking|getting to the park|cruise to|cruise up|park entrance|national park/i.test(q)) {
+            upsells.push(data.add_on_services.e_bikes);
+        }
+        if (!primaryIsWellness && /relax|relaxing|room.?4|shower|restore|unwind|recovery|soak/i.test(q)) {
+            upsells.push(data.add_on_services.wellness_tools);
+        }
+        return upsells;
+    }
+
+    function buildSyncResponse(input, data) {
+        var q = input.toLowerCase();
+        if (!data || data._fallback) return data.system_directive;
+
+        if (/cave|lava tube|tube system|underground/i.test(q)) {
+            return data.safety_and_rules.caves;
+        }
+        if (/room.?3|lumi|anela|workspace|angel room/i.test(q)) {
+            return data.rooms.room_3;
+        }
+        if (/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|forest edge/i.test(q)) {
+            return data.rooms.room_4;
+        }
+        if (/room|suite|linen|fiber|360|virtual tour/i.test(q)) {
+            return data.rooms.general;
+        }
+        if (/check.?in|check.?out|arrival time|3pm|11am|access code|self.check|remote check/i.test(q)) {
+            return 'Check-in: ' + data.logistics.check_in + ' Check-out: ' + data.logistics.check_out;
+        }
+        if (/breakfast|food|eat|coffee|continental|meal|amenities|tea/i.test(q)) {
+            return data.logistics.amenities;
+        }
+        if (/park|distance|drive|location|where.*lodge|far|how long|miles|minutes/i.test(q)) {
+            return data.logistics.location;
+        }
+        if (/dining|restaurant|eat out|lunch|dinner|ohelo|thai thai|the rim|pizza/i.test(q)) {
+            return data.local_guide.dining;
+        }
+        if (/climate|layers|pack|what.*wear|bring.*clothes/i.test(q)) {
+            return data.local_guide.climate;
+        }
+        if (/bike|e.?bike|ebike|cycle|cycling/i.test(q)) {
+            return data.add_on_services.e_bikes;
+        }
+        if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen/i.test(q)) {
+            return data.add_on_services.wellness_tools;
+        }
+        return data.system_directive;
+    }
+
+    function routeAsync(input, data) {
+        var q = input.toLowerCase();
+        if (/volcano|eruption|erupting|alert level|kīlauea|kilauea|lava flow|active.*vent|vog level/i.test(q)) {
+            return fetchVolcanoStatus();
+        }
+        if (/weather|temperature|how cold|how warm|what.*wear.*outside|forecast|degrees/i.test(q)) {
+            return fetchWeather();
+        }
+        return Promise.resolve(buildSyncResponse(input, data));
+    }
+
+    function appendMessage(text, role) {
+        var msgs = document.getElementById('fern-messages');
+        var div = document.createElement('div');
+        div.className = 'fern-msg ' + (role === 'bot' ? 'fern-msg-bot' : 'fern-msg-user');
+        if (role === 'bot') {
+            div.setAttribute('data-raw', text);
+            div.textContent = expertInsightsOn ? text : stripInsights(text);
+        } else {
+            div.textContent = text;
+        }
+        msgs.appendChild(div);
+        msgs.scrollTop = msgs.scrollHeight;
+        return div;
+    }
+
+    function rerenderBotMessages() {
+        var bots = document.querySelectorAll('.fern-msg-bot');
+        for (var i = 0; i < bots.length; i++) {
+            var raw = bots[i].getAttribute('data-raw') || '';
+            bots[i].textContent = expertInsightsOn ? raw : stripInsights(raw);
+        }
+    }
+
+    function processAndSend(rawText) {
+        appendMessage(rawText, 'bot');
+        if (hasPhonetic(rawText) && !triggerFired) {
+            insightCount++;
+            if (insightCount >= 3) {
+                triggerFired = true;
+                setTimeout(function () {
+                    appendMessage(INSIGHT_TRIGGER_MSG, 'bot');
+                }, 1000);
+            }
+        }
+    }
+
+    function setInputBusy(busy) {
+        var inp = document.getElementById('fern-input');
+        var btn = document.getElementById('fern-send');
+        if (!inp || !btn) return;
+        inp.disabled = busy;
+        btn.disabled = busy;
+        btn.style.opacity = busy ? '0.5' : '1';
+    }
+
+    function handleSend() {
+        if (pendingResponse) return;
+        var input = document.getElementById('fern-input');
+        var text = input.value.trim();
+        if (!text) return;
+
+        if (!fernData) {
+            appendMessage("One moment — I'm still loading the Lodge intel. Please try again in a second!", 'bot');
+            return;
+        }
+
+        appendMessage(text, 'user');
+        input.value = '';
+        pendingResponse = true;
+        setInputBusy(true);
+
+        routeAsync(text, fernData).then(function (primary) {
+            var upsells = getUpsells(text, fernData);
+            var parts = [primary];
+            upsells.forEach(function (u) {
+                if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
+            });
+            var full = parts.join('');
+            pendingResponse = false;
+            setInputBusy(false);
+            setTimeout(function () {
+                processAndSend(full);
+            }, 320);
+        });
     }
 
     function injectStyles() {
@@ -67,7 +262,7 @@
             '#fern-window {',
             '  position: fixed; bottom: 100px; right: 28px;',
             '  width: 360px; max-width: calc(100vw - 32px);',
-            '  height: 520px; max-height: calc(100vh - 120px);',
+            '  height: 540px; max-height: calc(100vh - 120px);',
             '  background: #18181b; border: 1px solid #2a2a2a;',
             '  border-radius: 12px; display: flex; flex-direction: column;',
             '  box-shadow: 0 16px 48px rgba(0,0,0,0.7); z-index: 99997;',
@@ -137,7 +332,7 @@
             '#fern-messages::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }',
             '.fern-msg {',
             '  max-width: 88%; padding: 10px 13px; border-radius: 10px;',
-            '  font-size: 0.88rem; line-height: 1.55; word-break: break-word;',
+            '  font-size: 0.88rem; line-height: 1.6; word-break: break-word; white-space: pre-wrap;',
             '}',
             '.fern-msg-bot {',
             '  align-self: flex-start; background: #1f1f23;',
@@ -145,7 +340,7 @@
             '}',
             '.fern-msg-user {',
             '  align-self: flex-end; background: #10b981;',
-            '  color: #0a0a0a; font-weight: 500; border-bottom-right-radius: 2px;',
+            '  color: #0a0a0a; font-weight: 500; border-bottom-right-radius: 2px; white-space: normal;',
             '}',
             '#fern-input-row {',
             '  display: flex; gap: 8px; padding: 10px 12px 12px;',
@@ -158,13 +353,14 @@
             '}',
             '#fern-input:focus { border-color: #10b981; }',
             '#fern-input::placeholder { color: #444; }',
+            '#fern-input:disabled { opacity: 0.5; }',
             '#fern-send {',
             '  background: #10b981; border: none; border-radius: 8px;',
             '  width: 38px; height: 38px; cursor: pointer; flex-shrink: 0;',
             '  display: flex; align-items: center; justify-content: center;',
-            '  transition: background 0.2s; outline: none;',
+            '  transition: background 0.2s, opacity 0.2s; outline: none;',
             '}',
-            '#fern-send:hover { background: #0ea472; }',
+            '#fern-send:hover:not(:disabled) { background: #0ea472; }',
             '#fern-send svg { pointer-events: none; }',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
@@ -181,18 +377,26 @@
     function buildHTML() {
         var fab = document.createElement('button');
         fab.id = 'fern-fab';
-        fab.setAttribute('aria-label', 'Chat with Fern, your Lodge Guide');
-        fab.setAttribute('title', 'Chat with Fern');
-        fab.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+        fab.setAttribute('aria-label', 'Chat with Fern, your Lodge Concierge');
+        fab.setAttribute('title', 'Ask Fern');
+        fab.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'
+            + '<path d="M12 22 C11.5 17 10 12 9 7.5 C8.5 5 9 3 10.5 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" fill="none"/>'
+            + '<path d="M10.5 18.5 C8.5 17.5 6.5 15.5 5.5 13.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '<path d="M9.8 14.5 C7.8 13 6 11 5 9" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '<path d="M9.3 10.5 C7.5 9 6 7 5.5 5" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '<path d="M11 16.5 C13 15.5 14.5 13.5 15.5 11.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '<path d="M10.2 12.5 C12.2 11 14 9 15 7" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '<path d="M9.8 8.5 C11.5 7 13 5 13.5 3" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>'
+            + '</svg>';
 
         var win = document.createElement('div');
         win.id = 'fern-window';
         win.setAttribute('role', 'dialog');
-        win.setAttribute('aria-label', 'Fern Lodge Guide Chat');
+        win.setAttribute('aria-label', 'Fern Concierge Chat');
         win.innerHTML = [
             '<div id="fern-header">',
             '  <div id="fern-header-top">',
-            '    <span id="fern-name">Fern &mdash; Lodge Guide</span>',
+            '    <span id="fern-name">Fern &mdash; Lodge Concierge</span>',
             '    <button id="fern-close" aria-label="Close chat">&times;</button>',
             '  </div>',
             '  <div id="fern-toggle-row">',
@@ -215,54 +419,6 @@
 
         document.body.appendChild(fab);
         document.body.appendChild(win);
-    }
-
-    function appendMessage(text, role) {
-        var msgs = document.getElementById('fern-messages');
-        var div = document.createElement('div');
-        div.className = 'fern-msg ' + (role === 'bot' ? 'fern-msg-bot' : 'fern-msg-user');
-        if (role === 'bot') {
-            div.setAttribute('data-raw', text);
-            div.textContent = expertInsightsOn ? text : stripInsights(text);
-        } else {
-            div.textContent = text;
-        }
-        msgs.appendChild(div);
-        msgs.scrollTop = msgs.scrollHeight;
-    }
-
-    function rerenderBotMessages() {
-        var bots = document.querySelectorAll('.fern-msg-bot');
-        for (var i = 0; i < bots.length; i++) {
-            var raw = bots[i].getAttribute('data-raw') || '';
-            bots[i].textContent = expertInsightsOn ? raw : stripInsights(raw);
-        }
-    }
-
-    function processAndSend(rawText) {
-        appendMessage(rawText, 'bot');
-
-        if (hasPhonetic(rawText) && !triggerFired) {
-            insightCount++;
-            if (insightCount >= 3) {
-                triggerFired = true;
-                setTimeout(function () {
-                    appendMessage(INSIGHT_TRIGGER_MSG, 'bot');
-                }, 1000);
-            }
-        }
-    }
-
-    function handleSend() {
-        var input = document.getElementById('fern-input');
-        var text = input.value.trim();
-        if (!text) return;
-        appendMessage(text, 'user');
-        input.value = '';
-        var response = route(text);
-        setTimeout(function () {
-            processAndSend(response);
-        }, 320);
     }
 
     function wireEvents() {
@@ -318,6 +474,7 @@
         injectStyles();
         buildHTML();
         wireEvents();
+        loadKnowledge();
     }
 
     if (document.readyState === 'loading') {
