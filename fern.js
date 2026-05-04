@@ -39,10 +39,10 @@
         return PHONETIC_TEST.test(text);
     }
 
-    function getFallback(data) {
-        var sd = (data && data.system_directive) || '';
-        var match = sd.match(/say:\s*['"]([^'"]+)['"]/);
-        return match ? match[1] : "That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you.";
+    var FALLBACK_MSG = "That is a great question! I don\u2019t have that detail right here, but the team will be happy to clarify that for you.";
+
+    function getFallback() {
+        return FALLBACK_MSG;
     }
 
     function loadKnowledge() {
@@ -75,12 +75,12 @@
                 var map = {
                     'normal': 'Resting / Quiet',
                     'green': 'Resting / Quiet',
-                    'advisory': 'Advisory — Watch the Updates',
-                    'yellow': 'Advisory — Watch the Updates',
+                    'advisory': 'Advisory / Watch the Updates',
+                    'yellow': 'Advisory / Watch the Updates',
                     'watch': 'Elevated Activity',
                     'orange': 'Elevated Activity',
-                    'warning': 'Erupting — Check with Ranger Station',
-                    'red': 'Erupting — Check with Ranger Station'
+                    'warning': 'Erupting \u2014 Check with Ranger Station',
+                    'red': 'Erupting \u2014 Check with Ranger Station'
                 };
                 var friendly = map[level] || 'Status available at the USGS Volcano Hazards Program page';
                 return 'Live Kīlauea status: ' + friendly + '. Always verify current conditions at the USGS Volcano Hazards Program page before heading to the crater rim.';
@@ -129,7 +129,7 @@
 
     function buildSyncResponse(input, data) {
         var q = input.toLowerCase();
-        if (!data || data._fallback) return data.system_directive;
+        if (!data || data._fallback) return getFallback();
 
         if (/cave|lava tube|tube system|underground/i.test(q)) {
             return data.safety_and_rules.caves;
@@ -167,7 +167,7 @@
         if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen/i.test(q)) {
             return data.add_on_services.wellness_tools;
         }
-        return getFallback(data);
+        return getFallback();
     }
 
     function routeAsync(input, data) {
