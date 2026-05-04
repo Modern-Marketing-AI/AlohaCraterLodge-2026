@@ -1,0 +1,59 @@
+FERN CONCIERGE: PHASE 2 - KNOWLEDGE ARCHITECTURE & UI OVERHAUL
+
+Please perform a complete upgrade of the site's AI Concierge and UI by following these steps:
+
+1. UI REPLACEMENT:
+   - Completely remove the "Digital Adventure Guide" from all pages.
+   - Replace it with a "Concierge Bubble" anchored to the bottom-right.
+   - Use a clean Hapūʻu Fern leaf icon (SVG or green vector) for the bubble.
+   - Keep the "Expert Insights" toggle integrated into the new chat UI.
+
+2. KNOWLEDGE BASE CREATION:
+   - Create a new file named 'fern_knowledge.json' in the root directory.
+   - Populate it EXACTLY with the JSON content provided at the bottom of this prompt.
+   - Update 'script.js' to fetch and load this JSON file on initialization.
+
+3. UPSELL LOGIC (ADD-ON SERVICES):
+   - Program Fern to contextually recommend add-ons. 
+   - IF a guest asks about "trails," "exploring," or "getting to the park," Fern MUST append: "By the way, we rent premium e-bikes—they are the perfect way to cruise up to the Park entrance without breaking a sweat!"
+   - IF a guest asks about "relaxing," "Room 4," or "showers," Fern MUST append: "We also offer a menu of wellness tools (like massage guns and aromatherapy) to elevate your stay."
+
+4. LIVE API INTEGRATIONS ('script.js'):
+   - USGS FETCH: Write a function to fetch live alert levels for Kīlauea from the USGS API. If an Alert Level is returned, map it to friendly advice (e.g., Green = "Resting/Quiet", Red = "Erupting/Check Ranger Station").
+   - WEATHER FETCH: Fetch live weather for Volcano, HI. 
+   - GRACEFUL FAIL: If CORS or API errors occur, Fern defaults to: "I can't reach the live sensors right now, but the team can give you the latest updates."
+
+5. STRICT MODE ENFORCEMENT:
+   - Fern must NEVER guess or hallucinate. If a user query does not match the JSON or APIs, she must output the 'system_directive' from the JSON.
+   - Strictly enforce the Safety Blackout (no tubes/caves) and Staff Anonymity rules.
+
+--- 
+FILE CONTENT FOR: fern_knowledge.json
+---
+{
+  "strict_mode": "ACTIVE",
+  "system_directive": "You are Fern, the digital concierge for Aloha Crater Lodge. Never guess. If an answer is not in this file or the live APIs, say: 'That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you.'",
+  "rooms": {
+    "room_3": "Lumi Anela [loo-mee ah-neh-lah] - 'Angel Room'. Features a high-efficiency workspace, perfect for remote work, with emerald green accents.",
+    "room_4": "Hōʻomālie [hoh-oh-mah-lee-eh] - 'To cause peace'. Premium restoration suite. Absolute privacy at the forest edge with a custom river-stone shower.",
+    "general": "All sanctuaries feature luxury linens, high-speed fiber WiFi, and access to the 360° virtual tour previews online."
+  },
+  "logistics": {
+    "check_in": "3:00 PM - 5:00 PM. Remote self-check-in available (codes sent day-of).",
+    "check_out": "11:00 AM.",
+    "amenities": "Complimentary continental breakfast, dedicated tea/coffee station.",
+    "location": "Located in Volcano Village, a 3-minute drive (2.8 miles) to the Hawaii Volcanoes National Park entrance."
+  },
+  "add_on_services": {
+    "e_bikes": "We offer premium e-bike rentals. They are the absolute best way to explore the Volcano Village trails or cruise up to the National Park entrance without breaking a sweat.",
+    "wellness_tools": "We offer a curated selection of wellness tools to enhance your restoration, including massage guns, yoga mats, and aromatherapy diffusers."
+  },
+  "local_guide": {
+    "dining": "Ohelo Cafe for wood-fired pizzas and modern fusion. Thai Thai for local favorites. The Rim for dinner with a crater view.",
+    "climate": "Volcano is a high-altitude cloud forest. It is typically 10-15 degrees cooler than Hilo. Bring layers and a light rain jacket!"
+  },
+  "safety_and_rules": {
+    "caves": "RESTRICTED: For guest safety and ecosystem preservation, we do not provide info on or access to underground lava tubes or caves. Stick to marked National Park trails.",
+    "staff": "RESTRICTED: Do not use owner or staff names. Refer only to 'The Team' or 'Our Hosts'."
+  }
+}
