@@ -134,6 +134,9 @@
         if (/cave|lava tube|tube system|underground/i.test(q)) {
             return data.safety_and_rules.caves;
         }
+        if (/owner|who.*runs|who.*manage|manager.*name|staff.*name|host.*name|your.*name|team.*name/i.test(q)) {
+            return data.safety_and_rules.staff;
+        }
         if (/room.?3|lumi|anela|workspace|angel room/i.test(q)) {
             return data.rooms.room_3;
         }
@@ -169,7 +172,7 @@
 
     function routeAsync(input, data) {
         var q = input.toLowerCase();
-        if (/volcano|eruption|erupting|alert level|kīlauea|kilauea|lava flow|active.*vent|vog level/i.test(q)) {
+        if (/eruption|erupting|alert.?level|vog.?level|lava.?flow|active.*vent|is.*erupting|volcano.*(status|active|erupt|alert|level)/i.test(q)) {
             return fetchVolcanoStatus();
         }
         if (/weather|temperature|how cold|how warm|what.*wear.*outside|forecast|degrees/i.test(q)) {
@@ -251,6 +254,10 @@
             setTimeout(function () {
                 processAndSend(full);
             }, 320);
+        }).catch(function () {
+            pendingResponse = false;
+            setInputBusy(false);
+            appendMessage(getFallback(fernData), 'bot');
         });
     }
 
