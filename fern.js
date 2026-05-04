@@ -39,7 +39,7 @@
         return PHONETIC_TEST.test(text);
     }
 
-    var FALLBACK_MSG = "That is a great question! I don\u2019t have that specific detail right here, but the team will be happy to clarify that for you.";
+    var FALLBACK_MSG = "That is a great question! I don't have that specific detail right here, but the team will be happy to clarify that for you.";
 
     function getFallback(data) {
         return (data && data.system_directive) ? data.system_directive : FALLBACK_MSG;
