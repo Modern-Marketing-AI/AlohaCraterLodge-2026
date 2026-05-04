@@ -194,6 +194,19 @@
         return results.length > 0 ? results[0] : getFallback(data);
     }
 
+    var BRIDGE_PHRASES = [
+        'Also — ',
+        'On another note — ',
+        'Good question on both fronts! ',
+        'And to cover the other part — ',
+        'Switching gears a bit — ',
+        'Here\'s the other piece — ',
+    ];
+
+    function pickBridge() {
+        return BRIDGE_PHRASES[Math.floor(Math.random() * BRIDGE_PHRASES.length)];
+    }
+
     function routeAsync(input, data) {
         var q = input.toLowerCase();
         var asyncFetchers = [];
@@ -214,7 +227,7 @@
             if (syncResults.length === 1) return Promise.resolve(syncResults[0]);
             var syncJoined = syncResults[0];
             for (var k = 1; k < syncResults.length; k++) {
-                syncJoined += '\n\nAlso — ' + syncResults[k];
+                syncJoined += '\n\n' + pickBridge() + syncResults[k];
             }
             return Promise.resolve(syncJoined);
         }
@@ -232,7 +245,7 @@
             if (unique.length === 1) return unique[0];
             var joined = unique[0];
             for (var j = 1; j < unique.length; j++) {
-                joined += '\n\nAlso — ' + unique[j];
+                joined += '\n\n' + pickBridge() + unique[j];
             }
             return joined;
         });
