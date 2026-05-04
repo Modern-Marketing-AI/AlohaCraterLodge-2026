@@ -9,6 +9,8 @@
     var triggerFired = false;
     var chipsEl = null;
 
+    var MAX_INTENTS = 3;
+
     var TOPIC_CHIPS = [
         { label: 'Stargazing',     question: 'Tell me about stargazing near the lodge' },
         { label: 'Rainy Day?',     question: 'What can I do on a rainy day?' },
@@ -204,27 +206,35 @@
             excludeTags.push('climate');
         }
 
-        var slotsLeft = 2 - asyncFetchers.length;
+        var slotsLeft = MAX_INTENTS - asyncFetchers.length;
         var syncResults = slotsLeft > 0 ? collectSyncIntents(input, data, slotsLeft, excludeTags) : [];
 
         if (asyncFetchers.length === 0) {
             if (syncResults.length === 0) return Promise.resolve(getFallback(data));
             if (syncResults.length === 1) return Promise.resolve(syncResults[0]);
-            return Promise.resolve(syncResults[0] + '\n\nAlso — ' + syncResults[1]);
+            var syncJoined = syncResults[0];
+            for (var k = 1; k < syncResults.length; k++) {
+                syncJoined += '\n\nAlso — ' + syncResults[k];
+            }
+            return Promise.resolve(syncJoined);
         }
 
         return Promise.all(asyncFetchers.map(function (fn) { return fn(); })).then(function (asyncResults) {
             var parts = asyncResults.concat(syncResults);
             var seen = [];
             var unique = [];
-            for (var i = 0; i < parts.length && unique.length < 2; i++) {
+            for (var i = 0; i < parts.length && unique.length < MAX_INTENTS; i++) {
                 if (seen.indexOf(parts[i]) === -1) {
                     seen.push(parts[i]);
                     unique.push(parts[i]);
                 }
             }
             if (unique.length === 1) return unique[0];
-            return unique[0] + '\n\nAlso — ' + unique[1];
+            var joined = unique[0];
+            for (var j = 1; j < unique.length; j++) {
+                joined += '\n\nAlso — ' + unique[j];
+            }
+            return joined;
         });
     }
 
