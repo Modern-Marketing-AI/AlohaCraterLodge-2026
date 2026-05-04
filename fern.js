@@ -7,6 +7,16 @@
     var greeted = false;
     var insightCount = 0;
     var triggerFired = false;
+    var chipsEl = null;
+
+    var TOPIC_CHIPS = [
+        { label: 'Stargazing',     question: 'Tell me about stargazing near the lodge' },
+        { label: 'Rainy Day?',     question: 'What can I do on a rainy day?' },
+        { label: 'Local Birds',    question: 'What birds might I see here?' },
+        { label: 'Sustainability', question: 'How is the lodge sustainable?' },
+        { label: 'Pele & Culture', question: 'Tell me about Pele and Hawaiian culture' },
+        { label: 'Itineraries',    question: 'What are some activity ideas and itineraries?' }
+    ];
 
     var GREETING = "Hi, I'm Fern, your Lodge Guide. Aloha! I'm here to help you find your way — whether you're picking the perfect suite, checking on the volcano, or looking for the best trails. How can I help you today?";
     var INSIGHT_TRIGGER_MSG = "I hope these local insights are helping you get a feel for the Lodge! You can flip the 'Expert Insights' switch at the top to 'Off' any time if you'd prefer quick facts only. Should I keep the local tips coming?";
@@ -218,6 +228,63 @@
         });
     }
 
+    function removeChips() {
+        if (chipsEl && chipsEl.parentNode) {
+            chipsEl.parentNode.removeChild(chipsEl);
+        }
+        chipsEl = null;
+    }
+
+    function showChips() {
+        var msgs = document.getElementById('fern-messages');
+        if (!msgs) return;
+        var row = document.createElement('div');
+        row.id = 'fern-chips';
+        TOPIC_CHIPS.forEach(function (chip) {
+            var btn = document.createElement('button');
+            btn.className = 'fern-chip';
+            btn.textContent = chip.label;
+            btn.addEventListener('click', function () {
+                var inp = document.getElementById('fern-input');
+                if (inp) inp.value = '';
+                removeChips();
+                sendChipQuestion(chip.question);
+            });
+            row.appendChild(btn);
+        });
+        msgs.appendChild(row);
+        msgs.scrollTop = msgs.scrollHeight;
+        chipsEl = row;
+    }
+
+    function sendChipQuestion(question) {
+        if (pendingResponse) return;
+        if (!fernData) {
+            appendMessage("One moment — I'm still loading the Lodge intel. Please try again in a second!", 'bot');
+            return;
+        }
+        appendMessage(question, 'user');
+        pendingResponse = true;
+        setInputBusy(true);
+        routeAsync(question, fernData).then(function (primary) {
+            var upsells = getUpsells(question, fernData);
+            var parts = [primary];
+            upsells.forEach(function (u) {
+                if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
+            });
+            var full = parts.join('');
+            pendingResponse = false;
+            setInputBusy(false);
+            setTimeout(function () {
+                processAndSend(full);
+            }, 320);
+        }).catch(function () {
+            pendingResponse = false;
+            setInputBusy(false);
+            appendMessage(getFallback(fernData), 'bot');
+        });
+    }
+
     function appendMessage(text, role) {
         var msgs = document.getElementById('fern-messages');
         var div = document.createElement('div');
@@ -274,6 +341,7 @@
             return;
         }
 
+        removeChips();
         appendMessage(text, 'user');
         input.value = '';
         pendingResponse = true;
@@ -413,6 +481,18 @@
             '}',
             '#fern-send:hover:not(:disabled) { background: #0ea472; }',
             '#fern-send svg { pointer-events: none; }',
+            '#fern-chips {',
+            '  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0 2px;',
+            '  align-self: flex-start; max-width: 100%;',
+            '}',
+            '.fern-chip {',
+            '  background: transparent; border: 1px solid #2a2a2a; border-radius: 999px;',
+            '  color: #999; font-size: 0.76rem; padding: 5px 12px; cursor: pointer;',
+            '  transition: border-color 0.18s, color 0.18s, background 0.18s;',
+            '  white-space: nowrap; font-family: inherit; outline: none; line-height: 1.4;',
+            '}',
+            '.fern-chip:hover { border-color: #10b981; color: #10b981; background: rgba(16,185,129,0.07); }',
+            '.fern-chip:active { background: rgba(16,185,129,0.14); }',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
@@ -487,6 +567,7 @@
                 greeted = true;
                 setTimeout(function () {
                     appendMessage(GREETING, 'bot');
+                    setTimeout(showChips, 80);
                 }, 80);
             }
             if (isOpen) {
