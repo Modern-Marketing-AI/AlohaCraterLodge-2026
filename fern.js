@@ -39,7 +39,7 @@
         return PHONETIC_TEST.test(text);
     }
 
-    var FALLBACK_MSG = "That is a great question! I don\u2019t have that detail right here, but the team will be happy to clarify that for you.";
+    var FALLBACK_MSG = "That is a great question! I don\u2019t have that specific detail right here, but the team will be happy to clarify that for you.";
 
     function getFallback(data) {
         return (data && data.system_directive) ? data.system_directive : FALLBACK_MSG;
@@ -55,7 +55,7 @@
                 fernData = data;
             })
             .catch(function () {
-                fernData = { _fallback: true, system_directive: "That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you." };
+                fernData = { _fallback: true, system_directive: "That is a great question! I don't have that specific detail right here, but the team will be happy to clarify that for you." };
             });
     }
 
@@ -194,7 +194,7 @@
         if (/itinerary|things.*do|what.*do|activities|suggestions|ideas/i.test(q)) {
             return data.curated_itineraries.slow_morning;
         }
-        if (/hapuu|hap[uū]|tree fern|ohia|[oō]hi[aā]|lehua|flora|plant|flower|native.*plant/i.test(q)) {
+        if (/hapuu|hap[uū]|tree fern|\bferns?\b|ohia|[oō]hi[aā]|lehua|flora|plant|flower|native.*plant/i.test(q)) {
             return data.naturalist_guide.flora;
         }
         if (/bird|iiwi|[iī][iī]wi|nene|n[eē]n[eē]|goose|fauna|wildlife|animal/i.test(q)) {
