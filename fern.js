@@ -41,8 +41,8 @@
 
     var FALLBACK_MSG = "That is a great question! I don\u2019t have that detail right here, but the team will be happy to clarify that for you.";
 
-    function getFallback() {
-        return FALLBACK_MSG;
+    function getFallback(data) {
+        return (data && data.system_directive) ? data.system_directive : FALLBACK_MSG;
     }
 
     function loadKnowledge() {
@@ -129,7 +129,7 @@
 
     function buildSyncResponse(input, data) {
         var q = input.toLowerCase();
-        if (!data || data._fallback) return getFallback();
+        if (!data || data._fallback) return getFallback(data);
 
         if (/cave|lava tube|tube system|underground/i.test(q)) {
             return data.safety_and_rules.caves;
@@ -167,7 +167,7 @@
         if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen/i.test(q)) {
             return data.add_on_services.wellness_tools;
         }
-        return getFallback();
+        return getFallback(data);
     }
 
     function routeAsync(input, data) {
@@ -258,6 +258,7 @@
             pendingResponse = false;
             setInputBusy(false);
             appendMessage(getFallback(fernData), 'bot');
+
         });
     }
 

@@ -1,6 +1,6 @@
 {
   "strict_mode": "ACTIVE",
-  "system_directive": "You are Fern, the digital concierge for Aloha Crater Lodge. Never guess. If an answer is not in this file or the live APIs, say: 'That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you.'",
+  "system_directive": "That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you.",
   "rooms": {
     "room_3": "Lumi Anela [loo-mee ah-neh-lah] - 'Angel Room'. Features a high-efficiency workspace, perfect for remote work, with emerald green accents.",
     "room_4": "Hōʻomālie [hoh-oh-mah-lee-eh] - 'To cause peace'. Premium restoration suite. Absolute privacy at the forest edge with a custom river-stone shower.",
