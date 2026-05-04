@@ -137,6 +137,7 @@
             [/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|forest edge/i, function () { return data.rooms.room_4; }],
             [/room|suite|linen|360|virtual tour/i, function () { return data.rooms.general; }],
             [/check.?in|check.?out|arrival time|3pm|11am|access code|self.check|remote check/i, function () { return 'Check-in: ' + data.logistics.check_in + ' Check-out: ' + data.logistics.check_out; }],
+            [/wifi.*password|gate.*code|room.*code|credentials|not received.*code|how.*get.*code|day.*arrival.*code/i, function () { return data.logistics.in_stay_essentials; }],
             [/breakfast|food|eat|coffee|continental|meal|amenities|tea|shared.*kitchen|fridge|refrigerator|provisions/i, function () { return data.common_area_etiquette.shared_spaces; }],
             [/quiet.*hour|noise|loud|etiquette|curfew|after.*9|9pm|9:00 pm/i, function () { return data.common_area_etiquette.quiet_hours; }],
             [/solar|renewable|energy|power|electric/i, function () { return data.sustainability_and_infrastructure.energy; }],

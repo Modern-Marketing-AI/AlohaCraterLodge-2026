@@ -9,7 +9,8 @@
   "logistics": {
     "check_in": "3:00 PM - 5:00 PM. Remote self-check-in available via keypad codes sent on the day of arrival.",
     "check_out": "11:00 AM.",
-    "location": "Located in Volcano Village, a 3-minute drive (2.8 miles) to the Hawaii Volcanoes National Park entrance."
+    "location": "Located in Volcano Village, a 3-minute drive (2.8 miles) to the Hawaii Volcanoes National Park entrance.",
+    "in_stay_essentials": "For your security, In-Stay Essentials (including WiFi passwords, gate codes, and room access) are sent directly to you via text and email on your day of arrival. If you have not received them, please text the host team."
   },
   "sustainability_and_infrastructure": {
     "water": "We utilize a sustainable, multi-filtered rainwater catchment system, allowing guests to experience living seamlessly with the rainforest environment.",
