@@ -39,6 +39,12 @@
         return PHONETIC_TEST.test(text);
     }
 
+    function getFallback(data) {
+        var sd = (data && data.system_directive) || '';
+        var match = sd.match(/say:\s*['"]([^'"]+)['"]/);
+        return match ? match[1] : "That is a great question! I don't have that detail right here, but the team will be happy to clarify that for you.";
+    }
+
     function loadKnowledge() {
         return fetch('/fern_knowledge.json')
             .then(function (res) {
@@ -158,7 +164,7 @@
         if (/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen/i.test(q)) {
             return data.add_on_services.wellness_tools;
         }
-        return data.system_directive;
+        return getFallback(data);
     }
 
     function routeAsync(input, data) {
