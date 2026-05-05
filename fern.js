@@ -457,12 +457,28 @@
         'Glad you asked — ',
     ];
 
+    var openerQueue = [];
     var lastOpenerIdx = -1;
+
+    function shuffledIndices(excludeIdx) {
+        var indices = [];
+        for (var i = 0; i < OPENING_LINES.length; i++) {
+            if (i !== excludeIdx) indices.push(i);
+        }
+        for (var j = indices.length - 1; j > 0; j--) {
+            var k = Math.floor(Math.random() * (j + 1));
+            var tmp = indices[j]; indices[j] = indices[k]; indices[k] = tmp;
+        }
+        if (excludeIdx >= 0 && excludeIdx < OPENING_LINES.length) indices.push(excludeIdx);
+        return indices;
+    }
 
     function pickOpener() {
         if (OPENING_LINES.length <= 1) return OPENING_LINES[0];
-        var idx;
-        do { idx = Math.floor(Math.random() * OPENING_LINES.length); } while (idx === lastOpenerIdx);
+        if (openerQueue.length === 0) {
+            openerQueue = shuffledIndices(lastOpenerIdx);
+        }
+        var idx = openerQueue.shift();
         lastOpenerIdx = idx;
         return OPENING_LINES[idx];
     }
