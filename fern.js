@@ -203,6 +203,65 @@
         return selected;
     }
 
+    function buildSafetyBannerText() {
+        var parts = [];
+        var aqiCache = getCached('airQuality');
+        if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+            var aqiMatch = /US AQI (\d+)/.exec(aqiCache);
+            if (aqiMatch) {
+                var aqi = parseInt(aqiMatch[1], 10);
+                if (aqi > 50) {
+                    var cat = aqi <= 100 ? 'Moderate' : aqi <= 150 ? 'Unhealthy for Sensitive Groups' : 'Unhealthy';
+                    parts.push('\u26a0 Air Quality: ' + cat + ' (AQI ' + aqi + ')');
+                }
+            }
+        }
+        var trailCache = getCached('trailConditions');
+        if (trailCache && trailCache !== GRACEFUL_FAIL) {
+            if (/Current trail alerts/.test(trailCache)) {
+                parts.push('\u26a0 Active trail alerts \u2014 tap Trail Conditions for details');
+            }
+        }
+        return parts.join('\u2002\xb7\u2002');
+    }
+
+    function updateSafetyBanner() {
+        var banner = document.getElementById('fern-safety-banner');
+        if (!banner) return;
+        try { if (sessionStorage.getItem('fernSafetyDismissed')) { banner.style.display = 'none'; return; } } catch (e) {}
+        var text = buildSafetyBannerText();
+        if (text) {
+            var span = banner.querySelector('.fern-safety-text');
+            if (span) span.textContent = text;
+            banner.style.display = '';
+        } else {
+            banner.style.display = 'none';
+        }
+    }
+
+    function buildOpeningSafetyMsg() {
+        var lines = [];
+        var aqiCache = getCached('airQuality');
+        if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+            var aqiMatch = /US AQI (\d+)/.exec(aqiCache);
+            if (aqiMatch) {
+                var aqi = parseInt(aqiMatch[1], 10);
+                if (aqi > 50) {
+                    var cat = aqi <= 100 ? 'Moderate' : aqi <= 150 ? 'Unhealthy for Sensitive Groups' : 'Unhealthy';
+                    lines.push('Air quality near the Lodge is currently ' + cat + ' (AQI ' + aqi + '). If you\u2019re sensitive to vog, you may want to limit time outdoors today.');
+                }
+            }
+        }
+        var trailCache = getCached('trailConditions');
+        if (trailCache && trailCache !== GRACEFUL_FAIL) {
+            if (/Current trail alerts/.test(trailCache)) {
+                lines.push('There are active trail alerts in the area \u2014 tap \u201cTrail Conditions\u201d below for the latest details before heading out.');
+            }
+        }
+        if (lines.length === 0) return '';
+        return 'Quick heads-up before you explore: ' + lines.join(' ');
+    }
+
     function maybeReprioritizeChips() {
         var conditionPinned = getConditionPinnedLabels();
         if (conditionPinned.length === 0) return;
@@ -1103,6 +1162,18 @@
             '  to   { opacity: 1; transform: translateY(0); }',
             '}',
             '.fern-chip-wrap { animation: fernChipsPop 0.28s ease both; }',
+            '#fern-safety-banner {',
+            '  background: rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.3);',
+            '  color: #f59e0b; font-size: 0.71rem; padding: 6px 10px 6px 12px;',
+            '  line-height: 1.45; display: flex; align-items: baseline; gap: 6px;',
+            '}',
+            '#fern-safety-banner .fern-safety-text { flex: 1; }',
+            '#fern-safety-banner .fern-safety-dismiss {',
+            '  background: none; border: none; color: #f59e0b; cursor: pointer;',
+            '  font-size: 1rem; line-height: 1; padding: 0; opacity: 0.65;',
+            '  flex-shrink: 0; font-family: inherit; transition: opacity 0.15s;',
+            '}',
+            '#fern-safety-banner .fern-safety-dismiss:hover { opacity: 1; }',
             '.fern-chip-undo {',
             '  display: inline-flex; align-items: center; cursor: pointer;',
             '  background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);',
@@ -1163,6 +1234,10 @@
             '    <span id="fern-toggle-value">ON</span>',
             '  </div>',
             '</div>',
+            '<div id="fern-safety-banner" style="display:none" aria-live="polite">',
+            '  <span class="fern-safety-text"></span>',
+            '  <button class="fern-safety-dismiss" aria-label="Dismiss safety notice">\u00d7</button>',
+            '</div>',
             '<div id="fern-messages" aria-live="polite"></div>',
             '<div id="fern-input-row">',
             '  <input id="fern-input" type="text" placeholder="Ask Fern anything..." autocomplete="off" maxlength="300">',
@@ -1216,13 +1291,33 @@
             fab.addEventListener('click', hideBubble, { once: true });
         })();
 
+        /* Safety banner dismiss */
+        (function () {
+            var dismissBtn = document.querySelector('.fern-safety-dismiss');
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', function () {
+                    var banner = document.getElementById('fern-safety-banner');
+                    if (banner) banner.style.display = 'none';
+                    try { sessionStorage.setItem('fernSafetyDismissed', '1'); } catch (e) {}
+                });
+            }
+        })();
+
         fab.addEventListener('click', function () {
             var isOpen = win.classList.toggle('fern-open');
             if (isOpen && !greeted) {
                 greeted = true;
                 setTimeout(function () {
                     appendMessage(GREETING, 'bot');
-                    setTimeout(showChips, 80);
+                    var safetyMsg = buildOpeningSafetyMsg();
+                    if (safetyMsg) {
+                        setTimeout(function () {
+                            appendMessage(safetyMsg, 'bot');
+                            setTimeout(showChips, 120);
+                        }, 500);
+                    } else {
+                        setTimeout(showChips, 80);
+                    }
                 }, 80);
             }
             if (isOpen) {
@@ -1276,6 +1371,7 @@
             fetchTrailConditions()
         ]).then(function () {
             maybeReprioritizeChips();
+            updateSafetyBanner();
         });
     }
 
@@ -1286,6 +1382,7 @@
         loadKnowledge();
         warmLiveCache();
         setInterval(warmLiveCache, LIVE_REFRESH_INTERVAL);
+        updateSafetyBanner();
     }
 
     if (document.readyState === 'loading') {
