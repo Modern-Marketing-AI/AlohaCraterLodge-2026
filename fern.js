@@ -654,7 +654,7 @@
         if (available.length === 0) {
             var hint = document.createElement('div');
             hint.className = 'fern-msg fern-msg-bot';
-            hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            hint.textContent = 'You\u2019ve hidden all topic suggestions. Type anything to ask Fern.';
             hint.appendChild(document.createElement('br'));
             hint.appendChild(makeResetLink(function () {
                 if (hint.parentNode) hint.parentNode.removeChild(hint);
@@ -708,7 +708,7 @@
         if (chips.length === 0) {
             var hint = document.createElement('div');
             hint.className = 'fern-msg fern-msg-bot';
-            hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            hint.textContent = 'You\u2019ve hidden all topic suggestions. Type anything to ask Fern.';
             hint.appendChild(document.createElement('br'));
             hint.appendChild(makeResetLink(function () {
                 if (hint.parentNode) hint.parentNode.removeChild(hint);
