@@ -339,6 +339,21 @@
         return BRIDGE_PHRASES[Math.floor(Math.random() * BRIDGE_PHRASES.length)];
     }
 
+    var OPENING_LINES = [
+        'Here\'s what I found — ',
+        'Great question! ',
+        'Happy to help with that — ',
+        'Good to know you\'re curious about this — ',
+        'Here\'s what the Lodge has to share — ',
+        'Let me share what I know — ',
+        'Here\'s a quick rundown — ',
+        'Glad you asked — ',
+    ];
+
+    function pickOpener() {
+        return OPENING_LINES[Math.floor(Math.random() * OPENING_LINES.length)];
+    }
+
     function routeAsync(input, data) {
         var q = input.toLowerCase();
         var asyncFetchers = [];
@@ -484,7 +499,7 @@
         setInputBusy(true);
         routeAsync(question, fernData).then(function (primary) {
             var upsells = getUpsells(question, fernData);
-            var parts = [primary];
+            var parts = [pickOpener() + primary];
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
@@ -577,7 +592,7 @@
 
         routeAsync(text, fernData).then(function (primary) {
             var upsells = getUpsells(text, fernData);
-            var parts = [primary];
+            var parts = [pickOpener() + primary];
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
