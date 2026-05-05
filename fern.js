@@ -881,7 +881,17 @@
 
         var btn = document.createElement('button');
         btn.className = 'fern-chip';
-        btn.textContent = chip.label;
+        if (chip.warning) {
+            var dot = document.createElement('span');
+            dot.className = 'fern-chip-warn-dot';
+            dot.setAttribute('aria-hidden', 'true');
+            btn.appendChild(dot);
+            var srLabel = document.createElement('span');
+            srLabel.className = 'fern-sr-only';
+            srLabel.textContent = 'Warning: ';
+            btn.appendChild(srLabel);
+        }
+        btn.appendChild(document.createTextNode(chip.label));
         btn.addEventListener('click', onSelect);
 
         var dismiss = document.createElement('button');
@@ -945,12 +955,16 @@
             var ri = Math.floor(Math.random() * pool.length);
             selected.push(pool.splice(ri, 1)[0]);
         }
+        var warnLabelsInact = getConditionPinnedLabels();
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-inactivity';
         row.style.display = 'flex'; row.style.flexWrap = 'wrap'; row.style.alignItems = 'center';
         selected.forEach(function (chip, idx) {
-            var el = makeChipEl(chip, function () {
+            var annotatedInact = warnLabelsInact.indexOf(chip.label) !== -1
+                ? { label: chip.label, question: chip.question, warning: true }
+                : chip;
+            var el = makeChipEl(annotatedInact, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
@@ -1031,12 +1045,16 @@
             msgs.scrollTop = msgs.scrollHeight;
             return;
         }
+        var warnLabels = getConditionPinnedLabels();
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-enter';
         row.style.display = 'flex'; row.style.flexWrap = 'wrap'; row.style.alignItems = 'center';
         chips.forEach(function (chip, idx) {
-            var el = makeChipEl(chip, function () {
+            var annotated = warnLabels.indexOf(chip.label) !== -1
+                ? { label: chip.label, question: chip.question, warning: true }
+                : chip;
+            var el = makeChipEl(annotated, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
@@ -1397,6 +1415,16 @@
             '  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);',
             '  border-radius: 999px; color: rgba(255,255,255,0.35); font-size: 0.67rem;',
             '  padding: 3px 9px; white-space: nowrap; margin-left: 4px; flex-shrink: 0;',
+            '}',
+            '.fern-chip-warn-dot {',
+            '  display: inline-block; width: 6px; height: 6px;',
+            '  background: #f59e0b; border-radius: 50%;',
+            '  margin-right: 5px; flex-shrink: 0; vertical-align: middle;',
+            '  box-shadow: 0 0 0 2px rgba(245,158,11,0.2);',
+            '}',
+            '.fern-sr-only {',
+            '  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;',
+            '  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;',
             '}',
             '#fern-data-ts {',
             '  font-size: 0.64rem; color: #444; text-align: right;',
