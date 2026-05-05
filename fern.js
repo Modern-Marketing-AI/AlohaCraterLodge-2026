@@ -38,18 +38,18 @@
     var usedChipLabels = [];
 
     var CHIP_COVERAGE = [
-        { label: 'Circulatory Reset',    test: /circulatory|pemf|terahertz|olylife.*p90|p90|physical reset/i },
-        { label: 'Optical Reset',        test: /optical|eye.*massage|galaxy.?g|g.?one|eye reset/i },
-        { label: 'Gravity Conditioning', test: /vibration|plate|lymphatic|gravity.*conditioning/i },
-        { label: 'Sensory Grounding',    test: /aroma|diffuser|scent|sensory.*grounding/i },
-        { label: 'Crater Mobility',      test: /bike|e.?bike|ebike|cycle|cycling|crater.*mobility/i },
-        { label: 'Dark Skies',           test: /star|stargazing|milky way|night sky|dark sky|bortle/i },
-        { label: 'Cultural Respect',     test: /pele|deity|goddess|reverence|sacred|cultural|culture|aina/i },
-        { label: 'Mess Hall',            test: /dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|mess hall/i },
-        { label: 'Check-in Time',        test: /check.?in|check.?out|infiltration|extraction|arrival time/i },
-        { label: 'Orchid Suite',         test: /room.?6|orchid|goldfish|botanical/i },
-        { label: 'Air Quality',          test: /air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate/i },
-        { label: 'Trail Conditions',     test: /trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|trail.*today/i }
+        { label: 'Massage Therapy',   test: /massage|pemf|terahertz|olylife.*p90|p90|physical.*recovery/i },
+        { label: 'Eye Recovery',      test: /eye.*recovery|eye.*massage|galaxy.?g|g.?one|optical/i },
+        { label: 'Vibration Therapy', test: /vibration|vibration.*plate|lymphatic/i },
+        { label: 'Aromatherapy',      test: /aroma|diffuser|scent|essential.*oil|oily.*life/i },
+        { label: 'E-Bike Rentals',    test: /bike|e.?bike|ebike|cycle|cycling/i },
+        { label: 'Dark Skies',        test: /star|stargazing|milky way|night sky|dark sky|bortle/i },
+        { label: 'Cultural Respect',  test: /pele|deity|goddess|reverence|sacred|cultural|culture|aina/i },
+        { label: 'Local Dining',      test: /dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|food/i },
+        { label: 'Check-in Time',     test: /check.?in|check.?out|arrival time/i },
+        { label: 'Orchid Suite',      test: /room.?6|orchid|goldfish|botanical/i },
+        { label: 'Air Quality',       test: /air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate/i },
+        { label: 'Trail Conditions',  test: /trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|trail.*today/i }
     ];
 
     function markCoveredTopics(input) {
@@ -62,18 +62,18 @@
     }
 
     var TOPIC_CHIPS_POOL = [
-        { label: 'Circulatory Reset',    question: 'Tell me about the Circulatory Reset — PEMF and Terahertz protocol' },
-        { label: 'Optical Reset',        question: 'Tell me about the Optical Reset' },
-        { label: 'Gravity Conditioning', question: 'Tell me about the Gravity Conditioning vibration plates' },
-        { label: 'Sensory Grounding',    question: 'Tell me about the Sensory Grounding aromatherapy options' },
-        { label: 'Crater Mobility',      question: 'Tell me about the Crater Mobility e-bikes' },
-        { label: 'Dark Skies',           question: 'Tell me about stargazing and dark sky conditions near the lodge' },
-        { label: 'Cultural Respect',     question: 'Tell me about respecting the \u02bbaina and Hawaiian culture' },
-        { label: 'Mess Hall',            question: 'What are the best local restaurants and mess hall partners?' },
-        { label: 'Check-in Time',        question: 'What time is infiltration (check-in) and extraction (check-out)?' },
-        { label: 'Orchid Suite',         question: 'Tell me about the Orchid Suite \u2014 Room 6' },
-        { label: 'Air Quality',          question: 'What\'s the air quality like today?' },
-        { label: 'Trail Conditions',     question: 'Are there any trail closures or conditions I should know about?' }
+        { label: 'Massage Therapy',   question: 'Tell me about the massage therapy and OlyLife P90 recovery device' },
+        { label: 'Eye Recovery',      question: 'Tell me about the eye recovery device — the OlyLife Galaxy G-One' },
+        { label: 'Vibration Therapy', question: 'Tell me about the vibration therapy and lymphatic plates' },
+        { label: 'Aromatherapy',      question: 'Tell me about the aromatherapy and essential oils available' },
+        { label: 'E-Bike Rentals',    question: 'Tell me about the e-bike rentals' },
+        { label: 'Dark Skies',        question: 'Tell me about stargazing and dark sky conditions near the lodge' },
+        { label: 'Cultural Respect',  question: 'Tell me about respecting the \u02bbaina and Hawaiian culture' },
+        { label: 'Local Dining',      question: 'What are the best local restaurants near the lodge?' },
+        { label: 'Check-in Time',     question: 'What time is check-in and check-out?' },
+        { label: 'Orchid Suite',      question: 'Tell me about the Orchid Suite \u2014 Room 6' },
+        { label: 'Air Quality',       question: 'What\'s the air quality like today?' },
+        { label: 'Trail Conditions',  question: 'Are there any trail closures or conditions I should know about?' }
     ];
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';

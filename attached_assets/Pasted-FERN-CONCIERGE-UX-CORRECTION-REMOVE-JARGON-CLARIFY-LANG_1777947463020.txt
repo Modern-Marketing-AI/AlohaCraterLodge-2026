@@ -1,3 +1,28 @@
+FERN CONCIERGE: UX CORRECTION - REMOVE JARGON & CLARIFY LANGUAGE
+
+The current UI and JSON use overly clinical, confusing jargon that ruins the guest experience. We need to immediately translate all "Tactical/Basecamp" terminology into clear, premium hospitality language. Please apply the following fixes across the UI and 'fern_knowledge.json':
+
+1. UI OVERHAUL (guest-concierge.html):
+- Page Title: Change from 'Basecamp Command' back to 'Guest Concierge'.
+- Action Tiles Translation: Rename the tiles to be instantly understandable:
+    * [CIRCULATORY RESET] -> [WELLNESS: MASSAGE THERAPY]
+    * [OPTICAL RESET] -> [WELLNESS: EYE RECOVERY]
+    * [GRAVITY CONDITIONING] -> [WELLNESS: VIBRATION THERAPY]
+    * [SENSORY GROUNDING] -> [AROMATHERAPY & ESSENTIAL OILS]
+    * [CRATER MOBILITY] -> [E-BIKE RENTALS]
+    * [REVEAL SECURE CODES] -> [VIEW PROPERTY CODES]
+- Comms Button: Change "CONTACT COMMAND" to "TEXT THE HOST TEAM (808) 345-4449".
+
+2. FERN BEHAVIOR & TOPIC CHIPS (fern.js):
+- Strip the "tactical, mission-driven" tone. Fern should be a warm, highly professional local guide.
+- Update the Topic Chips to match the plain English translations above (e.g., replace "Mess Hall" with "Local Dining").
+
+3. KNOWLEDGE BASE REWRITE ('fern_knowledge.json'):
+- Completely overwrite the file with the clean, jargon-free data below.
+
+---
+FILE CONTENT FOR: fern_knowledge.json
+---
 {
   "strict_mode": "ACTIVE",
   "system_directive": "That's a great question! I don't have that specific detail right here, but the host team will be happy to help you with that.",
@@ -31,8 +56,5 @@
     "caves": "RESTRICTED: For your safety, we do not provide information on underground lava tubes. Please stick to marked National Park trails.",
     "dark_skies": "We are located in a Bortle 1-2 dark sky environment, meaning it is exceptionally dark and perfect for stargazing.",
     "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the land and its history."
-  },
-  "config": {
-    "inactivity_delay_seconds": 45
   }
 }
