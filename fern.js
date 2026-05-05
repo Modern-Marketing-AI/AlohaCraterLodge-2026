@@ -54,7 +54,10 @@
         //     liveDataCacheTTL:   180000,  // ms to cache live data (AQI, trails). 30000–1800000. Default 120000.
         //     maxReprompts:       4,       // max async fetches per reply (1–10). Default 4.
         //     expertInsights:     true,    // show expert insight blocks on load (true/false). Default true.
-        //     repromptMultipliers: [1, 2, 3] // delay multipliers for successive inactivity reprompts. Must be 3 positive numbers.
+        //     repromptMultipliers: [1, 2, 3], // delay multipliers for successive inactivity reprompts. Must be 3 positive numbers.
+        //     chipsShowCount:     8,       // number of topic chips to show at once (1–12). Default 8.
+        //     greetingBubbleDelay: 8000,  // ms before greeting bubble appears (0–30000). Default 8000.
+        //     closingLines:       ['\n\nAnything else?'] // override Fern's closing line rotation.
         //   };</script>
         try {
             var cfg = window.FERN_CONFIG;
@@ -640,16 +643,27 @@
         'Glad you asked — ',
     ];
 
-    var CLOSING_LINES = [
-        '\n\nAnything else I can help you plan?',
-        '\n\nWhat else can I pull up for you?',
-        '\n\nFeel free to ask me anything else about the Lodge or the area.',
-        '\n\nLet me know if you want to dig deeper into any of this.',
-        '\n\nHappy to answer any follow-up questions.',
-        '\n\nIs there anything else on your mind for your stay?',
-        '\n\nJust ask if you need more details on any of this.',
-        '\n\nWhat else would be helpful to know?',
-    ];
+    var CLOSING_LINES = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && Array.isArray(cfg.closingLines) && cfg.closingLines.length >= 1) {
+                var valid = cfg.closingLines.filter(function (s) {
+                    return typeof s === 'string' && s.trim().length > 0;
+                });
+                if (valid.length >= 1) return valid;
+            }
+        } catch (e) {}
+        return [
+            '\n\nAnything else I can help you plan?',
+            '\n\nWhat else can I pull up for you?',
+            '\n\nFeel free to ask me anything else about the Lodge or the area.',
+            '\n\nLet me know if you want to dig deeper into any of this.',
+            '\n\nHappy to answer any follow-up questions.',
+            '\n\nIs there anything else on your mind for your stay?',
+            '\n\nJust ask if you need more details on any of this.',
+            '\n\nWhat else would be helpful to know?',
+        ];
+    })();
 
     var openerQueue = [];
     var lastOpenerIdx = -1;
@@ -700,6 +714,11 @@
         var idx = closerQueue.shift();
         lastCloserIdx = idx;
         return CLOSING_LINES[idx];
+    }
+
+    function shouldAddCloser(primary) {
+        var clean = (primary || '').replace(/[_*`\[\]()]/g, '').trim();
+        return clean.length >= 120;
     }
 
     function routeAsync(input, data) {
@@ -891,6 +910,7 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-inactivity';
+        row.style.display = 'flex'; row.style.flexWrap = 'wrap'; row.style.alignItems = 'center';
         selected.forEach(function (chip, idx) {
             var el = makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
@@ -902,6 +922,13 @@
             el.style.animationDelay = (idx * 0.07) + 's';
             row.appendChild(el);
         });
+        var inacDismissed = getDismissedChips();
+        if (inacDismissed.length > 0) {
+            var inacBadge = document.createElement('span');
+            inacBadge.className = 'fern-row-count-badge';
+            inacBadge.textContent = inacDismissed.length + ' hidden';
+            row.appendChild(inacBadge);
+        }
         msgs.appendChild(row);
         chipsEl = row;
         currentChipResetFn = showInactivityChips;
@@ -969,6 +996,7 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-enter';
+        row.style.display = 'flex'; row.style.flexWrap = 'wrap'; row.style.alignItems = 'center';
         chips.forEach(function (chip, idx) {
             var el = makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
@@ -980,6 +1008,13 @@
             el.style.animationDelay = (idx * 0.07) + 's';
             row.appendChild(el);
         });
+        var entDismissed = getDismissedChips();
+        if (entDismissed.length > 0) {
+            var entBadge = document.createElement('span');
+            entBadge.className = 'fern-row-count-badge';
+            entBadge.textContent = entDismissed.length + ' hidden';
+            row.appendChild(entBadge);
+        }
         msgs.appendChild(row);
         chipsEl = row;
         currentChipResetFn = showChips;
@@ -1005,7 +1040,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
-            parts.push(pickCloser());
+            if (shouldAddCloser(primary)) parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
@@ -1100,7 +1135,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
-            parts.push(pickCloser());
+            if (shouldAddCloser(primary)) parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
@@ -1309,6 +1344,35 @@
             '  font-size: 0.72rem; color: rgba(255,255,255,0.38); padding: 2px 12px 4px;',
             '  animation: fernHintFade 0.4s ease forwards;',
             '}',
+            '.fern-row-count-badge {',
+            '  display: inline-flex; align-items: center; align-self: center;',
+            '  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);',
+            '  border-radius: 999px; color: rgba(255,255,255,0.35); font-size: 0.67rem;',
+            '  padding: 3px 9px; white-space: nowrap; margin-left: 4px; flex-shrink: 0;',
+            '}',
+            '#fern-data-ts {',
+            '  font-size: 0.64rem; color: #444; text-align: right;',
+            '  margin-top: 5px; min-height: 0.85rem; transition: color 0.4s;',
+            '}',
+            '#fern-debug-panel {',
+            '  position: fixed; bottom: 170px; right: 28px; width: 320px;',
+            '  background: #0d0d0d; border: 1px solid #333; border-radius: 8px;',
+            '  padding: 12px 14px; z-index: 99999; font-family: monospace;',
+            '  font-size: 0.72rem; color: #888; box-shadow: 0 8px 32px rgba(0,0,0,0.6);',
+            '}',
+            '#fern-debug-panel h4 {',
+            '  color: #10b981; margin: 0 0 8px; font-size: 0.75rem; letter-spacing: 0.05em;',
+            '}',
+            '#fern-debug-panel pre {',
+            '  background: #111; padding: 8px; border-radius: 4px; overflow-x: auto;',
+            '  margin: 0; font-size: 0.68rem; color: #aaa; white-space: pre-wrap;',
+            '  max-height: 180px; overflow-y: auto;',
+            '}',
+            '#fern-debug-close {',
+            '  position: absolute; top: 8px; right: 10px; background: none; border: none;',
+            '  color: #555; cursor: pointer; font-size: 1rem; line-height: 1;',
+            '}',
+            '#fern-debug-close:hover { color: #fff; }',
             '.fern-dismissed-count .fern-reset-link {',
             '  display: inline; margin-top: 0;',
             '}',
@@ -1357,6 +1421,7 @@
             '    </label>',
             '    <span id="fern-toggle-value">ON</span>',
             '  </div>',
+            '  <div id="fern-data-ts" aria-live="polite"></div>',
             '</div>',
             '<div id="fern-safety-banner" style="display:none" aria-live="polite">',
             '  <span class="fern-safety-text"></span>',
@@ -1487,6 +1552,59 @@
 
     var LIVE_REFRESH_INTERVAL = LIVE_DATA_TTL;
 
+    function getLastRefreshTime() {
+        var keys = ['volcano', 'weather', 'airQuality', 'trailConditions'];
+        var maxTs = 0;
+        for (var i = 0; i < keys.length; i++) {
+            var entry = LIVE_DATA_CACHE[keys[i]];
+            if (entry && entry.ts > maxTs) maxTs = entry.ts;
+        }
+        return maxTs;
+    }
+
+    function updateRefreshTimestamp() {
+        var el = document.getElementById('fern-data-ts');
+        if (!el) return;
+        var ts = getLastRefreshTime();
+        if (!ts) { el.textContent = ''; return; }
+        var diffMin = Math.floor((Date.now() - ts) / 60000);
+        el.textContent = diffMin < 1 ? '\u25cf Live \u00b7 just refreshed'
+            : diffMin === 1 ? '\u25cf Live \u00b7 refreshed 1 min ago'
+            : '\u25cf Live \u00b7 refreshed ' + diffMin + ' min ago';
+    }
+
+    function initDebugPanel() {
+        try { if (!/[?&]fern_debug=1/.test(window.location.search)) return; } catch (e) { return; }
+        var panel = document.createElement('div');
+        panel.id = 'fern-debug-panel';
+        var closeBtn = document.createElement('button');
+        closeBtn.id = 'fern-debug-close';
+        closeBtn.textContent = '\u00d7';
+        closeBtn.setAttribute('aria-label', 'Close debug panel');
+        closeBtn.addEventListener('click', function () { panel.parentNode && panel.parentNode.removeChild(panel); });
+        var h4 = document.createElement('h4');
+        h4.textContent = 'FERN DEBUG \u2014 Effective Config';
+        var pre = document.createElement('pre');
+        function refreshDebug() {
+            var effective = {
+                inactivityDelay: INACTIVITY_DELAY_BASE,
+                liveDataCacheTTL: LIVE_DATA_TTL,
+                chipsShowCount: CHIPS_SHOW_COUNT,
+                closingLines: CLOSING_LINES,
+                repromptMultipliers: REPROMPT_MULTIPLIERS,
+                lastRefreshed: getLastRefreshTime() ? new Date(getLastRefreshTime()).toLocaleTimeString() : 'not yet',
+                windowFERN_CONFIG: window.FERN_CONFIG || null
+            };
+            pre.textContent = JSON.stringify(effective, null, 2);
+        }
+        refreshDebug();
+        setInterval(refreshDebug, 5000);
+        panel.appendChild(closeBtn);
+        panel.appendChild(h4);
+        panel.appendChild(pre);
+        document.body.appendChild(panel);
+    }
+
     function warmLiveCache() {
         return Promise.all([
             fetchVolcanoStatus(),
@@ -1496,6 +1614,7 @@
         ]).then(function () {
             maybeReprioritizeChips();
             updateSafetyBanner();
+            updateRefreshTimestamp();
         });
     }
 
@@ -1506,7 +1625,9 @@
         loadKnowledge();
         warmLiveCache();
         setInterval(warmLiveCache, LIVE_REFRESH_INTERVAL);
+        setInterval(updateRefreshTimestamp, 60000);
         updateSafetyBanner();
+        initDebugPanel();
     }
 
     if (document.readyState === 'loading') {
