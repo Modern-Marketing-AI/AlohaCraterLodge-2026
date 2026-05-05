@@ -612,6 +612,7 @@
         }
         var row = document.createElement('div');
         row.id = 'fern-chips';
+        row.className = 'fern-chips-enter';
         chips.forEach(function (chip) {
             row.appendChild(makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
@@ -895,7 +896,7 @@
             '  from { opacity: 0; transform: translateY(8px); }',
             '  to   { opacity: 1; transform: translateY(0); }',
             '}',
-            '.fern-chips-inactivity { animation: fernChipsPop 0.35s ease forwards; }',
+            '.fern-chips-inactivity, .fern-chips-enter { animation: fernChipsPop 0.35s ease forwards; }',
             '.fern-chip-undo {',
             '  display: inline-flex; align-items: center; cursor: pointer;',
             '  background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);',
