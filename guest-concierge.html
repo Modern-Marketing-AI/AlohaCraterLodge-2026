@@ -3,87 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Concierge | Aloha Crater Lodge — In-Stay Essentials</title>
-    <meta name="description" content="Your in-stay hub at Aloha Crater Lodge. Live volcano status, weather, curated itineraries, and add-on services for current guests.">
+    <title>Basecamp Command | Aloha Crater Lodge — Guest Operations</title>
+    <meta name="description" content="Basecamp Command — your in-stay operations hub at Aloha Crater Lodge. Live volcano status, action tiles, Bio-Regeneration protocols, and Crater Mobility deployment.">
     <link rel="canonical" href="https://www.alohacraterlodge.com/guest-concierge.html">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         * { box-sizing: border-box; }
-        body { background-color: #18181b; color: #fff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #0f0f0f; color: #fff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
 
         .alert-bar { background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold; font-size: 0.85rem; }
         .alert-bar a { color: white; text-decoration: none; }
 
-        .universal-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #111; padding: 1rem 2rem; border-bottom: 1px solid #222; }
+        .universal-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #0a0a0a; padding: 1rem 2rem; border-bottom: 1px solid #1a1a1a; }
         .logo { font-size: 1.4rem; font-weight: 900; color: #ff4500; letter-spacing: 0.08em; white-space: nowrap; }
         .subtitle { flex: 1; text-align: center; color: #aaa; font-style: italic; font-size: 0.9rem; min-width: 180px; margin: 0; }
         .header-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-        .header-links a { color: #ccc; text-decoration: none; border: 1px solid #444; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.04em; transition: all 0.2s; white-space: nowrap; }
+        .header-links a { color: #ccc; text-decoration: none; border: 1px solid #333; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.04em; transition: all 0.2s; white-space: nowrap; }
         .header-links a:hover { border-color: #ff4500; color: #ff4500; }
         .header-links a.active { border-color: #ff4500; color: #ff4500; box-shadow: 0 0 10px rgba(255,69,0,0.4); text-shadow: 0 0 8px rgba(255,69,0,0.5); }
         .nav-reserve-btn { background-color: #ff4500 !important; color: #fff !important; border-color: #ff4500 !important; }
         .nav-reserve-btn:hover { background-color: #cc3700 !important; box-shadow: 0 0 14px rgba(255,69,0,0.5) !important; }
 
-        .concierge-hero { background: linear-gradient(160deg, #18181b 0%, #1e1e22 60%, #18181b 100%); padding: 4rem 2rem 3rem; text-align: center; border-bottom: 1px solid #2a2a2a; }
-        .concierge-hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin: 0 0 1rem; letter-spacing: -0.02em; }
-        .concierge-hero h1 span { color: #10b981; }
-        .concierge-hero p { color: #aaa; font-size: 1.05rem; max-width: 560px; margin: 0 auto; line-height: 1.6; }
-
-        .page-container { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-        .section-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.14em; color: #555; text-transform: uppercase; margin: 0 0 0.5rem; }
-        .section-title { font-size: 1.5rem; font-weight: 900; color: #fff; margin: 0 0 1.5rem; }
-        .section-divider { border: none; border-top: 1px solid #2a2a2a; margin: 3rem 0; }
-
-        .essentials-block {
-            background: #141417;
-            border: 1px solid #2a2a2a;
-            border-left: 4px solid #10b981;
-            border-radius: 8px;
-            padding: 2rem;
+        /* Command Hero */
+        .command-hero {
+            background: radial-gradient(ellipse at 50% 0%, rgba(255,69,0,0.12) 0%, transparent 70%), #0f0f0f;
+            padding: 4.5rem 2rem 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid #1e1e1e;
+            position: relative;
         }
-        .essentials-block .lock-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
-        .essentials-block h2 { font-size: 1.05rem; font-weight: 900; color: #10b981; margin: 0 0 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
-        .essentials-block p { color: #ccc; font-size: 0.97rem; line-height: 1.8; margin: 0 0 1rem; }
-        .essentials-block .phone-reveal { display: inline-block; color: #10b981; border: 1px solid #10b981; padding: 8px 18px; border-radius: 4px; text-decoration: none; font-size: 0.82rem; font-weight: bold; letter-spacing: 0.03em; cursor: pointer; transition: all 0.2s; }
-        .essentials-block .phone-reveal:hover { background: #10b981; color: #000; }
+        .command-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff4500, #10b981, transparent);
+        }
+        .command-eyebrow { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.22em; color: #ff4500; text-transform: uppercase; margin: 0 0 1rem; }
+        .command-hero h1 { font-size: 2.8rem; font-weight: 900; color: #fff; margin: 0 0 0.75rem; letter-spacing: -0.03em; line-height: 1.1; }
+        .command-hero h1 span { color: #10b981; }
+        .command-hero p { color: #888; font-size: 1rem; max-width: 520px; margin: 0 auto 2rem; line-height: 1.65; }
+        .command-sms {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #ff4500;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .command-sms:hover { background: #cc3700; box-shadow: 0 0 24px rgba(255,69,0,0.5); }
+        .command-sms svg { flex-shrink: 0; }
 
-        .status-row { display: flex; gap: 16px; flex-wrap: wrap; }
-        .status-badge { flex: 1; min-width: 220px; background: #141417; border: 1px solid #2a2a2a; border-radius: 8px; padding: 1.4rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
-        .status-badge-icon { font-size: 2rem; flex-shrink: 0; }
+        /* Page layout */
+        .page-container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+        .section-label { font-size: 0.68rem; font-weight: 900; letter-spacing: 0.18em; color: #444; text-transform: uppercase; margin: 0 0 0.4rem; }
+        .section-title { font-size: 1.4rem; font-weight: 900; color: #fff; margin: 0 0 1.5rem; }
+        .section-divider { border: none; border-top: 1px solid #1a1a1a; margin: 3rem 0; }
+
+        /* Action Tiles */
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+        .action-tile {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 6px;
+            padding: 1.75rem 1.5rem;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .action-tile::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--tile-accent, #ff4500);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .action-tile:hover::before { opacity: 1; }
+        .action-tile:hover {
+            border-color: var(--tile-accent, #ff4500);
+            box-shadow: 0 0 20px rgba(var(--tile-glow, 255,69,0), 0.15);
+            background: #181818;
+        }
+        .action-tile.orange { --tile-accent: #ff4500; --tile-glow: 255,69,0; }
+        .action-tile.green  { --tile-accent: #10b981; --tile-glow: 16,185,129; }
+        .tile-icon { font-size: 1.6rem; }
+        .tile-code { font-size: 0.65rem; font-weight: 900; letter-spacing: 0.14em; color: var(--tile-accent, #ff4500); text-transform: uppercase; }
+        .tile-label { font-size: 0.95rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3; }
+        .tile-sub { font-size: 0.8rem; color: #666; line-height: 1.5; }
+        .tile-arrow { font-size: 0.75rem; color: #444; margin-top: auto; letter-spacing: 0.08em; }
+
+        /* REVEAL SECURE CODES tile — expandable */
+        .reveal-tile-form {
+            display: none;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #2a2a2a;
+        }
+        .reveal-tile-form.open { display: block; }
+        .reveal-tile-form label { font-size: 0.72rem; color: #888; display: block; margin-bottom: 4px; letter-spacing: 0.06em; }
+        .reveal-tile-form input[type="date"] {
+            width: 100%;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            outline: none;
+        }
+        .reveal-tile-form input[type="date"]:focus { border-color: #10b981; }
+        .reveal-tile-form .reveal-submit {
+            width: 100%;
+            background: #10b981;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            padding: 9px;
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+        .reveal-tile-form .reveal-submit:hover { background: #0d9467; }
+        .reveal-result {
+            display: none;
+            margin-top: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: #0a1a12;
+            border: 1px solid #10b981;
+            border-radius: 4px;
+            font-size: 0.83rem;
+            color: #10b981;
+            line-height: 1.6;
+        }
+        .reveal-result.open { display: block; }
+
+        /* Live Status */
+        .status-row { display: flex; gap: 14px; flex-wrap: wrap; }
+        .status-badge { flex: 1; min-width: 220px; background: #141414; border: 1px solid #1e1e1e; border-radius: 6px; padding: 1.4rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .status-badge-icon { font-size: 1.8rem; flex-shrink: 0; }
         .status-badge-content { flex: 1; }
-        .status-badge-label { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; color: #555; text-transform: uppercase; margin: 0 0 4px; }
+        .status-badge-label { font-size: 0.65rem; font-weight: 900; letter-spacing: 0.14em; color: #444; text-transform: uppercase; margin: 0 0 4px; }
         .status-badge-value { font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0; }
-        .status-badge-sub { font-size: 0.8rem; color: #888; margin: 2px 0 0; }
-        .status-loading { color: #555; font-style: italic; }
-
+        .status-badge-sub { font-size: 0.78rem; color: #666; margin: 2px 0 0; }
+        .status-loading { color: #444; font-style: italic; }
         .alert-normal { color: #10b981; }
         .alert-advisory { color: #f59e0b; }
         .alert-watch { color: #f97316; }
         .alert-warning { color: #ef4444; }
 
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-        .itinerary-card { background: #141417; border: 1px solid #2a2a2a; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s; }
-        .itinerary-card:hover { border-color: #10b981; }
-        .itinerary-card .card-emoji { font-size: 1.8rem; margin-bottom: 0.75rem; }
-        .itinerary-card h3 { font-size: 1rem; font-weight: 900; color: #fff; margin: 0 0 0.6rem; letter-spacing: 0.03em; text-transform: uppercase; }
-        .itinerary-card p { color: #aaa; font-size: 0.9rem; line-height: 1.65; margin: 0; }
-
-        .service-card { background: #141417; border: 1px solid #2a2a2a; border-radius: 8px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s; margin-bottom: 14px; }
-        .service-card:hover { border-color: #ff4500; }
-        .service-card:last-child { margin-bottom: 0; }
-        .service-card .svc-icon { font-size: 2rem; flex-shrink: 0; }
-        .service-card h3 { font-size: 1rem; font-weight: 900; color: #fff; margin: 0 0 0.4rem; }
-        .service-card p { color: #aaa; font-size: 0.9rem; line-height: 1.6; margin: 0 0 0.75rem; }
-        .service-card .svc-cta { display: inline-block; color: #ff4500; border: 1px solid #ff4500; padding: 6px 16px; border-radius: 4px; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.04em; cursor: pointer; text-decoration: none; transition: all 0.2s; }
-        .service-card .svc-cta:hover { background: #ff4500; color: #fff; }
-
-        footer { background: #111; border-top: 1px solid #222; padding: 2rem; color: #888; font-size: 0.85rem; }
+        /* Footer */
+        footer { background: #0a0a0a; border-top: 1px solid #1a1a1a; padding: 2rem; color: #888; font-size: 0.85rem; }
         .footer-content { display: flex; gap: 2rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto 1.5rem; }
         .footer-col h4 { color: #ccc; margin: 0 0 0.5rem; font-size: 0.9rem; letter-spacing: 0.06em; }
-        .footer-col a { color: #888; text-decoration: none; display: block; margin-bottom: 4px; }
+        .footer-col a { color: #555; text-decoration: none; display: block; margin-bottom: 4px; }
         .footer-col a:hover { color: #ff4500; }
-        .footer-legal { text-align: center; border-top: 1px solid #1e1e1e; padding-top: 1rem; color: #555; font-size: 0.78rem; line-height: 1.7; }
+        .footer-legal { text-align: center; border-top: 1px solid #1a1a1a; padding-top: 1rem; color: #444; font-size: 0.78rem; line-height: 1.7; }
     </style>
 </head>
 <body>
@@ -101,33 +192,76 @@
             <a href="wellness.html">WELLNESS</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
             <a href="faq.html">FAQ</a>
-            <a href="guest-concierge.html" class="active">GUEST CONCIERGE</a>
+            <a href="guest-concierge.html" class="active">BASECAMP COMMAND</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
         </div>
     </nav>
 
-    <div class="concierge-hero">
-        <h1>Guest <span>Concierge</span></h1>
-        <p>Your in-stay hub. Live conditions, security essentials, curated itineraries, and add-on gear — everything you need from the moment you arrive.</p>
+    <div class="command-hero">
+        <p class="command-eyebrow">Aloha Crater Lodge &mdash; Guest Operations</p>
+        <h1>Basecamp <span>Command</span></h1>
+        <p>Your in-stay operations hub. Deploy protocols, check field conditions, and contact the Host Team — all from one secured location.</p>
+        <a href="sms:+18083454449?body=Hi%2C%20I%27m%20a%20current%20guest%20at%20Aloha%20Crater%20Lodge%20and%20need%20assistance." class="command-sms">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            CONTACT COMMAND &nbsp;(808) 345-4449
+        </a>
     </div>
 
     <main class="page-container">
 
-        <!-- IN-STAY ESSENTIALS -->
-        <p class="section-label">Security & Access</p>
-        <h2 class="section-title">In-Stay Essentials</h2>
-        <div class="essentials-block">
-            <div class="lock-icon">🔐</div>
-            <h2>Credentials Delivered On Arrival Day</h2>
-            <p>For your security, In-Stay Essentials (including WiFi passwords, gate codes, and room access) are sent directly to you via text and email on your day of arrival. If you have not received them, please text the host team.</p>
-            <a href="#" class="phone-reveal reveal-phone-btn">Text the Host Team</a>
+        <!-- ACTION TILES -->
+        <p class="section-label">Initiate Protocol</p>
+        <h2 class="section-title">Action Relay</h2>
+
+        <div class="action-grid">
+
+            <div class="action-tile orange" onclick="window.fernQuery('Tell me about the Circulatory Reset — the OlyLife P90 PEMF and Terahertz protocol.')">
+                <div class="tile-icon">⚡</div>
+                <div class="tile-code">Protocol 01</div>
+                <div class="tile-label">Circulatory Reset</div>
+                <div class="tile-sub">OlyLife P90 — PEMF &amp; Terahertz energy for physical reset.</div>
+                <div class="tile-arrow">ASK FERN →</div>
+            </div>
+
+            <div class="action-tile orange" onclick="window.fernQuery('Tell me about the Optical Reset — the OlyLife Galaxy G-One eye and optical protocol.')">
+                <div class="tile-icon">👁</div>
+                <div class="tile-code">Protocol 02</div>
+                <div class="tile-label">Optical Reset</div>
+                <div class="tile-sub">Galaxy G-One — 3D airbag eye massage, 42°C heat compress.</div>
+                <div class="tile-arrow">ASK FERN →</div>
+            </div>
+
+            <div class="action-tile green" onclick="window.fernQuery('Tell me about Crater Mobility — the Basecamp E-Bikes for accessing Kīlauea.')">
+                <div class="tile-icon">🚴</div>
+                <div class="tile-code">Mobility Unit</div>
+                <div class="tile-label">Crater Mobility</div>
+                <div class="tile-sub">Basecamp E-Bikes. Bypass National Park gridlock entirely.</div>
+                <div class="tile-arrow">ASK FERN →</div>
+            </div>
+
+            <div class="action-tile green" id="reveal-tile" onclick="toggleRevealForm(event)">
+                <div class="tile-icon">🔐</div>
+                <div class="tile-code">Secure Access</div>
+                <div class="tile-label">Reveal Secure Codes</div>
+                <div class="tile-sub">Verify your infiltration date to access secure credentials.</div>
+                <div class="tile-arrow" id="reveal-arrow">VERIFY IDENTITY →</div>
+                <div class="reveal-tile-form" id="reveal-form">
+                    <label for="checkin-date">INFILTRATION DATE (Check-In)</label>
+                    <input type="date" id="checkin-date" onclick="event.stopPropagation()">
+                    <button class="reveal-submit" onclick="event.stopPropagation(); submitReveal()">RETRIEVE CREDENTIALS</button>
+                </div>
+                <div class="reveal-result" id="reveal-result">
+                    🔐 For your security, credentials are dispatched via text and email on your infiltration day. If not received, text the Host Team directly at (808) 345-4449 for immediate calibration.
+                </div>
+            </div>
+
         </div>
 
         <hr class="section-divider">
 
         <!-- LIVE STATUS -->
-        <p class="section-label">Live Conditions</p>
-        <h2 class="section-title">Current Field Intel</h2>
+        <p class="section-label">Live Field Intel</p>
+        <h2 class="section-title">Current Conditions</h2>
         <div class="status-row">
             <div class="status-badge">
                 <div class="status-badge-icon">🌋</div>
@@ -147,33 +281,15 @@
             </div>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- CURATED ITINERARIES — populated from fern_knowledge.json -->
-        <p class="section-label">Basecamp Intelligence</p>
-        <h2 class="section-title">Curated Itineraries</h2>
-        <div class="card-grid" id="itinerary-cards">
-            <div class="itinerary-card"><p class="status-loading">Loading…</p></div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- ADD-ON SERVICES — populated from fern_knowledge.json -->
-        <p class="section-label">Gear & Upgrades</p>
-        <h2 class="section-title">Add-On Services</h2>
-        <div id="service-cards">
-            <div class="service-card"><p class="status-loading">Loading…</p></div>
-        </div>
-
     </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Aloha Crater Lodge</h4>
-                <p style="color:#888;margin:0 0 2px;">11-3966 Kalani Honua Rd</p>
-                <p style="margin:0 0 8px;">Volcano Village, HI</p>
-                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
+                <p style="color:#555;margin:0 0 2px;">11-3966 Kalani Honua Rd</p>
+                <p style="margin:0 0 8px;color:#555;">Volcano Village, HI</p>
+                <a href="sms:+18083454449?body=Hi%2C%20I%27m%20a%20current%20guest." style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
             </div>
             <div class="footer-col">
                 <h4>Intel Feeds</h4>
@@ -198,23 +314,32 @@
     </footer>
 
     <script>
-        /* Reveal phone number on click */
-        (function() {
-            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    if (this.dataset.revealed !== 'true') {
-                        e.preventDefault();
-                        this.textContent = 'Text or Call (808) 345-4449';
-                        this.href = 'tel:+18083454449';
-                        this.dataset.revealed = 'true';
-                    }
-                });
-            });
-        })();
+        /* REVEAL SECURE CODES toggle */
+        function toggleRevealForm(e) {
+            var form = document.getElementById('reveal-form');
+            var result = document.getElementById('reveal-result');
+            var arrow = document.getElementById('reveal-arrow');
+            if (result.classList.contains('open')) return;
+            form.classList.toggle('open');
+            arrow.textContent = form.classList.contains('open') ? 'ENTER DATE BELOW ↓' : 'VERIFY IDENTITY →';
+        }
+        function submitReveal() {
+            var dateVal = document.getElementById('checkin-date').value;
+            var form = document.getElementById('reveal-form');
+            var result = document.getElementById('reveal-result');
+            var arrow = document.getElementById('reveal-arrow');
+            if (!dateVal) {
+                document.getElementById('checkin-date').style.borderColor = '#ff4500';
+                return;
+            }
+            form.classList.remove('open');
+            result.classList.add('open');
+            arrow.textContent = 'CREDENTIALS RETRIEVED ✓';
+        }
     </script>
 
     <script>
-        /* ── WMO code mapping — identical to fern.js ── */
+        /* WMO code mapping — identical to fern.js */
         var WMO_CODES = {
             0: 'Clear skies',
             1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Overcast',
@@ -227,7 +352,7 @@
             95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Heavy thunderstorm'
         };
 
-        /* ── Live USGS Kīlauea Alert Widget ── */
+        /* Live USGS Kīlauea Alert Widget */
         (function() {
             var statusEl = document.getElementById('usgs-status');
             var subEl = document.getElementById('usgs-sub');
@@ -260,7 +385,7 @@
                 });
         })();
 
-        /* ── Live Weather Widget — Open-Meteo (same coords as fern.js) ── */
+        /* Live Weather Widget — Open-Meteo (same coords as fern.js) */
         (function() {
             var tempEl = document.getElementById('weather-temp');
             var descEl = document.getElementById('weather-desc');
@@ -281,71 +406,7 @@
                 })
                 .catch(function() {
                     tempEl.textContent = 'Unavailable';
-                    descEl.innerHTML = '<a href="https://forecast.weather.gov/MapClick.php?CityName=Volcano&state=HI" target="_blank" style="color:#aaa;">Check NWS forecast</a>';
-                });
-        })();
-
-        /* ── Populate cards from fern_knowledge.json ── */
-        (function() {
-            var itineraryEmojis = { rainy_day: '🌧', stargazer: '🌌', slow_morning: '☕' };
-            var itineraryTitles = { rainy_day: 'Rainy Day', stargazer: 'Stargazer', slow_morning: 'Slow Morning' };
-            var serviceIcons = { e_bikes: '⚡', wellness_tools: '🧘' };
-            var serviceTitles = { e_bikes: 'Basecamp E-Bikes', wellness_tools: 'Wellness Tools' };
-
-            fetch('/fern_knowledge.json')
-                .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-                .then(function(data) {
-                    /* Itinerary cards */
-                    var itinContainer = document.getElementById('itinerary-cards');
-                    itinContainer.innerHTML = '';
-                    var itins = data.curated_itineraries || {};
-                    ['rainy_day', 'stargazer', 'slow_morning'].forEach(function(key) {
-                        if (!itins[key]) return;
-                        var card = document.createElement('div');
-                        card.className = 'itinerary-card';
-                        card.innerHTML =
-                            '<div class="card-emoji">' + (itineraryEmojis[key] || '📍') + '</div>' +
-                            '<h3>' + itineraryTitles[key] + '</h3>' +
-                            '<p>' + itins[key] + '</p>';
-                        itinContainer.appendChild(card);
-                    });
-
-                    /* Service cards */
-                    var svcContainer = document.getElementById('service-cards');
-                    svcContainer.innerHTML = '';
-                    var svc = data.add_on_services || {};
-                    ['e_bikes', 'wellness_tools'].forEach(function(key) {
-                        if (!svc[key]) return;
-                        var card = document.createElement('div');
-                        card.className = 'service-card';
-                        var ctaHtml = key === 'e_bikes'
-                            ? '<a href="#" class="svc-cta reveal-phone-btn">Text Concierge to Reserve</a>'
-                            : '<a href="wellness.html" class="svc-cta">View Full Wellness Menu</a>';
-                        card.innerHTML =
-                            '<div class="svc-icon">' + (serviceIcons[key] || '🔧') + '</div>' +
-                            '<div>' +
-                                '<h3>' + serviceTitles[key] + '</h3>' +
-                                '<p>' + svc[key] + '</p>' +
-                                ctaHtml +
-                            '</div>';
-                        svcContainer.appendChild(card);
-                    });
-
-                    /* Re-attach reveal-phone-btn listeners to dynamically added cards */
-                    svcContainer.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
-                        btn.addEventListener('click', function(e) {
-                            if (this.dataset.revealed !== 'true') {
-                                e.preventDefault();
-                                this.textContent = 'Text or Call (808) 345-4449';
-                                this.href = 'tel:+18083454449';
-                                this.dataset.revealed = 'true';
-                            }
-                        });
-                    });
-                })
-                .catch(function() {
-                    document.getElementById('itinerary-cards').innerHTML = '<p style="color:#888;">Content temporarily unavailable. Please check back or ask Fern.</p>';
-                    document.getElementById('service-cards').innerHTML = '';
+                    descEl.innerHTML = '<a href="https://forecast.weather.gov/MapClick.php?CityName=Volcano&state=HI" target="_blank" style="color:#666;">Check NWS forecast</a>';
                 });
         })();
     </script>

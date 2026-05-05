@@ -193,49 +193,50 @@
         if (!data || data._fallback) return [];
         var q = input.toLowerCase();
         var upsells = [];
-        var primaryIsEbike = /^(bike|e.?bike|ebike|cycle|cycling)/i.test(q.trim());
-        var primaryIsWellness = /^(wellness|massage|yoga|aromatherapy|diffuser|recovery|bio.?regen)/i.test(q.trim());
+        var primaryIsEbike = /^(bike|e.?bike|ebike|cycle|cycling|crater.*mobility)/i.test(q.trim());
+        var primaryIsWellness = /^(wellness|massage|pemf|terahertz|bio.?regen|circulatory|optical|recovery|calibration)/i.test(q.trim());
         if (!primaryIsEbike && /trail|explore|exploring|hike|hiking|getting to the park|cruise to|cruise up|park entrance|national park/i.test(q)) {
-            upsells.push(data.add_on_services.e_bikes);
+            upsells.push(data.crater_mobility && data.crater_mobility.units);
         }
-        if (!primaryIsWellness && /relax|relaxing|room.?4|shower|restore|unwind|recovery|soak/i.test(q)) {
-            upsells.push(data.add_on_services.wellness_tools);
+        if (!primaryIsWellness && /relax|room.?4|shower|restore|unwind|soak|grounded/i.test(q)) {
+            upsells.push(data.bio_regeneration_stack && data.bio_regeneration_stack.protocol);
         }
-        return upsells;
+        return upsells.filter(Boolean);
     }
 
     function collectSyncIntents(input, data, limit, excludeTags) {
         if (!data || data._fallback) return [];
         var q = input.toLowerCase();
         var checks = [
-            [/cave|lava tube|tube system|underground/i, function () { return data.safety_and_rules.caves; }],
-            [/owner|who.*runs|who.*manage|manager.*name|staff.*name|host.*name|your.*name|team.*name/i, function () { return data.safety_and_rules.staff; }],
-            [/room.?3|lumi|anela|workspace|angel room/i, function () { return data.rooms.room_3; }],
-            [/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|forest edge/i, function () { return data.rooms.room_4; }],
-            [/room|suite|linen|360|virtual tour/i, function () { return data.rooms.general; }],
-            [/wifi.*password|gate.*code|access.*code|room.*code|credentials|not received.*code|how.*get.*code|day.*arrival.*code/i, function () { return data.logistics.in_stay_essentials; }],
-            [/check.?in|check.?out|arrival time|3pm|11am|self.check|remote check/i, function () { return 'Check-in: ' + data.logistics.check_in + ' Check-out: ' + data.logistics.check_out; }],
-            [/breakfast|food|eat|coffee|continental|meal|amenities|tea|shared.*kitchen|fridge|refrigerator|provisions/i, function () { return data.common_area_etiquette.shared_spaces; }],
-            [/quiet.*hour|noise|loud|etiquette|curfew|after.*9|9pm|9:00 pm/i, function () { return data.common_area_etiquette.quiet_hours; }],
-            [/solar|renewable|energy|power|electric/i, function () { return data.sustainability_and_infrastructure.energy; }],
-            [/water|rainwater|catchment|drinking.*water|tap.*water/i, function () { return data.sustainability_and_infrastructure.water; }],
-            [/fiber|internet|wifi|wi.?fi|connectivity|zoom|remote.*work|starlink|online|connect/i, function () { return data.sustainability_and_infrastructure.connectivity; }],
-            [/sustainability|sustainable|eco|green.*lodge|footprint|environment/i, function () { return data.sustainability_and_infrastructure.energy; }],
-            [/park|distance|drive|location|where.*lodge|far|how long|miles|minutes/i, function () { return data.logistics.location; }],
-            [/dining|restaurant|eat out|lunch|dinner|ohelo|thai thai|the rim|pizza/i, function () { return data.local_guide.dining; }],
-            [/climate|layers|pack|what.*wear|bring.*clothes/i, function () { return data.local_guide.climate; }, 'climate'],
-            [/bike|e.?bike|ebike|cycle|cycling/i, function () { return data.add_on_services.e_bikes; }],
-            [/wellness|massage|yoga|aromatherapy|diffuser|bio.?regen|theragun/i, function () { return data.add_on_services.wellness_tools; }],
-            [/rainy|raining|misty|cloudy day|what.*do.*rain|stuck.*inside|bad weather|hilo/i, function () { return data.curated_itineraries.rainy_day; }],
-            [/star|stargazing|milky way|night sky|astronomy|dark sky|light pollution/i, function () { return data.curated_itineraries.stargazer; }],
-            [/morning|farmers.*market|cooper center|slow.*day|slow.*morning|coffee.*shop|pastry|cafe/i, function () { return data.curated_itineraries.slow_morning; }],
-            [/itinerary|things.*do|what.*do|activities|suggestions|ideas/i, function () { return data.curated_itineraries.slow_morning; }],
-            [/hapuu|hap[uū]|tree fern|\bferns?\b|ohia|[oō]hi[aā]|lehua|flora|plant|flower|native.*plant/i, function () { return data.naturalist_guide.flora; }],
-            [/bird|iiwi|[iī][iī]wi|nene|n[eē]n[eē]|goose|fauna|wildlife|animal/i, function () { return data.naturalist_guide.fauna; }],
-            [/frog|coqui|ko.?kee|sound|singing|night.*sound|noise.*night|chorus/i, function () { return data.naturalist_guide.soundscape; }],
-            [/pele|p[eē]l[eē]|deity|goddess|reverence|sacred|respect.*volcano/i, function () { return data.cultural_respect.pele; }],
-            [/rock|lava rock|take.*rock|remove.*rock|souvenir.*rock|[aā]ina|aina|land|native plant.*take|take.*plant/i, function () { return data.cultural_respect.aina; }],
-            [/cultural|culture|hawaiian.*custom|respect/i, function () { return data.cultural_respect.pele; }]
+            // Safety restrictions — highest priority
+            [/cave|lava tube|tube system|underground/i, function () { return data.safety_and_environment.caves; }],
+            [/owner|who.*runs|who.*manage|manager.*name|staff.*name|host.*name|your.*name|team.*name/i, function () { return data.safety_and_environment.staff; }],
+            // Sanctuaries
+            [/room.?3|lumi|anela|workspace|angel room|high.?efficiency/i, function () { return data.sanctuaries.room_3; }],
+            [/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|honeymoon|canopy entrance/i, function () { return data.sanctuaries.room_4; }],
+            [/room.?6|orchid|goldfish|botanical|tree.?trunk|pond/i, function () { return data.sanctuaries.room_6; }],
+            [/room.?[12]|pololina|family suite|4.person|four.person|front.*patio/i, function () { return data.sanctuaries.rooms_1_2; }],
+            // Credentials
+            [/wifi.*password|gate.*code|access.*code|room.*code|credentials|not received.*code|how.*get.*code|day.*arrival.*code/i, function () { return 'For secure access credentials, text the Host Team directly: ' + (data.logistics.contact || '(808) 345-4449') + '. Credentials are dispatched on your infiltration day.'; }],
+            // Logistics
+            [/check.?in|infiltration|arrival time|3pm|self.check|remote check/i, function () { return 'Infiltration (Check-in): ' + data.logistics.infiltration; }],
+            [/check.?out|extraction|departure|11am/i, function () { return 'Extraction (Check-out): ' + data.logistics.extraction; }],
+            [/coffee|ration|kitchen|fridge|refrigerator|provisions|kauu|estate/i, function () { return data.logistics.ration_center; }],
+            [/dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|mess hall|pizza/i, function () { return data.logistics.mess_hall_partners; }],
+            // Bio-regeneration stack — specific protocols first
+            [/circulatory|pemf|terahertz|tera.?hertz|olylife.*p90|p90|physical reset/i, function () { return data.bio_regeneration_stack.circulatory_reset; }],
+            [/optical|eye.*massage|galaxy.?g|g.?one|eye reset|air.*bag.*eye/i, function () { return data.bio_regeneration_stack.optical_reset; }],
+            [/vibration|plate|lymphatic|gravity.*conditioning|structural calibration/i, function () { return data.bio_regeneration_stack.gravity_conditioning; }],
+            [/aroma|diffuser|scent|sensory.*grounding|atmospheric/i, function () { return data.bio_regeneration_stack.sensory_grounding; }],
+            [/wellness|bio.?regen|recovery room|calibration|reset.*protocol|recovery.*tool/i, function () { return data.bio_regeneration_stack.protocol; }],
+            // Crater mobility
+            [/bike|e.?bike|ebike|cycle|cycling|crater.*mobility|mobility.*unit/i, function () { return data.crater_mobility.units; }],
+            [/helmet|lock|kit|orientation.*bike|bike.*gear/i, function () { return data.crater_mobility.kit; }],
+            [/complimentary.*bike|free.*bike|direct.*book.*bike|bike.*incentive/i, function () { return data.crater_mobility.incentive; }],
+            // Dark skies
+            [/star|stargazing|milky way|night sky|astronomy|dark sky|light pollution|bortle/i, function () { return data.safety_and_environment.dark_skies; }],
+            // Cultural respect
+            [/pele|p[eē]l[eē]|deity|goddess|reverence|sacred|rock|lava rock|take.*rock|remove.*rock|[aā]ina|aina|cultural|culture|hawaiian.*custom|respect.*volcano/i, function () { return data.safety_and_environment.cultural_respect; }]
         ];
         var results = [];
         var seen = [];
@@ -429,13 +430,19 @@
         });
     }
 
+    function filterResponse(text) {
+        return (text || '')
+            .replace(/\bcozy\b/gi, 'grounded')
+            .replace(/\bpampering\b/gi, 'calibration');
+    }
+
     function appendMessage(text, role) {
         var msgs = document.getElementById('fern-messages');
         var div = document.createElement('div');
         div.className = 'fern-msg ' + (role === 'bot' ? 'fern-msg-bot' : 'fern-msg-user');
         if (role === 'bot') {
             div.setAttribute('data-raw', text);
-            div.textContent = expertInsightsOn ? text : stripInsights(text);
+            div.textContent = expertInsightsOn ? filterResponse(text) : filterResponse(stripInsights(text));
         } else {
             div.textContent = text;
         }
@@ -448,7 +455,7 @@
         var bots = document.querySelectorAll('.fern-msg-bot');
         for (var i = 0; i < bots.length; i++) {
             var raw = bots[i].getAttribute('data-raw') || '';
-            bots[i].textContent = expertInsightsOn ? raw : stripInsights(raw);
+            bots[i].textContent = expertInsightsOn ? filterResponse(raw) : filterResponse(stripInsights(raw));
         }
     }
 
@@ -772,5 +779,18 @@
     } else {
         init();
     }
+
+    window.fernQuery = function(question) {
+        var fab = document.getElementById('fern-fab');
+        var win = document.getElementById('fern-window');
+        var inp = document.getElementById('fern-input');
+        var snd = document.getElementById('fern-send');
+        if (!fab || !win) return;
+        if (!win.classList.contains('fern-open')) fab.click();
+        setTimeout(function() {
+            if (inp) inp.value = question;
+            if (snd) snd.click();
+        }, 150);
+    };
 
 })();
