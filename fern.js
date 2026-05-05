@@ -113,6 +113,11 @@
         try { sessionStorage.removeItem(CHIPS_SESSION_KEY); } catch (e) {}
     }
 
+    function resetDismissedChips() {
+        try { localStorage.removeItem(DISMISSED_CHIPS_KEY); } catch (e) {}
+        try { sessionStorage.removeItem(CHIPS_SESSION_KEY); } catch (e) {}
+    }
+
     function getSessionChips() {
         var dismissed = getDismissedChips();
 
@@ -650,6 +655,11 @@
             var hint = document.createElement('div');
             hint.className = 'fern-msg fern-msg-bot';
             hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            hint.appendChild(document.createElement('br'));
+            hint.appendChild(makeResetLink(function () {
+                if (hint.parentNode) hint.parentNode.removeChild(hint);
+                showInactivityChips();
+            }));
             msgs.appendChild(hint);
             msgs.scrollTop = msgs.scrollHeight;
             return;
@@ -680,6 +690,17 @@
         resetInactivityTimer();
     }
 
+    function makeResetLink(afterReset) {
+        var link = document.createElement('span');
+        link.className = 'fern-reset-link';
+        link.textContent = 'Reset topic suggestions';
+        link.addEventListener('click', function () {
+            resetDismissedChips();
+            afterReset();
+        });
+        return link;
+    }
+
     function showChips() {
         var msgs = document.getElementById('fern-messages');
         if (!msgs) return;
@@ -688,6 +709,11 @@
             var hint = document.createElement('div');
             hint.className = 'fern-msg fern-msg-bot';
             hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            hint.appendChild(document.createElement('br'));
+            hint.appendChild(makeResetLink(function () {
+                if (hint.parentNode) hint.parentNode.removeChild(hint);
+                showChips();
+            }));
             msgs.appendChild(hint);
             msgs.scrollTop = msgs.scrollHeight;
             return;
@@ -989,6 +1015,12 @@
             '  font-family: inherit;',
             '}',
             '.fern-chip-undo:hover { background: rgba(16,185,129,0.22); }',
+            '.fern-reset-link {',
+            '  display: inline-block; margin-top: 7px; cursor: pointer;',
+            '  color: #10b981; font-size: 0.74rem; text-decoration: underline;',
+            '  opacity: 0.75; transition: opacity 0.2s;',
+            '}',
+            '.fern-reset-link:hover { opacity: 1; }',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
