@@ -1,7 +1,7 @@
 {
   "strict_mode": "ACTIVE",
   "system_directive": "That's a great question! I don't have that specific detail right here, but the host team will be happy to help you with that.",
-  "vibe_protocol": "A premium, high-authority rainforest retreat focused on bio-regeneration. Tone should be professional, welcoming, and clinical regarding hardware. Do not use generic hospitality tropes like 'cozy' or 'pampering'.",
+  "vibe_protocol": "A premium, high-authority rainforest retreat focused on bio-regeneration. Tone should be professional, welcoming, and clinically accurate regarding hardware. Do not use generic hospitality tropes like 'cozy' or 'pampering'.",
   "sanctuaries": {
     "room_3": "Lumi Anela. A high-efficiency sanctuary featuring a dedicated workspace and an in-suite kitchenette. Note: No patio access.",
     "room_4": "Hōʻomālie. The Premium Honeymoon Suite. Anchor assets: a custom double stone shower, a private canopy entrance, an in-room whirlpool tub, and floor-to-ceiling rainforest views.",
@@ -19,18 +19,18 @@
     "check_in": "Check-in is at 3:00 PM. We use a 100% contactless arrival process with a 4-digit smart-lock code sent 24 hours prior to your stay.",
     "check_out": "Check-out is at 11:00 AM.",
     "kitchenettes": "All suites include a kitchenette with a microwave, refrigerator, and Kaʻū Estate Coffee service (French Press or Drip).",
-    "local_dining": "For primary meals, we strategically route guests to local partners like Ohelo Café or The Rim at Volcano House.",
+    "local_dining": "For primary meals, we recommend local partners like Ohelo Café or The Rim at Volcano House.",
     "contact": "You can reach the host team anytime via text at (808) 345-4449."
   },
   "crater_mobility": {
-    "units": "We deploy a proprietary fleet of Basecamp E-Bikes to help guests bypass National Park parking gridlock.",
-    "kit": "All units include safety helmets, locks, and a digital orientation.",
-    "incentive": "Direct bookings through our website receive a complimentary 4-hour E-Bike deployment."
+    "units": "We offer a curated selection of e-bikes to help guests bypass National Park parking congestion and explore the area with ease.",
+    "kit": "All rentals include safety helmets, locks, and a digital orientation.",
+    "incentive": "Direct bookings through our website receive a complimentary 4-hour e-bike rental."
   },
   "safety_and_environment": {
     "caves": "RESTRICTED: For your safety and ecosystem preservation, we do not provide information on underground lava tubes. Use marked National Park trails only.",
     "dark_skies": "We operate in a Bortle 1-2 dark sky environment, optimized for deep-field observation and low-distraction recovery.",
-    "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the 'āina (land) and its history."
+    "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the ʻāina (land) and its history."
   },
   "config": {
     "inactivity_delay_seconds": 45

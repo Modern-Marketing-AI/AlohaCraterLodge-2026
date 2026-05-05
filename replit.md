@@ -16,6 +16,7 @@ A multi-page static website for Aloha Crater Lodge, a rainforest basecamp near K
 - `ebikes.html` - E-Bike rental page with ebike-hero.png, specs (750W/40mi/fat-tires), pricing grid, green CTA
 - AI Adventure Guide uses "Local Data Key" architecture — all intelligence embedded directly in clipboard button on index.html (no external directive files)
 - `blog.html` - "The Basecamp Dispatch" blog listing page — dark mode, universal nav, "First Dispatch Incoming" placeholder
+- `guest-concierge.html` - **Guest Concierge** hub (was "Basecamp Command") — action tiles with clinical terminology, NPS briefing video section, live conditions badges, Fern chatbot
 - `admin/index.html` - Dark mode Admin Keychain (noindex) — "WRITE NEW BLOG POST" button, Lodge Keychain links (CloudBeds, Starlink, Netlify, USGS), Decap CMS + Netlify Identity
 - `admin/config.yml` - Decap CMS config — git-gateway backend, blog collection (Title, Date, Image, Body fields)
 - `blog/` - Content folder for CMS-generated Markdown blog posts

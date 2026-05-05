@@ -626,7 +626,7 @@
             upsells.push(data.crater_mobility && data.crater_mobility.units);
         }
         if (!primaryIsWellness && /relax|room.?4|shower|restore|unwind|soak|grounded/i.test(q)) {
-            upsells.push(data.bio_regeneration_stack && data.bio_regeneration_stack.protocol);
+            upsells.push(data.bio_regeneration_hardware && data.bio_regeneration_hardware.protocol);
         }
         return upsells.filter(Boolean);
     }
@@ -644,18 +644,18 @@
             [/room.?6|orchid|goldfish|botanical|tree.?trunk|pond/i, function () { return data.sanctuaries.room_6; }],
             [/room.?[12]|pololina|family suite|4.person|four.person|front.*patio/i, function () { return data.sanctuaries.rooms_1_2; }],
             // Credentials
-            [/wifi.*password|gate.*code|access.*code|room.*code|credentials|not received.*code|how.*get.*code|day.*arrival.*code/i, function () { return 'For secure access credentials, text the Host Team directly: ' + (data.logistics.contact || '(808) 345-4449') + '. Credentials are dispatched on your infiltration day.'; }],
+            [/wifi.*password|gate.*code|access.*code|room.*code|credentials|not received.*code|how.*get.*code|day.*arrival.*code/i, function () { return 'For secure access credentials, text the Host Team directly: ' + (data.logistics.contact || '(808) 345-4449') + '. Your codes are sent on your check-in day.'; }],
             // Logistics
-            [/check.?in|infiltration|arrival time|3pm|self.check|remote check/i, function () { return 'Infiltration (Check-in): ' + data.logistics.infiltration; }],
-            [/check.?out|extraction|departure|11am/i, function () { return 'Extraction (Check-out): ' + data.logistics.extraction; }],
-            [/coffee|ration|kitchen|fridge|refrigerator|provisions|kauu|estate/i, function () { return data.logistics.ration_center; }],
-            [/dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|mess hall|pizza/i, function () { return data.logistics.mess_hall_partners; }],
-            // Bio-regeneration stack — specific protocols first
-            [/circulatory|pemf|terahertz|tera.?hertz|olylife.*p90|p90|physical reset/i, function () { return data.bio_regeneration_stack.circulatory_reset; }],
-            [/optical|eye.*massage|galaxy.?g|g.?one|eye reset|air.*bag.*eye/i, function () { return data.bio_regeneration_stack.optical_reset; }],
-            [/vibration|plate|lymphatic|gravity.*conditioning|structural calibration/i, function () { return data.bio_regeneration_stack.gravity_conditioning; }],
-            [/aroma|diffuser|scent|sensory.*grounding|atmospheric/i, function () { return data.bio_regeneration_stack.sensory_grounding; }],
-            [/wellness|bio.?regen|recovery room|calibration|reset.*protocol|recovery.*tool/i, function () { return data.bio_regeneration_stack.protocol; }],
+            [/check.?in|arrival time|3pm|self.check|remote check/i, function () { return 'Check-in: ' + data.logistics.check_in; }],
+            [/check.?out|departure|11am/i, function () { return 'Check-out: ' + data.logistics.check_out; }],
+            [/coffee|kitchen|fridge|refrigerator|kitchenette|kauu|estate/i, function () { return data.logistics.kitchenettes; }],
+            [/dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|pizza/i, function () { return data.logistics.local_dining; }],
+            // Bio-regeneration hardware — specific protocols first
+            [/circulatory|pemf|terahertz|tera.?hertz|olylife.*p90|p90|physical reset/i, function () { return data.bio_regeneration_hardware.circulatory_reset; }],
+            [/optical|eye.*massage|galaxy.?g|g.?one|eye reset|air.*bag.*eye/i, function () { return data.bio_regeneration_hardware.optical_recovery; }],
+            [/vibration|plate|lymphatic|gravity.*conditioning/i, function () { return data.bio_regeneration_hardware.gravity_conditioning; }],
+            [/aroma|diffuser|scent|sensory.*grounding|atmospheric/i, function () { return data.bio_regeneration_hardware.sensory_grounding; }],
+            [/wellness|bio.?regen|recovery room|reset.*protocol|recovery.*tool/i, function () { return data.bio_regeneration_hardware.protocol; }],
             // Crater mobility
             [/bike|e.?bike|ebike|cycle|cycling|crater.*mobility|mobility.*unit/i, function () { return data.crater_mobility.units; }],
             [/helmet|lock|kit|orientation.*bike|bike.*gear/i, function () { return data.crater_mobility.kit; }],
