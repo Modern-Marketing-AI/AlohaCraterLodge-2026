@@ -11,6 +11,7 @@
 
     var MAX_INTENTS = 4;
 
+    var inactivityFromUrl = false;
     var INACTIVITY_DELAY_BASE = (function () {
         var DEFAULT_MS = 45000;
         var MIN_MS = 2000;
@@ -22,7 +23,10 @@
                 var secs = parseFloat(raw);
                 if (!isNaN(secs) && isFinite(secs)) {
                     var ms = Math.round(secs * 1000);
-                    if (ms >= MIN_MS && ms <= MAX_MS) return ms;
+                    if (ms >= MIN_MS && ms <= MAX_MS) {
+                        inactivityFromUrl = true;
+                        return ms;
+                    }
                 }
             }
         } catch (e) {}
@@ -34,18 +38,18 @@
     var usedChipLabels = [];
 
     var CHIP_COVERAGE = [
-        { label: 'Stargazing',     test: /star|stargazing|milky way|night sky|astronomy|dark sky|light pollution/i },
-        { label: 'Rainy Day?',     test: /rainy|raining|misty|cloudy day|what.*do.*rain|stuck.*inside|bad weather|hilo/i },
-        { label: 'Local Birds',    test: /bird|iiwi|nene|goose|fauna|wildlife|animal/i },
-        { label: 'Sustainability', test: /sustainab|eco|green.*lodge|footprint|environment|solar|renewable|energy|power|electric/i },
-        { label: 'Pele & Culture', test: /pele|deity|goddess|reverence|sacred|cultural|culture|hawaiian.*custom/i },
-        { label: 'Itineraries',    test: /itinerary|things.*to.*do|activities|suggestions|ideas/i },
-        { label: 'Tree Ferns',     test: /hapuu|tree fern|\bferns?\b|ohia|lehua|flora|native.*plant/i },
-        { label: 'Night Sounds',   test: /coqui|night.*sound|noise.*night|chorus|what.*sound/i },
-        { label: 'E-Bikes',        test: /e.?bike|ebike|cycle|cycling/i },
-        { label: 'Local Dining',   test: /dining|restaurant|eat out|lunch|dinner|ohelo|thai thai|the rim/i },
-        { label: 'Rainwater',      test: /rainwater|catchment|drinking.*water|tap.*water/i },
-        { label: 'Farmers Market', test: /farmers.*market|cooper center/i }
+        { label: 'Circulatory Reset',    test: /circulatory|pemf|terahertz|olylife.*p90|p90|physical reset/i },
+        { label: 'Optical Reset',        test: /optical|eye.*massage|galaxy.?g|g.?one|eye reset/i },
+        { label: 'Gravity Conditioning', test: /vibration|plate|lymphatic|gravity.*conditioning/i },
+        { label: 'Sensory Grounding',    test: /aroma|diffuser|scent|sensory.*grounding/i },
+        { label: 'Crater Mobility',      test: /bike|e.?bike|ebike|cycle|cycling|crater.*mobility/i },
+        { label: 'Dark Skies',           test: /star|stargazing|milky way|night sky|dark sky|bortle/i },
+        { label: 'Cultural Respect',     test: /pele|deity|goddess|reverence|sacred|cultural|culture|aina/i },
+        { label: 'Mess Hall',            test: /dining|restaurant|eat out|lunch|dinner|ohelo|volcano house|mess hall/i },
+        { label: 'Check-in Time',        test: /check.?in|check.?out|infiltration|extraction|arrival time/i },
+        { label: 'Orchid Suite',         test: /room.?6|orchid|goldfish|botanical/i },
+        { label: 'Air Quality',          test: /air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate/i },
+        { label: 'Trail Conditions',     test: /trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|trail.*today/i }
     ];
 
     function markCoveredTopics(input) {
@@ -58,18 +62,18 @@
     }
 
     var TOPIC_CHIPS_POOL = [
-        { label: 'Stargazing',      question: 'Tell me about stargazing near the lodge' },
-        { label: 'Rainy Day?',      question: 'What can I do on a rainy day?' },
-        { label: 'Local Birds',     question: 'What birds might I see here?' },
-        { label: 'Sustainability',  question: 'How is the lodge sustainable?' },
-        { label: 'Pele & Culture',  question: 'Tell me about Pele and Hawaiian culture' },
-        { label: 'Itineraries',     question: 'What are some activity ideas and itineraries?' },
-        { label: 'Tree Ferns',      question: 'Tell me about the native plants and tree ferns on the property' },
-        { label: 'Night Sounds',    question: 'What is that sound I hear at night?' },
-        { label: 'E-Bikes',         question: 'Tell me about the e-bike rentals' },
-        { label: 'Local Dining',    question: 'What are some good restaurants nearby?' },
-        { label: 'Rainwater',       question: 'How does the rainwater catchment system work?' },
-        { label: 'Farmers Market',  question: 'Is there a farmers market nearby?' }
+        { label: 'Circulatory Reset',    question: 'Tell me about the Circulatory Reset — PEMF and Terahertz protocol' },
+        { label: 'Optical Reset',        question: 'Tell me about the Optical Reset' },
+        { label: 'Gravity Conditioning', question: 'Tell me about the Gravity Conditioning vibration plates' },
+        { label: 'Sensory Grounding',    question: 'Tell me about the Sensory Grounding aromatherapy options' },
+        { label: 'Crater Mobility',      question: 'Tell me about the Crater Mobility e-bikes' },
+        { label: 'Dark Skies',           question: 'Tell me about stargazing and dark sky conditions near the lodge' },
+        { label: 'Cultural Respect',     question: 'Tell me about respecting the \u02bbaina and Hawaiian culture' },
+        { label: 'Mess Hall',            question: 'What are the best local restaurants and mess hall partners?' },
+        { label: 'Check-in Time',        question: 'What time is infiltration (check-in) and extraction (check-out)?' },
+        { label: 'Orchid Suite',         question: 'Tell me about the Orchid Suite \u2014 Room 6' },
+        { label: 'Air Quality',          question: 'What is the current air quality near the lodge?' },
+        { label: 'Trail Conditions',     question: 'What are the current trail conditions at Hawaii Volcanoes National Park?' }
     ];
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';
@@ -98,6 +102,14 @@
         try {
             sessionStorage.removeItem(CHIPS_SESSION_KEY);
         } catch (e) { }
+    }
+
+    function undismissChip(label) {
+        var dismissed = getDismissedChips();
+        var idx = dismissed.indexOf(label);
+        if (idx !== -1) dismissed.splice(idx, 1);
+        try { localStorage.setItem(DISMISSED_CHIPS_KEY, JSON.stringify(dismissed)); } catch (e) {}
+        try { sessionStorage.removeItem(CHIPS_SESSION_KEY); } catch (e) {}
     }
 
     function getSessionChips() {
@@ -177,6 +189,10 @@
             })
             .then(function (data) {
                 fernData = data;
+                if (!inactivityFromUrl && data.config && typeof data.config.inactivity_delay_seconds === 'number') {
+                    var cfgMs = Math.round(data.config.inactivity_delay_seconds * 1000);
+                    if (cfgMs >= 2000 && cfgMs <= 600000) INACTIVITY_DELAY_BASE = cfgMs;
+                }
             })
             .catch(function () {
                 fernData = { _fallback: true, system_directive: "That is a great question! I don't have that specific detail right here, but the team will be happy to clarify that for you." };
@@ -397,8 +413,28 @@
         'Glad you asked — ',
     ];
 
+    var lastOpenerIdx = -1;
+
     function pickOpener() {
-        return OPENING_LINES[Math.floor(Math.random() * OPENING_LINES.length)];
+        if (OPENING_LINES.length <= 1) return OPENING_LINES[0];
+        var idx;
+        do { idx = Math.floor(Math.random() * OPENING_LINES.length); } while (idx === lastOpenerIdx);
+        lastOpenerIdx = idx;
+        return OPENING_LINES[idx];
+    }
+
+    var liveCache = {};
+    var LIVE_CACHE_TTL = 4 * 60 * 1000;
+
+    function cachedFetch(key, fn) {
+        var now = Date.now();
+        if (liveCache[key] && (now - liveCache[key].ts) < LIVE_CACHE_TTL) {
+            return Promise.resolve(liveCache[key].value);
+        }
+        return fn().then(function (result) {
+            liveCache[key] = { ts: now, value: result };
+            return result;
+        });
     }
 
     function routeAsync(input, data) {
@@ -406,17 +442,17 @@
         var asyncFetchers = [];
         var excludeTags = [];
         if (/eruption|erupting|alert.?level|vog.?level|lava.?flow|active.*vent|is.*erupting|volcano.*(status|active|erupt|alert|level)/i.test(q)) {
-            asyncFetchers.push(fetchVolcanoStatus);
+            asyncFetchers.push(function () { return cachedFetch('volcano', fetchVolcanoStatus); });
         }
         if (/weather|temperature|how cold|how warm|what.*wear.*outside|forecast|degrees/i.test(q)) {
-            asyncFetchers.push(fetchWeather);
+            asyncFetchers.push(function () { return cachedFetch('weather', fetchWeather); });
             excludeTags.push('climate');
         }
         if (/air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate|breathing.*outside|safe.*breathe/i.test(q)) {
-            asyncFetchers.push(fetchAirQuality);
+            asyncFetchers.push(function () { return cachedFetch('airquality', fetchAirQuality); });
         }
         if (/trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|path.*open|park.*trail|which.*trail|trail.*today|any.*closure|road.*closure|trail.*access/i.test(q)) {
-            asyncFetchers.push(fetchTrailConditions);
+            asyncFetchers.push(function () { return cachedFetch('trails', fetchTrailConditions); });
         }
 
         var slotsLeft = MAX_INTENTS - asyncFetchers.length;
@@ -496,8 +532,24 @@
         dismiss.textContent = '×';
         dismiss.addEventListener('click', function (e) {
             e.stopPropagation();
+            var parentRow = wrapper.parentNode;
             dismissChip(chip.label);
             if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+            if (parentRow) {
+                var undo = document.createElement('span');
+                undo.className = 'fern-chip-undo';
+                undo.textContent = '\u201c' + chip.label + '\u201d hidden \u2014 Undo';
+                var undoTimer = setTimeout(function () {
+                    if (undo.parentNode) undo.parentNode.removeChild(undo);
+                }, 5000);
+                undo.addEventListener('click', function () {
+                    clearTimeout(undoTimer);
+                    undismissChip(chip.label);
+                    if (undo.parentNode) undo.parentNode.removeChild(undo);
+                    parentRow.appendChild(makeChipEl(chip, onSelect));
+                });
+                parentRow.appendChild(undo);
+            }
         });
 
         wrapper.appendChild(btn);
@@ -512,7 +564,14 @@
         var available = TOPIC_CHIPS_POOL.filter(function (chip) {
             return usedChipLabels.indexOf(chip.label) === -1 && dismissed.indexOf(chip.label) === -1;
         });
-        if (available.length === 0) return;
+        if (available.length === 0) {
+            var hint = document.createElement('div');
+            hint.className = 'fern-msg fern-msg-bot';
+            hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            msgs.appendChild(hint);
+            msgs.scrollTop = msgs.scrollHeight;
+            return;
+        }
         var pool = available.slice();
         var selected = [];
         var count = Math.min(CHIPS_SHOW_COUNT, pool.length);
@@ -522,6 +581,7 @@
         }
         var row = document.createElement('div');
         row.id = 'fern-chips';
+        row.className = 'fern-chips-inactivity';
         selected.forEach(function (chip) {
             row.appendChild(makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
@@ -541,9 +601,18 @@
     function showChips() {
         var msgs = document.getElementById('fern-messages');
         if (!msgs) return;
+        var chips = getSessionChips();
+        if (chips.length === 0) {
+            var hint = document.createElement('div');
+            hint.className = 'fern-msg fern-msg-bot';
+            hint.textContent = 'You\u2019ve explored all my topic suggestions! Type any question below \u2014 I\u2019m here.';
+            msgs.appendChild(hint);
+            msgs.scrollTop = msgs.scrollHeight;
+            return;
+        }
         var row = document.createElement('div');
         row.id = 'fern-chips';
-        getSessionChips().forEach(function (chip) {
+        chips.forEach(function (chip) {
             row.appendChild(makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
@@ -822,6 +891,19 @@
             '  transition: color 0.15s;',
             '}',
             '.fern-chip-dismiss:hover { color: #ef4444; }',
+            '@keyframes fernChipsPop {',
+            '  from { opacity: 0; transform: translateY(8px); }',
+            '  to   { opacity: 1; transform: translateY(0); }',
+            '}',
+            '.fern-chips-inactivity { animation: fernChipsPop 0.35s ease forwards; }',
+            '.fern-chip-undo {',
+            '  display: inline-flex; align-items: center; cursor: pointer;',
+            '  background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);',
+            '  border-radius: 999px; color: #10b981; font-size: 0.74rem;',
+            '  padding: 4px 12px; white-space: nowrap; transition: background 0.2s;',
+            '  font-family: inherit;',
+            '}',
+            '.fern-chip-undo:hover { background: rgba(16,185,129,0.22); }',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
@@ -965,5 +1047,10 @@
             if (snd) snd.click();
         }, 150);
     };
+
+    if (Array.isArray(window._fernQueryQueue)) {
+        window._fernQueryQueue.forEach(function (q) { window.fernQuery(q); });
+        window._fernQueryQueue = null;
+    }
 
 })();

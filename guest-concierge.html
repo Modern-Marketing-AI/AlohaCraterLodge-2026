@@ -239,6 +239,22 @@
                 <div class="tile-arrow">ASK FERN →</div>
             </div>
 
+            <div class="action-tile orange" onclick="window.fernQuery('Tell me about the Gravity Conditioning vibration plates for lymphatic calibration.')">
+                <div class="tile-icon">🌀</div>
+                <div class="tile-code">Protocol 03</div>
+                <div class="tile-label">Gravity Conditioning</div>
+                <div class="tile-sub">Lymphatic Vibration Plates — structural calibration.</div>
+                <div class="tile-arrow">ASK FERN →</div>
+            </div>
+
+            <div class="action-tile orange" onclick="window.fernQuery('Tell me about Sensory Grounding — the aromatherapy options for atmospheric grounding.')">
+                <div class="tile-icon">🌿</div>
+                <div class="tile-code">Protocol 04</div>
+                <div class="tile-label">Sensory Grounding</div>
+                <div class="tile-sub">Oily Life aromatherapy — atmospheric grounding.</div>
+                <div class="tile-arrow">ASK FERN →</div>
+            </div>
+
             <div class="action-tile green" id="reveal-tile" onclick="toggleRevealForm(event)">
                 <div class="tile-icon">🔐</div>
                 <div class="tile-code">Secure Access</div>
@@ -411,6 +427,11 @@
         })();
     </script>
 
+    <script>
+        /* #36 — fernQuery resilience: queue any tile taps that fire before fern.js initialises */
+        window._fernQueryQueue = [];
+        window.fernQuery = function(q) { window._fernQueryQueue.push(q); };
+    </script>
     <script src="fern.js"></script>
 </body>
 </html>

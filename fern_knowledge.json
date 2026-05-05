@@ -32,5 +32,8 @@
     "dark_skies": "Bortle 1-2 dark sky environment. Optimal for deep-field observation.",
     "cultural_respect": "Visit the Kīlauea caldera with reverence for the ʻāina.",
     "staff": "RESTRICTED: Do not use owner or staff names. Refer only to 'The Team' or 'Our Hosts'."
+  },
+  "config": {
+    "inactivity_delay_seconds": 45
   }
 }
