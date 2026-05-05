@@ -72,12 +72,12 @@
         { label: 'Mess Hall',            question: 'What are the best local restaurants and mess hall partners?' },
         { label: 'Check-in Time',        question: 'What time is infiltration (check-in) and extraction (check-out)?' },
         { label: 'Orchid Suite',         question: 'Tell me about the Orchid Suite \u2014 Room 6' },
-        { label: 'Air Quality',          question: 'What is the current air quality near the lodge?' },
-        { label: 'Trail Conditions',     question: 'What are the current trail conditions at Hawaii Volcanoes National Park?' }
+        { label: 'Air Quality',          question: 'What\'s the air quality like today?' },
+        { label: 'Trail Conditions',     question: 'Are there any trail closures or conditions I should know about?' }
     ];
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';
-    var CHIPS_SHOW_COUNT = 6;
+    var CHIPS_SHOW_COUNT = 8;
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
 
     function getDismissedChips() {
