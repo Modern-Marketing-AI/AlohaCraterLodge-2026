@@ -12,6 +12,7 @@
     var MAX_INTENTS = 4;
 
     var inactivityFromUrl = false;
+    var inactivityFromConfig = false;
     var INACTIVITY_DELAY_BASE = (function () {
         var DEFAULT_MS = 45000;
         var MIN_MS = 2000;
@@ -27,6 +28,19 @@
                         inactivityFromUrl = true;
                         return ms;
                     }
+                }
+            }
+        } catch (e) {}
+        // Host pages can override the default without editing this file:
+        //   <script>window.FERN_CONFIG = { inactivityDelay: 30000 };</script>
+        // inactivityDelay is in milliseconds (e.g. 30000 = 30 s). Must be 2000–600000.
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.inactivityDelay === 'number') {
+                var cfgMs = Math.round(cfg.inactivityDelay);
+                if (cfgMs >= MIN_MS && cfgMs <= MAX_MS) {
+                    inactivityFromConfig = true;
+                    return cfgMs;
                 }
             }
         } catch (e) {}
@@ -205,7 +219,7 @@
             })
             .then(function (data) {
                 fernData = data;
-                if (!inactivityFromUrl && data.config && typeof data.config.inactivity_delay_seconds === 'number') {
+                if (!inactivityFromUrl && !inactivityFromConfig && data.config && typeof data.config.inactivity_delay_seconds === 'number') {
                     var cfgMs = Math.round(data.config.inactivity_delay_seconds * 1000);
                     if (cfgMs >= 2000 && cfgMs <= 600000) INACTIVITY_DELAY_BASE = cfgMs;
                 }
