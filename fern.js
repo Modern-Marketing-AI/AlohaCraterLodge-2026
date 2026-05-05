@@ -56,19 +56,48 @@
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';
     var CHIPS_SHOW_COUNT = 6;
+    var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
+
+    function getDismissedChips() {
+        try {
+            var stored = localStorage.getItem(DISMISSED_CHIPS_KEY);
+            if (stored) {
+                var arr = JSON.parse(stored);
+                if (Array.isArray(arr)) return arr;
+            }
+        } catch (e) { }
+        return [];
+    }
+
+    function dismissChip(label) {
+        var dismissed = getDismissedChips();
+        if (dismissed.indexOf(label) === -1) {
+            dismissed.push(label);
+            try {
+                localStorage.setItem(DISMISSED_CHIPS_KEY, JSON.stringify(dismissed));
+            } catch (e) { }
+        }
+        try {
+            sessionStorage.removeItem(CHIPS_SESSION_KEY);
+        } catch (e) { }
+    }
 
     function getSessionChips() {
+        var dismissed = getDismissedChips();
+
         try {
             var stored = sessionStorage.getItem(CHIPS_SESSION_KEY);
             if (stored) {
                 var indices = JSON.parse(stored);
                 if (Array.isArray(indices) && indices.length === CHIPS_SHOW_COUNT) {
-                    return indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
+                    var cached = indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
+                    var stillValid = cached.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
+                    if (stillValid.length === cached.length) return cached;
                 }
             }
         } catch (e) { }
 
-        var pool = TOPIC_CHIPS_POOL.slice();
+        var pool = TOPIC_CHIPS_POOL.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
         var selected = [];
         while (selected.length < CHIPS_SHOW_COUNT && pool.length > 0) {
             var ri = Math.floor(Math.random() * pool.length);
@@ -429,11 +458,36 @@
         }, INACTIVITY_DELAY);
     }
 
+    function makeChipEl(chip, onSelect) {
+        var wrapper = document.createElement('span');
+        wrapper.className = 'fern-chip-wrap';
+
+        var btn = document.createElement('button');
+        btn.className = 'fern-chip';
+        btn.textContent = chip.label;
+        btn.addEventListener('click', onSelect);
+
+        var dismiss = document.createElement('button');
+        dismiss.className = 'fern-chip-dismiss';
+        dismiss.setAttribute('aria-label', 'Dismiss ' + chip.label);
+        dismiss.textContent = '×';
+        dismiss.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dismissChip(chip.label);
+            if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+        });
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(dismiss);
+        return wrapper;
+    }
+
     function showInactivityChips() {
         var msgs = document.getElementById('fern-messages');
         if (!msgs) return;
+        var dismissed = getDismissedChips();
         var available = TOPIC_CHIPS_POOL.filter(function (chip) {
-            return usedChipLabels.indexOf(chip.label) === -1;
+            return usedChipLabels.indexOf(chip.label) === -1 && dismissed.indexOf(chip.label) === -1;
         });
         if (available.length === 0) return;
         var pool = available.slice();
@@ -446,17 +500,13 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         selected.forEach(function (chip) {
-            var btn = document.createElement('button');
-            btn.className = 'fern-chip';
-            btn.textContent = chip.label;
-            btn.addEventListener('click', function () {
+            row.appendChild(makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
-            });
-            row.appendChild(btn);
+            }));
         });
         msgs.appendChild(row);
         msgs.scrollTop = msgs.scrollHeight;
@@ -469,17 +519,13 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         getSessionChips().forEach(function (chip) {
-            var btn = document.createElement('button');
-            btn.className = 'fern-chip';
-            btn.textContent = chip.label;
-            btn.addEventListener('click', function () {
+            row.appendChild(makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
-            });
-            row.appendChild(btn);
+            }));
         });
         msgs.appendChild(row);
         msgs.scrollTop = msgs.scrollHeight;
@@ -728,14 +774,27 @@
             '  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0 2px;',
             '  align-self: flex-start; max-width: 100%;',
             '}',
+            '.fern-chip-wrap {',
+            '  display: inline-flex; align-items: center;',
+            '  border: 1px solid #2a2a2a; border-radius: 999px;',
+            '  transition: border-color 0.18s;',
+            '}',
+            '.fern-chip-wrap:hover { border-color: #10b981; }',
             '.fern-chip {',
-            '  background: transparent; border: 1px solid #2a2a2a; border-radius: 999px;',
-            '  color: #999; font-size: 0.76rem; padding: 5px 12px; cursor: pointer;',
-            '  transition: border-color 0.18s, color 0.18s, background 0.18s;',
+            '  background: transparent; border: none; border-radius: 999px 0 0 999px;',
+            '  color: #999; font-size: 0.76rem; padding: 5px 8px 5px 12px; cursor: pointer;',
+            '  transition: color 0.18s, background 0.18s;',
             '  white-space: nowrap; font-family: inherit; outline: none; line-height: 1.4;',
             '}',
-            '.fern-chip:hover { border-color: #10b981; color: #10b981; background: rgba(16,185,129,0.07); }',
-            '.fern-chip:active { background: rgba(16,185,129,0.14); }',
+            '.fern-chip-wrap:hover .fern-chip { color: #10b981; background: rgba(16,185,129,0.07); }',
+            '.fern-chip-wrap:hover .fern-chip:active { background: rgba(16,185,129,0.14); }',
+            '.fern-chip-dismiss {',
+            '  background: transparent; border: none; border-radius: 0 999px 999px 0;',
+            '  color: #555; font-size: 0.85rem; padding: 5px 10px 5px 2px; cursor: pointer;',
+            '  line-height: 1; font-family: inherit; outline: none;',
+            '  transition: color 0.15s;',
+            '}',
+            '.fern-chip-dismiss:hover { color: #ef4444; }',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
