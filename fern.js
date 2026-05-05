@@ -3,7 +3,13 @@
 
     var fernData = null;
     var pendingResponse = false;
-    var expertInsightsOn = true;
+    var expertInsightsOn = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.expertInsights === 'boolean') return cfg.expertInsights;
+        } catch (e) {}
+        return true;
+    })();
     var greeted = false;
     var insightCount = 0;
     var triggerFired = false;
@@ -11,7 +17,16 @@
     var chipsDismissedIndicatorEl = null;
     var currentChipResetFn = null;
 
-    var MAX_INTENTS = 4;
+    var MAX_INTENTS = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.maxReprompts === 'number') {
+                var n = Math.round(cfg.maxReprompts);
+                if (n >= 1 && n <= 10) return n;
+            }
+        } catch (e) {}
+        return 4;
+    })();
 
     var inactivityFromUrl = false;
     var inactivityFromConfig = false;
@@ -33,10 +48,14 @@
                 }
             }
         } catch (e) {}
-        // Host pages can override the default without editing this file:
-        //   <script>window.FERN_CONFIG = { inactivityDelay: 30000, liveDataCacheTTL: 180000 };</script>
-        // inactivityDelay is in milliseconds (e.g. 30000 = 30 s). Must be 2000–600000.
-        // liveDataCacheTTL is in milliseconds (e.g. 180000 = 3 min). Must be 30000–1800000.
+        // Host pages can override Fern behavior without editing this file:
+        //   <script>window.FERN_CONFIG = {
+        //     inactivityDelay:    30000,   // ms before first inactivity chip prompt. 2000–600000. Default 45000.
+        //     liveDataCacheTTL:   180000,  // ms to cache live data (AQI, trails). 30000–1800000. Default 120000.
+        //     maxReprompts:       4,       // max async fetches per reply (1–10). Default 4.
+        //     expertInsights:     true,    // show expert insight blocks on load (true/false). Default true.
+        //     repromptMultipliers: [1, 2, 3] // delay multipliers for successive inactivity reprompts. Must be 3 positive numbers.
+        //   };</script>
         try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.inactivityDelay === 'number') {
@@ -765,9 +784,27 @@
         }
     }
 
+    var REPROMPT_MULTIPLIERS = (function () {
+        var defaults = [1, 2, 3];
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && Array.isArray(cfg.repromptMultipliers) && cfg.repromptMultipliers.length >= 3) {
+                var candidate = [];
+                var valid = true;
+                for (var i = 0; i < 3; i++) {
+                    var m = cfg.repromptMultipliers[i];
+                    if (typeof m !== 'number' || !isFinite(m) || m <= 0) { valid = false; break; }
+                    candidate.push(m);
+                }
+                if (valid) return candidate;
+            }
+        } catch (e) {}
+        return defaults;
+    })();
+
     function getNextInactivityDelay() {
-        var multiplier = inactivityRepromptCount === 0 ? 1 : (inactivityRepromptCount === 1 ? 2 : 3);
-        return INACTIVITY_DELAY_BASE * multiplier;
+        var idx = Math.min(inactivityRepromptCount, 2);
+        return INACTIVITY_DELAY_BASE * REPROMPT_MULTIPLIERS[idx];
     }
 
     function resetInactivityTimer() {
