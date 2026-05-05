@@ -11,8 +11,26 @@
 
     var MAX_INTENTS = 4;
 
-    var INACTIVITY_DELAY = 45000;
+    var INACTIVITY_DELAY_BASE = (function () {
+        var DEFAULT_MS = 45000;
+        var MIN_MS = 2000;
+        var MAX_MS = 600000;
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var raw = params.get('fern_delay');
+            if (raw !== null) {
+                var secs = parseFloat(raw);
+                if (!isNaN(secs) && isFinite(secs)) {
+                    var ms = Math.round(secs * 1000);
+                    if (ms >= MIN_MS && ms <= MAX_MS) return ms;
+                }
+            }
+        } catch (e) {}
+        return DEFAULT_MS;
+    })();
+
     var inactivityTimer = null;
+    var inactivityRepromptCount = 0;
     var usedChipLabels = [];
 
     var CHIP_COVERAGE = [
@@ -447,6 +465,11 @@
         }
     }
 
+    function getNextInactivityDelay() {
+        var multiplier = inactivityRepromptCount === 0 ? 1 : (inactivityRepromptCount === 1 ? 2 : 3);
+        return INACTIVITY_DELAY_BASE * multiplier;
+    }
+
     function resetInactivityTimer() {
         clearInactivityTimer();
         var win = document.getElementById('fern-window');
@@ -455,7 +478,7 @@
             if (!chipsEl && !pendingResponse) {
                 showInactivityChips();
             }
-        }, INACTIVITY_DELAY);
+        }, getNextInactivityDelay());
     }
 
     function makeChipEl(chip, onSelect) {
@@ -511,6 +534,8 @@
         msgs.appendChild(row);
         msgs.scrollTop = msgs.scrollHeight;
         chipsEl = row;
+        if (inactivityRepromptCount < 2) inactivityRepromptCount++;
+        resetInactivityTimer();
     }
 
     function showChips() {
@@ -538,6 +563,7 @@
             appendMessage("One moment — I'm still loading the Lodge intel. Please try again in a second!", 'bot');
             return;
         }
+        inactivityRepromptCount = 0;
         clearInactivityTimer();
         markCoveredTopics(question);
         appendMessage(question, 'user');
@@ -628,6 +654,7 @@
             return;
         }
 
+        inactivityRepromptCount = 0;
         clearInactivityTimer();
         markCoveredTopics(text);
         removeChips();
