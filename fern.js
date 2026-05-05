@@ -467,36 +467,22 @@
         return OPENING_LINES[idx];
     }
 
-    var liveCache = {};
-    var LIVE_CACHE_TTL = 4 * 60 * 1000;
-
-    function cachedFetch(key, fn) {
-        var now = Date.now();
-        if (liveCache[key] && (now - liveCache[key].ts) < LIVE_CACHE_TTL) {
-            return Promise.resolve(liveCache[key].value);
-        }
-        return fn().then(function (result) {
-            liveCache[key] = { ts: now, value: result };
-            return result;
-        });
-    }
-
     function routeAsync(input, data) {
         var q = input.toLowerCase();
         var asyncFetchers = [];
         var excludeTags = [];
         if (/eruption|erupting|alert.?level|vog.?level|lava.?flow|active.*vent|is.*erupting|volcano.*(status|active|erupt|alert|level)/i.test(q)) {
-            asyncFetchers.push(function () { return cachedFetch('volcano', fetchVolcanoStatus); });
+            asyncFetchers.push(fetchVolcanoStatus);
         }
         if (/weather|temperature|how cold|how warm|what.*wear.*outside|forecast|degrees/i.test(q)) {
-            asyncFetchers.push(function () { return cachedFetch('weather', fetchWeather); });
+            asyncFetchers.push(fetchWeather);
             excludeTags.push('climate');
         }
         if (/air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate|breathing.*outside|safe.*breathe/i.test(q)) {
-            asyncFetchers.push(function () { return cachedFetch('airquality', fetchAirQuality); });
+            asyncFetchers.push(fetchAirQuality);
         }
         if (/trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|path.*open|park.*trail|which.*trail|trail.*today|any.*closure|road.*closure|trail.*access/i.test(q)) {
-            asyncFetchers.push(function () { return cachedFetch('trails', fetchTrailConditions); });
+            asyncFetchers.push(fetchTrailConditions);
         }
 
         var slotsLeft = MAX_INTENTS - asyncFetchers.length;
@@ -1067,11 +1053,22 @@
         });
     }
 
+    var LIVE_REFRESH_INTERVAL = LIVE_DATA_TTL;
+
+    function warmLiveCache() {
+        fetchVolcanoStatus();
+        fetchWeather();
+        fetchAirQuality();
+        fetchTrailConditions();
+    }
+
     function init() {
         injectStyles();
         buildHTML();
         wireEvents();
         loadKnowledge();
+        warmLiveCache();
+        setInterval(warmLiveCache, LIVE_REFRESH_INTERVAL);
     }
 
     if (document.readyState === 'loading') {
