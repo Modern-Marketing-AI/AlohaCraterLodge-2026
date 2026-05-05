@@ -79,6 +79,7 @@
     var CHIPS_SESSION_KEY = 'fern_chips_session';
     var CHIPS_SHOW_COUNT = 8;
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
+    var PINNED_CHIP_LABELS = ['Air Quality', 'Trail Conditions'];
 
     function getDismissedChips() {
         try {
@@ -119,16 +120,26 @@
             var stored = sessionStorage.getItem(CHIPS_SESSION_KEY);
             if (stored) {
                 var indices = JSON.parse(stored);
-                if (Array.isArray(indices) && indices.length === CHIPS_SHOW_COUNT) {
+                if (Array.isArray(indices) && indices.length > 0) {
                     var cached = indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
                     var stillValid = cached.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
-                    if (stillValid.length === cached.length) return cached;
+                    var pinnedPresent = PINNED_CHIP_LABELS.every(function (lbl) {
+                        return dismissed.indexOf(lbl) !== -1 ||
+                               stillValid.some(function (c) { return c.label === lbl; });
+                    });
+                    if (stillValid.length === cached.length && pinnedPresent) return cached;
                 }
             }
         } catch (e) { }
 
-        var pool = TOPIC_CHIPS_POOL.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
-        var selected = [];
+        var pinned = TOPIC_CHIPS_POOL.filter(function (c) {
+            return PINNED_CHIP_LABELS.indexOf(c.label) !== -1 && dismissed.indexOf(c.label) === -1;
+        });
+        var pinnedLabels = pinned.map(function (c) { return c.label; });
+        var pool = TOPIC_CHIPS_POOL.filter(function (c) {
+            return dismissed.indexOf(c.label) === -1 && pinnedLabels.indexOf(c.label) === -1;
+        });
+        var selected = pinned.slice();
         while (selected.length < CHIPS_SHOW_COUNT && pool.length > 0) {
             var ri = Math.floor(Math.random() * pool.length);
             selected.push(pool.splice(ri, 1)[0]);

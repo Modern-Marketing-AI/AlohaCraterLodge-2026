@@ -295,6 +295,22 @@
                     <p class="status-badge-sub" id="weather-desc"></p>
                 </div>
             </div>
+            <div class="status-badge">
+                <div class="status-badge-icon">💨</div>
+                <div class="status-badge-content">
+                    <p class="status-badge-label">Air Quality (AQI)</p>
+                    <p class="status-badge-value" id="aqi-status"><span class="status-loading">Fetching…</span></p>
+                    <p class="status-badge-sub" id="aqi-sub"></p>
+                </div>
+            </div>
+            <div class="status-badge">
+                <div class="status-badge-icon">🥾</div>
+                <div class="status-badge-content">
+                    <p class="status-badge-label">Trail Conditions</p>
+                    <p class="status-badge-value" id="trail-status"><span class="status-loading">Fetching…</span></p>
+                    <p class="status-badge-sub" id="trail-sub"></p>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -423,6 +439,61 @@
                 .catch(function() {
                     tempEl.textContent = 'Unavailable';
                     descEl.innerHTML = '<a href="https://forecast.weather.gov/MapClick.php?CityName=Volcano&state=HI" target="_blank" style="color:#666;">Check NWS forecast</a>';
+                });
+        })();
+
+        /* Live Air Quality Widget — Open-Meteo AQI */
+        (function() {
+            var statusEl = document.getElementById('aqi-status');
+            var subEl    = document.getElementById('aqi-sub');
+            var url = 'https://air-quality-api.open-meteo.com/v1/air-quality' +
+                '?latitude=19.4294&longitude=-155.2434' +
+                '&current=us_aqi' +
+                '&timezone=Pacific%2FHonolulu';
+            fetch(url)
+                .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(function(data) {
+                    if (!data || !data.current) throw new Error('no data');
+                    var aqi = data.current.us_aqi;
+                    var category, cls;
+                    if (aqi <= 50)       { category = 'Good';            cls = 'alert-normal'; }
+                    else if (aqi <= 100) { category = 'Moderate';        cls = 'alert-advisory'; }
+                    else if (aqi <= 150) { category = 'Unhealthy (Sensitive Groups)'; cls = 'alert-watch'; }
+                    else                 { category = 'Unhealthy';       cls = 'alert-warning'; }
+                    statusEl.innerHTML = '<span class="' + cls + '">AQI ' + aqi + '</span>';
+                    subEl.textContent = category + ' — vog watch active near Kīlauea';
+                })
+                .catch(function() {
+                    statusEl.textContent = 'Unavailable';
+                    subEl.innerHTML = '<a href="https://www.airnow.gov/" target="_blank" style="color:#666;">Check AirNow</a>';
+                });
+        })();
+
+        /* Live Trail Conditions Widget — NPS Alerts API */
+        (function() {
+            var statusEl = document.getElementById('trail-status');
+            var subEl    = document.getElementById('trail-sub');
+            fetch('https://developer.nps.gov/api/v1/alerts?parkCode=havo&limit=5&api_key=DEMO_KEY')
+                .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(function(data) {
+                    var alerts = (data && Array.isArray(data.data)) ? data.data : [];
+                    var trailAlerts = alerts.filter(function(a) {
+                        return /trail|road|closure|closed|access|hike/i.test(a.title + ' ' + a.description);
+                    });
+                    if (trailAlerts.length === 0 && alerts.length === 0) {
+                        statusEl.innerHTML = '<span class="alert-normal">No Closures</span>';
+                        subEl.textContent = 'No active trail alerts on record';
+                    } else if (trailAlerts.length === 0) {
+                        statusEl.innerHTML = '<span class="alert-normal">Clear</span>';
+                        subEl.textContent = 'No trail-specific closures listed';
+                    } else {
+                        statusEl.innerHTML = '<span class="alert-watch">' + trailAlerts.length + ' Alert' + (trailAlerts.length > 1 ? 's' : '') + '</span>';
+                        subEl.textContent = trailAlerts[0].title;
+                    }
+                })
+                .catch(function() {
+                    statusEl.textContent = 'Unavailable';
+                    subEl.innerHTML = '<a href="https://www.nps.gov/havo/planyourvisit/conditions.htm" target="_blank" style="color:#666;">Check NPS conditions</a>';
                 });
         })();
     </script>
