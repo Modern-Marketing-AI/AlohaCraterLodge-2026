@@ -32,8 +32,9 @@
             }
         } catch (e) {}
         // Host pages can override the default without editing this file:
-        //   <script>window.FERN_CONFIG = { inactivityDelay: 30000 };</script>
+        //   <script>window.FERN_CONFIG = { inactivityDelay: 30000, liveDataCacheTTL: 180000 };</script>
         // inactivityDelay is in milliseconds (e.g. 30000 = 30 s). Must be 2000–600000.
+        // liveDataCacheTTL is in milliseconds (e.g. 180000 = 3 min). Must be 30000–1800000.
         try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.inactivityDelay === 'number') {
@@ -345,7 +346,18 @@
     }
 
     var LIVE_DATA_CACHE = {};
-    var LIVE_DATA_TTL = 3 * 60 * 1000;
+    var LIVE_DATA_SHOWN = {};
+
+    var LIVE_DATA_TTL = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.liveDataCacheTTL === 'number') {
+                var ms = Math.round(cfg.liveDataCacheTTL);
+                if (ms >= 30000 && ms <= 30 * 60 * 1000) return ms;
+            }
+        } catch (e) {}
+        return 3 * 60 * 1000;
+    })();
 
     function getCached(key) {
         var entry = LIVE_DATA_CACHE[key];
@@ -359,6 +371,18 @@
         if (value !== GRACEFUL_FAIL) {
             LIVE_DATA_CACHE[key] = { value: value, ts: Date.now() };
         }
+    }
+
+    function wasRefreshed(key) {
+        var entry = LIVE_DATA_CACHE[key];
+        if (!entry) return false;
+        var lastShown = LIVE_DATA_SHOWN[key];
+        if (!lastShown) return false;
+        return entry.ts > lastShown;
+    }
+
+    function markShown(key) {
+        LIVE_DATA_SHOWN[key] = Date.now();
     }
 
     function fetchVolcanoStatus() {
@@ -395,6 +419,7 @@
                 return GRACEFUL_FAIL;
             });
     }
+    fetchVolcanoStatus._cacheKey = 'volcano';
 
     function fetchWeather() {
         var cached = getCached('weather');
@@ -421,6 +446,7 @@
                 return GRACEFUL_FAIL;
             });
     }
+    fetchWeather._cacheKey = 'weather';
 
     function fetchAirQuality() {
         var cached = getCached('airQuality');
@@ -463,6 +489,7 @@
                 return GRACEFUL_FAIL;
             });
     }
+    fetchAirQuality._cacheKey = 'airQuality';
 
     function fetchTrailConditions() {
         var cached = getCached('trailConditions');
@@ -495,6 +522,7 @@
                 return GRACEFUL_FAIL;
             });
     }
+    fetchTrailConditions._cacheKey = 'trailConditions';
 
     function getUpsells(input, data) {
         if (!data || data._fallback) return [];
@@ -685,6 +713,13 @@
         }
 
         return Promise.all(asyncFetchers.map(function (fn) { return fn(); })).then(function (asyncResults) {
+            var dataWasRefreshed = asyncFetchers.some(function (fn) {
+                return fn._cacheKey && wasRefreshed(fn._cacheKey);
+            });
+            asyncFetchers.forEach(function (fn) {
+                if (fn._cacheKey) markShown(fn._cacheKey);
+            });
+
             var parts = asyncResults.concat(syncResults);
             var seen = [];
             var unique = [];
@@ -694,12 +729,19 @@
                     unique.push(parts[i]);
                 }
             }
-            if (unique.length === 1) return unique[0];
-            var joined = unique[0];
-            for (var j = 1; j < unique.length; j++) {
-                joined += '\n\n' + pickBridge() + unique[j];
+            var result;
+            if (unique.length === 1) {
+                result = unique[0];
+            } else {
+                result = unique[0];
+                for (var j = 1; j < unique.length; j++) {
+                    result += '\n\n' + pickBridge() + unique[j];
+                }
             }
-            return joined;
+            if (dataWasRefreshed) {
+                result += '\n\n_(Updated just now.)_';
+            }
+            return result;
         });
     }
 
