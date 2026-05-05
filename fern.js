@@ -8,6 +8,8 @@
     var insightCount = 0;
     var triggerFired = false;
     var chipsEl = null;
+    var chipsDismissedIndicatorEl = null;
+    var currentChipResetFn = null;
 
     var MAX_INTENTS = 4;
 
@@ -750,6 +752,10 @@
             chipsEl.parentNode.removeChild(chipsEl);
         }
         chipsEl = null;
+        if (chipsDismissedIndicatorEl && chipsDismissedIndicatorEl.parentNode) {
+            chipsDismissedIndicatorEl.parentNode.removeChild(chipsDismissedIndicatorEl);
+        }
+        chipsDismissedIndicatorEl = null;
     }
 
     function clearInactivityTimer() {
@@ -793,6 +799,7 @@
             var parentRow = wrapper.parentNode;
             dismissChip(chip.label);
             if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+            updateDismissedIndicator();
             if (parentRow) {
                 var undo = document.createElement('span');
                 undo.className = 'fern-chip-undo';
@@ -805,6 +812,7 @@
                     undismissChip(chip.label);
                     if (undo.parentNode) undo.parentNode.removeChild(undo);
                     parentRow.appendChild(makeChipEl(chip, onSelect));
+                    updateDismissedIndicator();
                 });
                 parentRow.appendChild(undo);
             }
@@ -858,10 +866,38 @@
             row.appendChild(el);
         });
         msgs.appendChild(row);
-        msgs.scrollTop = msgs.scrollHeight;
         chipsEl = row;
+        currentChipResetFn = showInactivityChips;
+        updateDismissedIndicator();
+        msgs.scrollTop = msgs.scrollHeight;
         if (inactivityRepromptCount < 2) inactivityRepromptCount++;
         resetInactivityTimer();
+    }
+
+    function updateDismissedIndicator() {
+        var msgs = document.getElementById('fern-messages');
+        if (chipsDismissedIndicatorEl && chipsDismissedIndicatorEl.parentNode) {
+            chipsDismissedIndicatorEl.parentNode.removeChild(chipsDismissedIndicatorEl);
+        }
+        chipsDismissedIndicatorEl = null;
+        if (!msgs || !chipsEl) return;
+        var count = getDismissedChips().length;
+        if (count === 0) return;
+        var indicator = document.createElement('div');
+        indicator.className = 'fern-dismissed-count';
+        var label = count === 1 ? '1 topic hidden' : count + ' topics hidden';
+        indicator.textContent = label + ' \u2014 ';
+        var savedResetFn = currentChipResetFn;
+        var lnk = makeResetLink(function () {
+            if (indicator.parentNode) indicator.parentNode.removeChild(indicator);
+            chipsDismissedIndicatorEl = null;
+            if (chipsEl && chipsEl.parentNode) chipsEl.parentNode.removeChild(chipsEl);
+            chipsEl = null;
+            if (savedResetFn) savedResetFn();
+        });
+        indicator.appendChild(lnk);
+        msgs.appendChild(indicator);
+        chipsDismissedIndicatorEl = indicator;
     }
 
     function makeResetLink(afterReset) {
@@ -908,8 +944,10 @@
             row.appendChild(el);
         });
         msgs.appendChild(row);
-        msgs.scrollTop = msgs.scrollHeight;
         chipsEl = row;
+        currentChipResetFn = showChips;
+        updateDismissedIndicator();
+        msgs.scrollTop = msgs.scrollHeight;
     }
 
     function sendChipQuestion(question) {
@@ -1230,6 +1268,13 @@
             '  opacity: 0.75; transition: opacity 0.2s;',
             '}',
             '.fern-reset-link:hover { opacity: 1; }',
+            '.fern-dismissed-count {',
+            '  font-size: 0.72rem; color: rgba(255,255,255,0.38); padding: 2px 12px 4px;',
+            '  animation: fernHintFade 0.4s ease forwards;',
+            '}',
+            '.fern-dismissed-count .fern-reset-link {',
+            '  display: inline; margin-top: 0;',
+            '}',
             '@media (max-width: 400px) {',
             '  #fern-window { right: 8px; width: calc(100vw - 16px); bottom: 96px; }',
             '  #fern-fab { right: 16px; bottom: 20px; }',
