@@ -1,0 +1,61 @@
+FERN CONCIERGE: PHASE 4 - "PRIMITIVE-FUTURIST" BASECAMP UPGRADE
+
+Please perform a total overhaul of the 'Guest Concierge' page and Fern's 'Knowledge Brain' using the mission-driven, clinical terminology below.
+
+1. UI OVERHAUL: "THE COMMAND CENTER"
+- Rename the 'Guest Concierge' page to 'Basecamp Command' or 'Guest Concierge (Command)'.
+- Use a "Volcanic Dark Mode" aesthetic: Deep blacks, flame orange accents, and emerald green highlights.
+- INTERACTIVE TILES: Instead of plain text, use large, clickable "Action Tiles":
+    * [CIRCULATORY RESET]: Triggers Fern to explain the OlyLife P90 (PEMF/Terahertz).
+    * [OPTICAL RESET]: Triggers Fern to explain the OlyLife Galaxy G-One.
+    * [CRATER MOBILITY]: Triggers Fern to explain the Basecamp E-Bikes.
+    * [REVEAL SECURE CODES]: Triggers a verification prompt (e.g., "Enter check-in date") to display WiFi/Gate codes.
+- ONE-TAP COMMS: Add a button: "CONTACT COMMAND (808) 345-4449" that pre-fills a text message.
+
+2. FERN BEHAVIOR: "ACTION RELAY"
+- Update Fern's tone: Clinical, high-authority, and mission-driven. 
+- Use terms like "Infiltration" (Check-in), "Extraction" (Check-out), and "Calibration" (Relaxing).
+- Fern must never say "cozy" or "pampering."
+- Fern should facilitate requests: "Would you like me to prepare a deployment request for the OlyLife P90 to your suite?"
+
+3. KNOWLEDGE BASE REWRITE:
+- Replace the content of 'fern_knowledge.json' with the following EXACT data.
+
+---
+FILE CONTENT FOR: fern_knowledge.json
+---
+{
+  "strict_mode": "ACTIVE",
+  "system_directive": "This inquiry falls outside current mission parameters. Please contact the Host Team for direct calibration.",
+  "vibe_protocol": "Primitive-Futurist. High-Authority Basecamp. Use terms: Infiltration, Extraction, Calibration, Secure, Grounded.",
+  "sanctuaries": {
+    "room_3": "Lumi Anela. High-Efficiency Basecamp. Value-focused, high-utility sanctuary with an integrated Ration Center (kitchenette). No patio access.",
+    "room_4": "Hōʻomālie. Premium Honeymoon Suite. Anchor assets: Custom double stone shower, private canopy entrance, in-room whirlpool tub, floor-to-ceiling rainforest views.",
+    "room_6": "Orchid Suite. Tier 3 Premium. Features: Indoor goldfish pond, botanical garden, tree-trunk bed architecture, and private patio.",
+    "rooms_1_2": "Pololina Family Suite (Room 2). Tier 1 Family-Friendly basecamp. 4-person max occupancy with Ration Centers and front-facing patios."
+  },
+  "bio_regeneration_stack": {
+    "circulatory_reset": "OlyLife P90 utilizing PEMF and Terahertz energy for physical reset.",
+    "optical_reset": "OlyLife Galaxy G-One featuring 3D airbag eye massage and 42°C heat compress.",
+    "gravity_conditioning": "Lymphatic Vibration Plates for structural calibration.",
+    "sensory_grounding": "Oily Life aromatherapy products for atmospheric grounding.",
+    "protocol": "Assets can be delivered to suites for private use or booked for sessions in the Bio-Regeneration Recovery Room."
+  },
+  "logistics": {
+    "infiltration": "3:00 PM. 100% contactless arrival via 4-digit smart-lock code (dispatched 24h prior).",
+    "extraction": "11:00 AM.",
+    "ration_center": "Suites equipped with Kaʻū Estate Coffee (French Press/Drip), microwave, and refrigeration.",
+    "mess_hall_partners": "Primary meals routed to Ohelo Café or Volcano House.",
+    "contact": "(808) 345-4449. Reveal via intent-tracking function."
+  },
+  "crater_mobility": {
+    "units": "Basecamp E-Bikes (Crater Mobility Units). Designed to bypass National Park gridlock.",
+    "kit": "Safety helmets, locks, and orientation included.",
+    "incentive": "Complimentary 4-hour deployment available for direct-booking recapture."
+  },
+  "safety_and_environment": {
+    "caves": "RESTRICTED: No info provided for underground lava tubes. Use marked National Park trails only.",
+    "dark_skies": "Bortle 1-2 dark sky environment. Optimal for deep-field observation.",
+    "cultural_respect": "Visit the Kīlauea caldera with reverence for the 'āina."
+  }
+}
