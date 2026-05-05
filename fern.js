@@ -118,6 +118,7 @@
     ];
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';
+    var CHIP_ADVISORY_SESSION_KEY = 'fern_chip_advisory_seen';
     var CHIPS_SHOW_COUNT = (function () {
         try {
             var cfg = window.FERN_CONFIG;
@@ -155,6 +156,62 @@
             }
         }
         return pinned;
+    }
+
+    function buildChipAdvisoryText() {
+        var parts = [];
+        var aqiCache = getCached('airQuality');
+        if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+            var aqiMatch = /US AQI (\d+)/.exec(aqiCache);
+            if (aqiMatch) {
+                var aqi = parseInt(aqiMatch[1], 10);
+                if (aqi > 50) {
+                    var cat = aqi <= 100 ? 'Moderate' : aqi <= 150 ? 'Unhealthy for Sensitive Groups' : 'Unhealthy';
+                    parts.push('air quality is currently ' + cat);
+                }
+            }
+        }
+        var trailCache = getCached('trailConditions');
+        if (trailCache && trailCache !== GRACEFUL_FAIL) {
+            if (/Current trail alerts/.test(trailCache)) {
+                parts.push('there are active trail alerts nearby');
+            }
+        }
+        if (parts.length === 0) return '';
+        return 'Heads up: ' + parts.join(' and ') + ' \u2014 tap a chip below for details.';
+    }
+
+    function maybeShowChipAdvisory() {
+        try { if (sessionStorage.getItem(CHIP_ADVISORY_SESSION_KEY)) return; } catch (e) {}
+        var text = buildChipAdvisoryText();
+        if (!text) return;
+        var msgs = document.getElementById('fern-messages');
+        if (!msgs) return;
+        if (document.getElementById('fern-chip-advisory')) return;
+        var advisory = document.createElement('div');
+        advisory.id = 'fern-chip-advisory';
+        advisory.className = 'fern-chip-advisory fern-hint-fade';
+        var textSpan = document.createElement('span');
+        textSpan.className = 'fern-chip-advisory-text';
+        textSpan.textContent = text;
+        advisory.appendChild(textSpan);
+        var dismissBtn = document.createElement('button');
+        dismissBtn.className = 'fern-chip-advisory-dismiss';
+        dismissBtn.setAttribute('aria-label', 'Dismiss safety advisory');
+        dismissBtn.textContent = '\u00d7';
+        dismissBtn.addEventListener('click', function () {
+            if (advisory.parentNode) advisory.parentNode.removeChild(advisory);
+            try { sessionStorage.setItem(CHIP_ADVISORY_SESSION_KEY, '1'); } catch (e) {}
+        });
+        advisory.appendChild(dismissBtn);
+        var chipRow = document.getElementById('fern-chips');
+        if (chipRow && chipRow.parentNode === msgs) {
+            msgs.insertBefore(advisory, chipRow);
+        } else {
+            msgs.appendChild(advisory);
+        }
+        try { sessionStorage.setItem(CHIP_ADVISORY_SESSION_KEY, '1'); } catch (e) {}
+        msgs.scrollTop = msgs.scrollHeight;
     }
 
     function getDismissedChips() {
@@ -1071,6 +1128,7 @@
             entBadge.textContent = entDismissed.length + ' hidden';
             row.appendChild(entBadge);
         }
+        maybeShowChipAdvisory();
         msgs.appendChild(row);
         chipsEl = row;
         currentChipResetFn = showChips;
@@ -1426,6 +1484,19 @@
             '  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;',
             '  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;',
             '}',
+            '.fern-chip-advisory {',
+            '  display: flex; align-items: baseline; gap: 6px;',
+            '  background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);',
+            '  border-radius: 8px; padding: 7px 10px 7px 12px;',
+            '  margin: 4px 0 2px; font-size: 0.78rem; color: #f59e0b; line-height: 1.45;',
+            '}',
+            '.fern-chip-advisory-text { flex: 1; }',
+            '.fern-chip-advisory-dismiss {',
+            '  background: none; border: none; color: #f59e0b; cursor: pointer;',
+            '  font-size: 1rem; line-height: 1; padding: 0; opacity: 0.6;',
+            '  flex-shrink: 0; font-family: inherit; transition: opacity 0.15s;',
+            '}',
+            '.fern-chip-advisory-dismiss:hover { opacity: 1; }',
             '#fern-data-ts {',
             '  font-size: 0.64rem; color: #444; text-align: right;',
             '  margin-top: 5px; min-height: 0.85rem; transition: color 0.4s;',
@@ -1690,6 +1761,9 @@
             fetchTrailConditions()
         ]).then(function () {
             maybeReprioritizeChips();
+            if (document.getElementById('fern-chips')) {
+                maybeShowChipAdvisory();
+            }
             updateSafetyBanner();
             updateRefreshTimestamp();
         });
