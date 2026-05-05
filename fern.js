@@ -57,6 +57,7 @@
         //     repromptMultipliers: [1, 2, 3], // delay multipliers for successive inactivity reprompts. Must be 3 positive numbers.
         //     chipsShowCount:     8,       // number of topic chips to show at once (1–12). Default 8.
         //     greetingBubbleDelay: 8000,  // ms before greeting bubble appears (0–30000). Default 8000.
+        //     chipStaggerMs:      70,     // ms delay between each chip entrance (0–200). Default 70.
         //     closingLines:       ['\n\nAnything else?'] // override Fern's closing line rotation.
         //   };</script>
         try {
@@ -126,6 +127,16 @@
             }
         } catch (e) {}
         return 8;
+    })();
+    var CHIP_STAGGER_MS = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.chipStaggerMs === 'number') {
+                var ms = Math.round(cfg.chipStaggerMs);
+                if (ms >= 0 && ms <= 200) return ms;
+            }
+        } catch (e) {}
+        return 70;
     })();
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
     function getConditionPinnedLabels() {
@@ -837,9 +848,36 @@
         }, getNextInactivityDelay());
     }
 
+    function getChipAlertColor(label) {
+        var pinned = getConditionPinnedLabels();
+        if (pinned.indexOf(label) === -1) return null;
+        if (label === 'Air Quality') {
+            var aqiCache = getCached('airQuality');
+            if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+                var m = /US AQI (\d+)/.exec(aqiCache);
+                if (m) {
+                    var aqi = parseInt(m[1], 10);
+                    if (aqi > 150) return '#ef4444';
+                    if (aqi > 100) return '#f97316';
+                    return '#f59e0b';
+                }
+            }
+        }
+        return '#f59e0b';
+    }
+
     function makeChipEl(chip, onSelect) {
         var wrapper = document.createElement('span');
         wrapper.className = 'fern-chip-wrap';
+
+        var alertColor = getChipAlertColor(chip.label);
+        if (alertColor) {
+            var dot = document.createElement('span');
+            dot.className = 'fern-chip-alert-dot';
+            dot.style.background = alertColor;
+            dot.setAttribute('aria-hidden', 'true');
+            wrapper.appendChild(dot);
+        }
 
         var btn = document.createElement('button');
         btn.className = 'fern-chip';
@@ -919,7 +957,7 @@
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
             });
-            el.style.animationDelay = (idx * 0.07) + 's';
+            el.style.animationDelay = (idx * CHIP_STAGGER_MS / 1000) + 's';
             row.appendChild(el);
         });
         var inacDismissed = getDismissedChips();
@@ -1005,7 +1043,7 @@
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
             });
-            el.style.animationDelay = (idx * 0.07) + 's';
+            el.style.animationDelay = (idx * CHIP_STAGGER_MS / 1000) + 's';
             row.appendChild(el);
         });
         var entDismissed = getDismissedChips();
@@ -1344,6 +1382,16 @@
             '  font-size: 0.72rem; color: rgba(255,255,255,0.38); padding: 2px 12px 4px;',
             '  animation: fernHintFade 0.4s ease forwards;',
             '}',
+            '@keyframes fernAlertPulse {',
+            '  0%, 100% { transform: scale(1); opacity: 1; }',
+            '  50%       { transform: scale(1.5); opacity: 0.55; }',
+            '}',
+            '.fern-chip-alert-dot {',
+            '  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;',
+            '  display: inline-block; align-self: center;',
+            '  margin-left: 8px; margin-right: -2px;',
+            '  animation: fernAlertPulse 1.6s ease-in-out infinite;',
+            '}',
             '.fern-row-count-badge {',
             '  display: inline-flex; align-items: center; align-self: center;',
             '  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);',
@@ -1590,6 +1638,7 @@
                 inactivityDelay: INACTIVITY_DELAY_BASE,
                 liveDataCacheTTL: LIVE_DATA_TTL,
                 chipsShowCount: CHIPS_SHOW_COUNT,
+                chipStaggerMs: CHIP_STAGGER_MS,
                 closingLines: CLOSING_LINES,
                 repromptMultipliers: REPROMPT_MULTIPLIERS,
                 lastRefreshed: getLastRefreshTime() ? new Date(getLastRefreshTime()).toLocaleTimeString() : 'not yet',
