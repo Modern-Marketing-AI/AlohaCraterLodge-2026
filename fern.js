@@ -11,6 +11,34 @@
 
     var MAX_INTENTS = 3;
 
+    var INACTIVITY_DELAY = 45000;
+    var inactivityTimer = null;
+    var usedChipLabels = [];
+
+    var CHIP_COVERAGE = [
+        { label: 'Stargazing',     test: /star|stargazing|milky way|night sky|astronomy|dark sky|light pollution/i },
+        { label: 'Rainy Day?',     test: /rainy|raining|misty|cloudy day|what.*do.*rain|stuck.*inside|bad weather|hilo/i },
+        { label: 'Local Birds',    test: /bird|iiwi|nene|goose|fauna|wildlife|animal/i },
+        { label: 'Sustainability', test: /sustainab|eco|green.*lodge|footprint|environment|solar|renewable|energy|power|electric/i },
+        { label: 'Pele & Culture', test: /pele|deity|goddess|reverence|sacred|cultural|culture|hawaiian.*custom/i },
+        { label: 'Itineraries',    test: /itinerary|things.*to.*do|activities|suggestions|ideas/i },
+        { label: 'Tree Ferns',     test: /hapuu|tree fern|\bferns?\b|ohia|lehua|flora|native.*plant/i },
+        { label: 'Night Sounds',   test: /coqui|night.*sound|noise.*night|chorus|what.*sound/i },
+        { label: 'E-Bikes',        test: /e.?bike|ebike|cycle|cycling/i },
+        { label: 'Local Dining',   test: /dining|restaurant|eat out|lunch|dinner|ohelo|thai thai|the rim/i },
+        { label: 'Rainwater',      test: /rainwater|catchment|drinking.*water|tap.*water/i },
+        { label: 'Farmers Market', test: /farmers.*market|cooper center/i }
+    ];
+
+    function markCoveredTopics(input) {
+        for (var i = 0; i < CHIP_COVERAGE.length; i++) {
+            var entry = CHIP_COVERAGE[i];
+            if (entry.test.test(input) && usedChipLabels.indexOf(entry.label) === -1) {
+                usedChipLabels.push(entry.label);
+            }
+        }
+    }
+
     var TOPIC_CHIPS_POOL = [
         { label: 'Stargazing',      question: 'Tell me about stargazing near the lodge' },
         { label: 'Rainy Day?',      question: 'What can I do on a rainy day?' },
@@ -295,6 +323,58 @@
         chipsEl = null;
     }
 
+    function clearInactivityTimer() {
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = null;
+        }
+    }
+
+    function resetInactivityTimer() {
+        clearInactivityTimer();
+        var win = document.getElementById('fern-window');
+        if (!win || !win.classList.contains('fern-open')) return;
+        inactivityTimer = setTimeout(function () {
+            if (!chipsEl && !pendingResponse) {
+                showInactivityChips();
+            }
+        }, INACTIVITY_DELAY);
+    }
+
+    function showInactivityChips() {
+        var msgs = document.getElementById('fern-messages');
+        if (!msgs) return;
+        var available = TOPIC_CHIPS_POOL.filter(function (chip) {
+            return usedChipLabels.indexOf(chip.label) === -1;
+        });
+        if (available.length === 0) return;
+        var pool = available.slice();
+        var selected = [];
+        var count = Math.min(CHIPS_SHOW_COUNT, pool.length);
+        while (selected.length < count && pool.length > 0) {
+            var ri = Math.floor(Math.random() * pool.length);
+            selected.push(pool.splice(ri, 1)[0]);
+        }
+        var row = document.createElement('div');
+        row.id = 'fern-chips';
+        selected.forEach(function (chip) {
+            var btn = document.createElement('button');
+            btn.className = 'fern-chip';
+            btn.textContent = chip.label;
+            btn.addEventListener('click', function () {
+                var inp = document.getElementById('fern-input');
+                if (inp) inp.value = '';
+                removeChips();
+                if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
+                sendChipQuestion(chip.question);
+            });
+            row.appendChild(btn);
+        });
+        msgs.appendChild(row);
+        msgs.scrollTop = msgs.scrollHeight;
+        chipsEl = row;
+    }
+
     function showChips() {
         var msgs = document.getElementById('fern-messages');
         if (!msgs) return;
@@ -308,6 +388,7 @@
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
+                if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
             });
             row.appendChild(btn);
@@ -323,6 +404,8 @@
             appendMessage("One moment — I'm still loading the Lodge intel. Please try again in a second!", 'bot');
             return;
         }
+        clearInactivityTimer();
+        markCoveredTopics(question);
         appendMessage(question, 'user');
         pendingResponse = true;
         setInputBusy(true);
@@ -342,6 +425,7 @@
             pendingResponse = false;
             setInputBusy(false);
             appendMessage(getFallback(fernData), 'bot');
+            resetInactivityTimer();
         });
     }
 
@@ -376,9 +460,12 @@
                 triggerFired = true;
                 setTimeout(function () {
                     appendMessage(INSIGHT_TRIGGER_MSG, 'bot');
+                    resetInactivityTimer();
                 }, 1000);
+                return;
             }
         }
+        resetInactivityTimer();
     }
 
     function setInputBusy(busy) {
@@ -401,6 +488,8 @@
             return;
         }
 
+        clearInactivityTimer();
+        markCoveredTopics(text);
         removeChips();
         appendMessage(text, 'user');
         input.value = '';
@@ -423,7 +512,7 @@
             pendingResponse = false;
             setInputBusy(false);
             appendMessage(getFallback(fernData), 'bot');
-
+            resetInactivityTimer();
         });
     }
 
@@ -632,11 +721,15 @@
             }
             if (isOpen) {
                 setTimeout(function () { inputEl.focus(); }, 80);
+                resetInactivityTimer();
+            } else {
+                clearInactivityTimer();
             }
         });
 
         closeBtn.addEventListener('click', function () {
             win.classList.remove('fern-open');
+            clearInactivityTimer();
         });
 
         toggleInput.addEventListener('change', function () {
@@ -655,9 +748,14 @@
             }
         });
 
+        inputEl.addEventListener('input', function () {
+            resetInactivityTimer();
+        });
+
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && win.classList.contains('fern-open')) {
                 win.classList.remove('fern-open');
+                clearInactivityTimer();
             }
         });
     }
