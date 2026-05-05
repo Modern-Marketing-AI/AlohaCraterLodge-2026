@@ -210,7 +210,26 @@
             });
     }
 
+    var LIVE_DATA_CACHE = {};
+    var LIVE_DATA_TTL = 3 * 60 * 1000;
+
+    function getCached(key) {
+        var entry = LIVE_DATA_CACHE[key];
+        if (entry && (Date.now() - entry.ts) < LIVE_DATA_TTL) {
+            return entry.value;
+        }
+        return null;
+    }
+
+    function setCached(key, value) {
+        if (value !== GRACEFUL_FAIL) {
+            LIVE_DATA_CACHE[key] = { value: value, ts: Date.now() };
+        }
+    }
+
     function fetchVolcanoStatus() {
+        var cached = getCached('volcano');
+        if (cached !== null) return Promise.resolve(cached);
         return fetch('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO', { mode: 'cors' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -234,7 +253,9 @@
                     'red': 'Erupting \u2014 Check with Ranger Station'
                 };
                 var friendly = map[level] || 'Status available at the USGS Volcano Hazards Program page';
-                return 'Live Kīlauea status: ' + friendly + '. Always verify current conditions at the USGS Volcano Hazards Program page before heading to the crater rim.';
+                var result = 'Live Kīlauea status: ' + friendly + '. Always verify current conditions at the USGS Volcano Hazards Program page before heading to the crater rim.';
+                setCached('volcano', result);
+                return result;
             })
             .catch(function () {
                 return GRACEFUL_FAIL;
@@ -242,6 +263,8 @@
     }
 
     function fetchWeather() {
+        var cached = getCached('weather');
+        if (cached !== null) return Promise.resolve(cached);
         var url = 'https://api.open-meteo.com/v1/forecast' +
             '?latitude=19.4294&longitude=-155.2434' +
             '&current=temperature_2m,weather_code' +
@@ -256,7 +279,9 @@
                 var temp = Math.round(data.current.temperature_2m);
                 var code = data.current.weather_code;
                 var condition = WMO_CODES[code] || 'Mixed cloud and mist';
-                return 'Right now in Volcano Village: ' + temp + '\u00b0F and ' + condition + '. Remember, Volcano is a high-altitude cloud forest — typically 10\u201315\u00b0F cooler than the coast. Pack layers and a light rain jacket!';
+                var result = 'Right now in Volcano Village: ' + temp + '\u00b0F and ' + condition + '. Remember, Volcano is a high-altitude cloud forest — typically 10\u201315\u00b0F cooler than the coast. Pack layers and a light rain jacket!';
+                setCached('weather', result);
+                return result;
             })
             .catch(function () {
                 return GRACEFUL_FAIL;
@@ -264,6 +289,8 @@
     }
 
     function fetchAirQuality() {
+        var cached = getCached('airQuality');
+        if (cached !== null) return Promise.resolve(cached);
         var url = 'https://air-quality-api.open-meteo.com/v1/air-quality' +
             '?latitude=19.4294&longitude=-155.2434' +
             '&current=us_aqi,pm2_5';
@@ -295,6 +322,7 @@
                 var msg = 'Current air quality near Volcano Village: US AQI ' + aqi + ' (' + category + ')';
                 if (pm25 !== null) msg += ', PM2.5 ' + pm25 + ' \u03bcg/m\u00b3';
                 msg += '. ' + advice;
+                setCached('airQuality', msg);
                 return msg;
             })
             .catch(function () {
@@ -303,6 +331,8 @@
     }
 
     function fetchTrailConditions() {
+        var cached = getCached('trailConditions');
+        if (cached !== null) return Promise.resolve(cached);
         var url = 'https://developer.nps.gov/api/v1/alerts' +
             '?parkCode=havo&limit=5&api_key=DEMO_KEY';
         return fetch(url)
@@ -315,14 +345,17 @@
                 var trailAlerts = alerts.filter(function (a) {
                     return /trail|road|closure|closed|access|path|hike|footpath/i.test(a.title + ' ' + a.description);
                 });
+                var result;
                 if (trailAlerts.length === 0 && alerts.length === 0) {
-                    return 'No current trail alerts on record for Hawai\u02bbi Volcanoes National Park. Always check the official NPS site or the Kīlauea Visitor Center before heading out.';
+                    result = 'No current trail alerts on record for Hawai\u02bbi Volcanoes National Park. Always check the official NPS site or the Kīlauea Visitor Center before heading out.';
+                } else if (trailAlerts.length === 0) {
+                    result = 'No trail-specific closures listed right now at Hawai\u02bbi Volcanoes National Park. General park alerts exist — check nps.gov/havo or the visitor center for the latest.';
+                } else {
+                    var summaries = trailAlerts.slice(0, 2).map(function (a) { return a.title; }).join('; ');
+                    result = 'Current trail alerts at Hawai\u02bbi Volcanoes National Park: ' + summaries + '. Always verify with a ranger or at nps.gov/havo before your hike.';
                 }
-                if (trailAlerts.length === 0) {
-                    return 'No trail-specific closures listed right now at Hawai\u02bbi Volcanoes National Park. General park alerts exist — check nps.gov/havo or the visitor center for the latest.';
-                }
-                var summaries = trailAlerts.slice(0, 2).map(function (a) { return a.title; }).join('; ');
-                return 'Current trail alerts at Hawai\u02bbi Volcanoes National Park: ' + summaries + '. Always verify with a ranger or at nps.gov/havo before your hike.';
+                setCached('trailConditions', result);
+                return result;
             })
             .catch(function () {
                 return GRACEFUL_FAIL;
