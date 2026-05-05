@@ -1,0 +1,38 @@
+FERN CONCIERGE: FULL ARCHITECTURE SYNC & FINAL DEPLOYMENT
+
+Please execute a comprehensive update across 'guest-concierge.html', 'fern.js', and 'fern_knowledge.json' to finalize the site for production. This prompt incorporates all approved UI, UX, and clinical logic.
+
+1. BRANDING & CLINICAL ACCURACY (guest-concierge.html):
+- Rename 'Basecamp Command' to 'Guest Concierge'.
+- Update Action Tiles to high-authority clinical terminology:
+    * [CIRCULATORY RESET (PEMF)]
+    * [OPTICAL RECOVERY (3D AIRBAG)]
+    * [GRAVITY CONDITIONING (VIBRATION)]
+    * [SENSORY GROUNDING (AROMATHERAPY)]
+    * [CRATER MOBILITY (E-BIKE RENTALS)]
+    * [VIEW PROPERTY CODES]
+- Comms Button: "TEXT THE HOST TEAM (808) 345-4449".
+
+2. THE OFFICIAL BRIEFING STATION:
+- Embed 'volcanonationalparkinfo.mp4' in a premium dark container.
+- Above the video, include the official NPS caption:
+  "Hawai‘i Volcanoes National Park protects some of the most unique geological, biological, and cherished cultural landscapes in the world. Extending from sea level to 13,680 feet, the park encompasses the summits of two of the world's most active volcanoes - Kīlauea and Mauna Loa - and is a designated International Biosphere Reserve and UNESCO World Heritage Site.
+  
+  Watch the video to learn about different areas in the park to explore."
+- REMOVE all experimental timestamp buttons or calibration overlays.
+
+3. FERN BEHAVIOR & UX (fern.js):
+- PROACTIVE GREETING: Implement a floating text bubble next to the icon. 
+    * Trigger: 8-second delay after page load.
+    * Content: "Aloha! Tap here for live trail conditions or equipment details."
+    * Persistence: Use sessionStorage to show only once per session. Fade out after 12s.
+- LOGIC UPGRADES: Ensure no-repeat openers (#37), 4-minute data caching (#33), 5-second green "Undo" pill (#38), and inactivity re-engagement animations (#30).
+
+4. KNOWLEDGE BASE (fern_knowledge.json):
+- Rewrite the file with strict "OlyLife Tera-P90" and "Circulatory Reset" nomenclature.
+- RESTRICTION: Do not mention or promote the lava tube/cave due to safety precautions.
+- LOGISTICS: Keep contactless check-in/out and local dining info clear and professional.
+
+5. CLEANUP:
+- Purge all previous military jargon (e.g., 'Field Operatives', 'Infiltration').
+- Use a high-fidelity, grounded tone: professional, welcoming, and clinically accurate.
