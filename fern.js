@@ -9,7 +9,7 @@
     var triggerFired = false;
     var chipsEl = null;
 
-    var MAX_INTENTS = 3;
+    var MAX_INTENTS = 4;
 
     var INACTIVITY_DELAY = 45000;
     var inactivityTimer = null;
@@ -189,6 +189,72 @@
             });
     }
 
+    function fetchAirQuality() {
+        var url = 'https://air-quality-api.open-meteo.com/v1/air-quality' +
+            '?latitude=19.4294&longitude=-155.2434' +
+            '&current=us_aqi,pm2_5';
+        return fetch(url)
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                var aqi = Math.round(data.current.us_aqi);
+                var pm25 = data.current.pm2_5 !== undefined ? data.current.pm2_5.toFixed(1) : null;
+                var category, advice;
+                if (aqi <= 50) {
+                    category = 'Good';
+                    advice = 'Air is clean — great conditions for outdoor activities!';
+                } else if (aqi <= 100) {
+                    category = 'Moderate';
+                    advice = 'Generally fine outside; unusually sensitive individuals may want to limit prolonged exertion.';
+                } else if (aqi <= 150) {
+                    category = 'Unhealthy for Sensitive Groups';
+                    advice = 'People with respiratory conditions should limit extended outdoor activity. Vog from Kīlauea may be a factor.';
+                } else if (aqi <= 200) {
+                    category = 'Unhealthy';
+                    advice = 'Everyone may begin to experience effects. Consider limiting outdoor exertion and check with Park rangers.';
+                } else {
+                    category = 'Very Unhealthy / Hazardous';
+                    advice = 'Air quality is poor — minimize outdoor time and keep windows closed. Vog or volcanic emissions may be elevated.';
+                }
+                var msg = 'Current air quality near Volcano Village: US AQI ' + aqi + ' (' + category + ')';
+                if (pm25 !== null) msg += ', PM2.5 ' + pm25 + ' \u03bcg/m\u00b3';
+                msg += '. ' + advice;
+                return msg;
+            })
+            .catch(function () {
+                return GRACEFUL_FAIL;
+            });
+    }
+
+    function fetchTrailConditions() {
+        var url = 'https://developer.nps.gov/api/v1/alerts' +
+            '?parkCode=havo&limit=5&api_key=DEMO_KEY';
+        return fetch(url)
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                var alerts = data.data || [];
+                var trailAlerts = alerts.filter(function (a) {
+                    return /trail|road|closure|closed|access|path|hike|footpath/i.test(a.title + ' ' + a.description);
+                });
+                if (trailAlerts.length === 0 && alerts.length === 0) {
+                    return 'No current trail alerts on record for Hawai\u02bbi Volcanoes National Park. Always check the official NPS site or the Kīlauea Visitor Center before heading out.';
+                }
+                if (trailAlerts.length === 0) {
+                    return 'No trail-specific closures listed right now at Hawai\u02bbi Volcanoes National Park. General park alerts exist — check nps.gov/havo or the visitor center for the latest.';
+                }
+                var summaries = trailAlerts.slice(0, 2).map(function (a) { return a.title; }).join('; ');
+                return 'Current trail alerts at Hawai\u02bbi Volcanoes National Park: ' + summaries + '. Always verify with a ranger or at nps.gov/havo before your hike.';
+            })
+            .catch(function () {
+                return GRACEFUL_FAIL;
+            });
+    }
+
     function getUpsells(input, data) {
         if (!data || data._fallback) return [];
         var q = input.toLowerCase();
@@ -283,6 +349,12 @@
         if (/weather|temperature|how cold|how warm|what.*wear.*outside|forecast|degrees/i.test(q)) {
             asyncFetchers.push(fetchWeather);
             excludeTags.push('climate');
+        }
+        if (/air.*quality|aqi|air.*pollution|pm2\.?5|smoke|particulate|breathing.*outside|safe.*breathe/i.test(q)) {
+            asyncFetchers.push(fetchAirQuality);
+        }
+        if (/trail.*condition|trail.*status|trail.*open|trail.*close|hike.*condition|path.*open|park.*trail|which.*trail|trail.*today|any.*closure|road.*closure|trail.*access/i.test(q)) {
+            asyncFetchers.push(fetchTrailConditions);
         }
 
         var slotsLeft = MAX_INTENTS - asyncFetchers.length;
