@@ -47,6 +47,7 @@
         return DEFAULT_MS;
     })();
 
+    /* #47 — read additional FERN_CONFIG keys */
     var inactivityTimer = null;
     var inactivityRepromptCount = 0;
     var usedChipLabels = [];
@@ -91,7 +92,16 @@
     ];
 
     var CHIPS_SESSION_KEY = 'fern_chips_session';
-    var CHIPS_SHOW_COUNT = 8;
+    var CHIPS_SHOW_COUNT = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.chipsShowCount === 'number') {
+                var n = Math.round(cfg.chipsShowCount);
+                if (n >= 1 && n <= 12) return n;
+            }
+        } catch (e) {}
+        return 8;
+    })();
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
     var PINNED_CHIP_LABELS = ['Air Quality', 'Trail Conditions'];
 
@@ -689,14 +699,16 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-inactivity';
-        selected.forEach(function (chip) {
-            row.appendChild(makeChipEl(chip, function () {
+        selected.forEach(function (chip, idx) {
+            var el = makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
-            }));
+            });
+            el.style.animationDelay = (idx * 0.07) + 's';
+            row.appendChild(el);
         });
         msgs.appendChild(row);
         msgs.scrollTop = msgs.scrollHeight;
@@ -737,14 +749,16 @@
         var row = document.createElement('div');
         row.id = 'fern-chips';
         row.className = 'fern-chips-enter';
-        chips.forEach(function (chip) {
-            row.appendChild(makeChipEl(chip, function () {
+        chips.forEach(function (chip, idx) {
+            var el = makeChipEl(chip, function () {
                 var inp = document.getElementById('fern-input');
                 if (inp) inp.value = '';
                 removeChips();
                 if (usedChipLabels.indexOf(chip.label) === -1) usedChipLabels.push(chip.label);
                 sendChipQuestion(chip.question);
-            }));
+            });
+            el.style.animationDelay = (idx * 0.07) + 's';
+            row.appendChild(el);
         });
         msgs.appendChild(row);
         msgs.scrollTop = msgs.scrollHeight;
@@ -1042,7 +1056,7 @@
             '  from { opacity: 0; transform: translateY(8px); }',
             '  to   { opacity: 1; transform: translateY(0); }',
             '}',
-            '.fern-chips-inactivity, .fern-chips-enter { animation: fernChipsPop 0.35s ease forwards; }',
+            '.fern-chip-wrap { animation: fernChipsPop 0.28s ease both; }',
             '.fern-chip-undo {',
             '  display: inline-flex; align-items: center; cursor: pointer;',
             '  background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);',
@@ -1141,10 +1155,18 @@
                 clearTimeout(hideTimer);
                 try { sessionStorage.setItem('fernGreetingSeen', '1'); } catch (e) {}
             }
+            var bubbleDelay = 8000;
+            try {
+                var bCfg = window.FERN_CONFIG;
+                if (bCfg && typeof bCfg.greetingBubbleDelay === 'number') {
+                    var bd = Math.round(bCfg.greetingBubbleDelay);
+                    if (bd >= 0 && bd <= 30000) bubbleDelay = bd;
+                }
+            } catch (e) {}
             showTimer = setTimeout(function () {
                 if (bubble) bubble.classList.add('show-fern-bubble');
                 hideTimer = setTimeout(hideBubble, 12000);
-            }, 8000);
+            }, bubbleDelay);
             fab.addEventListener('click', hideBubble, { once: true });
         })();
 
