@@ -457,8 +457,21 @@
         'Glad you asked — ',
     ];
 
+    var CLOSING_LINES = [
+        '\n\nAnything else I can help you plan?',
+        '\n\nWhat else can I pull up for you?',
+        '\n\nFeel free to ask me anything else about the Lodge or the area.',
+        '\n\nLet me know if you want to dig deeper into any of this.',
+        '\n\nHappy to answer any follow-up questions.',
+        '\n\nIs there anything else on your mind for your stay?',
+        '\n\nJust ask if you need more details on any of this.',
+        '\n\nWhat else would be helpful to know?',
+    ];
+
     var openerQueue = [];
     var lastOpenerIdx = -1;
+    var closerQueue = [];
+    var lastCloserIdx = -1;
 
     function shuffledIndices(excludeIdx) {
         var indices = [];
@@ -481,6 +494,29 @@
         var idx = openerQueue.shift();
         lastOpenerIdx = idx;
         return OPENING_LINES[idx];
+    }
+
+    function shuffledCloserIndices(excludeIdx) {
+        var indices = [];
+        for (var i = 0; i < CLOSING_LINES.length; i++) {
+            if (i !== excludeIdx) indices.push(i);
+        }
+        for (var j = indices.length - 1; j > 0; j--) {
+            var k = Math.floor(Math.random() * (j + 1));
+            var tmp = indices[j]; indices[j] = indices[k]; indices[k] = tmp;
+        }
+        if (excludeIdx >= 0 && excludeIdx < CLOSING_LINES.length) indices.push(excludeIdx);
+        return indices;
+    }
+
+    function pickCloser() {
+        if (CLOSING_LINES.length <= 1) return CLOSING_LINES[0];
+        if (closerQueue.length === 0) {
+            closerQueue = shuffledCloserIndices(lastCloserIdx);
+        }
+        var idx = closerQueue.shift();
+        lastCloserIdx = idx;
+        return CLOSING_LINES[idx];
     }
 
     function routeAsync(input, data) {
@@ -691,6 +727,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
+            parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
@@ -785,6 +822,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
+            parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
