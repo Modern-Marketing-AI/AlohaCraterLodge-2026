@@ -38,10 +38,10 @@
     var usedChipLabels = [];
 
     var CHIP_COVERAGE = [
-        { label: 'Massage Therapy',   test: /massage|pemf|terahertz|olylife.*p90|p90|physical.*recovery/i },
-        { label: 'Eye Recovery',      test: /eye.*recovery|eye.*massage|galaxy.?g|g.?one|optical/i },
-        { label: 'Vibration Therapy', test: /vibration|vibration.*plate|lymphatic/i },
-        { label: 'Aromatherapy',      test: /aroma|diffuser|scent|essential.*oil|oily.*life/i },
+        { label: 'Circulatory Reset',     test: /circulatory|pemf|terahertz|tera.?p90|olylife.*p90|microcirculation/i },
+        { label: 'Optical Recovery',      test: /optical|eye.*recovery|eye.*massage|galaxy.?g|g.?one/i },
+        { label: 'Gravity Conditioning',  test: /vibration|vibration.*plate|lymphatic|gravity.*condition/i },
+        { label: 'Sensory Grounding',     test: /aroma|diffuser|scent|essential.*oil|oily.*life|sensory.*ground/i },
         { label: 'E-Bike Rentals',    test: /bike|e.?bike|ebike|cycle|cycling/i },
         { label: 'Dark Skies',        test: /star|stargazing|milky way|night sky|dark sky|bortle/i },
         { label: 'Cultural Respect',  test: /pele|deity|goddess|reverence|sacred|cultural|culture|aina/i },
@@ -62,10 +62,10 @@
     }
 
     var TOPIC_CHIPS_POOL = [
-        { label: 'Massage Therapy',   question: 'Tell me about the massage therapy and OlyLife P90 recovery device' },
-        { label: 'Eye Recovery',      question: 'Tell me about the eye recovery device — the OlyLife Galaxy G-One' },
-        { label: 'Vibration Therapy', question: 'Tell me about the vibration therapy and lymphatic plates' },
-        { label: 'Aromatherapy',      question: 'Tell me about the aromatherapy and essential oils available' },
+        { label: 'Circulatory Reset',    question: 'Tell me about the Circulatory Reset — the OlyLife Tera-P90 PEMF and Terahertz device.' },
+        { label: 'Optical Recovery',     question: 'Tell me about the Optical Recovery device — the OlyLife Galaxy G-One 3D airbag eye massager.' },
+        { label: 'Gravity Conditioning', question: 'Tell me about the Gravity Conditioning vibration plates for lymphatic drainage.' },
+        { label: 'Sensory Grounding',    question: 'Tell me about the Sensory Grounding aromatherapy and Oily Life essential oils.' },
         { label: 'E-Bike Rentals',    question: 'Tell me about the e-bike rentals' },
         { label: 'Dark Skies',        question: 'Tell me about stargazing and dark sky conditions near the lodge' },
         { label: 'Cultural Respect',  question: 'Tell me about respecting the \u02bbaina and Hawaiian culture' },
@@ -652,9 +652,10 @@
             return usedChipLabels.indexOf(chip.label) === -1 && dismissed.indexOf(chip.label) === -1;
         });
         if (available.length === 0) {
+            var dismissedCount = getDismissedChips().length;
             var hint = document.createElement('div');
-            hint.className = 'fern-msg fern-msg-bot';
-            hint.textContent = 'You\u2019ve hidden all topic suggestions. Type anything to ask Fern.';
+            hint.className = 'fern-msg fern-msg-bot fern-hint-fade';
+            hint.textContent = 'You\u2019ve hidden ' + dismissedCount + ' of ' + TOPIC_CHIPS_POOL.length + ' topic suggestions. Type anything to ask Fern.';
             hint.appendChild(document.createElement('br'));
             hint.appendChild(makeResetLink(function () {
                 if (hint.parentNode) hint.parentNode.removeChild(hint);
@@ -706,9 +707,10 @@
         if (!msgs) return;
         var chips = getSessionChips();
         if (chips.length === 0) {
+            var dismissedCount = getDismissedChips().length;
             var hint = document.createElement('div');
-            hint.className = 'fern-msg fern-msg-bot';
-            hint.textContent = 'You\u2019ve hidden all topic suggestions. Type anything to ask Fern.';
+            hint.className = 'fern-msg fern-msg-bot fern-hint-fade';
+            hint.textContent = 'You\u2019ve hidden ' + dismissedCount + ' of ' + TOPIC_CHIPS_POOL.length + ' topic suggestions. Type anything to ask Fern.';
             hint.appendChild(document.createElement('br'));
             hint.appendChild(makeResetLink(function () {
                 if (hint.parentNode) hint.parentNode.removeChild(hint);
@@ -874,6 +876,26 @@
             '}',
             '#fern-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(16,185,129,0.6); }',
             '#fern-fab svg { pointer-events: none; }',
+            '#fern-bubble {',
+            '  position: fixed; bottom: 100px; right: 96px;',
+            '  background: #111; border: 1px solid rgba(16,185,129,0.55);',
+            '  box-shadow: 0 2px 16px rgba(16,185,129,0.18);',
+            '  color: #fff; font-size: 0.82rem; line-height: 1.45;',
+            '  padding: 0.6rem 0.9rem; border-radius: 10px;',
+            '  max-width: 210px; pointer-events: none;',
+            '  opacity: 0; transition: opacity 0.4s ease-in-out;',
+            '  z-index: 99997;',
+            '}',
+            '#fern-bubble::after {',
+            '  content: ""; position: absolute; bottom: -7px; right: 18px;',
+            '  width: 12px; height: 12px; background: #111;',
+            '  border-right: 1px solid rgba(16,185,129,0.55);',
+            '  border-bottom: 1px solid rgba(16,185,129,0.55);',
+            '  transform: rotate(45deg);',
+            '}',
+            '#fern-bubble.show-fern-bubble { opacity: 1; }',
+            '.fern-hint-fade { animation: fernHintFade 0.5s ease forwards; }',
+            '@keyframes fernHintFade { from { opacity: 0; } to { opacity: 1; } }',
             '#fern-window {',
             '  position: fixed; bottom: 100px; right: 28px;',
             '  width: 360px; max-width: calc(100vw - 32px);',
@@ -1076,7 +1098,12 @@
             '</div>'
         ].join('');
 
+        var bubble = document.createElement('div');
+        bubble.id = 'fern-bubble';
+        bubble.textContent = 'Aloha! Tap here for live trail conditions or equipment details.';
+
         document.body.appendChild(fab);
+        document.body.appendChild(bubble);
         document.body.appendChild(win);
     }
 
@@ -1088,6 +1115,24 @@
         var toggleValue = document.getElementById('fern-toggle-value');
         var sendBtn = document.getElementById('fern-send');
         var inputEl = document.getElementById('fern-input');
+
+        /* Greeting bubble logic */
+        (function () {
+            if (sessionStorage.getItem('fernGreetingSeen')) return;
+            var bubble = document.getElementById('fern-bubble');
+            var showTimer, hideTimer;
+            function hideBubble() {
+                if (bubble) bubble.classList.remove('show-fern-bubble');
+                clearTimeout(showTimer);
+                clearTimeout(hideTimer);
+                try { sessionStorage.setItem('fernGreetingSeen', '1'); } catch (e) {}
+            }
+            showTimer = setTimeout(function () {
+                if (bubble) bubble.classList.add('show-fern-bubble');
+                hideTimer = setTimeout(hideBubble, 12000);
+            }, 8000);
+            fab.addEventListener('click', hideBubble, { once: true });
+        })();
 
         fab.addEventListener('click', function () {
             var isOpen = win.classList.toggle('fern-open');

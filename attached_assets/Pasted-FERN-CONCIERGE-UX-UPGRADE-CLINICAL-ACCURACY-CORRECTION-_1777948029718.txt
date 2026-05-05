@@ -1,3 +1,37 @@
+FERN CONCIERGE: UX UPGRADE & CLINICAL ACCURACY CORRECTION
+
+Please perform the following two updates simultaneously: adding a proactive greeting bubble and correcting hardware nomenclature to strict clinical standards.
+
+PART 1: THE "SOFT NUDGE" GREETING BUBBLE
+1. HTML UPDATE ('guest-concierge.html' and main layout):
+- Add a tooltip container adjacent to the main Fern chat button toggle.
+- The text inside should read: "Aloha! Tap here for live trail conditions or equipment details."
+
+2. CSS STYLING:
+- Style the tooltip as a small, elegant text bubble pointing toward the Hapūʻu Fern icon.
+- Background: Deep charcoal/black. Text: White with a subtle emerald green border/shadow.
+- Animation: Default state is `opacity: 0`, `pointer-events: none`. Active class (e.g., `.show-fern-bubble`) transitions to `opacity: 1` over 0.4s ease-in-out.
+
+3. JAVASCRIPT LOGIC ('fern.js'):
+- Use `sessionStorage.getItem('fernGreetingSeen')` to ensure it only shows once per session.
+- If false, use `setTimeout` to add the active class exactly 8 seconds after the page loads.
+- Use a second `setTimeout` to remove the active class 12 seconds after it appears.
+- If the user clicks the Fern icon at any time, instantly hide the bubble, clear timers, and set `fernGreetingSeen` to true.
+
+PART 2: CLINICAL ACCURACY & HARDWARE NOMENCLATURE
+1. UI ACTION TILES ('guest-concierge.html'):
+- We must remove the word "Massage" from the Tera-P90 tile and ensure clinical accuracy without confusing jargon. Update the tile texts to:
+    * [CIRCULATORY RESET (PEMF)]
+    * [OPTICAL RECOVERY (3D AIRBAG)]
+    * [GRAVITY CONDITIONING (VIBRATION)]
+    * [SENSORY GROUNDING (AROMATHERAPY)]
+
+2. KNOWLEDGE BASE REWRITE ('fern_knowledge.json'):
+- Completely overwrite the file with the data below to strictly adhere to the "OlyLife Tera-P90" nomenclature and bio-regeneration positioning, while keeping logistics in plain, premium English.
+
+---
+FILE CONTENT FOR: fern_knowledge.json
+---
 {
   "strict_mode": "ACTIVE",
   "system_directive": "That's a great question! I don't have that specific detail right here, but the host team will be happy to help you with that.",
@@ -31,8 +65,5 @@
     "caves": "RESTRICTED: For your safety and ecosystem preservation, we do not provide information on underground lava tubes. Use marked National Park trails only.",
     "dark_skies": "We operate in a Bortle 1-2 dark sky environment, optimized for deep-field observation and low-distraction recovery.",
     "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the 'āina (land) and its history."
-  },
-  "config": {
-    "inactivity_delay_seconds": 45
   }
 }
