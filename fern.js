@@ -103,7 +103,23 @@
         return 8;
     })();
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
-    var PINNED_CHIP_LABELS = ['Air Quality', 'Trail Conditions'];
+    function getConditionPinnedLabels() {
+        var pinned = [];
+        var aqiCache = getCached('airQuality');
+        if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+            var aqiMatch = /US AQI (\d+)/.exec(aqiCache);
+            if (aqiMatch && parseInt(aqiMatch[1], 10) > 50) {
+                pinned.push('Air Quality');
+            }
+        }
+        var trailCache = getCached('trailConditions');
+        if (trailCache && trailCache !== GRACEFUL_FAIL) {
+            if (/Current trail alerts/.test(trailCache)) {
+                pinned.push('Trail Conditions');
+            }
+        }
+        return pinned;
+    }
 
     function getDismissedChips() {
         try {
@@ -144,6 +160,7 @@
 
     function getSessionChips() {
         var dismissed = getDismissedChips();
+        var conditionPinned = getConditionPinnedLabels();
 
         try {
             var stored = sessionStorage.getItem(CHIPS_SESSION_KEY);
@@ -152,18 +169,20 @@
                 if (Array.isArray(indices) && indices.length > 0) {
                     var cached = indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
                     var stillValid = cached.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
-                    var pinnedPresent = PINNED_CHIP_LABELS.every(function (lbl) {
+                    var conditionOk = conditionPinned.every(function (lbl, i) {
                         return dismissed.indexOf(lbl) !== -1 ||
-                               stillValid.some(function (c) { return c.label === lbl; });
+                               (stillValid[i] && stillValid[i].label === lbl);
                     });
-                    if (stillValid.length === cached.length && pinnedPresent) return cached;
+                    if (stillValid.length === cached.length && conditionOk) return cached;
                 }
             }
         } catch (e) { }
 
-        var pinned = TOPIC_CHIPS_POOL.filter(function (c) {
-            return PINNED_CHIP_LABELS.indexOf(c.label) !== -1 && dismissed.indexOf(c.label) === -1;
-        });
+        var pinned = conditionPinned
+            .map(function (lbl) {
+                return TOPIC_CHIPS_POOL.filter(function (c) { return c.label === lbl; })[0];
+            })
+            .filter(function (c) { return c && dismissed.indexOf(c.label) === -1; });
         var pinnedLabels = pinned.map(function (c) { return c.label; });
         var pool = TOPIC_CHIPS_POOL.filter(function (c) {
             return dismissed.indexOf(c.label) === -1 && pinnedLabels.indexOf(c.label) === -1;
@@ -182,6 +201,33 @@
         } catch (e) { }
 
         return selected;
+    }
+
+    function maybeReprioritizeChips() {
+        var conditionPinned = getConditionPinnedLabels();
+        if (conditionPinned.length === 0) return;
+        var dismissed = getDismissedChips();
+        try {
+            var stored = sessionStorage.getItem(CHIPS_SESSION_KEY);
+            if (stored) {
+                var indices = JSON.parse(stored);
+                if (Array.isArray(indices) && indices.length > 0) {
+                    var chips = indices.map(function (i) { return TOPIC_CHIPS_POOL[i]; }).filter(Boolean);
+                    var valid = chips.filter(function (c) { return dismissed.indexOf(c.label) === -1; });
+                    var alreadyCorrect = conditionPinned.every(function (lbl, i) {
+                        return dismissed.indexOf(lbl) !== -1 ||
+                               (valid[i] && valid[i].label === lbl);
+                    });
+                    if (alreadyCorrect) return;
+                }
+            }
+        } catch (e) { }
+        try { sessionStorage.removeItem(CHIPS_SESSION_KEY); } catch (e) {}
+        if (chipsEl && chipsEl.parentNode && !chipsEl.classList.contains('fern-chips-inactivity')) {
+            chipsEl.parentNode.removeChild(chipsEl);
+            chipsEl = null;
+            showChips();
+        }
     }
 
     var GREETING = "Hi, I'm Fern, your Lodge Guide. Aloha! I'm here to help you find your way — whether you're picking the perfect suite, checking on the volcano, or looking for the best trails. How can I help you today?";
@@ -1223,10 +1269,14 @@
     var LIVE_REFRESH_INTERVAL = LIVE_DATA_TTL;
 
     function warmLiveCache() {
-        fetchVolcanoStatus();
-        fetchWeather();
-        fetchAirQuality();
-        fetchTrailConditions();
+        return Promise.all([
+            fetchVolcanoStatus(),
+            fetchWeather(),
+            fetchAirQuality(),
+            fetchTrailConditions()
+        ]).then(function () {
+            maybeReprioritizeChips();
+        });
     }
 
     function init() {
