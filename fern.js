@@ -1158,6 +1158,7 @@
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
+            updateRefreshTimestamp();
             setTimeout(function () {
                 processAndSend(full);
             }, 320);
@@ -1253,6 +1254,7 @@
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
+            updateRefreshTimestamp();
             setTimeout(function () {
                 processAndSend(full);
             }, 320);
@@ -1776,7 +1778,7 @@
         loadKnowledge();
         warmLiveCache();
         setInterval(warmLiveCache, LIVE_REFRESH_INTERVAL);
-        setInterval(updateRefreshTimestamp, 60000);
+        setInterval(updateRefreshTimestamp, 30000);
         updateSafetyBanner();
         initDebugPanel();
     }
