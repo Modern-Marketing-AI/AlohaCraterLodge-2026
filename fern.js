@@ -58,6 +58,7 @@
         //     chipsShowCount:     8,       // number of topic chips to show at once (1–12). Default 8.
         //     greetingBubbleDelay: 8000,  // ms before greeting bubble appears (0–30000). Default 8000.
         //     chipStaggerMs:      70,     // ms delay between each chip entrance (0–200). Default 70.
+        //     closerMinLength:    80,     // min response length (chars) to append a closing line (0–500). Default 80.
         //     closingLines:       ['\n\nAnything else?'] // override Fern's closing line rotation.
         //   };</script>
         try {
@@ -138,6 +139,16 @@
             }
         } catch (e) {}
         return 70;
+    })();
+    var CLOSER_MIN_LENGTH = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.closerMinLength === 'number') {
+                var n = Math.round(cfg.closerMinLength);
+                if (n >= 0 && n <= 500) return n;
+            }
+        } catch (e) {}
+        return 80;
     })();
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
     function getConditionPinnedLabels() {
@@ -786,7 +797,7 @@
 
     function shouldAddCloser(primary) {
         var clean = (primary || '').replace(/[_*`\[\]()]/g, '').trim();
-        return clean.length >= 120;
+        return clean.length >= CLOSER_MIN_LENGTH;
     }
 
     function routeAsync(input, data) {
@@ -1740,6 +1751,7 @@
                 liveDataCacheTTL: LIVE_DATA_TTL,
                 chipsShowCount: CHIPS_SHOW_COUNT,
                 chipStaggerMs: CHIP_STAGGER_MS,
+                closerMinLength: CLOSER_MIN_LENGTH,
                 closingLines: CLOSING_LINES,
                 repromptMultipliers: REPROMPT_MULTIPLIERS,
                 lastRefreshed: getLastRefreshTime() ? new Date(getLastRefreshTime()).toLocaleTimeString() : 'not yet',
