@@ -5,6 +5,14 @@
     var pendingResponse = false;
     var expertInsightsOn = (function () {
         try {
+            var params = new URLSearchParams(window.location.search);
+            var raw = params.get('fern_expert_insights');
+            if (raw !== null) {
+                if (raw === '0' || raw === 'false') return false;
+                if (raw === '1' || raw === 'true') return true;
+            }
+        } catch (e) {}
+        try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.expertInsights === 'boolean') return cfg.expertInsights;
         } catch (e) {}
@@ -18,6 +26,14 @@
     var currentChipResetFn = null;
 
     var MAX_INTENTS = (function () {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var raw = params.get('fern_max_reprompts');
+            if (raw !== null) {
+                var n = Math.round(parseFloat(raw));
+                if (!isNaN(n) && n >= 1 && n <= 10) return n;
+            }
+        } catch (e) {}
         try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.maxReprompts === 'number') {
@@ -61,6 +77,12 @@
         //     closerMinLength:    80,     // min response length (chars) to append a closing line (0–500). Default 80.
         //     closingLines:       ['\n\nAnything else?'] // override Fern's closing line rotation.
         //   };</script>
+        //
+        // URL params (for live preview without editing code):
+        //   fern_delay=30          — inactivity delay in seconds (same as inactivityDelay).
+        //   fern_max_reprompts=2   — max async fetches per reply, 1–10 (same as maxReprompts).
+        //   fern_expert_insights=0 — disable expert insights; 1 to enable (same as expertInsights).
+        //   fern_debug=1           — show the live config overlay panel.
         try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.inactivityDelay === 'number') {
@@ -1748,6 +1770,8 @@
         function refreshDebug() {
             var effective = {
                 inactivityDelay: INACTIVITY_DELAY_BASE,
+                maxReprompts: MAX_INTENTS,
+                expertInsights: expertInsightsOn,
                 liveDataCacheTTL: LIVE_DATA_TTL,
                 chipsShowCount: CHIPS_SHOW_COUNT,
                 chipStaggerMs: CHIP_STAGGER_MS,
