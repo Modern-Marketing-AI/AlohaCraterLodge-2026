@@ -316,8 +316,7 @@
         .btn-claim-offer:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(16,185,129,0.4); }
     </style>
     <script>
-        /* PRE-FLIGHT HOOK 1: Global Staging for HotelChamp & Little Hotelier */
-        const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+        const CLOUDBEDS_URL = "https://hotels.cloudbeds.com/en/reservation/ifCVNX";
         const HOTELCHAMP_ID = "PENDING_ID";
     </script>
 </head>
@@ -465,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <script>
         function proceedToBooking() {
-            window.location.href = LH_BOOKING_ENGINE;
+            window.location.href = CLOUDBEDS_URL;
         }
         document.addEventListener('mouseout', function(e) {
             if (e.clientY < 20) {
@@ -480,7 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         function openMagmaModal() { openModal(); }
         function claimOfferAndBook() {
-            const trackedURL = LH_BOOKING_ENGINE + "?promoCode=EBIKE4HR";
+            const trackedURL = CLOUDBEDS_URL + "?promoCode=EBIKE4HR";
             closeExitModal();
             const finalizeBtn = document.querySelector('.btn-finalize');
             if (finalizeBtn) {

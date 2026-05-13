@@ -170,8 +170,7 @@
         .magma-btn:hover { background: #e03e00; }
     </style>
     <script>
-        /* PRE-FLIGHT HOOK: Global Staging for HotelChamp & Little Hotelier */
-        const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+        const CLOUDBEDS_URL = "https://hotels.cloudbeds.com/en/reservation/ifCVNX";
         const HOTELCHAMP_ID = "PENDING_ID";
     </script>
 </head>
@@ -359,7 +358,7 @@
         }
         function openMagmaModal() { openModal(); }
         function proceedToBooking() {
-            window.location.href = LH_BOOKING_ENGINE;
+            window.location.href = CLOUDBEDS_URL;
         }
     </script>
 

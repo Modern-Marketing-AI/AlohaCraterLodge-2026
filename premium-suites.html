@@ -502,8 +502,7 @@
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script>
-        /* PRE-FLIGHT HOOK 1: Global Staging for HotelChamp & Little Hotelier */
-        const LH_BOOKING_ENGINE = "https://placeholder-little-hotelier-link.com";
+        const CLOUDBEDS_URL = "https://hotels.cloudbeds.com/en/reservation/ifCVNX";
         const HOTELCHAMP_ID = "PENDING_ID";
     </script>
 </head>
@@ -748,7 +747,7 @@
     </div>
     <script>
         function proceedToBooking() {
-            window.location.href = LH_BOOKING_ENGINE;
+            window.location.href = CLOUDBEDS_URL;
         }
         document.addEventListener('mouseout', function(e) {
             if (e.clientY < 20) {
@@ -763,7 +762,7 @@
         }
         function openMagmaModal() { openModal(); }
         function claimOfferAndBook() {
-            const trackedURL = LH_BOOKING_ENGINE + "?promoCode=EBIKE4HR";
+            const trackedURL = CLOUDBEDS_URL + "?promoCode=EBIKE4HR";
             closeExitModal();
             const finalizeBtn = document.querySelector('.btn-finalize');
             if (finalizeBtn) {
