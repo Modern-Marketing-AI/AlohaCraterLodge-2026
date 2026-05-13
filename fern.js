@@ -214,6 +214,12 @@
         return 'Heads up: ' + parts.join(' and ') + ' \u2014 tap a chip below for details.';
     }
 
+    function dismissChipAdvisory() {
+        var el = document.getElementById('fern-chip-advisory');
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+        try { sessionStorage.setItem(CHIP_ADVISORY_SESSION_KEY, '1'); } catch (e) {}
+    }
+
     function maybeShowChipAdvisory() {
         try { if (sessionStorage.getItem(CHIP_ADVISORY_SESSION_KEY)) return; } catch (e) {}
         var text = buildChipAdvisoryText();
@@ -1177,6 +1183,7 @@
             appendMessage("One moment — I'm still loading the Lodge intel. Please try again in a second!", 'bot');
             return;
         }
+        dismissChipAdvisory();
         inactivityRepromptCount = 0;
         clearInactivityTimer();
         markCoveredTopics(question);
@@ -1270,6 +1277,7 @@
             return;
         }
 
+        dismissChipAdvisory();
         inactivityRepromptCount = 0;
         clearInactivityTimer();
         markCoveredTopics(text);
