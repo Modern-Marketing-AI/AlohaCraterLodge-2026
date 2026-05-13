@@ -974,6 +974,8 @@
         if (chip.warning) {
             var dot = document.createElement('span');
             dot.className = 'fern-chip-warn-dot';
+            var warnColor = getChipAlertColor(chip.label) || '#f59e0b';
+            dot.style.background = warnColor;
             dot.setAttribute('aria-hidden', 'true');
             btn.appendChild(dot);
             var srLabel = document.createElement('span');
