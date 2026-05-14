@@ -531,7 +531,8 @@
     function fetchVolcanoStatus() {
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
-        return fetch('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO', { mode: 'cors' })
+
+        var jsonFetch = fetch('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO', { mode: 'cors' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
@@ -543,6 +544,25 @@
                 } else if (data && data.alert_level) {
                     level = data.alert_level.toLowerCase();
                 }
+                return level;
+            })
+            .catch(function () { return ''; });
+
+        var rssFetch = fetch('https://volcanoes.usgs.gov/hans-public/api/feed/hvo', { mode: 'cors' })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function (text) {
+                var m = text.match(/<item>[\s\S]*?<title>(.*?)<\/title>/);
+                return m ? m[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
+            })
+            .catch(function () { return ''; });
+
+        return Promise.all([jsonFetch, rssFetch])
+            .then(function (results) {
+                var level = results[0];
+                var headline = results[1];
                 var map = {
                     'normal': 'Resting / Quiet',
                     'green': 'Resting / Quiet',
@@ -553,9 +573,13 @@
                     'warning': 'Erupting \u2014 Check with Ranger Station',
                     'red': 'Erupting \u2014 Check with Ranger Station'
                 };
-                var friendly = map[level] || 'Status available at the USGS Volcano Hazards Program page';
-                var result = 'Live Kīlauea status: ' + friendly + '. Always verify current conditions at the USGS Volcano Hazards Program page before heading to the crater rim.';
-                setCached('volcano', result);
+                var friendly = level ? (map[level] || level.toUpperCase()) : null;
+                var parts = [];
+                if (friendly) parts.push('Live K\u012blauea status: ' + friendly + '.');
+                if (headline) parts.push('Latest USGS update: \u201c' + headline + '\u201d');
+                parts.push('You can watch the summit camera live right now on our Live Volcano Feed page \u2014 scroll to the top of the site to find it. Always verify conditions at the K\u012blauea Visitor Center before heading to the crater rim.');
+                var result = parts.length > 1 ? parts.join(' ') : GRACEFUL_FAIL;
+                if (result !== GRACEFUL_FAIL) setCached('volcano', result);
                 return result;
             })
             .catch(function () {

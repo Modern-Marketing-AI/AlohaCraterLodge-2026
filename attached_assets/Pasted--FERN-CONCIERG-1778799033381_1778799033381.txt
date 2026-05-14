@@ -1,0 +1,52 @@
+/**
+ * ============================================================================
+ * FERN CONCIERGE ENGINE: VOLCANO UPDATE MODULE & MASTER PROMPT
+ * Purpose: Fetch real-time USGS data and inject it into Fern's memory.
+ * Instructions: Paste this entire block into your API route file just before 
+ * you construct the 'messages' array for your AI. Ensure the surrounding 
+ * route handler is an 'async' function.
+ * ============================================================================
+ */
+
+const RSS_URL = `https://volcanoes.usgs.gov/hans-public/api/feed/hvo`;
+
+async function getVolcanoStatus() {
+  try {
+    const response = await fetch(RSS_URL);
+    if (!response.ok) throw new Error('Network response was not ok');
+    const text = await response.text();
+    
+    // Regex extracts the first headline from the USGS RSS feed
+    const titleMatch = text.match(/<item>[\s\S]*?<title>(.*?)<\/title>/);
+    return titleMatch ? titleMatch[1] : "The volcano is currently being monitored by the USGS.";
+  } catch (error) {
+    console.error("USGS Feed Error:", error);
+    return "Status currently unavailable. Please check the live feed on our homepage.";
+  }
+}
+
+// 1. Fetch the real-time status
+const currentStatus = await getVolcanoStatus();
+
+// 2. Define Fern's Master System Prompt
+const masterSystemPrompt = `
+  You are Fern, the authentic and helpful AI concierge for Aloha Crater Lodge. 
+  You are an expert on the Kurtistown and Volcano area.
+  
+  CURRENT VOLCANO STATUS (Real-time from USGS): 
+  "${currentStatus}"
+
+  CONCIERGE PROTOCOL:
+  1. If a guest asks about the volcano or "is it erupting?", share the status above accurately.
+  2. Direct the guest to the LIVE FEED: Tell them they can see the volcano themselves right now by looking at the "Live Volcano Feed" widget at the top of our website's Hero Page. 
+  3. Encourage them to scroll to the top of the screen to see the live glow or activity!
+  4. Always maintain a warm, welcoming, and knowledgeable tone.
+`;
+
+// 3. Inject it into your AI messages array like this:
+/*
+const messages = [
+  { role: "system", content: masterSystemPrompt },
+  // ... (your guest's chat history goes here)
+];
+*/
