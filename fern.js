@@ -1802,12 +1802,33 @@
     function updateRefreshTimestamp() {
         var el = document.getElementById('fern-data-ts');
         if (!el) return;
-        var ts = getLastRefreshTime();
-        if (!ts) { el.textContent = ''; return; }
-        var diffMin = Math.floor((Date.now() - ts) / 60000);
-        el.textContent = diffMin < 1 ? '\u25cf Live \u00b7 just refreshed'
-            : diffMin === 1 ? '\u25cf Live \u00b7 refreshed 1 min ago'
-            : '\u25cf Live \u00b7 refreshed ' + diffMin + ' min ago';
+        var TYPE_LABELS = { volcano: 'Volcano', weather: 'Weather', airQuality: 'AQI', trailConditions: 'Trails' };
+        var keys = ['volcano', 'weather', 'airQuality', 'trailConditions'];
+        var shown = [];
+        for (var i = 0; i < keys.length; i++) {
+            if (!LIVE_DATA_SHOWN[keys[i]]) continue;
+            var entry = LIVE_DATA_CACHE[keys[i]];
+            if (entry && entry.ts) shown.push({ key: keys[i], ts: entry.ts });
+        }
+        if (shown.length === 0) { el.textContent = ''; return; }
+        var now = Date.now();
+        function ageLabel(ts) {
+            var diffMin = Math.floor((now - ts) / 60000);
+            return diffMin < 1 ? 'just now' : diffMin === 1 ? '1 min ago' : diffMin + ' min ago';
+        }
+        if (shown.length === 1) {
+            var diffMin = Math.floor((now - shown[0].ts) / 60000);
+            el.textContent = diffMin < 1 ? '\u25cf Live \u00b7 just refreshed'
+                : diffMin === 1 ? '\u25cf Live \u00b7 refreshed 1 min ago'
+                : '\u25cf Live \u00b7 refreshed ' + diffMin + ' min ago';
+        } else {
+            shown.sort(function (a, b) { return b.ts - a.ts; });
+            var parts = [];
+            for (var j = 0; j < shown.length; j++) {
+                parts.push(TYPE_LABELS[shown[j].key] + ': ' + ageLabel(shown[j].ts));
+            }
+            el.textContent = '\u25cf Live \u00b7 ' + parts.join(' \u00b7 ');
+        }
     }
 
     function initDebugPanel() {
