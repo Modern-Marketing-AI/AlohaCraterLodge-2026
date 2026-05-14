@@ -490,6 +490,7 @@
 
     var LIVE_DATA_CACHE = {};
     var LIVE_DATA_SHOWN = {};
+    var _lastLiveDataKeys = [];
 
     var LIVE_DATA_TTL = (function () {
         try {
@@ -886,6 +887,7 @@
         var syncResults = slotsLeft > 0 ? collectSyncIntents(input, data, slotsLeft, excludeTags) : [];
 
         if (asyncFetchers.length === 0) {
+            _lastLiveDataKeys = [];
             if (syncResults.length === 0) return Promise.resolve(getFallback(data));
             if (syncResults.length === 1) return Promise.resolve(syncResults[0]);
             var syncJoined = syncResults[0];
@@ -896,6 +898,7 @@
         }
 
         return Promise.all(asyncFetchers.map(function (fn) { return fn(); })).then(function (asyncResults) {
+            _lastLiveDataKeys = asyncFetchers.map(function (fn) { return fn._cacheKey; }).filter(Boolean);
             var dataWasRefreshed = asyncFetchers.some(function (fn) {
                 return fn._cacheKey && wasRefreshed(fn._cacheKey);
             });
@@ -1239,6 +1242,7 @@
             updateRefreshTimestamp();
             setTimeout(function () {
                 processAndSend(full);
+                attachLiveFreshnessFootnote();
             }, 320);
         }).catch(function () {
             pendingResponse = false;
@@ -1252,6 +1256,31 @@
         return (text || '')
             .replace(/\bcozy\b/gi, 'grounded')
             .replace(/\bpampering\b/gi, 'calibration');
+    }
+
+    function getLiveFreshnessText() {
+        if (_lastLiveDataKeys.length === 0) return '';
+        var now = Date.now();
+        var newestTs = 0;
+        for (var i = 0; i < _lastLiveDataKeys.length; i++) {
+            var entry = LIVE_DATA_CACHE[_lastLiveDataKeys[i]];
+            if (entry && entry.ts > newestTs) newestTs = entry.ts;
+        }
+        if (!newestTs) return '';
+        var diffMin = Math.floor((now - newestTs) / 60000);
+        return diffMin < 1 ? 'Data checked just now' : 'Data from ' + diffMin + (diffMin === 1 ? ' min ago' : ' min ago');
+    }
+
+    function attachLiveFreshnessFootnote() {
+        var text = getLiveFreshnessText();
+        if (!text) return;
+        var bots = document.querySelectorAll('.fern-msg-bot');
+        if (!bots.length) return;
+        var last = bots[bots.length - 1];
+        var foot = document.createElement('span');
+        foot.className = 'fern-live-footnote';
+        foot.textContent = text;
+        last.appendChild(foot);
     }
 
     function appendMessage(text, role) {
@@ -1272,8 +1301,10 @@
     function rerenderBotMessages() {
         var bots = document.querySelectorAll('.fern-msg-bot');
         for (var i = 0; i < bots.length; i++) {
+            var footnote = bots[i].querySelector('.fern-live-footnote');
             var raw = bots[i].getAttribute('data-raw') || '';
             bots[i].textContent = expertInsightsOn ? filterResponse(raw) : filterResponse(stripInsights(raw));
+            if (footnote) bots[i].appendChild(footnote);
         }
     }
 
@@ -1336,6 +1367,7 @@
             updateRefreshTimestamp();
             setTimeout(function () {
                 processAndSend(full);
+                attachLiveFreshnessFootnote();
             }, 320);
         }).catch(function () {
             pendingResponse = false;
@@ -1590,6 +1622,10 @@
             '#fern-data-ts {',
             '  font-size: 0.64rem; color: #444; text-align: right;',
             '  margin-top: 5px; min-height: 0.85rem; transition: color 0.4s;',
+            '}',
+            '.fern-live-footnote {',
+            '  display: block; margin-top: 5px;',
+            '  font-size: 0.68rem; font-style: italic; color: #555;',
             '}',
             '#fern-debug-panel {',
             '  position: fixed; bottom: 170px; right: 28px; width: 320px;',
