@@ -553,7 +553,7 @@
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
 
-        var jsonFetch = fetch('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO', { mode: 'cors' })
+        var jsonFetch = fetch('/api/volcano-json', { mode: 'cors' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
@@ -569,7 +569,7 @@
             })
             .catch(function () { return ''; });
 
-        var rssFetch = fetch('https://volcanoes.usgs.gov/hans-public/api/feed/hvo', { mode: 'cors' })
+        var rssFetch = fetch('/api/volcano-rss', { mode: 'cors' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
