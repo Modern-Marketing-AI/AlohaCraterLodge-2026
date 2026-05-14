@@ -76,6 +76,7 @@
         //     chipStaggerMs:      70,     // ms delay between each chip entrance (0–200). Default 70.
         //     closerMinLength:    80,     // min response length (chars) to append a closing line (0–500). Default 80.
         //     closingLines:       ['\n\nAnything else?'], // override Fern's closing line rotation.
+        //     closingLinesMode:   'replace', // 'replace' (default) — custom lines fully replace defaults; 'extend' — custom lines are added to defaults.
         //     chipAdvisoryTemplate: 'Heads up: {condition} — tap a chip below for details.' // advisory wording; use {condition} placeholder.
         //   };</script>
         //
@@ -788,16 +789,7 @@
     ];
 
     var CLOSING_LINES = (function () {
-        try {
-            var cfg = window.FERN_CONFIG;
-            if (cfg && Array.isArray(cfg.closingLines) && cfg.closingLines.length >= 1) {
-                var valid = cfg.closingLines.filter(function (s) {
-                    return typeof s === 'string' && s.trim().length > 0;
-                });
-                if (valid.length >= 1) return valid;
-            }
-        } catch (e) {}
-        return [
+        var defaults = [
             '\n\nAnything else I can help you plan?',
             '\n\nWhat else can I pull up for you?',
             '\n\nFeel free to ask me anything else about the Lodge or the area.',
@@ -807,6 +799,21 @@
             '\n\nJust ask if you need more details on any of this.',
             '\n\nWhat else would be helpful to know?',
         ];
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && Array.isArray(cfg.closingLines) && cfg.closingLines.length >= 1) {
+                var valid = cfg.closingLines.filter(function (s) {
+                    return typeof s === 'string' && s.trim().length > 0;
+                });
+                if (valid.length >= 1) {
+                    if (cfg.closingLinesMode === 'extend') {
+                        return defaults.concat(valid);
+                    }
+                    return valid;
+                }
+            }
+        } catch (e) {}
+        return defaults;
     })();
 
     var openerQueue = [];
