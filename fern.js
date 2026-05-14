@@ -75,6 +75,7 @@
         //     greetingBubbleDelay: 8000,  // ms before greeting bubble appears (0–30000). Default 8000.
         //     chipStaggerMs:      70,     // ms delay between each chip entrance (0–200). Default 70.
         //     closerMinLength:    80,     // min response length (chars) to append a closing line (0–500). Default 80.
+        //     closerMinLengthByTopic: { 'Air Quality': 0, 'Check-in Time': 500 }, // per-topic overrides; keys are chip labels from CHIP_COVERAGE.
         //     closingLines:       ['\n\nAnything else?'], // override Fern's closing line rotation.
         //     closingLinesMode:   'replace', // 'replace' (default) — custom lines fully replace defaults; 'extend' — custom lines are added to defaults.
         //     chipAdvisoryTemplate: 'Heads up: {condition} — tap a chip below for details.' // advisory wording; use {condition} placeholder.
@@ -184,6 +185,24 @@
             }
         } catch (e) {}
         return 80;
+    })();
+    var CLOSER_MIN_LENGTH_BY_TOPIC = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && cfg.closerMinLengthByTopic && typeof cfg.closerMinLengthByTopic === 'object' &&
+                    !Array.isArray(cfg.closerMinLengthByTopic)) {
+                var map = {};
+                var keys = Object.keys(cfg.closerMinLengthByTopic);
+                for (var i = 0; i < keys.length; i++) {
+                    var val = cfg.closerMinLengthByTopic[keys[i]];
+                    if (typeof val === 'number' && val >= 0 && val <= 9999) {
+                        map[keys[i]] = Math.round(val);
+                    }
+                }
+                return map;
+            }
+        } catch (e) {}
+        return {};
     })();
     var DISMISSED_CHIPS_KEY = 'fern_dismissed_chips';
     function getConditionPinnedLabels() {
@@ -867,9 +886,21 @@
         return CLOSING_LINES[idx];
     }
 
-    function shouldAddCloser(primary) {
+    function getTopicTag(input) {
+        var q = input || '';
+        for (var i = 0; i < CHIP_COVERAGE.length; i++) {
+            if (CHIP_COVERAGE[i].test.test(q)) return CHIP_COVERAGE[i].label;
+        }
+        return null;
+    }
+
+    function shouldAddCloser(primary, topic) {
         var clean = (primary || '').replace(/[_*`\[\]()]/g, '').trim();
-        return clean.length >= CLOSER_MIN_LENGTH;
+        var tag = topic || null;
+        var threshold = (tag !== null && Object.prototype.hasOwnProperty.call(CLOSER_MIN_LENGTH_BY_TOPIC, tag))
+            ? CLOSER_MIN_LENGTH_BY_TOPIC[tag]
+            : CLOSER_MIN_LENGTH;
+        return clean.length >= threshold;
     }
 
     function routeAsync(input, data) {
@@ -1242,7 +1273,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
-            if (shouldAddCloser(primary)) parts.push(pickCloser());
+            if (shouldAddCloser(primary, getTopicTag(question))) parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
@@ -1367,7 +1398,7 @@
             upsells.forEach(function (u) {
                 if (u && u !== primary) parts.push('\n\nBy the way — ' + u);
             });
-            if (shouldAddCloser(primary)) parts.push(pickCloser());
+            if (shouldAddCloser(primary, getTopicTag(text))) parts.push(pickCloser());
             var full = parts.join('');
             pendingResponse = false;
             setInputBusy(false);
@@ -1895,6 +1926,7 @@
                 chipsShowCount: CHIPS_SHOW_COUNT,
                 chipStaggerMs: CHIP_STAGGER_MS,
                 closerMinLength: CLOSER_MIN_LENGTH,
+                closerMinLengthByTopic: CLOSER_MIN_LENGTH_BY_TOPIC,
                 chipAdvisoryTemplate: CHIP_ADVISORY_TEMPLATE,
                 closingLines: CLOSING_LINES,
                 repromptMultipliers: REPROMPT_MULTIPLIERS,
