@@ -75,7 +75,8 @@
         //     greetingBubbleDelay: 8000,  // ms before greeting bubble appears (0–30000). Default 8000.
         //     chipStaggerMs:      70,     // ms delay between each chip entrance (0–200). Default 70.
         //     closerMinLength:    80,     // min response length (chars) to append a closing line (0–500). Default 80.
-        //     closingLines:       ['\n\nAnything else?'] // override Fern's closing line rotation.
+        //     closingLines:       ['\n\nAnything else?'], // override Fern's closing line rotation.
+        //     chipAdvisoryTemplate: 'Heads up: {condition} — tap a chip below for details.' // advisory wording; use {condition} placeholder.
         //   };</script>
         //
         // URL params (for live preview without editing code):
@@ -162,6 +163,17 @@
         } catch (e) {}
         return 70;
     })();
+    var CHIP_ADVISORY_TEMPLATE = (function () {
+        try {
+            var cfg = window.FERN_CONFIG;
+            if (cfg && typeof cfg.chipAdvisoryTemplate === 'string' &&
+                    cfg.chipAdvisoryTemplate.trim().length > 0 &&
+                    cfg.chipAdvisoryTemplate.indexOf('{condition}') !== -1) {
+                return cfg.chipAdvisoryTemplate;
+            }
+        } catch (e) {}
+        return 'Heads up: {condition} \u2014 tap a chip below for details.';
+    })();
     var CLOSER_MIN_LENGTH = (function () {
         try {
             var cfg = window.FERN_CONFIG;
@@ -211,7 +223,7 @@
             }
         }
         if (parts.length === 0) return '';
-        return 'Heads up: ' + parts.join(' and ') + ' \u2014 tap a chip below for details.';
+        return CHIP_ADVISORY_TEMPLATE.split('{condition}').join(parts.join(' and '));
     }
 
     function dismissChipAdvisory() {
@@ -1795,6 +1807,7 @@
                 chipsShowCount: CHIPS_SHOW_COUNT,
                 chipStaggerMs: CHIP_STAGGER_MS,
                 closerMinLength: CLOSER_MIN_LENGTH,
+                chipAdvisoryTemplate: CHIP_ADVISORY_TEMPLATE,
                 closingLines: CLOSING_LINES,
                 repromptMultipliers: REPROMPT_MULTIPLIERS,
                 lastRefreshed: getLastRefreshTime() ? new Date(getLastRefreshTime()).toLocaleTimeString() : 'not yet',
