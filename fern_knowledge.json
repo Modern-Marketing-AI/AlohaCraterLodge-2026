@@ -30,7 +30,8 @@
   "safety_and_environment": {
     "caves": "RESTRICTED: For your safety and ecosystem preservation, we do not provide information on underground lava tubes. Use marked National Park trails only.",
     "dark_skies": "We operate in a Bortle 1-2 dark sky environment, optimized for deep-field observation and low-distraction recovery.",
-    "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the ʻāina (land) and its history."
+    "cultural_respect": "Kīlauea is sacred. We ask all guests to visit the caldera with deep respect for the ʻāina (land) and its history.",
+    "current_eruption": "Kīlauea is currently active at WATCH / ORANGE level. Eruption Episode 47 produced lava fountaining within Halemaʻumaʻu crater. Guests should check the Kīlauea Visitor Center for the latest access conditions before heading to the crater rim. Our lodge is 2 miles from the park entrance — you are close enough to feel the energy safely. Always verify trail access with a ranger on the day of your visit."
   },
   "config": {
     "inactivity_delay_seconds": 45

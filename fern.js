@@ -580,10 +580,11 @@
             })
             .then(function (data) {
                 var level = '';
-                if (Array.isArray(data) && data.length > 0) {
-                    level = (data[0].alert_level || '').toLowerCase();
-                } else if (data && data.alert_level) {
-                    level = data.alert_level.toLowerCase();
+                if (Array.isArray(data)) {
+                    var kilauea = data.find(function (v) { return v.vnum === '332010'; }) || data[3] || data[0];
+                    if (kilauea) level = (kilauea.status || kilauea.color || '').toLowerCase();
+                } else if (data) {
+                    level = (data.status || data.color || data.alert_level || '').toLowerCase();
                 }
                 return level;
             })
