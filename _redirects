@@ -1,5 +1,5 @@
-/volcano-data-json  https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO  200!
-/volcano-data-rss   https://volcanoes.usgs.gov/hans-public/api/feed/hvo       200!
+/volcano-json  https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO  200!
+/volcano-rss   https://volcanoes.usgs.gov/hans-public/api/feed/hvo       200!
 /faq /faq.html 301
 /blog/* /guide.html 301
 /wellness /wellness.html 301
