@@ -573,7 +573,7 @@
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
 
-        var jsonFetch = fetch('/volcano-data-json')
+        var jsonFetch = fetch('/.netlify/functions/volcano?type=json')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
@@ -589,7 +589,7 @@
             })
             .catch(function () { return ''; });
 
-        var rssFetch = fetch('/volcano-data-rss')
+        var rssFetch = fetch('/.netlify/functions/volcano?type=rss')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
