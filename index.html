@@ -141,6 +141,14 @@
         .admin-login-link:hover {
             color: #ff4500;
         }
+        .volcano-status-bar { display: flex; align-items: center; justify-content: center; gap: 0.6rem; background: #111; border-bottom: 1px solid #1e1e1e; padding: 0.55rem 1rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .volcano-status-bar .vsb-label { color: #555; }
+        .vsb-level { color: #fff; }
+        .vsb-level.alert-normal  { color: #10b981; }
+        .vsb-level.alert-advisory { color: #f59e0b; }
+        .vsb-level.alert-watch   { color: #f97316; }
+        .vsb-level.alert-warning { color: #ef4444; }
+        .vsb-sub { color: #555; font-weight: 400; }
     </style>
 </head>
 <body>
@@ -167,6 +175,11 @@
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
         </div>
     </header>
+    <div class="volcano-status-bar" id="volcano-status-bar">
+        <span class="vsb-label">🌋 Kīlauea:</span>
+        <span class="vsb-level" id="vsb-level">Fetching…</span>
+        <span class="vsb-sub" id="vsb-sub"></span>
+    </div>
     <section id="rooms" class="section">
         <h2>The Basecamps</h2>
         <div class="grid">
@@ -383,5 +396,38 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script src="fern.js"></script>
+<script>
+(function () {
+    var levelEl = document.getElementById('vsb-level');
+    var subEl   = document.getElementById('vsb-sub');
+    if (!levelEl) return;
+    var levelMap = {
+        'normal':   { label: 'Normal',   cls: 'alert-normal',   sub: 'Resting / Quiet' },
+        'green':    { label: 'Normal',   cls: 'alert-normal',   sub: 'Resting / Quiet' },
+        'advisory': { label: 'Advisory', cls: 'alert-advisory', sub: 'Watch the Updates' },
+        'yellow':   { label: 'Advisory', cls: 'alert-advisory', sub: 'Watch the Updates' },
+        'watch':    { label: 'WATCH',    cls: 'alert-watch',    sub: 'Elevated Activity' },
+        'orange':   { label: 'WATCH',    cls: 'alert-watch',    sub: 'Elevated Activity' },
+        'warning':  { label: 'WARNING',  cls: 'alert-warning',  sub: 'Erupting — Check with Ranger Station' },
+        'red':      { label: 'WARNING',  cls: 'alert-warning',  sub: 'Erupting — Check with Ranger Station' }
+    };
+    fetch('/.netlify/functions/volcano?type=json')
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function (data) {
+            var kilauea = Array.isArray(data)
+                ? (data.find(function (v) { return v.vnum === '332010'; }) || data[3] || data[0])
+                : data;
+            var raw   = kilauea ? (kilauea.alertLevel || kilauea.colorCode || '') : '';
+            var level = raw.toLowerCase();
+            var info  = levelMap[level] || { label: raw || 'Unknown', cls: 'vsb-level', sub: '' };
+            levelEl.textContent    = info.label;
+            levelEl.className      = 'vsb-level ' + info.cls;
+            if (subEl) subEl.textContent = info.sub;
+        })
+        .catch(function () {
+            levelEl.textContent = 'Unavailable';
+        });
+}());
+</script>
 </body>
 </html>
