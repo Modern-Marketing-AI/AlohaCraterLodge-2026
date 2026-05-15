@@ -589,7 +589,7 @@
             })
             .catch(function () { return ''; });
 
-        var rssFetch = fetch('/api/volcano-rss', { mode: 'cors' })
+        var rssFetch = fetch('/volcano-data-rss')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
