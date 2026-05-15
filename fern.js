@@ -590,12 +590,13 @@
             })
             .catch(function () { return ''; });
 
-        var rssFetch = fetch('https://corsproxy.io/?https://volcanoes.usgs.gov/hans-public/api/feed/hvo')
+        var rssFetch = fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://volcanoes.usgs.gov/hans-public/api/feed/hvo'))
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
-                return res.text();
+                return res.json();
             })
-            .then(function (text) {
+            .then(function (wrapper) {
+                var text = wrapper.contents;
                 var m = text.match(/<item>[\s\S]*?<title>(.*?)<\/title>/);
                 return m ? m[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
             })
