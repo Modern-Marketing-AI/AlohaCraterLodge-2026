@@ -1,16 +1,4 @@
 [[redirects]]
-  from = "/volcano-json"
-  to = "https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/volcano-rss"
-  to = "https://volcanoes.usgs.gov/hans-public/api/feed/hvo"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/faq"
   to = "/faq.html"
   status = 301
