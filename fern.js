@@ -86,6 +86,7 @@
         //   fern_delay=30          — inactivity delay in seconds (same as inactivityDelay).
         //   fern_max_reprompts=2   — max async fetches per reply, 1–10 (same as maxReprompts).
         //   fern_expert_insights=0 — disable expert insights; 1 to enable (same as expertInsights).
+        //   fern_chip_stagger=40   — ms delay between each chip entrance, 0–200 (same as chipStaggerMs).
         //   fern_debug=1           — show the live config overlay panel.
         try {
             var cfg = window.FERN_CONFIG;
@@ -157,6 +158,14 @@
         return 8;
     })();
     var CHIP_STAGGER_MS = (function () {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var raw = params.get('fern_chip_stagger');
+            if (raw !== null) {
+                var ms = Math.round(parseFloat(raw));
+                if (!isNaN(ms) && ms >= 0 && ms <= 200) return ms;
+            }
+        } catch (e) {}
         try {
             var cfg = window.FERN_CONFIG;
             if (cfg && typeof cfg.chipStaggerMs === 'number') {
