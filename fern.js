@@ -24,6 +24,7 @@
     var chipsEl = null;
     var chipsDismissedIndicatorEl = null;
     var currentChipResetFn = null;
+    var pendingHintTimeout = null;
 
     var MAX_INTENTS = (function () {
         try {
@@ -1110,17 +1111,7 @@
             return usedChipLabels.indexOf(chip.label) === -1 && dismissed.indexOf(chip.label) === -1;
         });
         if (available.length === 0) {
-            var dismissedCount = getDismissedChips().length;
-            var hint = document.createElement('div');
-            hint.className = 'fern-msg fern-msg-bot fern-hint-fade';
-            hint.textContent = 'You\u2019ve hidden ' + dismissedCount + ' of ' + TOPIC_CHIPS_POOL.length + ' topic suggestions. Type anything to ask Fern.';
-            hint.appendChild(document.createElement('br'));
-            hint.appendChild(makeResetLink(function () {
-                if (hint.parentNode) hint.parentNode.removeChild(hint);
-                showInactivityChips();
-            }));
-            msgs.appendChild(hint);
-            msgs.scrollTop = msgs.scrollHeight;
+            scheduleHint(msgs, showInactivityChips);
             return;
         }
         var pool = available.slice();
@@ -1191,6 +1182,25 @@
         chipsDismissedIndicatorEl = indicator;
     }
 
+    function scheduleHint(msgs, afterResetFn) {
+        msgs.querySelectorAll('.fern-hint-msg').forEach(function (el) { el.parentNode && el.parentNode.removeChild(el); });
+        clearTimeout(pendingHintTimeout);
+        var dismissedCount = getDismissedChips().length;
+        pendingHintTimeout = setTimeout(function () {
+            pendingHintTimeout = null;
+            var hint = document.createElement('div');
+            hint.className = 'fern-msg fern-msg-bot fern-hint-fade fern-hint-msg';
+            hint.textContent = 'You\u2019ve hidden ' + dismissedCount + ' of ' + TOPIC_CHIPS_POOL.length + ' topic suggestions. Type anything to ask Fern.';
+            hint.appendChild(document.createElement('br'));
+            hint.appendChild(makeResetLink(function () {
+                if (hint.parentNode) hint.parentNode.removeChild(hint);
+                afterResetFn();
+            }));
+            msgs.appendChild(hint);
+            msgs.scrollTop = msgs.scrollHeight;
+        }, 0);
+    }
+
     function makeResetLink(afterReset) {
         var link = document.createElement('span');
         link.className = 'fern-reset-link';
@@ -1207,17 +1217,7 @@
         if (!msgs) return;
         var chips = getSessionChips();
         if (chips.length === 0) {
-            var dismissedCount = getDismissedChips().length;
-            var hint = document.createElement('div');
-            hint.className = 'fern-msg fern-msg-bot fern-hint-fade';
-            hint.textContent = 'You\u2019ve hidden ' + dismissedCount + ' of ' + TOPIC_CHIPS_POOL.length + ' topic suggestions. Type anything to ask Fern.';
-            hint.appendChild(document.createElement('br'));
-            hint.appendChild(makeResetLink(function () {
-                if (hint.parentNode) hint.parentNode.removeChild(hint);
-                showChips();
-            }));
-            msgs.appendChild(hint);
-            msgs.scrollTop = msgs.scrollHeight;
+            scheduleHint(msgs, showChips);
             return;
         }
         var warnLabels = getConditionPinnedLabels();
