@@ -582,9 +582,9 @@
                 var level = '';
                 if (Array.isArray(data)) {
                     var kilauea = data.find(function (v) { return v.vnum === '332010'; }) || data[3] || data[0];
-                    if (kilauea) level = (kilauea.status || kilauea.color || '').toLowerCase();
+                    if (kilauea) level = (kilauea.alertLevel || kilauea.colorCode || '').toLowerCase();
                 } else if (data) {
-                    level = (data.status || data.color || data.alert_level || '').toLowerCase();
+                    level = (data.alertLevel || data.colorCode || data.alert_level || '').toLowerCase();
                 }
                 return level;
             })
