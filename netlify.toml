@@ -1,3 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "."
+  functions = "functions"
+
+[[redirects]]
+  from = "/volcano-json"
+  to = "/.netlify/functions/volcano?type=json"
+  status = 200
+
+[[redirects]]
+  from = "/volcano-rss"
+  to = "/.netlify/functions/volcano?type=rss"
+  status = 200
+
 [[redirects]]
   from = "/faq"
   to = "/faq.html"
@@ -57,10 +72,6 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[build]
-  publish = "."
-  command = ""
 
 [context.production]
   branch = "main"
