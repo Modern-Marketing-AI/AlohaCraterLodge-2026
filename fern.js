@@ -759,6 +759,8 @@
             // Safety restrictions — highest priority
             [/cave|lava tube|tube system|underground/i, function () { return data.safety_and_environment.caves; }],
             [/owner|who.*runs|who.*manage|manager.*name|staff.*name|host.*name|your.*name|team.*name/i, function () { return data.safety_and_environment.staff; }],
+            // Current eruption context — episode details, fountaining, why/how questions
+            [/why.*erupt|erupt.*why|episode\s*\d+|\d+\s*episode|fountain|how.*active|what.*happen.*volcan|current.*erupt|erupt.*current|lava.*fountain|summit.*erupt|ongoing.*erupt|erupt.*ongoing|tell.*erupt|erupt.*tell|what.*erupt/i, function () { return data.safety_and_environment.current_eruption; }],
             // Sanctuaries
             [/room.?3|lumi|anela|workspace|angel room|high.?efficiency/i, function () { return data.sanctuaries.room_3; }],
             [/room.?4|h[o\u014d][\u02bb']?om[a\u0101]lie|hoomalie|whirlpool|jetted|stone shower|honeymoon|canopy entrance/i, function () { return data.sanctuaries.room_4; }],
