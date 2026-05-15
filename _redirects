@@ -1,3 +1,5 @@
+/api/volcano-json  https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO  200
+/api/volcano-rss   https://volcanoes.usgs.gov/hans-public/api/feed/hvo       200
 /faq /faq.html 301
 /blog/* /guide.html 301
 /wellness /wellness.html 301
@@ -9,6 +11,4 @@
 /rooms /suites.html 301
 /things-to-do /things-to-do.html 301
 /live-feed /live-feed.html 301
-/api/volcano-json  https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO  200
-/api/volcano-rss   https://volcanoes.usgs.gov/hans-public/api/feed/hvo       200
 /* /index.html 200
