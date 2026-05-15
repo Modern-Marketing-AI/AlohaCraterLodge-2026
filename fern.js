@@ -573,12 +573,13 @@
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
 
-        var jsonFetch = fetch('https://corsproxy.io/?https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO')
+        var jsonFetch = fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO'))
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
             })
-            .then(function (data) {
+            .then(function (wrapper) {
+                var data = JSON.parse(wrapper.contents);
                 var level = '';
                 if (Array.isArray(data) && data.length > 0) {
                     level = (data[0].alert_level || '').toLowerCase();
@@ -702,6 +703,8 @@
     function fetchTrailConditions() {
         var cached = getCached('trailConditions');
         if (cached !== null) return Promise.resolve(cached);
+        /* NPS fetch disabled — DEMO_KEY hitting 429 rate limits.
+           Re-enable once a free api.data.gov key is available.
         var url = 'https://developer.nps.gov/api/v1/alerts' +
             '?parkCode=havo&limit=5&api_key=DEMO_KEY';
         return fetch(url)
@@ -729,6 +732,8 @@
             .catch(function () {
                 return GRACEFUL_FAIL;
             });
+        */
+        return Promise.resolve(GRACEFUL_FAIL);
     }
     fetchTrailConditions._cacheKey = 'trailConditions';
 
