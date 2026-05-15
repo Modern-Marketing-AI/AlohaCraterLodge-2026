@@ -1,15 +1,3 @@
-[[redirects]]
-  from = "/api/volcano-json"
-  to = "https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/volcano-rss"
-  to = "https://volcanoes.usgs.gov/hans-public/api/feed/hvo"
-  status = 200
-  force = true
-
 [build]
   publish = "."
   command = ""
