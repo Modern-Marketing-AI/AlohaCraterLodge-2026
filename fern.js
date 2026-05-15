@@ -563,7 +563,7 @@
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
 
-        var jsonFetch = fetch('/api/volcano-json', { mode: 'cors' })
+        var jsonFetch = fetch('/volcano-data-json')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
