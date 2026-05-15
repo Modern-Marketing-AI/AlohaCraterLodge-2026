@@ -420,7 +420,7 @@
                 'warning': { label: 'WARNING', cls: 'alert-warning', sub: 'Erupting \u2014 Check with Ranger Station' },
                 'red':     { label: 'WARNING', cls: 'alert-warning', sub: 'Erupting \u2014 Check with Ranger Station' }
             };
-            fetch('https://alohacraterlodgenetlifyapp.netlify.app/volcano-json')
+            fetch('/volcano-json')
                 .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
                 .then(function(data) {
                     var level = '';

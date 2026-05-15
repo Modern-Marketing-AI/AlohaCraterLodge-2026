@@ -573,7 +573,7 @@
         var cached = getCached('volcano');
         if (cached !== null) return Promise.resolve(cached);
 
-        var jsonFetch = fetch('https://alohacraterlodgenetlifyapp.netlify.app/volcano-json')
+        var jsonFetch = fetch('/volcano-json')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
@@ -589,7 +589,7 @@
             })
             .catch(function () { return ''; });
 
-        var rssFetch = fetch('https://alohacraterlodgenetlifyapp.netlify.app/volcano-rss')
+        var rssFetch = fetch('/volcano-rss')
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();

@@ -1,3 +1,75 @@
+[[redirects]]
+  from = "/volcano-json"
+  to = "https://volcanoes.usgs.gov/vsc/api/volcanoApi/summary/HVO"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/volcano-rss"
+  to = "https://volcanoes.usgs.gov/hans-public/api/feed/hvo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/guide.html"
+  status = 301
+
+[[redirects]]
+  from = "/wellness"
+  to = "/wellness.html"
+  status = 301
+
+[[redirects]]
+  from = "/ebikes"
+  to = "/ebikes.html"
+  status = 301
+
+[[redirects]]
+  from = "/guide"
+  to = "/guide.html"
+  status = 301
+
+[[redirects]]
+  from = "/premium-suites"
+  to = "/premium-suites.html"
+  status = 301
+
+[[redirects]]
+  from = "/basecamp"
+  to = "/basecamp.html"
+  status = 301
+
+[[redirects]]
+  from = "/family-suites"
+  to = "/family-suites.html"
+  status = 301
+
+[[redirects]]
+  from = "/rooms"
+  to = "/suites.html"
+  status = 301
+
+[[redirects]]
+  from = "/things-to-do"
+  to = "/things-to-do.html"
+  status = 301
+
+[[redirects]]
+  from = "/live-feed"
+  to = "/live-feed.html"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [build]
   publish = "."
   command = ""
