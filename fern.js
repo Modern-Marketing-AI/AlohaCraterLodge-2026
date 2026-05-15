@@ -1049,6 +1049,30 @@
         return '#f59e0b';
     }
 
+    function getChipSeverity(label) {
+        if (label === 'Air Quality') {
+            var aqiCache = getCached('airQuality');
+            if (aqiCache && aqiCache !== GRACEFUL_FAIL) {
+                var m = /US AQI (\d+)/.exec(aqiCache);
+                if (m) {
+                    var aqi = parseInt(m[1], 10);
+                    if (aqi > 150) return 'hazardous';
+                    if (aqi > 100) return 'high';
+                    if (aqi > 50)  return 'moderate';
+                    return 'low';
+                }
+            }
+        }
+        if (label === 'Trail Conditions') {
+            var trailCache = getCached('trailConditions');
+            if (trailCache && trailCache !== GRACEFUL_FAIL) {
+                if (/closed|closure|hazardous/i.test(trailCache)) return 'hazardous';
+                if (/restricted|danger|caution|warning/i.test(trailCache)) return 'high';
+            }
+        }
+        return 'moderate';
+    }
+
     function makeChipEl(chip, onSelect) {
         var wrapper = document.createElement('span');
         wrapper.className = 'fern-chip-wrap';
@@ -1070,6 +1094,7 @@
             var warnColor = getChipAlertColor(chip.label) || '#f59e0b';
             dot.style.background = warnColor;
             dot.setAttribute('aria-hidden', 'true');
+            dot.setAttribute('data-severity', getChipSeverity(chip.label));
             btn.appendChild(dot);
             var srLabel = document.createElement('span');
             srLabel.className = 'fern-sr-only';
@@ -1649,6 +1674,10 @@
             '.fern-chip:focus .fern-chip-warn-dot {',
             '  animation-play-state: paused;',
             '}',
+            '.fern-chip-warn-dot[data-severity="low"]      { animation-duration: 3s; }',
+            '.fern-chip-warn-dot[data-severity="moderate"] { animation-duration: 2s; }',
+            '.fern-chip-warn-dot[data-severity="high"]     { animation-duration: 1.2s; }',
+            '.fern-chip-warn-dot[data-severity="hazardous"]{ animation-duration: 0.7s; }',
             '.fern-sr-only {',
             '  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;',
             '  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;',
