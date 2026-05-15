@@ -256,9 +256,19 @@
         return CHIP_ADVISORY_TEMPLATE.split('{condition}').join(parts.join(' and '));
     }
 
+    function fadeOutRemove(el, cb) {
+        if (!el) { if (cb) cb(); return; }
+        el.style.transition = 'opacity 0.25s ease';
+        el.style.opacity = '0';
+        setTimeout(function () {
+            if (el.parentNode) el.parentNode.removeChild(el);
+            if (cb) cb();
+        }, 260);
+    }
+
     function dismissChipAdvisory() {
         var el = document.getElementById('fern-chip-advisory');
-        if (el && el.parentNode) el.parentNode.removeChild(el);
+        fadeOutRemove(el);
         try { sessionStorage.setItem(CHIP_ADVISORY_SESSION_KEY, '1'); } catch (e) {}
     }
 
@@ -281,7 +291,7 @@
         dismissBtn.setAttribute('aria-label', 'Dismiss safety advisory');
         dismissBtn.textContent = '\u00d7';
         dismissBtn.addEventListener('click', function () {
-            if (advisory.parentNode) advisory.parentNode.removeChild(advisory);
+            fadeOutRemove(advisory);
             try { sessionStorage.setItem(CHIP_ADVISORY_SESSION_KEY, '1'); } catch (e) {}
         });
         advisory.appendChild(dismissBtn);
