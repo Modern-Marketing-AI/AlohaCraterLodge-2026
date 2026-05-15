@@ -1684,6 +1684,15 @@
             '  color: #555; cursor: pointer; font-size: 1rem; line-height: 1;',
             '}',
             '#fern-debug-close:hover { color: #fff; }',
+            '#fern-debug-copy {',
+            '  margin-top: 8px; background: rgba(16,185,129,0.12);',
+            '  border: 1px solid rgba(16,185,129,0.35); border-radius: 4px;',
+            '  color: #10b981; font-size: 0.68rem; font-family: monospace;',
+            '  padding: 4px 10px; cursor: pointer; transition: background 0.2s, color 0.2s;',
+            '  width: 100%;',
+            '}',
+            '#fern-debug-copy:hover { background: rgba(16,185,129,0.22); }',
+            '#fern-debug-copy.copied { background: rgba(16,185,129,0.3); color: #6ee7b7; }',
             '.fern-dismissed-count .fern-reset-link {',
             '  display: inline; margin-top: 0;',
             '}',
@@ -1937,9 +1946,41 @@
         }
         refreshDebug();
         setInterval(refreshDebug, 5000);
+        var copyBtn = document.createElement('button');
+        copyBtn.id = 'fern-debug-copy';
+        copyBtn.textContent = 'Copy JSON';
+        copyBtn.addEventListener('click', function () {
+            refreshDebug();
+            function showCopied() {
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(function () {
+                    copyBtn.textContent = 'Copy JSON';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }
+            function fallbackCopy() {
+                try {
+                    var ta = document.createElement('textarea');
+                    ta.value = pre.textContent;
+                    ta.style.cssText = 'position:fixed;opacity:0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    showCopied();
+                } catch (e2) {}
+            }
+            try {
+                navigator.clipboard.writeText(pre.textContent).then(showCopied).catch(fallbackCopy);
+            } catch (e) {
+                fallbackCopy();
+            }
+        });
         panel.appendChild(closeBtn);
         panel.appendChild(h4);
         panel.appendChild(pre);
+        panel.appendChild(copyBtn);
         document.body.appendChild(panel);
     }
 
