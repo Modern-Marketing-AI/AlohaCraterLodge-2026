@@ -780,6 +780,7 @@
             [/aroma|diffuser|scent|sensory.*grounding|atmospheric/i, function () { return data.bio_regeneration_hardware.sensory_grounding; }],
             [/wellness|bio.?regen|recovery room|reset.*protocol|recovery.*tool/i, function () { return data.bio_regeneration_hardware.protocol; }],
             // Crater mobility
+            [/how much.*bike|bike.*cost|bike.*price|bike.*rate|price.*bike|cost.*bike|rent.*bike.*\$|e.?bike.*fee|ebike.*fee|bike.*rental.*cost|how.*rent.*bike/i, function () { return data.crater_mobility.pricing; }],
             [/bike|e.?bike|ebike|cycle|cycling|crater.*mobility|mobility.*unit/i, function () { return data.crater_mobility.units; }],
             [/helmet|lock|kit|orientation.*bike|bike.*gear/i, function () { return data.crater_mobility.kit; }],
             [/complimentary.*bike|free.*bike|direct.*book.*bike|bike.*incentive/i, function () { return data.crater_mobility.incentive; }],
