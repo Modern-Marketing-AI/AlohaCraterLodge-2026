@@ -56,11 +56,9 @@
         .specs { background: #18181b; color: #f4f4f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
         .specs h3 { color: #10b981; margin: 0 0 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
         .specs ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.8; }
-        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .price-box { background: #f4f4f5; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #e4e4e7; }
-        .price-box.guest { border-color: #10b981; background: #ecfdf5; }
-        .price-label { font-size: 12px; text-transform: uppercase; color: #52525b; letter-spacing: 0.5px; margin-bottom: 5px; }
-        .price-amount { font-size: 20px; font-weight: bold; color: #18181b; }
+        .pricing-inquiry { background: #18181b; border: 1px solid #10b981; border-radius: 8px; padding: 18px 20px; margin-bottom: 20px; text-align: center; }
+        .pricing-inquiry p { margin: 0 0 4px; color: #ccc; font-size: 0.95rem; }
+        .pricing-inquiry strong { color: #10b981; }
         .cta-button { display: block; width: 100%; text-align: center; background: #10b981; color: #ffffff; padding: 16px 0; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 16px; border: none; cursor: pointer; transition: background 0.2s; }
         .cta-button:hover { background: #059669; }
     </style>
@@ -100,17 +98,11 @@
                         <li>Fat-Tires for Volcanic Terrain</li>
                     </ul>
                 </div>
-                <div class="pricing-grid">
-                    <div class="price-box guest">
-                        <div class="price-label">Lodge Guests</div>
-                        <div class="price-amount">$50 / Day</div>
-                    </div>
-                    <div class="price-box">
-                        <div class="price-label">Non-Guests</div>
-                        <div class="price-amount">$100 / Day</div>
-                    </div>
+                <div class="pricing-inquiry">
+                    <p><strong>Pricing &amp; Reservations</strong></p>
+                    <p>Text the concierge team directly for current pricing and to reserve your e-bikes.</p>
                 </div>
-                <a href="#" class="cta-button reveal-phone-btn">Text Concierge</a>
+                <a href="sms:+18083454449?body=Hi%2C%20I%27d%20like%20to%20ask%20about%20e-bike%20rentals." class="cta-button">Text Concierge for Pricing</a>
             </div>
         </div>
     </div>
