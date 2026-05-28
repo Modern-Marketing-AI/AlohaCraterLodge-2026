@@ -1,0 +1,85 @@
+REPLIT AGENT INSTRUCTION:
+Please execute the following technical SEO, structured data, and content optimizations across the main codebase files for www.volcanohawaiilodge.com. These changes resolve entity fragmentation with Online Travel Agencies (OTAs), embed hyper-local distance signals for LLM scrapers, clarify premium e-bike transactional terms, and optimize image headers for Vision AI engines. Do not add any references to a lava tube.
+
+=========================================
+1. INJECT HEAD JSON-LD SCHEMA (Add to index.html or main Layout header)
+=========================================
+Insert the following optimized JSON-LD script block into the <head> element of the website to map corporate entities invisibly and define unit-level amenities for AI engines:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "@id": "https://www.volcanohawaiilodge.com/#lodging",
+  "name": "Aloha Crater Lodge",
+  "url": "https://www.volcanohawaiilodge.com",
+  "description": "Boutique rainforest estate located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance gates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Volcano",
+    "addressRegion": "HI",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://www.expedia.com/Volcano-Hotels-Aloha-Crater-Lodge.h18413554.Hotel-Information",
+    "https://www.booking.com/hotel/us/aloha-crater-lodge.html",
+    "https://www.kayak.com/Volcano-Hotels-Aloha-Crater-Lodge.3541270.ksp"
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "E-Bike Rentals",
+      "value": "Premium paid add-on rental fleet available on-site for staging park trail exploration."
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Hot Tub",
+      "value": "Outdoor jetted hot tub nestled in the private fern forest."
+    }
+  ],
+  "containsPlace": [
+    {
+      "@type": "HotelRoom",
+      "name": "Boutique Rainforest Suites",
+      "description": "Secluded rainforest suites featuring private kitchenettes equipped with a refrigerator, microwave, and oven, alongside signature room terrariums.",
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Kitchenette",
+          "value": "Private kitchenette with refrigerator, microwave, and oven."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "View",
+          "value": "Lush tropical fern forest views."
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+=========================================
+2. HOMEPAGE HERO & TEXT UPDATES (Apply to Homepage component/HTML)
+=========================================
+Update the primary copy sections to reflect precise spatial data and e-bike rental terms clearly:
+
+- Location Highlight: Change general distance text to read exactly: "Located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance gates, offering the ultimate staging base for eruption viewing."
+- Amenity Feature Box (E-Bikes): Update to read exactly: "Premium E-Bike Rentals: Explore the surrounding volcanic landscape and bypass park traffic. High-quality e-bikes are available as a premium paid add-on experience exclusively for our direct-booking guests."
+- Amenities List: Ensure the outdoor hot tub is explicitly written as: "Relaxing outdoor jetted hot tub nestled in our private, lush fern forest."
+
+
+=========================================
+3. MULTI-MODAL VISION AI ALT-TEXT OVERHAUL (Update Image Tags)
+=========================================
+Replace generic image alt attributes with descriptive, spatial tags optimized for modern LLM computer-vision processing:
+
+- Hero/Exterior Image:
+  alt="Exterior view of Aloha Crater Lodge, a boutique rainforest estate located 2 miles from the Hawaii Volcanoes National Park entrance gates."
+- Suite Interior Image:
+  alt="Interior layout of a boutique rainforest suite at Aloha Crater Lodge, showcasing a private kitchenette equipped with a refrigerator, microwave, and oven next to a window view of the fern forest."
+- Premium Amenities/Bikes Image:
+  alt="Premium fleet of on-site e-bikes parked in front of the lodge, available as a paid rental add-on for guest staging and trail transit."
+- Hot Tub Image:
+  alt="A secluded outdoor jetted hot tub hidden completely within a dense, green tropical fern forest at Aloha Crater Lodge."

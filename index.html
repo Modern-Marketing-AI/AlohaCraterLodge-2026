@@ -16,11 +16,18 @@
     {
       "@context": "https://schema.org",
       "@type": "LodgingBusiness",
+      "@id": "https://www.volcanohawaiilodge.com/#lodging",
       "name": "Aloha Crater Lodge",
       "legalName": "Aloha Crater Lodge LLC",
-      "description": "Modern rainforest basecamp positioned 2 miles from Kīlauea volcano and Hawaii Volcanoes National Park in Volcano Village, Hawaii.",
-      "url": "https://alohacraterlodge.com",
+      "description": "Boutique rainforest estate located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance gates, offering the ultimate staging base for eruption viewing.",
+      "url": "https://www.volcanohawaiilodge.com",
       "telephone": "+1-808-345-4449",
+      "sameAs": [
+        "https://alohacraterlodge.com",
+        "https://www.expedia.com/Volcano-Hotels-Aloha-Crater-Lodge.h18413554.Hotel-Information",
+        "https://www.booking.com/hotel/us/aloha-crater-lodge.html",
+        "https://www.kayak.com/Volcano-Hotels-Aloha-Crater-Lodge.3541270.ksp"
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "11-3966 Lanihuli Road",
@@ -38,15 +45,26 @@
       "priceRange": "$$",
       "amenityFeature": [
         { "@type": "LocationFeatureSpecification", "name": "Enterprise Starlink Wi-Fi 200Mbps+", "value": true },
-        { "@type": "LocationFeatureSpecification", "name": "Communal Hot Tub", "value": true },
-        { "@type": "LocationFeatureSpecification", "name": "E-Bike Rentals", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Hot Tub", "value": "Outdoor jetted hot tub nestled in the private fern forest." },
+        { "@type": "LocationFeatureSpecification", "name": "E-Bike Rentals", "value": "Premium paid add-on rental fleet available on-site for staging park trail exploration." },
         { "@type": "LocationFeatureSpecification", "name": "Bio-Regeneration Recovery Stack", "value": true },
         { "@type": "LocationFeatureSpecification", "name": "Contactless Arrival", "value": true }
+      ],
+      "containsPlace": [
+        {
+          "@type": "HotelRoom",
+          "name": "Boutique Rainforest Suites",
+          "description": "Secluded rainforest suites featuring private kitchenettes equipped with a refrigerator, microwave, and oven, alongside signature room terrariums.",
+          "amenityFeature": [
+            { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": "Private kitchenette with refrigerator, microwave, and oven." },
+            { "@type": "LocationFeatureSpecification", "name": "View", "value": "Lush tropical fern forest views." }
+          ]
+        }
       ],
       "containedInPlace": {
         "@type": "Place",
         "name": "Hawaii Volcanoes National Park vicinity",
-        "description": "Located 2 miles from Hawaii Volcanoes National Park"
+        "description": "Located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance gates"
       }
     }
     </script>
@@ -188,7 +206,7 @@
         <div class="grid">
             <div class="card">
                 <a href="suites.html" style="text-decoration: none; color: inherit;">
-                    <img src="premium-suite-private-jetted-tub-volcano-hi.jpg" alt="Premium basecamp suite interior featuring a private jetted tub and fish terrarium in Volcano Hawaii">
+                    <img src="premium-suite-private-jetted-tub-volcano-hi.jpg" alt="Interior layout of a boutique rainforest suite at Aloha Crater Lodge, showcasing a private kitchenette equipped with a refrigerator, microwave, and oven next to a window view of the fern forest.">
                     <h3>Premium Suites</h3>
                 </a>
                 <ul class="room-features">
@@ -200,7 +218,7 @@
             </div>
             <div class="card">
                 <a href="suites.html" style="text-decoration: none; color: inherit;">
-                    <img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Family module suite at Aloha Crater Lodge with full kitchenette and front patio access">
+                    <img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Exterior view of Aloha Crater Lodge, a boutique rainforest estate located 2 miles from the Hawaii Volcanoes National Park entrance gates.">
                     <h3>Family Modules</h3>
                 </a>
                 <ul class="room-features">
@@ -212,7 +230,7 @@
             </div>
             <div class="card">
                 <a href="suites.html" style="text-decoration: none; color: inherit;">
-                    <img src="high-utility-basecamp-suite-volcano-hawaii.jpg" alt="High-utility basecamp suite in Volcano Village with efficiency kitchenette and modern amenities">
+                    <img src="high-utility-basecamp-suite-volcano-hawaii.jpg" alt="A secluded outdoor jetted hot tub hidden completely within a dense, green tropical fern forest at Aloha Crater Lodge.">
                     <h3>Budget Basecamp</h3>
                 </a>
                 <ul class="room-features">
@@ -258,7 +276,7 @@
             </div>
         </div>
         <div style="text-align:center; border-top:1px solid #2a2a2a; margin-top:1.5rem; padding-top:1rem; color:#555; font-size:0.78rem; line-height:1.7;">
-            <p style="margin:0;">Located 2 miles from Hawaii Volcanoes National Park.</p>
+            <p style="margin:0;">Located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance gates, offering the ultimate staging base for eruption viewing.</p>
             <p style="margin:0;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
         </div>
     </footer>
