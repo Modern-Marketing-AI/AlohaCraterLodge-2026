@@ -1,0 +1,42 @@
+REPLIT AGENT INSTRUCTION:
+Please implement a high-converting, utility-driven "Live Eruption Staging & Logistics Tracker" widget on live-feed.html. This component must be placed prominently near the live webcam stream container. Use the existing dark-themed styling, matching the ember-bordered card aesthetic and red/amber warning text variables already present in the UI. Do not add any references to a lava tube.
+
+=========================================
+1. UPDATE LIVE-FEED.HTML (Inject Widget HTML/CSS Component)
+=========================================
+Locate the main layout or container wrapping the live webcam feed in live-feed.html. Directly below or adjacent to the video player container, insert the following responsive, semantic HTML card component:
+
+<div class="eruption-staging-widget" style="background: #121212; border-left: 4px solid #d35400; padding: 20px; margin: 20px 0; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family: sans-serif; color: #e0e0e0;">
+  
+  <div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <span style="width: 10px; height: 10px; background-color: #e67e22; border-radius: 50%; display: inline-block; margin-right: 10px; animate: pulse 2s infinite;"></span>
+    <h3 style="color: #e67e22; margin: 0; font-size: 1.2rem; font-weight: 600; uppercase; letter-spacing: 0.05em;">Kīlauea Summit Transit & Staging Advisor</h3>
+  </div>
+
+  <p style="font-size: 0.95rem; line-height: 1.5; margin: 0 0 15px 0; color: #b3b3b3;">
+    With Kīlauea's record-breaking episodic activity continuing, traffic congestion and strict public vehicle restrictions are frequently enforced at the <strong>Uēkahuna parking lot</strong> and summit overlooks. Avoid hazardous pitch-black night drives across the island back to Kona or Hilo coasts.
+  </p>
+
+  <div style="background: #1a1a1a; border: 1px solid #2a2a2a; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+    <h4 style="color: #ffffff; margin: 0 0 8px 0; font-size: 1rem;">Need Real-Time Bypass Logistics? Ask Fern</h4>
+    <p style="font-size: 0.88rem; line-height: 1.4; margin: 0 0 12px 0; color: #aaaaaa;">
+      Our interactive AI Concierge, <strong>Fern</strong>, is updated with live park transit metrics. Open the chat widget below to ask Fern about immediate gate distances, weather conditions, or to check on-site availability for our premium e-bike rental fleet to glide straight past summit vehicle blockades.
+    </p>
+    <button onclick="window.CommunicationApp && window.CommunicationApp.openChat ? window.CommunicationApp.openChat() : alert('Please click the chat icon in the bottom right corner to talk with Fern instantly!');" style="background: #d35400; color: #ffffff; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background 0.2s;">
+      💬 Consult Fern for Live Routes
+    </button>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px solid #222; padding-top: 12px;">
+    <div style="font-size: 0.85rem; color: #888888;">
+      <strong>Staging Basecamp Proximity:</strong> Exactly 2.0 miles from Hawaii Volcanoes National Park main gates on Lanihuli Road.
+    </div>
+    <a href="https://www.volcanohawaiilodge.com/#booking" style="color: #e67e22; font-size: 0.9rem; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #e67e22; padding-bottom: 2px;">
+      Secure a Direct Booking Staging Base &rarr;
+    </a>
+  </div>
+</div>
+=========================================
+2. VERIFY NO INTRUSIONS
+=========================================
+Ensure that the injection of this markup is clean, self-contained within its style block, and does not obstruct the responsive container of the live video stream component or break global navigation headers.
