@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Intelligence | Aloha Crater Lodge Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;color:#e4e4e7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:none}
+
+/* ── HEADER ── */
+.mi-header{background:#0d0d0d;border-bottom:1px solid rgba(255,69,0,0.25);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.mi-header .logo{color:#ff4500;font-family:Georgia,serif;font-size:1.2em;letter-spacing:2px}
+.mi-header .logo span{color:#888;font-size:0.65em;display:block;letter-spacing:1px;margin-top:2px}
+.btn-primary{background:#ff4500;color:#fff;border:none;padding:10px 20px;border-radius:4px;font-size:0.85em;font-weight:bold;cursor:pointer;letter-spacing:.05em;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#cc3600}
+.btn-secondary{background:transparent;color:#aaa;border:1px solid #444;padding:9px 18px;border-radius:4px;font-size:0.82em;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-secondary:hover{border-color:#ff4500;color:#ff4500}
+.header-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* ── LAYOUT ── */
+.mi-body{max-width:1100px;margin:0 auto;padding:28px 24px}
+
+/* ── FRESHNESS BAR ── */
+.freshness-bar{display:flex;align-items:center;gap:10px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;padding:10px 16px;margin-bottom:24px;flex-wrap:wrap;justify-content:space-between}
+.freshness-dot{width:9px;height:9px;border-radius:50%;background:#10b981;flex-shrink:0;animation:pulse-dot 2s infinite}
+.freshness-dot.stale{background:#ef4444;animation:none}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+.freshness-text{font-size:0.82em;color:#aaa}
+.freshness-text strong{color:#e4e4e7}
+.freshness-stale{color:#ef4444 !important}
+
+/* ── CONTROLS PANEL ── */
+.controls-panel{background:#161616;border:1px solid #2a2a2a;border-radius:8px;padding:20px;margin-bottom:28px}
+.controls-panel summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-size:0.82em;text-transform:uppercase;letter-spacing:.08em;color:#888;user-select:none}
+.controls-panel summary::-webkit-details-marker{display:none}
+.controls-panel summary::after{content:"▸";transition:transform .2s;font-size:1em}
+details[open] .controls-panel summary::after{transform:rotate(90deg)}
+.controls-panel summary span{color:#ff4500}
+.controls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:18px}
+.control-group label{display:block;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:6px}
+.control-group label strong{color:#e4e4e7}
+input[type=range]{width:100%;accent-color:#ff4500;cursor:pointer}
+.range-row{display:flex;align-items:center;gap:10px}
+.range-val{font-size:0.85em;color:#ff4500;font-weight:bold;min-width:36px;text-align:right}
+.control-input{width:100%;background:#111;border:1px solid #333;color:#e4e4e7;padding:8px 10px;border-radius:4px;font-size:0.85em}
+.control-input:focus{outline:none;border-color:#ff4500}
+
+/* ── COMPSET MANAGER ── */
+.compset-list{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.compset-item{display:flex;align-items:center;gap:8px;background:#1a1a1a;border:1px solid #2e2e2e;border-radius:4px;padding:7px 10px}
+.compset-item input{flex:1;background:transparent;border:none;color:#e4e4e7;font-size:0.85em;outline:none}
+.compset-item input::placeholder{color:#555}
+.compset-remove{background:none;border:none;color:#555;cursor:pointer;font-size:1rem;line-height:1;padding:0 4px;transition:color .15s}
+.compset-remove:hover{color:#ef4444}
+.compset-add-row{display:flex;gap:8px;margin-top:8px}
+.compset-add-row input{flex:1;background:#1a1a1a;border:1px solid #2e2e2e;border-radius:4px;padding:7px 10px;color:#e4e4e7;font-size:0.84em;outline:none}
+.compset-add-row input:focus{border-color:#ff4500}
+.btn-add{background:#1e3a2a;color:#10b981;border:1px solid #10b981;padding:7px 14px;border-radius:4px;font-size:0.82em;cursor:pointer;font-weight:bold;white-space:nowrap}
+.btn-add:hover{background:#10b981;color:#000}
+
+/* ── LOADING / EMPTY ── */
+.loading-state{text-align:center;padding:60px 20px;color:#555}
+.loading-state p{margin-top:12px;font-size:0.9em}
+.spinner{width:36px;height:36px;border:3px solid #2a2a2a;border-top-color:#ff4500;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:60px 20px;color:#555;border:1px dashed #2a2a2a;border-radius:8px}
+.empty-state h3{color:#888;margin-bottom:8px}
+
+/* ── ACCORDION ROWS ── */
+.timeline-section h2{font-size:0.78em;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #1e1e1e}
+.weekend-block{background:#161616;border:1px solid #252525;border-radius:6px;margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.weekend-block:hover{border-color:#333}
+.block-header{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;flex-wrap:wrap;gap:10px}
+.block-date{font-size:1em;font-weight:600;color:#fff;min-width:130px}
+.block-date small{display:block;font-size:0.7em;color:#555;font-weight:400;letter-spacing:.04em;margin-top:1px}
+.badge{padding:4px 10px;border-radius:3px;font-size:0.72em;font-weight:bold;letter-spacing:.04em;white-space:nowrap}
+.badge-green{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+.badge-amber{background:rgba(245,158,11,.12);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
+.badge-red{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
+.badge-blue{background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.25)}
+.compression-bar{flex:1;min-width:100px;max-width:180px}
+.compression-bar-label{font-size:0.7em;color:#666;margin-bottom:3px;display:flex;justify-content:space-between}
+.compression-bar-track{height:6px;background:#222;border-radius:3px;overflow:hidden}
+.compression-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.block-toggle{margin-left:auto;font-size:0.72em;color:#555;white-space:nowrap;background:none;border:1px solid #2a2a2a;border-radius:3px;padding:5px 10px;cursor:pointer;transition:all .15s}
+.block-toggle:hover{border-color:#ff4500;color:#ff4500}
+
+.block-detail{display:none;padding:0 18px 18px;border-top:1px solid #1e1e1e}
+.block-detail.open{display:block}
+.detail-section-label{font-size:0.7em;text-transform:uppercase;letter-spacing:.1em;color:#555;margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid #1a1a1a}
+
+.comp-table{width:100%;border-collapse:collapse;font-size:0.83em}
+.comp-table th{text-align:left;color:#555;font-weight:500;font-size:0.75em;text-transform:uppercase;letter-spacing:.05em;padding:6px 8px;border-bottom:1px solid #1e1e1e}
+.comp-table td{padding:9px 8px;border-bottom:1px solid #1a1a1a;vertical-align:middle}
+.comp-table tr:last-child td{border-bottom:none}
+.rate-drop-tag{display:inline-block;background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.3);border-radius:3px;font-size:0.72em;padding:2px 7px;margin-left:6px;font-weight:bold}
+
+.layer2-summary{background:#121212;border:1px solid #222;border-radius:4px;padding:12px 16px;margin-top:4px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.layer2-summary .l2-label{font-size:0.78em;color:#777;flex:1;min-width:150px}
+.layer2-occ{font-size:1.3em;font-weight:700}
+
+.cloudbeds-link{display:inline-flex;align-items:center;gap:6px;background:rgba(255,69,0,.08);border:1px solid rgba(255,69,0,.3);color:#ff4500;text-decoration:none;padding:7px 14px;border-radius:4px;font-size:0.8em;font-weight:bold;margin-top:12px;transition:all .15s}
+.cloudbeds-link:hover{background:rgba(255,69,0,.18)}
+.cloudbeds-link-disabled{opacity:.35;cursor:default;pointer-events:none}
+
+/* ── SCAN PROGRESS ── */
+.scan-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:999;display:none}
+.scan-overlay.visible{display:flex}
+.scan-box{background:#161616;border:1px solid #2a2a2a;border-radius:8px;padding:32px 40px;text-align:center;max-width:360px;width:90%}
+.scan-box h3{color:#ff4500;font-size:1.1em;margin-bottom:8px}
+.scan-box p{color:#888;font-size:0.85em;margin-bottom:18px}
+.scan-progress-bar{height:4px;background:#222;border-radius:2px;overflow:hidden}
+.scan-progress-fill{height:100%;background:#ff4500;border-radius:2px;width:0%;transition:width .3s}
+
+@media(max-width:600px){
+  .block-header{padding:12px 14px}
+  .comp-table{font-size:0.75em}
+  .comp-table th:nth-child(3),.comp-table td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="mi-header">
+  <div class="logo">ALOHA CRATER LODGE <span>Market Intelligence · Yield Dashboard</span></div>
+  <div class="header-actions">
+    <button class="btn-primary" id="btn-refresh">⟳ Refresh Market Data</button>
+    <a href="index.html" class="btn-secondary">← Admin Keychain</a>
+  </div>
+</div>
+
+<div class="mi-body">
+
+  <!-- FRESHNESS BAR -->
+  <div class="freshness-bar">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="freshness-dot" id="freshness-dot"></div>
+      <span class="freshness-text" id="freshness-text"><strong>No data yet.</strong> Click "Refresh Market Data" to run the first scan.</span>
+    </div>
+    <span style="font-size:0.75em;color:#444">90-day · Weekends Only · Fri check-in</span>
+  </div>
+
+  <!-- CONTROLS PANEL -->
+  <details>
+    <div class="controls-panel">
+      <summary><span>⚙ Scanner Settings & CompSet Manager</span></summary>
+      <div class="controls-grid" style="margin-top:18px">
+
+        <div class="control-group">
+          <label>Rate Drop Alert Threshold &nbsp;<strong id="lbl-ratedrop">15%</strong></label>
+          <div class="range-row">
+            <span style="font-size:0.75em;color:#555">5%</span>
+            <input type="range" id="sl-ratedrop" min="5" max="40" value="15">
+            <span style="font-size:0.75em;color:#555">40%</span>
+          </div>
+          <p style="font-size:0.72em;color:#555;margin-top:4px">Tag a competitor if their rate drops by this % vs prior scan.</p>
+        </div>
+
+        <div class="control-group">
+          <label>Market Squeeze Alert Threshold &nbsp;<strong id="lbl-squeeze">80%</strong></label>
+          <div class="range-row">
+            <span style="font-size:0.75em;color:#555">60%</span>
+            <input type="range" id="sl-squeeze" min="60" max="95" value="80">
+            <span style="font-size:0.75em;color:#555">95%</span>
+          </div>
+          <p style="font-size:0.72em;color:#555;margin-top:4px">Layer 2 compression indicator turns red above this threshold.</p>
+        </div>
+
+        <div class="control-group">
+          <label>Cloudbeds Base URL</label>
+          <input type="text" class="control-input" id="inp-cloudbeds"
+            placeholder="https://hotels.cloudbeds.com/en/reservation/ifCVNX">
+          <p style="font-size:0.72em;color:#555;margin-top:4px">Property ID is extracted automatically for deep links.</p>
+        </div>
+
+        <div class="control-group" style="grid-column:1/-1">
+          <label>CompSet Manager · Layer 1 Core Competitors</label>
+          <div class="compset-list" id="compset-list"></div>
+          <div class="compset-add-row">
+            <input type="text" id="inp-new-comp" placeholder="Add competitor name…">
+            <button class="btn-add" id="btn-add-comp">+ Add</button>
+          </div>
+          <p style="font-size:0.72em;color:#555;margin-top:8px">Changes take effect on the next "Refresh Market Data" scan.</p>
+        </div>
+
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button class="btn-primary" id="btn-save-settings" style="font-size:0.8em;padding:8px 16px">Save Settings</button>
+        <span id="settings-saved" style="font-size:0.78em;color:#10b981;display:none;align-self:center">✓ Saved</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section" style="margin-top:24px">
+    <h2>90-Day Weekend Pipeline</h2>
+    <div id="timeline-container">
+      <div class="empty-state">
+        <h3>Market Data Uninitialized</h3>
+        <p style="margin-top:6px">Click <strong>Refresh Market Data</strong> to run the first scan and populate the pipeline.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SCAN PROGRESS OVERLAY -->
+<div class="scan-overlay" id="scan-overlay">
+  <div class="scan-box">
+    <h3>Scanning Market Pipeline…</h3>
+    <p id="scan-status-text">Initializing weekend probes…</p>
+    <div class="scan-progress-bar"><div class="scan-progress-fill" id="scan-progress-fill"></div></div>
+  </div>
+</div>
+
+<script src="marketScanner.js"></script>
+<script>
+(function() {
+
+  const scanner = new MarketScanner();
+  let settings = scanner.loadSettings();
+  let compSet  = scanner.loadCompSet();
+
+  /* ── helpers ─────────────────────────────────────────────────────── */
+  function extractPropertyId(url) {
+    if (!url) return null;
+    const m = url.match(/\/reservation\/([a-zA-Z0-9]+)/);
+    return m ? m[1] : null;
+  }
+
+  function cloudbedsDeepLink(baseUrl, date) {
+    const pid = extractPropertyId(baseUrl);
+    if (!pid) return null;
+    return `https://hotels.cloudbeds.com/connect/${pid}#/matrix?date=${date}`;
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+  }
+
+  function compressionColor(pct, threshold) {
+    if (pct >= threshold) return '#ef4444';
+    if (pct >= threshold - 12) return '#f59e0b';
+    return '#10b981';
+  }
+
+  function availBadgeClass(available, total) {
+    const ratio = available / total;
+    if (ratio === 0) return 'badge-red';
+    if (ratio <= 0.5) return 'badge-amber';
+    return 'badge-green';
+  }
+
+  /* ── freshness bar ─────────────────────────────────────────────────*/
+  function updateFreshness(data) {
+    const dot  = document.getElementById('freshness-dot');
+    const text = document.getElementById('freshness-text');
+    if (!data || !data.lastUpdated) {
+      dot.className  = 'freshness-dot stale';
+      text.innerHTML = '<strong>No data yet.</strong> Click "Refresh Market Data" to run the first scan.';
+      return;
+    }
+    const updated = new Date(data.lastUpdated);
+    const stale   = scanner.isCacheStale();
+    const timeStr = updated.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+    const dateStr = updated.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    dot.className  = stale ? 'freshness-dot stale' : 'freshness-dot';
+    text.innerHTML = stale
+      ? `<span class="freshness-stale"><strong>⚠ Data stale</strong> — last updated ${dateStr} at ${timeStr}. Refresh recommended.</span>`
+      : `<span><strong>Market Data Live</strong> — Last updated: ${dateStr} at ${timeStr}</span>`;
+  }
+
+  /* ── render timeline ───────────────────────────────────────────────*/
+  function renderTimeline(data) {
+    const container = document.getElementById('timeline-container');
+    if (!data || !data.timeline || data.timeline.length === 0) {
+      container.innerHTML = '<div class="empty-state"><h3>No Data</h3><p>Run a scan to populate.</p></div>';
+      return;
+    }
+
+    const sq  = parseInt(document.getElementById('sl-squeeze').value);
+    const rd  = parseInt(document.getElementById('sl-ratedrop').value);
+    const cbUrl = document.getElementById('inp-cloudbeds').value.trim();
+
+    container.innerHTML = data.timeline.map((block, i) => {
+      const satDate = new Date(block.date + 'T12:00:00');
+      satDate.setDate(satDate.getDate() + 1);
+      const satIso  = satDate.toISOString().split('T')[0];
+      const compPct = block.layer2_regional_compression;
+      const fillColor = compressionColor(compPct, sq);
+      const aClass   = availBadgeClass(block.layer1_available, block.layer1_total);
+      const deepLink  = cloudbedsDeepLink(cbUrl, block.date);
+
+      const competitorRows = block.competitors.map(c => {
+        let statusBadge = '';
+        if (c.status === 'Sold Out')
+          statusBadge = '<span class="badge badge-red" style="margin-left:6px">Sold Out</span>';
+        else if (c.status.includes('1-Night Blocked'))
+          statusBadge = '<span class="badge badge-amber" style="margin-left:6px">2-Night Min</span>';
+
+        const rateStr = c.currentRate ? `$${c.currentRate}` : '—';
+        let rateDropTag = '';
+        if (c.rateDropPct !== null && c.rateDropPct >= rd) {
+          rateDropTag = `<span class="rate-drop-tag">▼ ${c.rateDropPct}% Drop</span>`;
+        }
+
+        return `<tr>
+          <td>${c.name}${statusBadge}</td>
+          <td>${rateStr}${rateDropTag}</td>
+          <td style="color:#555;font-size:0.8em">${c.previousRate ? '$' + c.previousRate : '—'}</td>
+        </tr>`;
+      }).join('');
+
+      const l2Color  = compPct >= sq ? '#ef4444' : compPct >= sq - 12 ? '#f59e0b' : '#10b981';
+      const deepLinkHtml = deepLink
+        ? `<a class="cloudbeds-link" href="${deepLink}" target="_blank">
+             ⬡ Open in Cloudbeds Matrix for ${fmtDate(block.date)}
+           </a>`
+        : `<a class="cloudbeds-link cloudbeds-link-disabled" href="#">
+             ⬡ Configure Cloudbeds URL above for deep links
+           </a>`;
+
+      return `
+        <div class="weekend-block" id="wb-${i}">
+          <div class="block-header" onclick="toggleBlock(${i})">
+            <div class="block-date">
+              ${fmtDate(block.date)}
+              <small>Fri – Sat check-in</small>
+            </div>
+            <span class="badge ${aClass}">
+              ${block.layer1_available}/${block.layer1_total} Available
+            </span>
+            <div class="compression-bar">
+              <div class="compression-bar-label">
+                <span>Regional</span><span style="color:${fillColor}">${compPct}%</span>
+              </div>
+              <div class="compression-bar-track">
+                <div class="compression-bar-fill" style="width:${compPct}%;background:${fillColor}"></div>
+              </div>
+            </div>
+            <button class="block-toggle" id="tog-${i}">View Details ▾</button>
+          </div>
+          <div class="block-detail" id="det-${i}">
+            <div class="detail-section-label">Layer 1 · Core CompSet Breakdown</div>
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Current Rate</th>
+                  <th>Prior Rate</th>
+                </tr>
+              </thead>
+              <tbody>${competitorRows}</tbody>
+            </table>
+            <div class="detail-section-label">Layer 2 · Highway 11 Corridor Compression</div>
+            <div class="layer2-summary">
+              <div class="l2-label">Volcano Village → Glenwood → Mountain View → Keaʻau corridor (Hilo & Kona excluded)</div>
+              <span class="layer2-occ" style="color:${l2Color}">${compPct}%</span>
+              <span class="badge ${compPct >= sq ? 'badge-red' : compPct >= sq - 12 ? 'badge-amber' : 'badge-green'}">
+                ${compPct >= sq ? 'Market Squeeze' : compPct >= sq - 12 ? 'Tightening' : 'Healthy Supply'}
+              </span>
+            </div>
+            ${deepLinkHtml}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  window.toggleBlock = function(i) {
+    const det = document.getElementById('det-' + i);
+    const tog = document.getElementById('tog-' + i);
+    const open = det.classList.contains('open');
+    det.classList.toggle('open', !open);
+    tog.textContent = open ? 'View Details ▾' : 'Collapse ▴';
+  };
+
+  /* ── controls init ──────────────────────────────────────────────── */
+  function initControls() {
+    const slRd  = document.getElementById('sl-ratedrop');
+    const slSq  = document.getElementById('sl-squeeze');
+    const inpCb = document.getElementById('inp-cloudbeds');
+
+    slRd.value  = settings.rateDropThreshold;
+    slSq.value  = settings.squeezeThreshold;
+    inpCb.value = settings.cloudbedsUrl || '';
+
+    document.getElementById('lbl-ratedrop').textContent = settings.rateDropThreshold + '%';
+    document.getElementById('lbl-squeeze').textContent  = settings.squeezeThreshold  + '%';
+
+    slRd.addEventListener('input', () => {
+      document.getElementById('lbl-ratedrop').textContent = slRd.value + '%';
+    });
+    slSq.addEventListener('input', () => {
+      document.getElementById('lbl-squeeze').textContent  = slSq.value + '%';
+      const data = scanner.getDashboardData();
+      if (data) renderTimeline(data);
+    });
+    inpCb.addEventListener('input', () => {
+      const data = scanner.getDashboardData();
+      if (data) renderTimeline(data);
+    });
+
+    document.getElementById('btn-save-settings').addEventListener('click', () => {
+      settings.rateDropThreshold = parseInt(slRd.value);
+      settings.squeezeThreshold  = parseInt(slSq.value);
+      settings.cloudbedsUrl      = inpCb.value.trim();
+      scanner.saveSettings(settings);
+      scanner.saveCompSet(compSet);
+      const saved = document.getElementById('settings-saved');
+      saved.style.display = 'inline';
+      setTimeout(() => { saved.style.display = 'none'; }, 2200);
+      const data = scanner.getDashboardData();
+      if (data) renderTimeline(data);
+    });
+  }
+
+  /* ── compset manager ────────────────────────────────────────────── */
+  function renderCompSet() {
+    const list = document.getElementById('compset-list');
+    list.innerHTML = compSet.map((c, i) => `
+      <div class="compset-item">
+        <input type="text" value="${c.name}" data-idx="${i}" class="comp-name-inp">
+        <button class="compset-remove" data-idx="${i}" title="Remove">✕</button>
+      </div>`).join('');
+
+    list.querySelectorAll('.comp-name-inp').forEach(inp => {
+      inp.addEventListener('change', e => {
+        compSet[parseInt(e.target.dataset.idx)].name = e.target.value.trim();
+      });
+    });
+    list.querySelectorAll('.compset-remove').forEach(btn => {
+      btn.addEventListener('click', e => {
+        compSet.splice(parseInt(btn.dataset.idx), 1);
+        renderCompSet();
+      });
+    });
+  }
+
+  document.getElementById('btn-add-comp').addEventListener('click', () => {
+    const inp  = document.getElementById('inp-new-comp');
+    const name = inp.value.trim();
+    if (!name) return;
+    const id = 'prop_' + name.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8) + '_' + Date.now().toString(36);
+    compSet.push({ id, name });
+    renderCompSet();
+    inp.value = '';
+  });
+
+  /* ── scan / refresh ─────────────────────────────────────────────── */
+  document.getElementById('btn-refresh').addEventListener('click', async () => {
+    const overlay = document.getElementById('scan-overlay');
+    const fill    = document.getElementById('scan-progress-fill');
+    const status  = document.getElementById('scan-status-text');
+    overlay.classList.add('visible');
+    fill.style.width = '5%';
+    status.textContent = 'Loading CompSet…';
+
+    const activeCompSet = compSet.length > 0 ? compSet : scanner.defaultCompSet;
+    const weekends      = scanner.getUpcomingWeekends();
+    let done = 0;
+
+    status.textContent = `Scanning ${weekends.length} weekend blocks…`;
+    fill.style.width   = '15%';
+
+    const originalPass = scanner.executionPass.bind(scanner);
+
+    try {
+      const data = await scanner.executionPass(activeCompSet);
+      fill.style.width   = '95%';
+      status.textContent = 'Writing cache…';
+      await new Promise(r => setTimeout(r, 300));
+      fill.style.width   = '100%';
+      await new Promise(r => setTimeout(r, 200));
+      overlay.classList.remove('visible');
+      updateFreshness(data);
+      renderTimeline(data);
+    } catch(err) {
+      overlay.classList.remove('visible');
+      alert('Scan error: ' + err.message);
+    }
+  });
+
+  /* ── init ───────────────────────────────────────────────────────── */
+  function init() {
+    initControls();
+    renderCompSet();
+    const data = scanner.getDashboardData();
+    if (data) {
+      updateFreshness(data);
+      renderTimeline(data);
+    } else {
+      updateFreshness(null);
+    }
+  }
+
+  /* ── auth gate ──────────────────────────────────────────────────── */
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', user => {
+      if (user) { document.body.style.display = 'block'; init(); }
+      else window.location.href = '/admin/';
+    });
+    netlifyIdentity.on('login', user => {
+      if (user) { document.body.style.display = 'block'; init(); }
+    });
+    netlifyIdentity.on('logout', () => { window.location.href = '/'; });
+  } else {
+    document.body.style.display = 'block';
+    init();
+  }
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+You are an expert full-stack developer. Build a lightweight, high-performance Market Intelligence and Yield Management Dashboard component for our administrative dashboard. This tool is designed to help a boutique lodge track local market vacancy constraints to optimize pricing.
+
+### 1. Data Architecture & Scope (Two-Layer Model)
+- **Layer 1: Core CompSet:** Track a fixed, user-managed list of direct local competitors: "Volcano Village Lodge", "Kilauea Lodge & Restaurant", "Volcano Rainforest Retreat", and "At The Crater's Edge". 
+- **Layer 2: Wider Mountain Pipeline:** Track the broader macro-market supply across the Highway 11 corridor. The boundary includes Volcano Village down through Glenwood, Mountain View, and Keaʻau. Exclude Hilo proper and Kona entirely.
+
+### 2. Time Horizon & Optimization
+- **Timeline:** Scan a rolling 90-day advanced window into the future.
+- **Payload Optimization:** To minimize external travel API costs and overhead, the script must look at WEEKENDS ONLY (Friday and Saturday check-ins). Completely ignore Mondays through Thursdays for future dates.
+
+### 3. Core Logic & Variable Capture
+- **Minimum Length of Stay (LOS) Detection:** If a single-night Saturday query returns "Sold Out", the script must immediately test a 2-night stay (Friday–Sunday). If the 2-night stay is available, flag the property status as: "1-Night Blocked (2-Night Minimum Enforced)".
+- **Rate Drop Detection:** Track 24-hour pricing shifts. If a competitor's rate drops below a user-defined threshold percentage, tag the listing with a "Rate Drop Alert".
+- **Caching Mechanism:** Do not fetch live data on every page reload. Run the data collection once per day (or via an explicit manual refresh button) and save the payload into a local `advanced-pace.json` file. Serve all dashboard requests instantly from this cache.
+
+### 4. Interactive User Controls & Thresholds
+Provide frontend UI controls (HTML5 sliders/toggles) that allow the user to modify sensitivity without changing code:
+- **Rate Drop Slider:** Adjusts the percentage threshold (5% to 40%) that triggers a panic-dump or rate-drop alert.
+- **Market Squeeze Slider:** Adjusts the macro occupancy percentage threshold (60% to 95%) required to turn the Layer 2 regional status tracker red.
+- **CompSet Manager:** A simple visual configuration area to Add, Remove, or Update the names/URLs of properties in Layer 1.
+- **Cloudbeds Integration:** A configuration input for "Cloudbeds Base URL". The dashboard must parse this base URL, extract the property ID, and use it to build dynamic deep links next to each weekend block using this exact pattern: `https://hotels.cloudbeds.com/connect/PROPERTY_ID#/matrix?date=YYYY-MM-DD`.
+
+### 5. Frontend UI Design (Progressive Disclosure Pattern)
+Build a clean Accordion/Drawer component:
+- **Closed State (Macro):** Displays the weekend date block, a simple visual metric for Layer 1 Core Status (e.g., "0/4 Available"), and Layer 2 Compression (e.g., "85% Compressed"). Includes a "View Details" button.
+- **Expanded State (Micro):** Smoothly opens downward to show the property-by-property breakdown of Layer 1 (live pricing, room availability, restrictions) followed by an aggregated status summary block for Layer 2. Include a prominent deep link to the corresponding Cloudbeds date matrix.
+- **Data Freshness Indicator:** Display a timestamp showing exactly when the cache file was last generated (e.g., "Market Data Live - Last updated: Today at 6:00 AM"). Turn the indicator red if data is older than 24 hours.
+
+### 6. Core Implementation Code
+Use the following backend structure (`marketScanner.js`) to handle the multi-layered logic, data caching, and the Minimum Length of Stay (LOS) bypass loops. Implement this code directly into the workspace:
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+class MarketScanner {
+  constructor() {
+    this.cachePath = path.join(__dirname, 'advanced-pace.json');
+    this.defaultCompSet = [
+      { id: "prop_vvl", name: "Volcano Village Lodge" },
+      { id: "prop_klr", name: "Kilauea Lodge & Restaurant" },
+      { id: "prop_vrr", name: "Volcano Rainforest Retreat" },
+      { id: "prop_ace", name: "At The Crater's Edge" }
+    ];
+  }
+
+  // Generates array of upcoming Friday dates for the next 90 days
+  getUpcomingWeekends() {
+    const weekends = [];
+    const today = new Date();
+    
+    // Move to the next upcoming Friday
+    let current = new Date(today);
+    current.setDate(today.getDate() + (5 - today.getDay() + 7) % 7);
+
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 90);
+
+    while (current <= maxDate) {
+      weekends.push(current.toISOString().split('T')[0]);
+      current.setDate(current.getDate() + 7); // Jump to next week
+    }
+    return weekends;
+  }
+
+  // Mock function representing connection to a Travel API endpoint (e.g., RapidAPI / Booking)
+  async fetchExternalRoomStatus(propertyId, checkInDate, lengthOfStay = 1) {
+    // In production, this will be replaced with actual API fetch calls.
+    if (propertyId === "prop_klr" && lengthOfStay === 1) {
+      return { available: false, rate: null }; // Simulated LOS block trigger
+    }
+    return { available: true, rate: 250 + Math.floor(Math.random() * 150) };
+  }
+
+  // Processes dual-layer data mapping and checks for Minimum Stay Restrictions
+  async executionPass() {
+    const datesToScan = this.getUpcomingWeekends();
+    const finalReport = {
+      lastUpdated: new Date().toISOString(),
+      timeline: []
+    };
+
+    for (const date of datesToScan) {
+      const compSetResults = [];
+      let soldOutCount = 0;
+
+      // Layer 1 Loop: Scan Core Neighbors
+      for (const competitor of this.defaultCompSet) {
+        let probe = await this.fetchExternalRoomStatus(competitor.id, date, 1);
+        let status = "Available";
+        let rate = probe.rate;
+
+        if (!probe.available) {
+          const losProbe = await this.fetchExternalRoomStatus(competitor.id, date, 2);
+          if (losProbe.available) {
+            status = "1-Night Blocked (2-Night Minimum Enforced)";
+            rate = losProbe.rate;
+          } else {
+            status = "Sold Out";
+            soldOutCount++;
+          }
+        }
+
+        compSetResults.push({
+          name: competitor.name,
+          status: status,
+          currentRate: rate
+        });
+      }
+
+      // Layer 2 Calculation: Simulating regional pipeline compression data
+      const mockRegionalOccupancy = 65 + Math.floor(Math.random() * 32); 
+
+      finalReport.timeline.push({
+        date: date,
+        layer1_core_summary: `${soldOutCount}/${this.defaultCompSet.length} Sold Out`,
+        layer2_regional_compression: mockRegionalOccupancy,
+        competitors: compSetResults
+      });
+    }
+
+    fs.writeFileSync(this.cachePath, JSON.stringify(finalReport, null, 2), 'utf-8');
+    return finalReport;
+  }
+
+  // Fast read-pass for dashboard rendering
+  getDashboardData() {
+    if (fs.existsSync(this.cachePath)) {
+      return JSON.parse(fs.readFileSync(this.cachePath, 'utf-8'));
+    }
+    return { error: "Cache uninitialized. Run executionPass()." };
+  }
+}
+
+module.exports = new MarketScanner();
+```
