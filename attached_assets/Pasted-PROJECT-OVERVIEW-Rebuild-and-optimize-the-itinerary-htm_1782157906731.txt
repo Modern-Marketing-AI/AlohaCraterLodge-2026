@@ -1,0 +1,228 @@
+PROJECT OVERVIEW:
+Rebuild and optimize the 'itinerary.html' page layout to fix desktop view presentation bottlenecks, ensuring text is highly legible, beautifully spaced, and centered rather than squished into the left margin.
+
+LAYOUT & LEGIBILITY FIXES:
+1. Typography Upgrade: Replace microscopic text sizes. Elevate body copy to a highly scannable text-base (16px) and subtitles to text-sm. Enhance headings to clear text-xl and text-2xl standards.
+2. Flexible Desktop Splitting: Retain the stable 40% left and 60% right split-pane format on widescreen desktops, but ensure text containers have an optimized max-width boundary so columns expand comfortably without feeling narrow or crushed.
+3. Content Centering & Alignment: Utilize clean padding matrices (p-8 to p-16) and responsive auto-margins to keep text elements balanced on the screen.
+4. Retention of System Governance: Maintain pure Tailwind CSS utilities, 100dvh dynamic constraints, 100% visible components, the non-crashing immutable JavaScript dictionary, the CloudBeds deep-link date parsers, and all active brand safety guardrails.
+
+====================================================================
+FILE: itinerary.html (Replace full content with this updated build)
+====================================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aloha Crater Lodge | Custom Itinerary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 800: '#065f46', 900: '#064e3b', 950: '#022c22' },
+            slate: { 750: '#27272a', 800: '#1e293b', 900: '#0f172a' },
+            amber: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 950: '#451a03' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased min-h-[100dvh] flex flex-col md:flex-row overflow-hidden">
+
+  <aside class="w-full md:w-2/5 h-[50dvh] md:h-[100dvh] bg-emerald-900 p-6 md:p-12 overflow-y-auto border-r border-emerald-800 flex flex-col gap-8">
+    
+    <div class="border-b border-emerald-800/80 pb-6 mb-2 max-w-xl mx-auto w-full">
+      <div class="inline-block px-3 py-1 rounded-full bg-amber-600/20 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-widest uppercase mb-4">
+        ⚡ Guaranteed Travel Friction Bypass
+      </div>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+        Outsmart the Summit. <br><span class="text-emerald-400">Command Your Time.</span>
+      </h1>
+      <p class="text-emerald-100 text-base leading-relaxed mb-4">
+        Most visitors to Kīlauea make the same exhausting mistake: they plan their days around driving rather than experiencing. They idle in two-hour gate lines, fight for parking, and navigate dangerous mountain highways in the pitch black. 
+      </p>
+      <p class="text-emerald-200 text-sm font-medium bg-emerald-950/60 p-4 rounded border border-emerald-800/50 leading-relaxed">
+        <span class="text-amber-400 font-bold">The Blueprint Engine is your insider bypass.</span> Tap your parameters below to unlock our master routing—bypassing the crowds, securing your e-bike access, and locking in a frictionless East Side basecamp.
+      </p>
+    </div>
+
+    <div class="max-w-xl mx-auto w-full space-y-6">
+      <div class="step-node">
+        <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">1. Primary Focus</h2>
+        <div class="grid grid-cols-1 gap-2">
+          <button onclick="updateState('vibe', 'lava')" class="vibe-btn w-full text-left p-4 rounded bg-emerald-800 hover:bg-emerald-700 transition text-base font-medium focus:ring-2 focus:ring-amber-600">🌋 Lava & Volcanology</button>
+          <button onclick="updateState('vibe', 'waterfalls')" class="vibe-btn w-full text-left p-4 rounded bg-emerald-800 hover:bg-emerald-700 transition text-base font-medium focus:ring-2 focus:ring-amber-600">🌿 Waterfalls & Hikes</button>
+        </div>
+      </div>
+
+      <div class="step-node">
+        <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">2. Basecamp Duration</h2>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="updateState('duration', '1')" class="dur-btn p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-base font-medium focus:ring-2 focus:ring-amber-600">1 Day</button>
+          <button onclick="updateState('duration', '2')" class="dur-btn p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-base font-medium focus:ring-2 focus:ring-amber-600">2 Days</button>
+          <button onclick="updateState('duration', '3')" class="dur-btn p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-base font-medium focus:ring-2 focus:ring-amber-600">3 Days</button>
+        </div>
+      </div>
+
+      <div class="step-node">
+        <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">3. Arrival Dates</h2>
+        <div class="flex gap-4">
+          <div class="w-1/2">
+            <label class="block text-xs font-semibold text-emerald-200 mb-1">Check-in</label>
+            <input type="date" id="checkin" onchange="updateState('checkin', this.value)" class="w-full p-3 rounded bg-emerald-800 text-white border-none text-base focus:ring-2 focus:ring-amber-600">
+          </div>
+          <div class="w-1/2">
+            <label class="block text-xs font-semibold text-emerald-200 mb-1">Check-out</label>
+            <input type="date" id="checkout" onchange="updateState('checkout', this.value)" class="w-full p-3 rounded bg-emerald-800 text-white border-none text-base focus:ring-2 focus:ring-amber-600">
+          </div>
+        </div>
+      </div>
+
+      <div class="step-node">
+        <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">4. Lodging Logistics</h2>
+        <div class="grid grid-cols-1 gap-2">
+          <button onclick="updateState('intercept', 'kona')" class="int-btn w-full text-left p-4 rounded bg-emerald-800 hover:bg-emerald-700 transition text-base font-medium focus:ring-2 focus:ring-amber-600">🚗 Commuting from Kona/West Side</button>
+          <button onclick="updateState('intercept', 'east')" class="int-btn w-full text-left p-4 rounded bg-emerald-800 hover:bg-emerald-700 transition text-base font-medium focus:ring-2 focus:ring-amber-600">🏡 Looking for an East Side Basecamp</button>
+        </div>
+      </div>
+
+      <div class="step-node pb-12">
+        <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">5. Deliver Blueprint</h2>
+        <input type="email" placeholder="Enter primary email..." class="w-full p-4 rounded bg-emerald-800 text-white border-none text-base mb-3 focus:ring-2 focus:ring-amber-600">
+        <button class="w-full p-4 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white text-base tracking-wide transition">Unlock My Mobile Itinerary</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <main class="w-full md:w-3/5 h-[50dvh] md:h-[100dvh] bg-slate-900 flex flex-col relative">
+    
+    <div class="flex-grow w-full overflow-y-auto pb-40">
+      <div id="timeline-container" class="max-w-2xl mx-auto p-6 md:p-12 w-full space-y-8 flex flex-col justify-center min-h-full">
+        </div>
+    </div>
+
+    <div class="absolute bottom-0 w-full bg-slate-800 border-t border-slate-700 p-6 flex-shrink-0 z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
+      <div class="max-w-xl mx-auto text-center">
+        <p class="text-base text-slate-300 mb-3">Secure your room and e-bike access to bypass National Park vehicle gridlock.</p>
+        <button onclick="executeBooking()" id="book-btn" class="w-full px-8 py-4 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white transition text-lg tracking-wide shadow-md">Book This Trip Now</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // System Constants
+    const CLOUDBEDS_URL = "YOUR_EXISTING_PORTAL_LINK"; 
+    
+    // Flat State Matrix
+    const state = {
+      vibe: '',
+      duration: '',
+      checkin: '',
+      checkout: '',
+      intercept: ''
+    };
+
+    // Evergreen Content Dictionary (Optimized with high-end text spacing and sizing)
+    const contentBlocks = {
+      manifesto: `
+        <div class="w-full text-center py-6 md:py-12" id="manifesto-block">
+          <div class="w-16 h-16 bg-emerald-900/50 border border-emerald-700/40 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+            <span class="text-2xl">🌿</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-tight leading-snug">
+            Your Vacation is Too Valuable for Gridlock
+          </h2>
+          <p class="text-slate-300 text-base md:text-lg leading-relaxed text-left bg-slate-800/80 p-6 md:p-8 rounded-xl border border-slate-700/60 shadow-xl">
+            There is a distinct moment at 8:30 PM standing on the crater rim. The fountaining glow is magnificent. But then reality sets in: you have a two-and-a-half-hour drive back to the West Side over dark, winding, foggy saddle roads. 
+            <br><br>
+            <span class="text-emerald-400 font-bold">It does not have to be this way.</span> 
+            <br><br>
+            By establishing your command hub just two miles outside the National Park gates, you secure immediate access to a hot stone shower, 250 Mbps Starlink isolation, our dedicated Bio-Regeneration Recovery Room, and an all-terrain e-bike fleet engineered to cruise right past the entrance lines.
+          </p>
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-500 uppercase tracking-widest animate-pulse bg-amber-950/40 px-5 py-2.5 rounded-full border border-amber-800/40 mt-8">
+            <span>👈 Select your primary focus on the left to begin</span>
+          </div>
+        </div>
+      `,
+      morning_base: `
+        <div class="bg-slate-750 rounded-xl p-6 border-l-4 border-emerald-500 shadow-md">
+          <h3 class="font-bold text-xl text-white mb-2 tracking-tight">Morning Block: Basecamp Staging</h3>
+          <p class="text-base text-slate-300 leading-relaxed">Target Hilo (KTA Super Stores) for heavy provisions before ascending to 4,000 feet. Drop your gear early to bypass the 10:00 AM park gate vehicle gridlock using our 2-mile e-bike staging shortcut.</p>
+        </div>
+      `,
+      afternoon_lava: `
+        <div class="bg-slate-750 rounded-xl p-6 border-l-4 border-amber-500 shadow-md">
+          <h3 class="font-bold text-xl text-white mb-2 tracking-tight">Afternoon Block: Kīlauea Iki Descent</h3>
+          <p class="text-base text-slate-300 leading-relaxed">Descend through the fern canopy onto a solid lava lake bed. Pack a waterproof jacket; high-altitude rainforest micro-climates shift rapidly.</p>
+        </div>
+      `,
+      evening_curfew: `
+        <div class="bg-slate-750 rounded-xl p-6 border-l-4 border-slate-500 shadow-md">
+          <h3 class="font-bold text-xl text-white mb-2 tracking-tight">Evening Block: Curfew & Crater Glow</h3>
+          <p class="text-base text-slate-300 leading-relaxed">Volcano Village kitchens (Ohelo Café) close firmly by 8:30 PM. Secure your locally sourced fuel early. Utilize our e-bikes to park directly at the summit overlooks for night viewing, avoiding tow zones.</p>
+        </div>
+      `,
+      intercept_warning: `
+        <div class="bg-amber-950/40 rounded-xl p-6 border border-amber-700/50 shadow-lg">
+          <h3 class="font-bold text-lg text-amber-400 mb-2 tracking-tight">⚠️ The Midnight Safety Hazard</h3>
+          <p class="text-base text-amber-100 leading-relaxed">Driving back to Kona after an 8:30 PM lava viewing requires navigating 2 hours of dark, foggy mountain highways. Lock in an East Side basecamp to prioritize your safety and physical condition.</p>
+        </div>
+      `
+    };
+
+    function updateState(key, value) {
+      if (state[key] === value) {
+        state[key] = ''; 
+      } else {
+        state[key] = value;
+      }
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById('timeline-container');
+      
+      // If state is empty, smoothly revert layout to the central manifesto
+      if (!state.vibe && !state.duration && !state.checkin && !state.checkout && !state.intercept) {
+        container.innerHTML = contentBlocks.manifesto;
+        return;
+      }
+
+      container.innerHTML = ''; 
+
+      // Inject Intercept Warning
+      if (state.intercept === 'kona') {
+        container.innerHTML += contentBlocks.intercept_warning;
+      }
+
+      // Inject High-Readability Blocks
+      container.innerHTML += contentBlocks.morning_base;
+      if (state.vibe === 'lava') {
+        container.innerHTML += contentBlocks.afternoon_lava;
+      }
+      container.innerHTML += contentBlocks.evening_curfew;
+    }
+
+    function executeBooking() {
+      if (!state.checkin || !state.checkout) {
+        window.location.href = CLOUDBEDS_URL;
+        return;
+      }
+      const deepLink = `${CLOUDBEDS_URL}?checkin=${state.checkin}&checkout=${state.checkout}&adults=2`;
+      window.location.href = deepLink;
+    }
+
+    // Initial Dashboard Paint on Document Load
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('timeline-container').innerHTML = contentBlocks.manifesto;
+    });
+  </script>
+</body>
+</html>
