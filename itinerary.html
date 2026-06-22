@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Build Your Basecamp Blueprint | Aloha Crater Lodge</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Plan your custom rainforest and volcano itinerary at Aloha Crater Lodge — 2 miles from Kīlauea. Choose your focus, duration, and dates for an optimized East Side route.">
+  <link rel="canonical" href="https://www.alohacraterlodge.com/itinerary.html">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 700: '#047857', 800: '#065f46', 900: '#064e3b' },
+            slate:   { 700: '#334155', 800: '#1e293b', 900: '#0f172a' },
+            amber:   { 600: '#d97706', 700: '#b45309' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Alert bar + nav inherit the site palette outside Tailwind */
+    .site-alert{background:#aa0000;color:#fff;text-align:center;padding:9px 12px;font-weight:bold;font-size:0.82rem;letter-spacing:.04em}
+    .site-alert a{color:#fff;text-decoration:none}
+    .site-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:#111;padding:.75rem 1.5rem;border-bottom:1px solid #222}
+    .site-nav .logo{color:#ff4500;font-weight:900;font-size:1.1rem;letter-spacing:.08em;white-space:nowrap}
+    .site-nav .nav-links{display:flex;gap:6px;flex-wrap:wrap}
+    .site-nav .nav-links a{color:#ccc;text-decoration:none;border:1px solid #444;padding:5px 11px;border-radius:4px;font-size:.75rem;font-weight:bold;letter-spacing:.04em;transition:all .2s;white-space:nowrap}
+    .site-nav .nav-links a:hover{border-color:#ff4500;color:#ff4500}
+    .site-nav .nav-links .reserve{background:rgba(255,69,0,.15);color:#ff4500;border-color:#ff4500}
+    .site-nav .nav-links .reserve:hover{background:#ff4500;color:#fff}
+
+    /* Active button state */
+    .vibe-btn.active,.dur-btn.active,.int-btn.active{
+      background:#d97706 !important;
+      color:#fff !important;
+      box-shadow:0 0 0 2px #d97706;
+    }
+
+    /* Thin custom scrollbar inside panels */
+    .panel-scroll::-webkit-scrollbar{width:4px}
+    .panel-scroll::-webkit-scrollbar-track{background:transparent}
+    .panel-scroll::-webkit-scrollbar-thumb{background:#1e3a2a;border-radius:2px}
+  </style>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased" style="min-height:100dvh;display:flex;flex-direction:column;overflow:hidden">
+
+  <!-- Site alert bar -->
+  <div class="site-alert flex-shrink-0">
+    <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a>
+    &nbsp;|&nbsp;
+    <a href="volcano-guide.html#latest">[ READ THE LATEST BASECAMP DISPATCH ]</a>
+  </div>
+
+  <!-- Universal nav -->
+  <nav class="site-nav flex-shrink-0">
+    <div class="logo">ALOHA CRATER LODGE</div>
+    <div class="nav-links">
+      <a href="index.html">BASECAMP (HOME)</a>
+      <a href="suites.html">SUITES</a>
+      <a href="wellness.html">WELLNESS</a>
+      <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+      <a href="faq.html">FAQ</a>
+      <a href="guest-concierge.html">BASECAMP COMMAND</a>
+      <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="reserve">RESERVE BASECAMP</a>
+    </div>
+  </nav>
+
+  <!-- Split-pane wrapper — fills remaining viewport height -->
+  <div class="flex flex-col md:flex-row flex-grow overflow-hidden">
+
+    <!-- ── LEFT PANEL: Interaction ── -->
+    <aside class="w-full md:w-2/5 bg-emerald-900 border-r border-emerald-800 flex flex-col overflow-hidden" style="height:50dvh;min-height:0" id="left-panel">
+      <div class="panel-scroll flex-grow overflow-y-auto p-6 md:p-8 flex flex-col gap-7 pb-6">
+
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Build Your Basecamp Blueprint</h1>
+          <p class="text-emerald-200 text-sm leading-relaxed">Select your options below to instantly map an optimized rainforest and summit route for the East Side.</p>
+        </div>
+
+        <!-- Step 1 -->
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest text-emerald-300 uppercase mb-3">1 · Primary Focus</h2>
+          <div class="grid grid-cols-1 gap-2">
+            <button onclick="pick('vibe','lava',this)" class="vibe-btn w-full text-left px-4 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm">🌋 Lava &amp; Volcanology</button>
+            <button onclick="pick('vibe','waterfalls',this)" class="vibe-btn w-full text-left px-4 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm">🌿 Waterfalls &amp; Hikes</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest text-emerald-300 uppercase mb-3">2 · Basecamp Duration</h2>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="pick('duration','1',this)" class="dur-btn px-2 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm">1 Day</button>
+            <button onclick="pick('duration','2',this)" class="dur-btn px-2 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm">2 Days</button>
+            <button onclick="pick('duration','3',this)" class="dur-btn px-2 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm">3 Days</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest text-emerald-300 uppercase mb-3">3 · Arrival Dates</h2>
+          <div class="flex gap-3">
+            <div class="w-1/2">
+              <label class="block text-xs text-emerald-300 mb-1">Check-in</label>
+              <input type="date" id="checkin" onchange="updateState('checkin',this.value)"
+                class="w-full p-2 rounded bg-emerald-800 text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-600">
+            </div>
+            <div class="w-1/2">
+              <label class="block text-xs text-emerald-300 mb-1">Check-out</label>
+              <input type="date" id="checkout" onchange="updateState('checkout',this.value)"
+                class="w-full p-2 rounded bg-emerald-800 text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest text-emerald-300 uppercase mb-3">4 · Lodging Logistics</h2>
+          <div class="grid grid-cols-1 gap-2">
+            <button onclick="pick('intercept','kona',this)" class="int-btn w-full text-left px-4 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm">🚗 Commuting from Kona / West Side</button>
+            <button onclick="pick('intercept','east',this)" class="int-btn w-full text-left px-4 py-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm">🏡 Looking for an East Side Basecamp</button>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="pb-2">
+          <h2 class="text-xs font-semibold tracking-widest text-emerald-300 uppercase mb-3">5 · Deliver Blueprint</h2>
+          <input type="email" id="email-capture" placeholder="Enter primary email…"
+            class="w-full px-4 py-3 rounded bg-emerald-800 text-white text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-amber-600 placeholder-emerald-500">
+          <button onclick="sendBlueprint()"
+            class="w-full px-4 py-3 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white text-sm transition">
+            Unlock My Mobile Itinerary
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ── RIGHT PANEL: Live Timeline ── -->
+    <main class="w-full md:w-3/5 bg-slate-900 flex flex-col relative overflow-hidden" style="height:50dvh;min-height:0" id="right-panel">
+
+      <div id="timeline-container" class="panel-scroll flex-grow overflow-y-auto p-6 md:p-10 space-y-5" style="padding-bottom:96px">
+        <div class="text-slate-500 text-center mt-16 text-sm leading-relaxed px-4">
+          Select your preferences on the left to generate your optimised rainforest and summit route.
+        </div>
+      </div>
+
+      <!-- Sticky booking footer -->
+      <div class="absolute bottom-0 w-full bg-slate-800 border-t border-slate-700 p-4 flex-shrink-0 z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="max-w-xl mx-auto text-center">
+          <p class="text-xs text-slate-400 mb-2">Secure your room and e-bike access to bypass National Park vehicle gridlock.</p>
+          <button onclick="executeBooking()" id="book-btn"
+            class="w-full md:w-auto px-8 py-3 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white transition text-base">
+            Book This Trip Now
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- end split-pane -->
+
+  <script>
+  (function () {
+
+    const CLOUDBEDS_URL = 'https://hotels.cloudbeds.com/en/reservation/ifCVNX';
+
+    const state = { vibe: '', duration: '', checkin: '', checkout: '', intercept: '' };
+
+    // ── Content blocks ──────────────────────────────────────────────────────
+    const blocks = {
+      warning_kona: `
+        <div class="rounded p-4 border border-amber-600 bg-amber-900/30">
+          <h3 class="font-bold text-amber-400 mb-1">⚠ The Midnight Safety Hazard</h3>
+          <p class="text-sm text-amber-100 leading-relaxed">Driving back to Kona after 8:30 PM lava viewing requires 2+ hours of dark, fog-wrapped mountain highways. Locking in an East Side basecamp protects your safety and keeps you positioned for an early next-day start.</p>
+        </div>`,
+
+      east_advantage: `
+        <div class="rounded p-4 border border-emerald-700 bg-emerald-900/30">
+          <h3 class="font-bold text-emerald-400 mb-1">✔ East Side Basecamp Advantage</h3>
+          <p class="text-sm text-emerald-100 leading-relaxed">Staying 2 miles from the park entrance means no cross-island drive, no parking lottery, and access to on-site e-bikes that let you arrive at the crater rim before the crowds even reach the gate.</p>
+        </div>`,
+
+      morning_base: `
+        <div class="rounded p-5 border-l-4 border-emerald-600 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🌄 Morning Block: Basecamp Staging</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Target Hilo (KTA Super Stores) for provisions before ascending to 4,000 feet. Drop gear at the lodge early to bypass the 10:00 AM entrance-gate vehicle surge using our 2-mile e-bike route directly to the summit overlooks.</p>
+        </div>`,
+
+      afternoon_lava: `
+        <div class="rounded p-5 border-l-4 border-amber-600 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🌋 Afternoon Block: Kīlauea Iki Descent</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Descend through the fern canopy onto the solid lava lake bed at Kīlauea Iki. Pack a waterproof layer — high-altitude rainforest micro-climates shift rapidly. Return to basecamp before the 8:30 PM kitchen close at Ohelo Café.</p>
+        </div>`,
+
+      afternoon_waterfalls: `
+        <div class="rounded p-5 border-l-4 border-emerald-500 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🌿 Afternoon Block: Wailuku &amp; Waimoku Trails</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Head toward Hilo for the Rainbow Falls morning light window, then drive the Road to Hana corridor or the Puna district for the Lava Tree State Monument trail. Lush, crowd-light, and accessible without park permits.</p>
+        </div>`,
+
+      evening_curfew: `
+        <div class="rounded p-5 border-l-4 border-slate-500 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🌙 Evening Block: Curfew &amp; Crater Glow</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Volcano Village kitchens close firmly by 8:30 PM. Secure your provisions early. Use your e-bike after dark to reach the summit overlooks without competing for tow-zone parking — the glow is best after 9:00 PM.</p>
+        </div>`,
+
+      day2_lava: `
+        <div class="rounded p-5 border-l-4 border-amber-500 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🗓 Day 2: Chain of Craters &amp; Holei Sea Arch</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Follow the Chain of Craters Road to the coast. Holei Sea Arch provides dramatic ocean-entry context. Carry two liters of water — no services on the lower road. Return via Crater Rim Drive for summit gas readings at the overlooks.</p>
+        </div>`,
+
+      day2_waterfalls: `
+        <div class="rounded p-5 border-l-4 border-emerald-400 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🗓 Day 2: Akaka Falls &amp; Hamakua Coast</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">Drive north along the Hamakua Coast to Akaka Falls State Park (442-foot single-drop falls). Add Botanical World Adventures for a private river canyon zipline. One hour from Volcano, low crowds on weekdays.</p>
+        </div>`,
+
+      day3_recovery: `
+        <div class="rounded p-5 border-l-4 border-slate-400 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">🗓 Day 3: Bio-Regeneration Recovery Day</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">After two high-output field days, reserve the morning for the lodge's Bio-Regeneration Recovery Room. The OlyLife Galaxy G-One optical therapy session and vertical vibration plates address post-hike fatigue before a relaxed afternoon thermal session in the fern forest hot tub.</p>
+        </div>`,
+
+      stargazing: `
+        <div class="rounded p-5 border-l-4 border-slate-600 bg-slate-800">
+          <h3 class="font-bold text-base text-white mb-1">✦ Night Window: Bortle 1–2 Dark Skies</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">At 4,000 feet, the lodge sits above the coastal cloud inversion layer most clear nights. Bortle Class 1–2 dark sky conditions make this one of the highest-contrast Milky Way viewing windows on the island — no telescope required.</p>
+        </div>`
+    };
+
+    // ── Button group selection helper ────────────────────────────────────────
+    const groupMap = {
+      vibe: '.vibe-btn',
+      duration: '.dur-btn',
+      intercept: '.int-btn'
+    };
+
+    window.pick = function (key, value, btn) {
+      state[key] = value;
+      const sel = groupMap[key];
+      if (sel) document.querySelectorAll(sel).forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderTimeline();
+    };
+
+    window.updateState = function (key, value) {
+      state[key] = value;
+      renderTimeline();
+    };
+
+    // ── Render ────────────────────────────────────────────────────────────────
+    window.renderTimeline = function () {
+      const c = document.getElementById('timeline-container');
+      const parts = [];
+      const { vibe, duration, intercept } = state;
+
+      if (intercept === 'kona') parts.push(blocks.warning_kona);
+      if (intercept === 'east') parts.push(blocks.east_advantage);
+
+      if (vibe || duration) {
+        parts.push(blocks.morning_base);
+
+        if (vibe === 'lava')       parts.push(blocks.afternoon_lava);
+        if (vibe === 'waterfalls') parts.push(blocks.afternoon_waterfalls);
+
+        parts.push(blocks.evening_curfew);
+
+        if (parseInt(duration) >= 2) {
+          if (vibe === 'lava' || !vibe)       parts.push(blocks.day2_lava);
+          if (vibe === 'waterfalls') parts.push(blocks.day2_waterfalls);
+        }
+
+        if (parseInt(duration) >= 3) parts.push(blocks.day3_recovery);
+
+        // Always offer stargazing context when we have any selections
+        parts.push(blocks.stargazing);
+      }
+
+      if (parts.length === 0) {
+        c.innerHTML = '<div class="text-slate-500 text-center mt-16 text-sm leading-relaxed px-4">Select your preferences on the left to generate your optimised rainforest and summit route.</div>';
+      } else {
+        c.innerHTML = parts.join('');
+      }
+    };
+
+    // ── Booking CTA ───────────────────────────────────────────────────────────
+    window.executeBooking = function () {
+      if (!state.checkin || !state.checkout) {
+        window.open(CLOUDBEDS_URL, '_blank');
+        return;
+      }
+      const link = CLOUDBEDS_URL + '?checkin=' + state.checkin + '&checkout=' + state.checkout + '&adults=2';
+      window.open(link, '_blank');
+    };
+
+    // ── Email capture (static — no server) ───────────────────────────────────
+    window.sendBlueprint = function () {
+      const email = document.getElementById('email-capture').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address to receive your itinerary.');
+        return;
+      }
+      // Static: acknowledge receipt, redirect to booking
+      alert('Blueprint saved! Redirecting you to secure your dates.');
+      executeBooking();
+    };
+
+  })();
+  </script>
+</body>
+</html>
