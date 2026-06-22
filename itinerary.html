@@ -276,10 +276,15 @@
     };
 
     window.pick = function (key, value, btn) {
-      state[key] = value;
       const sel = groupMap[key];
-      if (sel) document.querySelectorAll(sel).forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      if (state[key] === value) {
+        state[key] = '';
+        if (sel) document.querySelectorAll(sel).forEach(b => b.classList.remove('active'));
+      } else {
+        state[key] = value;
+        if (sel) document.querySelectorAll(sel).forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+      }
       renderTimeline();
     };
 
