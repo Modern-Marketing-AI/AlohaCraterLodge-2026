@@ -1,0 +1,250 @@
+PROJECT OVERVIEW:
+Build a static, high-conversion Itinerary Planner and an updated FAQ section for Aloha Crater Lodge. 
+
+ENVIRONMENT & STYLING RULES:
+1. Framework: Pure HTML5, Vanilla JavaScript, and Tailwind CSS (via CDN). No heavy front-end frameworks like React or Vue.
+2. Layout Architecture: The itinerary planner must use a split-pane layout on desktop (40% left interaction, 60% right visualization) and a progressive vertical stack on mobile. 
+3. Sizing Constraint: Use `100dvh` for the main wrapper and `flex-shrink-0` on critical bottom elements so mobile keyboards do not warp the timeline during email capture.
+4. UI Visibility: All elements must remain permanently visible. Do not use hidden drawers, <details> tags, or collapsible accordions.
+5. Color Palette: Primary background is Deep Emerald/Moss Green (safety/sanctuary), Secondary is Luxury Slate/Charcoal (premium night framing), and Action Accents are Volcanic Amber (strictly for buttons/CTAs).
+6. Integrations: The final booking button must construct a URL string appending `?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD` to the CloudBeds variable.
+
+BRAND VOICE & CONTENT RULES:
+1. The tone is "Lodge Guide": Warm, professional, and direct.
+2. BANNED WORDS: Cozy, nest, healing, pamper, hidden gem, yummy, protocols, tactical, deployment, spa. 
+3. BANNED TOPICS: Never mention or code any references to the on-property lava tube or caves.
+4. EXACT NOMENCLATURE: Optical therapy equipment must be named "OlyLife Galaxy G-One". The recovery area is the "Bio-Regeneration Recovery Room".
+5. ASSETS: Do not use or code any <img> placeholder tags. Visual cards will render as clean, colored blocks until the verified media files are delivered by the owners.
+
+====================================================================
+FILE 1: itinerary.html (Create new file and paste this below)
+====================================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aloha Crater Lodge | Custom Itinerary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 800: '#065f46', 900: '#064e3b', 950: '#022c22' },
+            slate: { 800: '#1e293b', 900: '#0f172a' },
+            amber: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 950: '#451a03' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased min-h-[100dvh] flex flex-col md:flex-row overflow-hidden">
+
+  <aside class="w-full md:w-2/5 h-[50dvh] md:h-[100dvh] bg-emerald-900 p-6 md:p-10 overflow-y-auto border-r border-emerald-800 flex flex-col gap-8">
+    
+    <div class="border-b border-emerald-800/80 pb-6 mb-2">
+      <div class="inline-block px-3 py-1 rounded-full bg-amber-600/20 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-widest uppercase mb-3">
+        ⚡ Guaranteed Travel Friction Bypass
+      </div>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 leading-tight">
+        Outsmart the Summit. <br><span class="text-emerald-400">Command Your Time.</span>
+      </h1>
+      <p class="text-emerald-100 text-sm leading-relaxed mb-4">
+        Most visitors to Kīlauea make the same exhausting mistake: they plan their days around driving rather than experiencing. They idle in two-hour gate lines, fight for parking, and navigate dangerous mountain highways in the pitch black. 
+      </p>
+      <p class="text-emerald-300 text-xs font-medium bg-emerald-950/60 p-3 rounded border border-emerald-800/50 leading-normal">
+        <span class="text-amber-400 font-bold">The Blueprint Engine is your insider bypass.</span> Tap your parameters below to unlock our master routing—bypassing the crowds, securing your e-bike access, and locking in a frictionless East Side basecamp.
+      </p>
+    </div>
+
+    <div class="step-node">
+      <h2 class="text-sm font-semibold tracking-wider text-emerald-300 uppercase mb-3">1. Primary Focus</h2>
+      <div class="grid grid-cols-1 gap-2">
+        <button onclick="updateState('vibe', 'lava')" class="vibe-btn w-full text-left p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition focus:ring-2 focus:ring-amber-600">🌋 Lava & Volcanology</button>
+        <button onclick="updateState('vibe', 'waterfalls')" class="vibe-btn w-full text-left p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition focus:ring-2 focus:ring-amber-600">🌿 Waterfalls & Hikes</button>
+      </div>
+    </div>
+
+    <div class="step-node">
+      <h2 class="text-sm font-semibold tracking-wider text-emerald-300 uppercase mb-3">2. Basecamp Duration</h2>
+      <div class="grid grid-cols-3 gap-2">
+        <button onclick="updateState('duration', '1')" class="dur-btn p-2 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm focus:ring-2 focus:ring-amber-600">1 Day</button>
+        <button onclick="updateState('duration', '2')" class="dur-btn p-2 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm focus:ring-2 focus:ring-amber-600">2 Days</button>
+        <button onclick="updateState('duration', '3')" class="dur-btn p-2 rounded bg-emerald-800 hover:bg-emerald-700 transition text-center text-sm focus:ring-2 focus:ring-amber-600">3 Days</button>
+      </div>
+    </div>
+
+    <div class="step-node">
+      <h2 class="text-sm font-semibold tracking-wider text-emerald-300 uppercase mb-3">3. Arrival Dates</h2>
+      <div class="flex gap-4">
+        <div class="w-1/2">
+          <label class="block text-xs text-emerald-200 mb-1">Check-in</label>
+          <input type="date" id="checkin" onchange="updateState('checkin', this.value)" class="w-full p-2 rounded bg-emerald-800 text-white border-none focus:ring-2 focus:ring-amber-600">
+        </div>
+        <div class="w-1/2">
+          <label class="block text-xs text-emerald-200 mb-1">Check-out</label>
+          <input type="date" id="checkout" onchange="updateState('checkout', this.value)" class="w-full p-2 rounded bg-emerald-800 text-white border-none focus:ring-2 focus:ring-amber-600">
+        </div>
+      </div>
+    </div>
+
+    <div class="step-node">
+      <h2 class="text-sm font-semibold tracking-wider text-emerald-300 uppercase mb-3">4. Lodging Logistics</h2>
+      <div class="grid grid-cols-1 gap-2">
+        <button onclick="updateState('intercept', 'kona')" class="int-btn w-full text-left p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm focus:ring-2 focus:ring-amber-600">🚗 Commuting from Kona/West Side</button>
+        <button onclick="updateState('intercept', 'east')" class="int-btn w-full text-left p-3 rounded bg-emerald-800 hover:bg-emerald-700 transition text-sm focus:ring-2 focus:ring-amber-600">🏡 Looking for an East Side Basecamp</button>
+      </div>
+    </div>
+
+    <div class="step-node pb-10">
+      <h2 class="text-sm font-semibold tracking-wider text-emerald-300 uppercase mb-3">5. Deliver Blueprint</h2>
+      <input type="email" placeholder="Enter primary email..." class="w-full p-3 rounded bg-emerald-800 text-white border-none mb-2 focus:ring-2 focus:ring-amber-600">
+      <button class="w-full p-3 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white transition">Unlock My Mobile Itinerary</button>
+    </div>
+
+  </aside>
+
+  <main class="w-full md:w-3/5 h-[50dvh] md:h-[100dvh] bg-slate-900 flex flex-col relative">
+    
+    <div id="timeline-container" class="flex-grow p-6 md:p-12 overflow-y-auto space-y-8 pb-36">
+      
+      <div class="max-w-xl mx-auto my-auto pt-8 md:pt-16 text-center" id="manifesto-block">
+        
+        <div class="w-16 h-16 bg-emerald-900/60 border border-emerald-700/50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+          <span class="text-2xl">🌿</span>
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
+          Your Vacation is Too Valuable for Gridlock
+        </h2>
+
+        <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-8 text-left bg-slate-800/60 p-6 rounded-lg border border-slate-700/50 shadow-lg">
+          There is a distinct moment at 8:30 PM standing on the crater rim. The fountaining glow is magnificent. But then reality sets in: you have a two-and-a-half-hour drive back to the West Side over dark, winding, foggy saddle roads. 
+          <br><br>
+          <span class="text-emerald-400 font-semibold">It does not have to be this way.</span> 
+          <br><br>
+          By establishing your command hub just two miles outside the National Park gates, you secure immediate access to a hot stone shower, 250 Mbps Starlink isolation, our dedicated Bio-Regeneration Recovery Room, and an all-terrain e-bike fleet engineered to cruise right past the entrance lines.
+        </p>
+
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-amber-500 uppercase tracking-widest animate-pulse bg-amber-950/30 px-4 py-2 rounded-full border border-amber-800/50">
+          <span>👈 Select your primary focus on the left to begin</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="absolute bottom-0 w-full bg-slate-800 border-t border-slate-700 p-4 md:p-6 flex-shrink-0 z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+      <div class="max-w-xl mx-auto text-center">
+        <p class="text-sm text-slate-300 mb-3">Secure your room and e-bike access to bypass National Park vehicle gridlock.</p>
+        <button onclick="executeBooking()" id="book-btn" class="w-full md:w-auto px-8 py-3 rounded bg-amber-600 hover:bg-amber-700 font-bold text-white transition text-lg w-full">Book This Trip Now</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // System Constants
+    const CLOUDBEDS_URL = "YOUR_EXISTING_PORTAL_LINK"; 
+    
+    // Flat State Matrix
+    const state = {
+      vibe: '',
+      duration: '',
+      checkin: '',
+      checkout: '',
+      intercept: ''
+    };
+
+    // Evergreen Content Dictionary
+    const contentBlocks = {
+      morning_base: `<div class="bg-slate-800 rounded p-5 border-l-4 border-emerald-600"><h3 class="font-bold text-lg text-white mb-1">Morning Block: Basecamp Staging</h3><p class="text-sm text-slate-300">Target Hilo (KTA Super Stores) for heavy provisions before ascending to 4,000 feet. Drop your gear early to bypass the 10:00 AM park gate vehicle gridlock using our 2-mile e-bike staging shortcut.</p></div>`,
+      afternoon_lava: `<div class="bg-slate-800 rounded p-5 border-l-4 border-amber-600"><h3 class="font-bold text-lg text-white mb-1">Afternoon Block: Kīlauea Iki Descent</h3><p class="text-sm text-slate-300">Descend through the fern canopy onto a solid lava lake bed. Pack a waterproof jacket; high-altitude rainforest micro-climates shift rapidly.</p></div>`,
+      evening_curfew: `<div class="bg-slate-800 rounded p-5 border-l-4 border-slate-500"><h3 class="font-bold text-lg text-white mb-1">Evening Block: Curfew & Crater Glow</h3><p class="text-sm text-slate-300">Volcano Village kitchens (Ohelo Café) close firmly by 8:30 PM. Secure your locally sourced fuel early. Utilize our e-bikes to park directly at the summit overlooks for night viewing, avoiding tow zones.</p></div>`,
+      intercept_warning: `<div class="bg-amber-900/50 rounded p-5 border border-amber-600 mb-6"><h3 class="font-bold text-amber-500 mb-1">⚠️ The Midnight Safety Hazard</h3><p class="text-sm text-amber-100">Driving back to Kona after an 8:30 PM lava viewing requires navigating 2 hours of dark, foggy mountain highways. Lock in an East Side basecamp to prioritize your safety and physical condition.</p></div>`
+    };
+
+    function updateState(key, value) {
+      state[key] = value;
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById('timeline-container');
+      container.innerHTML = ''; 
+
+      // Inject Intercept Warning
+      if (state.intercept === 'kona') {
+        container.innerHTML += contentBlocks.intercept_warning;
+      }
+
+      // Inject Standard Blocks
+      if (state.vibe || state.duration || state.checkin || state.intercept) {
+        container.innerHTML += contentBlocks.morning_base;
+        if (state.vibe === 'lava') container.innerHTML += contentBlocks.afternoon_lava;
+        container.innerHTML += contentBlocks.evening_curfew;
+      } else {
+        // Fallback to reload manifesto if somehow empty but triggered
+        container.innerHTML = document.getElementById('manifesto-block').outerHTML;
+      }
+    }
+
+    function executeBooking() {
+      if (!state.checkin || !state.checkout) {
+        // Fallback Loop: Send to general booking if dates aren't selected
+        window.location.href = CLOUDBEDS_URL;
+        return;
+      }
+      // Construct CloudBeds exact parameter string
+      const deepLink = `${CLOUDBEDS_URL}?checkin=${state.checkin}&checkout=${state.checkout}&adults=2`;
+      window.location.href = deepLink;
+    }
+  </script>
+</body>
+</html>
+
+====================================================================
+FILE 2: faq.html (Replace old questions with this isolated component)
+====================================================================
+
+<div id="faq-optimized-grid" class="max-w-4xl mx-auto p-6 grid grid-cols-1 gap-8 text-left text-slate-800">
+  
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">How do I bypass the multi-hour vehicle traffic jams at the Hawaii Volcanoes National Park entrance gates?</h3>
+    <p class="text-md leading-relaxed text-slate-700">Peak vehicle congestion at the primary entrance gates historically builds daily between 10:00 AM and 2:00 PM when cross-island commuter traffic arrives. To bypass this bottleneck completely, we recommend arriving early or staying directly at our rainforest basecamp just 2 miles from the park border. Guests can skip the car keys, select an all-terrain e-bike right from our property lobby, and utilize a quiet 2-mile staging shortcut to cruise right past the vehicle lines and park directly at the prime summit overlooks.</p>
+  </div>
+
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">Where can I get food or groceries near the Kīlauea summit if I arrive late in the evening?</h3>
+    <p class="text-md leading-relaxed text-slate-700">To maintain the quiet environment of our mountain rainforest, local kitchens in Volcano Village wind down early, with most dining choices ending dinner service firmly by 8:30 PM. We highly recommend stocking up on heavy trail provisions and groceries down in Hilo (at KTA Super Stores or Target) before making the drive up the mountain. Every suite at our lodge is equipped with a high-utility kitchenette and refrigeration space, providing a secure setup to store your locally sourced fuel and snacks.</p>
+  </div>
+
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">Is there an active wellness space or recovery center near the national park to reset after a strenuous hike?</h3>
+    <p class="text-md leading-relaxed text-slate-700">Yes. To service your body after a demanding day of trail exploration, the lodge features a dedicated Bio-Regeneration Recovery Room. This private space provides day-use clients and overnight guests with advanced physical conditioning systems to manage post-hike fatigue. Recovery sessions include targeted circulation adjustments using the advanced OlyLife Galaxy G-One for optical therapy, alongside vertical vibration plates to rapidly restore physical wellness.</p>
+  </div>
+
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">What should I pack for a stay near the volcano summit, and do the rooms require air conditioning?</h3>
+    <p class="text-md leading-relaxed text-slate-700">Sitting at an elevated 4,000 feet, the weather at the Kīlauea summit behaves completely differently than Hawaii’s coastal beaches. Temperatures drop rapidly after dark, often cooling down to 50°F. Because the mountain air remains crisp and cool year-round, air conditioning is rarely required; instead, high-altitude heating systems and fireplaces are standard features across our suites to keep your basecamp secure and grounded. A waterproof rain jacket and sturdy hiking footwear are mandatory items.</p>
+  </div>
+
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">Can I reliably work remotely, stream video, or handle video conferencing calls from the lodge?</h3>
+    <p class="text-md leading-relaxed text-slate-700">Absolute network reliability is engineered into our environment to support remote professionals seeking high-utility isolation. The property is connected to a dedicated high-speed Starlink Satellite Uplink, delivering consistent average speeds of 150–250 Mbps with low latency. This setup effortlessly sustains heavy data transfers, creative synthesis workflows, and uninterrupted video conferencing.</p>
+  </div>
+
+  <div class="border-b border-slate-200 pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">What are the conditions for stargazing at the lodge, and what makes this elevation unique for viewing?</h3>
+    <p class="text-md leading-relaxed text-slate-700">Sitting at a high 4,000-foot altitude puts the lodge right at the tropical atmospheric inversion layer, which regularly pushes heavy coastal clouds down below us and leaves the summit skies clear, thin, and exceptionally stable. Free from urban light pollution, our basecamp experiences pristine Bortle 1–2 dark sky conditions, making it a high-value target for astronomy enthusiasts and night photographers.</p>
+  </div>
+
+  <div class="pb-6">
+    <h3 class="text-xl font-bold mb-3 text-emerald-900">How does staying at the lodge compare to booking a room at the historic hotel located directly inside the National Park?</h3>
+    <p class="text-md leading-relaxed text-slate-700">While staying directly on the crater rim offers a classic vantage point, it also means sharing your stay with heavy daytime tourist crowds and older room infrastructure. Aloha Crater Lodge provides a modern, high-amenity alternative focused on active exploration and personal restoration. Located just 2 miles outside the gates, we balance secluded rainforest privacy with modern operational assets that older park properties lack, including our high-speed Starlink network, a private e-bike fleet for bypassing main gate traffic, and our dedicated Bio-Regeneration Recovery Room.</p>
+  </div>
+
+</div>
