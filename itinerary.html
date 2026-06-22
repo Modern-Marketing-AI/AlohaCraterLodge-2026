@@ -199,6 +199,8 @@
   <script>
   (function () {
 
+    const MANIFESTO = document.getElementById('manifesto-block').outerHTML;
+
     const CLOUDBEDS_URL = 'https://hotels.cloudbeds.com/en/reservation/ifCVNX';
 
     const state = { vibe: '', duration: '', checkin: '', checkout: '', intercept: '' };
@@ -315,7 +317,7 @@
       }
 
       if (parts.length === 0) {
-        c.innerHTML = '<div class="text-slate-500 text-center mt-16 text-sm leading-relaxed px-4">Select your preferences on the left to generate your optimised rainforest and summit route.</div>';
+        c.innerHTML = MANIFESTO;
       } else {
         c.innerHTML = parts.join('');
       }
