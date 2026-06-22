@@ -1,0 +1,56 @@
+Please refactor 'itinerary.html' to break it out of the rigid split-pane panel layout and move it into an open vertical editorial layout by making these three targeted changes:
+
+1. CHANGE THE BODY & CONTAINER STRUCTURE:
+- Remove all horizontal split classes from the <body> tag (delete 'flex flex-col md:flex-row overflow-hidden'). Change it to simple vertical scrolling: 'bg-slate-900 text-white font-sans antialiased min-h-[100dvh] overflow-y-auto'.
+- Remove the separate <aside> and <main> tags. Wrap the entire contents of the page inside a single, unified, centered column container:
+  <div class="max-w-4xl mx-auto px-6 py-12 md:py-20 flex flex-col gap-16 pb-44">
+
+2. STRIP BOX BACKGROUNDS FROM CHIPS & ENGINE:
+- On the selection steps, change the button wrapper background from a dark solid block to a subtle, open canvas layout: 'bg-slate-800/40 p-6 md:p-10 rounded-2xl border border-slate-800/80 space-y-8 shadow-inner'.
+
+3. SWAP THE JAVASCRIPT 'contentBlocks' OBJECT:
+Replace the contentBlocks variable inside the <script> tag with this open-air, border-left layout design that removes box structures completely:
+
+const contentBlocks = {
+  manifesto: `
+    <div class="w-full py-4 text-left max-w-3xl" id="manifesto-block">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight leading-snug">Your Rainforest Command Strategy</h2>
+      <p class="text-slate-300 text-base md:text-lg leading-relaxed space-y-6">
+        There is a distinct moment at 8:30 PM standing directly on the Kīlauea crater rim. The active volcanic fountaining glow is unmatched. But as the dark night cold sets in, the standard tourist reality hits: a demanding, fog-shrouded two-and-a-half-hour drive back across the island's interior saddle routes.
+        <br><br>
+        By establishing your perimeter base camp two miles outside the Hawaii Volcanoes National Park checkpoint, you unlock complete environmental autonomy. Relax with high-utility Starlink network connectivity, drop your hiking gear early, and swap your vehicle keys for an all-terrain e-bike fleet engineered to cruise cleanly past park checkpoint backups.
+      </p>
+      <div class="inline-flex items-center gap-3 text-xs font-bold text-amber-500 uppercase tracking-widest bg-amber-950/30 px-5 py-3 rounded-full border border-amber-900/40 mt-8">
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+        <span>Establish preferences above to generate your custom timeline tracks</span>
+      </div>
+    </div>
+  `,
+  morning_base: `
+    <div class="pl-6 border-l-2 border-emerald-500/40 py-2 space-y-2">
+      <div class="text-xs font-bold tracking-widest text-emerald-400 uppercase">08:00 AM — Basecamp Staging & Provisioning</div>
+      <h3 class="font-extrabold text-2xl text-white tracking-tight">Acquire Supplies & Clear Entry Gate</h3>
+      <p class="text-base text-slate-300 leading-relaxed max-w-3xl">Target regional distribution points in Hilo (such as KTA Super Stores) for heavy exploration provisions before completing mountain ascent. Check into your retreat framework early to step past the 10:00 AM multi-hour entry gate car logjams using our direct, private 2-mile bicycle access trail.</p>
+    </div>
+  `,
+  afternoon_lava: `
+    <div class="pl-6 border-l-2 border-amber-500/40 py-2 space-y-2">
+      <div class="text-xs font-bold tracking-widest text-amber-400 uppercase">01:30 PM — Crater Bed Isolation</div>
+      <h3 class="font-extrabold text-2xl text-white tracking-tight">Kīlauea Iki Rainforest Trail Descent</h3>
+      <p class="text-base text-slate-300 leading-relaxed max-w-3xl">Descend past the tropical endemic fern canopies directly onto the solid floor of the volcanic crater lakebed. Ensure heavy outer layer waterproof gear is equipped; high-altitude summit micro-climates experience immediate and volatile shifts.</p>
+    </div>
+  `,
+  evening_curfew: `
+    <div class="pl-6 border-l-2 border-slate-600 py-2 space-y-2">
+      <div class="text-xs font-bold tracking-widest text-slate-400 uppercase">06:00 PM — Mountain Night Logistics</div>
+      <h3 class="font-extrabold text-2xl text-white tracking-tight">Summit Glow Access & Early Village Curfew</h3>
+      <p class="text-base text-slate-300 leading-relaxed max-w-3xl">Volcano Village dining kitchens, including regional culinary points like Ohelo Café, firmly conclude evening operations by 8:30 PM to secure the quiet ecosystem of the high forest. Arrange early dining provisions before ascending to active lookouts for night sky observation. Utilize our bypass assets to avoid full parking closures near the main caldera rims.</p>
+    </div>
+  `,
+  intercept_warning: `
+    <div class="p-6 bg-amber-950/20 border border-amber-800/40 rounded-2xl mb-4 max-w-3xl">
+      <h3 class="font-bold text-lg text-amber-400 mb-2 flex items-center gap-2">⚠️ High-Risk West Side Commute Detected</h3>
+      <p class="text-base text-amber-100/90 leading-relaxed">Attempting an intersection drive back to distant western resorts following a night lava observation introduces dangerous driving parameters over blind mountain terrain. Retaining an immediate regional base camp safeguards physical conditions and optimizes exploration efficiency.</p>
+    </div>
+  `
+};
