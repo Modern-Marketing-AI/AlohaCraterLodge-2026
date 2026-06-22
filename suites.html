@@ -245,16 +245,16 @@
         }
         .secure-dates-btn:hover { background: #e03e00; }
 
-        .ember-footer {
-            text-align: center;
-            padding: 60px 5%;
-            background: linear-gradient(180deg, #18181b 0%, #1a0e00 100%);
+        footer {
+            background: #0d0d0d;
+            color: #fff;
+            padding: 40px 5%;
         }
-
-        .ember-footer p {
-            color: rgba(255,255,255,0.4);
-            font-size: 0.9rem;
-        }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; max-width: 1100px; margin: 0 auto 1.5rem; }
+        .footer-col h4 { color: #ccc; margin: 0 0 0.8rem; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .footer-col p { color: #888; font-size: 0.9rem; margin: 0 0 4px; }
+        .footer-col a { color: #888; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.9rem; }
+        .footer-col a:hover { color: #10b981; }
 
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2rem; }
@@ -378,22 +378,38 @@
         </a>
     </section>
 
-    <div class="ember-footer">
-        <p>Aloha Crater Lodge — 2 miles from Kīlauea Crater Rim</p>
-        <p style="margin-top:0.6rem;"><a href="#" class="reveal-phone-btn" style="color:#10b981;border:1px solid #10b981;padding:5px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;transition:all 0.2s;">Text Concierge</a></p>
-        <div style="margin-top:1.2rem; border-top:1px solid #2a2a2a; padding-top:1.2rem;">
-            <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#888; margin-bottom:0.6rem;">Quick Links</p>
-            <p style="font-size:0.88rem; line-height:2;">
-                <a href="suites.html" style="color:#888;text-decoration:none;margin:0 10px;">Suites</a>
-                <a href="wellness.html" style="color:#888;text-decoration:none;margin:0 10px;">Wellness</a>
-                <a href="faq.html" style="color:#888;text-decoration:none;margin:0 10px;">FAQ</a>
-                <a href="volcano-guide.html" style="color:#888;text-decoration:none;margin:0 10px;">Volcano Guide</a>
-                <a href="itinerary.html" style="color:#888;text-decoration:none;margin:0 10px;">Plan Your Trip</a>
-            </p>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aloha Crater Lodge</h4>
+                <p>11-3966 Lanihuli Road</p>
+                <p>Volcano Village, HI</p>
+                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
+            </div>
+            <div class="footer-col">
+                <h4>Intel Feeds</h4>
+                <a href="https://www.instagram.com/alohacraterlodge" target="_blank">Instagram: @alohacraterlodge</a>
+                <a href="#" target="_blank">YouTube: Volcano Insider</a>
+                <a href="https://www.tiktok.com/@alohacraterlodge" target="_blank">TikTok: @AlohaCraterLodge</a>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="suites.html">Suites</a>
+                <a href="wellness.html">Wellness</a>
+                <a href="faq.html">FAQ</a>
+                <a href="volcano-guide.html">Volcano Guide</a>
+                <a href="things-to-do.html">Things To Do</a>
+                <a href="itinerary.html">Plan Your Trip</a>
+                <a href="guest-concierge.html">Guest Concierge</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
         </div>
-        <p style="margin-top:0.5rem; font-size:0.78rem; color:#555;">Located 2 miles from Hawaii Volcanoes National Park. &nbsp;&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
-        <p style="margin-top:0.4rem; font-size:0.78rem; color:#444;"><a href="privacy-policy.html" style="color:#555;text-decoration:none;">Privacy Policy</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="terms.html" style="color:#555;text-decoration:none;">Terms of Service</a></p>
-    </div>
+        <div style="text-align:center; border-top:1px solid #2a2a2a; margin-top:1.5rem; padding-top:1rem; color:#555; font-size:0.78rem; line-height:1.7;">
+            <p style="margin:0;">Located 2 miles from Hawaii Volcanoes National Park.</p>
+            <p style="margin:0;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
         function openModal() {
