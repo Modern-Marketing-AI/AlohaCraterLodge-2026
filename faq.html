@@ -286,51 +286,8 @@
 
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>Aloha Crater Lodge</h4>
-                <p style="color:#888;margin:0 0 2px;">11-3966 Lanihuli Road</p>
-                <p>Volcano Village, HI</p>
-                <a href="#" class="reveal-phone-btn" style="display:inline-block;margin:4px 0 6px;color:#10b981;border:1px solid #10b981;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:bold;letter-spacing:0.03em;transition:all 0.2s;">Text Concierge</a>
-                <a href="#" id="admin-trigger" style="display:block;color:#888;font-size:0.82rem;text-decoration:none;margin-top:4px;">[ Admin Login ]</a>
-            </div>
-            <div class="footer-col">
-                <h4>Intel Feeds</h4>
-                <a href="https://www.instagram.com/alohacraterlodge" target="_blank">Instagram: @alohacraterlodge</a>
-                <a href="#" target="_blank">YouTube: Volcano Insider</a>
-                <a href="https://www.tiktok.com/@alohacraterlodge" target="_blank">TikTok: @AlohaCraterLodge</a>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="suites.html">Suites</a>
-                <a href="wellness.html">Wellness</a>
-                <a href="faq.html">FAQ</a>
-                <a href="volcano-guide.html">Volcano Guide</a>
-                <a href="itinerary.html">Plan Your Trip</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-            </div>
-        </div>
-        <div class="footer-legal">
-            <p style="margin:0;">Located 2 miles from Hawaii Volcanoes National Park.</p>
-            <p style="margin:0;">&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>
-        </div>
-    </footer>
-    <script>
-        (function() {
-            document.querySelectorAll('.reveal-phone-btn').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    if (this.dataset.revealed !== 'true') {
-                        e.preventDefault();
-                        this.textContent = 'Text or Call (808) 345-4449';
-                        this.href = 'tel:+18083454449';
-                        this.dataset.revealed = 'true';
-                    }
-                });
-            });
-        })();
-    </script>
+    <div id="site-footer"></div>
+    <script src="footer.js"></script>
     <script>
         function openModal() {
             document.getElementById('magmaModal').classList.add('active');
