@@ -1,0 +1,53 @@
+PROJECT OVERVIEW:
+Remove the modal popup layer ('magmaModal') to eliminate multi-click checkout friction. Relocate the value-proposition checklist items directly into the body text below the room grid to improve both SEO indexing and conversion velocity.
+
+GUARDRAILS:
+- Do not use any of these banned words: cozy, nest, healing, pamper, hidden gem, yummy, protocols, tactical, deployment, spa.
+- Retain the volcano status bar script, Netlify Identity scripts, and 'fern.js' imports exactly as they are.
+
+====================================================================
+1. INSERT THE INLINE BASECAMP ADVANTAGE SECTION
+====================================================================
+Find the closing tag of the room section ('</section>') and insert this clean, high-converting inline block immediately below it:
+
+    <section class="section direct-benefits" style="background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 2rem; max-width: 1200px; margin: 2rem auto 0 auto; text-align: left;">
+        <h3 style="color: #ff4500; font-family: 'Georgia', serif; font-size: 1.6rem; margin-top: 0; margin-bottom: 1.2rem; letter-spacing: 1px;">The Basecamp Direct Booking Advantage</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.5rem;">
+            <li style="display: flex; align-items: flex-start; gap: 0.8rem;">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#10b981" stroke-width="3" fill="none" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color: #fff; display: block; margin-bottom: 0.2rem;">1. Contactless Arrival.</strong> Your secure 4-digit keyless entry code is delivered automatically via SMS 24 hours prior to your scheduled check-in window.</div>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 0.8rem;">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#10b981" stroke-width="3" fill="none" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color: #fff; display: block; margin-bottom: 0.2rem;">2. High-Speed Connectivity Guaranteed.</strong> Dedicated Enterprise Starlink Wi-Fi (200Mbps+) is fully active and uncapped across the entire property footprint for seamless remote work workflows.</div>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 0.8rem;">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#10b981" stroke-width="3" fill="none" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div><strong style="color: #fff; display: block; margin-bottom: 0.2rem;">3. Priority Gear Verification.</strong> Booking directly ensures immediate priority reservations for our on-property all-terrain e-bike fleet and physical restoration hardware inside your post-booking Guest Portal.</div>
+            </li>
+        </ul>
+    </section>
+
+====================================================================
+2. REMOVE THE OLD MODAL HTML LAYER
+====================================================================
+Locate and delete the entire HTML block container for the modal overlay:
+
+Delete this block completely:
+<div class="magma-modal-overlay" id="magmaModal">
+    ... everything inside it ...
+</div>
+
+====================================================================
+3. STRIP OUT THE INTERCEPTOR JAVASCRIPT
+====================================================================
+Locate the script tag right below the old modal code that listens for Cloudbeds clicks and prevents the default navigation. 
+
+Delete this block completely:
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('magmaModal');
+    ...
+    modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
+});
+</script>
