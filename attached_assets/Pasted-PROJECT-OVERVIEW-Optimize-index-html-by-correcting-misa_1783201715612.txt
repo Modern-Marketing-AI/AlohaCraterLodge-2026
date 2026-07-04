@@ -1,0 +1,29 @@
+PROJECT OVERVIEW:
+Optimize 'index.html' by correcting misaligned image alt tags and upgrading the hero copywriting to target high-intent search queries. 
+
+GUARDRAILS:
+- Do not use any of these banned words: cozy, nest, healing, pamper, hidden gem, yummy, protocols, tactical, deployment, spa.
+- Do not add or reference any text about on-property lava tubes or caves.
+- Retain all scripts, the volcano alert status bar functionality, and the Netlify Identity configuration exactly as they are.
+
+====================================================================
+1. UPGRADE THE HERO COPY (Targeting Bottom-of-Funnel Search Intent)
+====================================================================
+Find the <header id="location"> block and replace the <h1> and <p> tags inside '.hero-content' with this optimized copy:
+
+<h1>Bypass the Summit Crowds. Secure Your Volcano Basecamp.</h1>
+<p>Located exactly 2.0 miles from the Kīlauea entrance gates. Secure your premium modern suite, unlock private e-bike gate access, and maintain absolute connectivity.</p>
+
+====================================================================
+2. ALIGN & FIX THE IMAGE ALT TAGS
+====================================================================
+Find the <section id="rooms"> grid and swap out the <img> tags for the three room cards so the filenames contextually match their descriptive alt text:
+
+- Card 1 (Premium Suites):
+<img src="premium-suite-private-jetted-tub-volcano-hi.jpg" alt="Interior layout of Room 4 at Aloha Crater Lodge, showcasing a premium modern suite with a view of a private whirlpool tub overlooking the pristine rainforest canopy.">
+
+- Card 2 (Family Modules):
+<img src="family-basecamp-module-kitchenette-volcano-village.webp" alt="Interior view of a spacious Family Module suite at Aloha Crater Lodge, featuring a functional private kitchenette setup with a refrigerator, microwave, and integrated cooking layout.">
+
+- Card 3 (Budget Basecamp):
+<img src="high-utility-basecamp-suite-volcano-hawaii.jpg" alt="A clean, high-utility budget basecamp suite layout at Aloha Crater Lodge, engineered for maximum travel efficiency and exploration staging near the national park.">
