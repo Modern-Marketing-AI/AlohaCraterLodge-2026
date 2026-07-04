@@ -29,11 +29,6 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .wellness-image { flex: 1; min-width: 300px; }
 .wellness-image img { width: 100%; border-radius: 3px; }
 footer { background: #0D0D0D; color: white; padding: 50px 5%; }
-.footer-content { display: flex; justify-content: space-between; max-width: 1200px; margin: auto; flex-wrap: wrap; }
-.footer-col { margin-bottom: 20px; }
-.footer-col h4 { margin-bottom: 15px; color: #E65100; }
-.social a { color: #AAA; text-decoration: none; display: block; margin-bottom: 8px; }
-.social a:hover { color: white; }
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.5rem; }
     .nav-links { display: none; }
