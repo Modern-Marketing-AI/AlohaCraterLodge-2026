@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Specials | Aloha Crater Lodge</title>
+    <meta name="description" content="Direct booking advantages and excursion perks for your stay at Aloha Crater Lodge.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Volcanic Dark Mode & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #18181b;
+            color: #f3f4f6;
+            line-height: 1.6;
+        }
+
+        /* Universal Navigation Matching index.html */
+        .universal-nav {
+            text-align: center; 
+            padding: 25px 0 25px 0; 
+            position: relative; 
+            z-index: 10;
+            background-color: #18181b;
+            border-bottom: 1px solid #2a2a2d;
+        }
+        .universal-nav .logo {
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px;
+        }
+        .universal-nav .subtitle {
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px;
+        }
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-links a {
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 0 6px rgba(255, 69, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .header-links a:hover {
+            border-color: #ff4500;
+            box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.2), inset 0 0 8px rgba(255, 69, 0, 0.15);
+            transform: translateY(-1px);
+            text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);
+        }
+        .nav-reserve-btn {
+            background: rgba(255, 69, 0, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(180deg, #18181b 0%, #111113 100%);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Specials Matrix */
+        .specials-container {
+            max-width: 1000px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .special-card {
+            background-color: #212124;
+            border: 1px solid #3f3f46;
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .special-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4500;
+        }
+
+        .special-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #3f3f46;
+            padding-bottom: 20px;
+        }
+
+        .special-title h2 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        .special-deal {
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .special-body {
+            color: #d4d4d8;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: inline-block;
+            background-color: #ff4500;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
+        }
+        .btn:hover {
+            background-color: #e63e00;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+        }
+
+        /* Footer Backup Formatting */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #2a2a2d;
+            color: #71717a;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;"><a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
+
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <p class="subtitle" style="text-align: center; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links" style="justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">SUITES</a>
+            <a href="wellness.html">WELLNESS</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+            <a href="faq.html">FAQ</a>
+            <a href="guest-concierge.html">BASECAMP COMMAND</a>
+            <a href="itinerary.html">PLAN YOUR TRIP</a>
+            <a href="specials.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">CURRENT SPECIALS</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Current Specials</h1>
+        <p>Direct booking advantages and excursion perks to optimize your exploration of the Kīlauea summit.</p>
+    </section>
+
+    <section class="specials-container">
+
+        <div class="special-card">
+            <div class="special-header">
+                <div class="special-title">
+                    <h2>The E-Bike Gate Bypass</h2>
+                    <span class="special-deal">1-Hour Complimentary Pass Included</span>
+                </div>
+            </div>
+            <div class="special-body">
+                <p>The National Park entrance and major overlook parking lots experience heavy gridlock from 10:00 AM to 3:00 PM. Bypass this friction entirely. Leave your vehicle safely parked at the estate and navigate the rim trails directly on our all-terrain e-bikes.</p>
+                <br>
+                <p>Direct bookings automatically unlock a complimentary 1-hour trail pass per guest. Need to extend your clearance? Upgrade to an All-Day Expedition Pass for just $50 per bike (saving $25 off the standard $75 walk-up rate).</p>
+            </div>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX?promo=E-Bike1Hour" class="target-btn btn">Claim E-Bike Access</a>
+        </div>
+
+        <div class="special-card">
+            <div class="special-header">
+                <div class="special-title">
+                    <h2>Extended Expedition Savings</h2>
+                    <span class="special-deal">Automatic 10% Multi-Night Rate Cut</span>
+                </div>
+            </div>
+            <div class="special-body">
+                <p>Mountain weather at a 4,000-foot elevation shifts rapidly from bright sun to cold rainforest mist. Reserving a single night risks your crater viewing window. Securing 3 or 4 nights guarantees clear viewing opportunities and allows you to explore the active summit without rushing.</p>
+                <br>
+                <p>Enjoy an automatic 10% rate reduction applied to your entire stay when reserving 3 or more nights. No promo code required—the discount calculates automatically when you select your dates on the calendar.</p>
+            </div>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="target-btn btn">Check Open Dates</a>
+        </div>
+
+        <div class="special-card">
+            <div class="special-header">
+                <div class="special-title">
+                    <h2>Hawaii Resident Rate</h2>
+                    <span class="special-deal">Instant $10 Nightly Reduction</span>
+                </div>
+            </div>
+            <div class="special-body">
+                <p>Escape the coastal humidity and establish your basecamp in the crisp, cool air of the summit elevation. Avoid the daytime crowds and enjoy complete schedule autonomy with our independent private kitchenettes and outdoor thermal recovery tubs.</p>
+                <br>
+                <p>Available for all verified Hawaii residents. Click below to automatically attach the resident clearance rate to your reservation.</p>
+            </div>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX?promo=Kama’aina2026" class="target-btn btn">Apply Resident Rate</a>
+        </div>
+
+    </section>
+
+    <footer>
+        <div id="site-footer"></div>
+        <script src="footer.js"></script>
+        <script src="fern.js"></script>
+    </footer>
+
+</body>
+</html>

@@ -324,6 +324,7 @@
             <a href="faq.html">FAQ</a>
             <a href="guest-concierge.html">BASECAMP COMMAND</a>
             <a href="itinerary.html">PLAN YOUR TRIP</a>
+            <a href="specials.html">CURRENT SPECIALS</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
         </div>
     </nav>
@@ -388,7 +389,7 @@
         <ul class="magma-list">
             <li>
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
+                <div><strong style="color:#fff;">1. Contactless Arrival.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
             </li>
             <li>
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -428,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="exitIntentModal" class="exit-modal-overlay">
         <div class="exit-modal-content">
             <span class="modal-close" onclick="closeExitModal()">&times;</span>
-            <h2 style="color: var(--lava-red); margin-top: 0; text-transform: uppercase; letter-spacing: 2px;">Deploy With Full Mobility.</h2>
-            <p style="color: #d1d1d6; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Before you abandon your Basecamp, secure your tactical advantage. Book your dates direct right now and receive a complimentary <strong>4-hour deployment of our Basecamp E-Bike Fleet</strong>.</p>
+            <h2 style="color: var(--lava-red); margin-top: 0; text-transform: uppercase; letter-spacing: 2px;">Explore With Full Mobility.</h2>
+            <p style="color: #d1d1d6; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Before you leave, secure your advantage. Book your dates direct right now and receive a complimentary <strong>1-hour trail pass for our Basecamp E-Bike Fleet</strong>.</p>
             <p style="color: #a1a1aa; font-size: 0.95rem;">Explore the Kīlauea summit trails in complete silence. Bypass the crowds. Zero friction.</p>
             <button class="btn-claim-offer" onclick="claimOfferAndBook()">[ SECURE DATES & CLAIM FLEET ]</button>
         </div>
@@ -451,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         function openMagmaModal() { openModal(); }
         function claimOfferAndBook() {
-            const trackedURL = CLOUDBEDS_URL + "?promoCode=EBIKE4HR";
+            const trackedURL = CLOUDBEDS_URL + "?promo=E-Bike1Hour";
             closeExitModal();
             const finalizeBtn = document.querySelector('.btn-finalize');
             if (finalizeBtn) {

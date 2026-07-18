@@ -28,7 +28,7 @@
                 '<p>11-3966 Lanihuli Road</p>' +
                 '<p>Volcano, HI 96785</p>' +
                 '<div class="footer-map">' +
-                    '<iframe src="https://maps.google.com/maps?q=19.434694,-155.223806&amp;z=17&amp;output=embed"' +
+                    '<iframe src="https://maps.google.com/maps?q=19.434694,-155.223806&z=17&output=embed"' +
                     ' allowfullscreen="" loading="lazy"' +
                     ' referrerpolicy="no-referrer-when-downgrade"' +
                     ' title="Aloha Crater Lodge location map"></iframe>' +
@@ -44,6 +44,7 @@
             '</div>' +
             '<div class="footer-col">' +
                 '<h4>Quick Links</h4>' +
+                '<a href="specials.html" style="color:#ff4500;">Current Specials</a>' +
                 '<a href="suites.html">Suites</a>' +
                 '<a href="wellness.html">Wellness</a>' +
                 '<a href="faq.html">FAQ</a>' +
@@ -56,7 +57,7 @@
         '</div>' +
         '<div class="footer-legal">' +
             '<p>Located exactly 2.0 miles from the Hawaii Volcanoes National Park main entrance.</p>' +
-            '<p>&copy; 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>' +
+            '<p>© 2026 Aloha Crater Lodge LLC. All Rights Reserved.</p>' +
         '</div>' +
     '</footer>';
 
