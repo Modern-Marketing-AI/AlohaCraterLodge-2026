@@ -1,0 +1,14 @@
+/what-to-expect    /experience.html    301
+/rooms             /suites.html        301
+/things-to-do      /things-to-do.html  301
+/wellness          /wellness.html      301
+/ebikes            /ebikes.html        301
+/concierge         /concierge.html     301
+/guide             /guide.html         301
+/premium-suites    /premium-suites.html 301
+/basecamp          /basecamp.html      301
+/family-suites     /family-suites.html 301
+/live-feed         /live-feed.html     301
+/blog/*            /blog/:splat        301
+
+/*    /index.html   200
