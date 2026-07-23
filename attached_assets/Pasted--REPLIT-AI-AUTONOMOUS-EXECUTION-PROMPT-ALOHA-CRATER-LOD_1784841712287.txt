@@ -1,0 +1,209 @@
+[REPLIT AI AUTONOMOUS EXECUTION PROMPT — ALOHA CRATER LODGE: EXPERIENCE PAGE MIGRATION]
+
+SYSTEM ROLE:
+You are an autonomous Replit AI Agent with direct codebase access. Execute the following three steps automatically. Do not ask the human to manually copy, paste, or locate text. You must parse the files and perform the exact file modifications yourself. 
+
+CRITICAL CONSTRAINTS (DO NOT VIOLATE):
+1. The "Direct Capture Stack" and `capture-scripts.js` were just implemented. DO NOT touch, alter, or break any of those recent additions.
+2. DO NOT modify or remove any `<script type="application/ld+json">` schema markup.
+3. DO NOT modify or remove the Netlify volcano API scripts or alert bars.
+4. DO NOT alter `footer.js` or the `<div id="site-footer"></div>` container.
+5. Use ONLY vanilla JS and CSS. No external frameworks. Ensure 100% responsiveness on mobile screens (max-width: 768px).
+
+---
+
+### STEP 1: AUTOMATED SURGERY ON `index.html`
+1. Read `index.html`. Search for and completely DELETE the large text block containing the headings "INSIDE THE BASECAMP: SETTING CLEAR EXPECTATIONS", "WHAT TO EXPECT", and "WHAT NOT TO EXPECT". 
+2. Search for the primary Hero CTA button (which links to the Cloudbeds `ifCVNX` engine).
+3. Wrap that primary button in a flex container and add the new secondary button so the final structure matches this exactly:
+
+<div class="hero-button-group">
+  <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn-primary">🟢 CHECK DATES & RATES</a>
+  
+  <a href="experience.html" class="btn-secondary-ghost">⚪ IS THE BASECAMP RIGHT FOR YOU?</a>
+</div>
+
+---
+
+### STEP 2: GENERATE `experience.html`
+1. Create a new file in the root directory named `experience.html`.
+2. Extract the standard `<head>`, `<nav>`, and footer injection logic (`<div id="site-footer"></div><script src="footer.js"></script>`) from `index.html` to ensure architectural consistency.
+3. Inject the following HTML as the core body content between the navigation and footer:
+
+<main class="experience-section">
+  <div class="container">
+    <h1 class="page-title">The Basecamp Experience</h1>
+    <p class="page-subtitle">Setting clear expectations for your rainforest stay.</p>
+    
+    <div class="experience-grid">
+      <div class="exp-col positive">
+        <h2 class="exp-header">✅ WHAT TO EXPECT</h2>
+        
+        <div class="exp-item">
+          <h3>Unmatched Park Proximity</h3>
+          <p>Just 2.0 miles from the park border. You have the freedom to explore the crater at sunrise or midnight on your own schedule.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Frictionless Park Access</h3>
+          <p>Grab an on-property e-bike to cruise past entrance station vehicle queues and bypass crowded overlook parking lots.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Active Physical Restoration</h3>
+          <p>Deep outdoor jetted tubs under the fern canopy and our specialized Bio-Regeneration Room to recharge your body after heavy trail days.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Absolute Privacy & Autonomy</h3>
+          <p>Isolated suites hidden deep in the rainforest canopy. Private kitchenettes give you total control over your meals and departure times.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Crisp Mountain Elevation</h3>
+          <p>Located at 4,000 feet. Expect clear, refreshing air and misty, authentic rainforest mornings.</p>
+        </div>
+      </div>
+
+      <div class="exp-col negative">
+        <h2 class="exp-header">❌ WHAT TO LEAVE BEHIND</h2>
+        
+        <div class="exp-item">
+          <h3>A Distant Commute</h3>
+          <p>No long highway drives back to the coast or wasting your limited island hours sitting in traffic.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Rental Car Gridlock</h3>
+          <p>No idling in lines at the national park gate or endlessly circling the crater hunting for an open parking slot.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Traditional Resort Services</h3>
+          <p>No beauty parlors, bellhops, or massage bookings. This is a self-directed, tech-enabled environment engineered for trail recovery.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Hotel Lobbies & Crowds</h3>
+          <p>No shared hotel hallways, elevator banks, rigid breakfast buffets, or noisy communal lounges.</p>
+        </div>
+        
+        <div class="exp-item">
+          <h3>Coastal Beach Weather</h3>
+          <p>Air conditioning is useless up here. You are trading tropical coastal heat for a cool, restorative mountain climate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+---
+
+### STEP 3: APPEND TO `style.css`
+Open `style.css` and append the following CSS block to the absolute bottom of the file. Do not alter or overwrite any existing CSS rules.
+
+/* --- HERO BUTTON GROUP --- */
+.hero-button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.btn-secondary-ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #555555;
+  padding: 15px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  text-align: center;
+}
+.btn-secondary-ghost:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- THE BASECAMP EXPERIENCE PAGE --- */
+.experience-section {
+  padding: 80px 20px;
+  background-color: #111113;
+  color: #ffffff;
+}
+.page-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+.page-subtitle {
+  text-align: center;
+  color: #aaaaaa;
+  margin-bottom: 50px;
+  font-size: 1.1em;
+}
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.exp-col {
+  background: #1a1a1c;
+  border-radius: 12px;
+  padding: 40px 30px;
+}
+.exp-col.positive {
+  border-top: 4px solid #10b981;
+}
+.exp-col.negative {
+  border-top: 4px solid #ef4444;
+}
+.exp-header {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333333;
+}
+.exp-item {
+  margin-bottom: 30px;
+}
+.exp-item:last-child {
+  margin-bottom: 0;
+}
+.exp-item h3 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.exp-item p {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 0.95em;
+  margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-button-group a {
+    width: 100%;
+  }
+  .experience-section {
+    padding: 60px 15px;
+  }
+}
+
+---
+Execute these three file modifications directly and report back when the build is complete.
