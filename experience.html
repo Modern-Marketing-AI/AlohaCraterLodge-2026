@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Basecamp Experience | Aloha Crater Lodge</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-card-button {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            border-radius: 6px;
+            background: transparent;
+            color: #ff4500;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.15);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        header nav a, .header-links a {
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 0 6px rgba(255, 69, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        header nav a:hover, .header-links a:hover {
+            border-color: #ff4500;
+            box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.2), inset 0 0 8px rgba(255, 69, 0, 0.15);
+            transform: translateY(-1px);
+            text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);
+        }
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .universal-nav {
+            text-align: center;
+            padding: 25px 0 25px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .universal-nav .logo {
+            font-family: 'Georgia', serif;
+            font-size: 2.2em;
+            color: #ff4500;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .universal-nav .subtitle {
+            font-style: italic;
+            color: #ccc;
+            font-family: 'Georgia', serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .nav-reserve-btn {
+            background: rgba(255, 69, 0, 0.15);
+        }
+        body { background-color: #111113; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="alert-bar" style="background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold;"><a href="live-feed.html" style="color: white; text-decoration: none;">[ LIVE SUMMIT CAM ]</a> &nbsp; | &nbsp; <a href="volcano-guide.html#latest" style="color: white; text-decoration: none;">[ READ THE LATEST BASECAMP DISPATCH ]</a></div>
+
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+        <div class="logo">ALOHA CRATER LODGE</div>
+        <p class="subtitle" style="text-align: center; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+        <div class="header-links" style="justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+            <a href="index.html">BASECAMP (HOME)</a>
+            <a href="suites.html">SUITES</a>
+            <a href="wellness.html">WELLNESS</a>
+            <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+            <a href="faq.html">FAQ</a>
+            <a href="guest-concierge.html">BASECAMP COMMAND</a>
+            <a href="itinerary.html">PLAN YOUR TRIP</a>
+            <a href="specials.html" style="color: #ff4500; font-weight: bold; border-color: #ff4500;">CURRENT SPECIALS</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+        </div>
+    </nav>
+
+    <main class="experience-section">
+        <div class="container">
+            <h1 class="page-title">The Basecamp Experience</h1>
+            <p class="page-subtitle">Setting clear expectations for your rainforest stay.</p>
+
+            <div class="experience-grid">
+                <div class="exp-col positive">
+                    <h2 class="exp-header">✅ WHAT TO EXPECT</h2>
+
+                    <div class="exp-item">
+                        <h3>Unmatched Park Proximity</h3>
+                        <p>Just 2.0 miles from the park border. You have the freedom to explore the crater at sunrise or midnight on your own schedule.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Frictionless Park Access</h3>
+                        <p>Grab an on-property e-bike to cruise past entrance station vehicle queues and bypass crowded overlook parking lots.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Active Physical Restoration</h3>
+                        <p>Deep outdoor jetted tubs under the fern canopy and our specialized Bio-Regeneration Room to recharge your body after heavy trail days.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Absolute Privacy & Autonomy</h3>
+                        <p>Isolated suites hidden deep in the rainforest canopy. Private kitchenettes give you total control over your meals and departure times.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Crisp Mountain Elevation</h3>
+                        <p>Located at 4,000 feet. Expect clear, refreshing air and misty, authentic rainforest mornings.</p>
+                    </div>
+                </div>
+
+                <div class="exp-col negative">
+                    <h2 class="exp-header">❌ WHAT TO LEAVE BEHIND</h2>
+
+                    <div class="exp-item">
+                        <h3>A Distant Commute</h3>
+                        <p>No long highway drives back to the coast or wasting your limited island hours sitting in traffic.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Rental Car Gridlock</h3>
+                        <p>No idling in lines at the national park gate or endlessly circling the crater hunting for an open parking slot.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Traditional Resort Services</h3>
+                        <p>No beauty parlors, bellhops, or massage bookings. This is a self-directed, tech-enabled environment engineered for trail recovery.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Hotel Lobbies & Crowds</h3>
+                        <p>No shared hotel hallways, elevator banks, rigid breakfast buffets, or noisy communal lounges.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Coastal Beach Weather</h3>
+                        <p>Air conditioning is useless up here. You are trading tropical coastal heat for a cool, restorative mountain climate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="footer.js"></script>
+    <script src="capture-scripts.js"></script>
+</body>
+</html>

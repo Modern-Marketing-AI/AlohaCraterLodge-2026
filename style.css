@@ -190,3 +190,105 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
   color: #888888;
   border: 1px solid #444444;
 }
+
+/* --- HERO BUTTON GROUP --- */
+.hero-button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.btn-secondary-ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #555555;
+  padding: 15px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  text-align: center;
+}
+.btn-secondary-ghost:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- THE BASECAMP EXPERIENCE PAGE --- */
+.experience-section {
+  padding: 80px 20px;
+  background-color: #111113;
+  color: #ffffff;
+}
+.page-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+.page-subtitle {
+  text-align: center;
+  color: #aaaaaa;
+  margin-bottom: 50px;
+  font-size: 1.1em;
+}
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.exp-col {
+  background: #1a1a1c;
+  border-radius: 12px;
+  padding: 40px 30px;
+}
+.exp-col.positive {
+  border-top: 4px solid #10b981;
+}
+.exp-col.negative {
+  border-top: 4px solid #ef4444;
+}
+.exp-header {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333333;
+}
+.exp-item {
+  margin-bottom: 30px;
+}
+.exp-item:last-child {
+  margin-bottom: 0;
+}
+.exp-item h3 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.exp-item p {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 0.95em;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-button-group a {
+    width: 100%;
+  }
+  .experience-section {
+    padding: 60px 15px;
+  }
+}
