@@ -1,0 +1,237 @@
+[REPLIT AI EXECUTION PROMPT — ALOHA CRATER LODGE DIRECT CAPTURE STACK]
+
+OBJECTIVE:
+You are an expert Frontend Architect. Implement the "Direct Capture Strategy" across the Aloha Crater Lodge codebase. I am providing the exact HTML, CSS, and JavaScript required. Your task is to inject these into the corresponding files without hallucinating new logic, deleting existing structures, or altering my current setup.
+
+STRICT CONSTRAINTS (DO NOT VIOLATE):
+1. Use ONLY the vanilla JS and CSS provided. Do not use external libraries or frameworks.
+2. DO NOT modify or remove any existing `<script type="application/ld+json">` schema markup in the `<head>`.
+3. DO NOT modify or remove the Netlify volcano API script or the volcano alert bar.
+4. DO NOT modify the existing footer script (`footer.js`) or its container. 
+5. Ensure 100% responsiveness on mobile screens (max-width: 768px).
+
+---
+
+### STEP 1: CREATE AND LINK NEW JS FILE
+Create a new file named `capture-scripts.js` in the root directory. Link it inside the `<head>` or just above the `</body>` tag of `index.html`, `suites.html`, and `specials.html` using: `<script src="capture-scripts.js"></script>`.
+
+Paste this exact code into `capture-scripts.js`:
+
+```javascript
+// 1. Dynamic Tab-Title Hacking (Loss Aversion)
+const originalTitle = document.title;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    document.title = '⚠️ (1) Direct E-Bike Pass Reserved...';
+  } else {
+    document.title = originalTitle;
+  }
+});
+
+// 2. Exit-Intent & Mobile Back-Swipe Intercept
+document.addEventListener('DOMContentLoaded', () => {
+  // Prevent re-triggering in same session
+  if (sessionStorage.getItem('exitModalDismissed')) return;
+
+  // Inject Modal HTML into DOM
+  const modalHTML = `
+    <div id="exit-intent-modal" class="exit-modal-overlay">
+      <div class="exit-modal-content">
+        <div class="modal-title">✋ Hold On — Don't Leave Your Perks Behind</div>
+        <div class="modal-body">
+          Booking on third-party sites adds platform service fees and excludes your complimentary e-bike trail pass.<br><br>
+          Lock in $0 added fees and free e-bike passes by completing your booking right now.
+        </div>
+        <a href="[https://hotels.cloudbeds.com/en/reservation/ifCVNX](https://hotels.cloudbeds.com/en/reservation/ifCVNX)" class="modal-btn btn-direct">🟢 CLAIM PERKS & BOOK HERE</a>
+        <button class="modal-btn btn-ota close-exit-modal">Continue to Third-Party OTA</button>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  const modal = document.getElementById('exit-intent-modal');
+  const closeBtns = document.querySelectorAll('.close-exit-modal');
+
+  const dismissModal = () => {
+    modal.style.display = 'none';
+    sessionStorage.setItem('exitModalDismissed', 'true');
+  };
+
+  closeBtns.forEach(btn => btn.addEventListener('click', dismissModal));
+
+  // Desktop Exit-Intent (Mouse leaves top of viewport)
+  document.addEventListener('mouseout', (e) => {
+    if (e.clientY < 50 && e.relatedTarget == null && !sessionStorage.getItem('exitModalDismissed')) {
+      modal.style.display = 'flex';
+    }
+  });
+
+  // Mobile Back-Swipe / History Intercept
+  window.history.pushState({ capture: 'active' }, '');
+  window.addEventListener('popstate', () => {
+    if (!sessionStorage.getItem('exitModalDismissed')) {
+      modal.style.display = 'flex';
+      window.history.pushState({ capture: 'active' }, '');
+    }
+  });
+});
+```
+
+---
+
+### STEP 2: INJECT CSS FOR NEW COMPONENTS
+Open `style.css` and append the following code at the bottom of the file. Do not alter existing CSS classes.
+
+```css
+/* --- DIRECT CAPTURE STACK STYLES --- */
+
+/* Price Anchor Tag */
+.price-anchor-tag {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 5px;
+}
+.capacity-notice {
+  font-size: 0.85em;
+  color: #10b981;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Comparison Matrix (Desktop: 2 Col, Mobile: 1 Col) */
+.comparison-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 30px 0;
+}
+.comp-card {
+  background: #111113;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  color: #fff;
+}
+.comp-card.direct {
+  border-color: #10b981;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+}
+.comp-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.comp-header.direct { color: #10b981; }
+.comp-header.ota { color: #aaaaaa; }
+.comp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
+}
+.comp-list li { margin-bottom: 10px; }
+.comp-list.ota li { color: #888888; }
+.strike { text-decoration: line-through; opacity: 0.6; }
+
+@media (max-width: 768px) {
+  .comparison-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Exit Intent Modal */
+.exit-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+.exit-modal-content {
+  background: #111113;
+  border: 2px solid #ff4500;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  color: #fff;
+  text-align: center;
+}
+.modal-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.modal-body {
+  margin-bottom: 25px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+.modal-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  text-align: center;
+}
+.btn-direct {
+  background: #10b981;
+  color: #fff;
+  border: none;
+}
+.btn-ota {
+  background: transparent;
+  color: #888888;
+  border: 1px solid #444444;
+}
+```
+
+---
+
+### STEP 3: HTML INJECTIONS (`suites.html` & `specials.html`)
+
+Task 3.1: Locate the nightly price display for the suites. Append this HTML directly below the price text:
+```html
+<span class="price-anchor-tag">🟢 $0 PLATFORM FEES (Save ~$30 vs Airbnb)</span>
+```
+
+Task 3.2: Locate the primary room selection area / booking button zone. Inject this HTML block immediately ABOVE the main Cloudbeds "Book Now" buttons:
+```html
+<div class="capacity-notice">🌿 On-Property E-Bike Capacity Notice: Only 2 complimentary e-bike passes remain available for your selected dates. Direct bookings reserve gear priority automatically.</div>
+
+<div class="comparison-matrix">
+  <div class="comp-card direct">
+    <div class="comp-header direct">🟢 BOOK HERE</div>
+    <ul class="comp-list">
+      <li>✅ <strong>Price:</strong> $180 / night ($0 Added Fees)</li>
+      <li>✅ <strong>Gear:</strong> Guaranteed E-Bike Fleet Reservation</li>
+      <li>✅ <strong>Flexibility:</strong> Free Date-Shifts for Eruption/Weather</li>
+      <li>✅ <strong>Check-In:</strong> Instant SMS Keyless Code 24 Hrs Prior</li>
+    </ul>
+  </div>
+
+  <div class="comp-card">
+    <div class="comp-header ota">⚪ THIRD-PARTY OTA</div>
+    <ul class="comp-list ota">
+      <li>❌ <strong>Price:</strong> $180 / night (+14% Service Fee at Checkout)</li>
+      <li><span class="strike">❌ <strong>Gear:</strong> E-Bike Fleet Access Excluded</span></li>
+      <li>❌ <strong>Flexibility:</strong> Rigid Platform Cancellation Rules</li>
+      <li>❌ <strong>Check-In:</strong> Standard App Messaging Verification</li>
+    </ul>
+  </div>
+</div>
+```
+
+---
+Execute these three steps and confirm when the code is fully integrated.

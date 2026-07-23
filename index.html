@@ -167,6 +167,22 @@
         .vsb-level.alert-watch   { color: #f97316; }
         .vsb-level.alert-warning { color: #ef4444; }
         .vsb-sub { color: #555; font-weight: 400; }
+
+        /* Mobile Matrix Stacking */
+        @media (max-width: 768px) {
+            .expectation-matrix table, .expectation-matrix thead, .expectation-matrix tbody, .expectation-matrix th, .expectation-matrix td, .expectation-matrix tr {
+                display: block;
+                width: 100% !important;
+            }
+            .expectation-matrix th {
+                border-left: none !important;
+                border-bottom: 1px solid #ff4500;
+            }
+            .expectation-matrix td {
+                border-left: none !important;
+                border-bottom: 1px solid #2a2a2d;
+            }
+        }
     </style>
 </head>
 <body>
@@ -194,7 +210,7 @@
             <p>Located exactly 2.0 miles from the Kīlauea entrance gates. Secure your premium modern suite, unlock private e-bike gate access, and maintain absolute connectivity.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;">
                 <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" class="btn" target="_blank">Explore Dates</a>
-                <a href="ebikes.html" class="btn" style="background:transparent;border:2px solid #10b981;color:#10b981;" onmouseover="this.style.background='#10b981';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#10b981'">E-Bike Rentals</a>
+                <a href="specials.html" class="btn" style="background:transparent;border:2px solid #10b981;color:#10b981;" onmouseover="this.style.background='#10b981';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#10b981'">E-Bike Perks</a>
             </div>
         </div>
     </header>
@@ -310,6 +326,7 @@
     <div id="site-footer"></div>
     <script src="footer.js"></script>
 <script src="fern.js"></script>
+<script src="capture-scripts.js"></script>
 <script>
 (function () {
     var levelEl = document.getElementById('vsb-level');

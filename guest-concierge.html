@@ -14,15 +14,36 @@
         .alert-bar { background-color: #aa0000; color: white; text-align: center; padding: 10px; font-weight: bold; font-size: 0.85rem; }
         .alert-bar a { color: white; text-decoration: none; }
 
-        .universal-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #0a0a0a; padding: 1rem 2rem; border-bottom: 1px solid #1a1a1a; }
-        .logo { font-size: 1.4rem; font-weight: 900; color: #ff4500; letter-spacing: 0.08em; white-space: nowrap; }
-        .subtitle { flex: 1; text-align: center; color: #aaa; font-style: italic; font-size: 0.9rem; min-width: 180px; margin: 0; }
-        .header-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-        .header-links a { color: #ccc; text-decoration: none; border: 1px solid #333; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.04em; transition: all 0.2s; white-space: nowrap; }
-        .header-links a:hover { border-color: #ff4500; color: #ff4500; }
-        .header-links a.active { border-color: #ff4500; color: #ff4500; box-shadow: 0 0 10px rgba(255,69,0,0.4); text-shadow: 0 0 8px rgba(255,69,0,0.5); }
-        .nav-reserve-btn { background-color: #ff4500 !important; color: #fff !important; border-color: #ff4500 !important; }
-        .nav-reserve-btn:hover { background-color: #cc3700 !important; box-shadow: 0 0 14px rgba(255,69,0,0.5) !important; }
+        /* UNIVERSAL NAV SPACING */
+        .universal-nav { 
+            background: #1a1a1a; 
+            text-align: center; 
+            padding: 25px 5% 25px 5%; 
+            position: relative; 
+            z-index: 10; 
+            border-bottom: 1px solid rgba(255,69,0,0.2);
+        }
+        .universal-nav .logo { 
+            font-family: 'Georgia', serif; 
+            font-size: 2.2em; 
+            color: #ff4500; 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); 
+            letter-spacing: 2px; 
+            margin-bottom: 5px; 
+            display: block;
+            text-decoration: none;
+        }
+        .universal-nav .subtitle { 
+            font-style: italic; 
+            color: #ccc; 
+            font-family: 'Georgia', serif; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+        }
+        .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .header-links a { display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-links a:hover { border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); }
+        .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
 
         /* Command Hero */
         .command-hero {
@@ -176,17 +197,18 @@
         <a href="volcano-guide.html#latest">[ READ THE LATEST BASECAMP DISPATCH ]</a>
     </div>
 
-    <nav class="universal-nav">
-        <div class="logo">ALOHA CRATER LODGE</div>
-        <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+    <nav class="universal-nav" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <a href="index.html" class="logo">ALOHA CRATER LODGE</a>
+        <p class="subtitle" style="flex: 1; text-align: center; min-width: 200px; margin: 0;">A Private Rainforest Retreat at the Edge of Kīlauea</p>
         <div class="header-links">
             <a href="index.html">BASECAMP (HOME)</a>
             <a href="suites.html">SUITES</a>
             <a href="wellness.html">WELLNESS</a>
             <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
             <a href="faq.html">FAQ</a>
-            <a href="guest-concierge.html" class="active">GUEST CONCIERGE</a>
+            <a href="guest-concierge.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">GUEST CONCIERGE</a>
             <a href="itinerary.html">PLAN YOUR TRIP</a>
+            <a href="specials.html">CURRENT SPECIALS</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
         </div>
     </nav>
@@ -203,7 +225,6 @@
 
     <main class="page-container">
 
-        <!-- ACTION TILES -->
         <p class="section-label">What We Offer</p>
         <h2 class="section-title">Guest Services</h2>
 
@@ -269,7 +290,6 @@
 
         <hr class="section-divider">
 
-        <!-- OFFICIAL BRIEFING STATION -->
         <p class="section-label">Official Briefing</p>
         <h2 class="section-title">The Briefing Station</h2>
         <div style="background:#111;border:1px solid #1e1e1e;border-radius:8px;overflow:hidden;max-width:760px;">
@@ -291,7 +311,6 @@
 
         <hr class="section-divider">
 
-        <!-- LIVE STATUS -->
         <p class="section-label">Live Conditions</p>
         <h2 class="section-title">Current Conditions</h2>
         <div class="status-row">

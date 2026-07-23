@@ -77,3 +77,116 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .magma-close:hover { color: #ff4500; }
 .magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; }
 .magma-btn:hover { background: #e03e00; }
+
+/* --- DIRECT CAPTURE STACK STYLES --- */
+
+/* Price Anchor Tag */
+.price-anchor-tag {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 5px;
+}
+.capacity-notice {
+  font-size: 0.85em;
+  color: #10b981;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Comparison Matrix (Desktop: 2 Col, Mobile: 1 Col) */
+.comparison-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 30px 0;
+}
+.comp-card {
+  background: #111113;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  color: #fff;
+}
+.comp-card.direct {
+  border-color: #10b981;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+}
+.comp-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.comp-header.direct { color: #10b981; }
+.comp-header.ota { color: #aaaaaa; }
+.comp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
+}
+.comp-list li { margin-bottom: 10px; }
+.comp-list.ota li { color: #888888; }
+.strike { text-decoration: line-through; opacity: 0.6; }
+
+@media (max-width: 768px) {
+  .comparison-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Exit Intent Modal */
+.exit-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+.exit-modal-content {
+  background: #111113;
+  border: 2px solid #ff4500;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  color: #fff;
+  text-align: center;
+}
+.modal-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.modal-body {
+  margin-bottom: 25px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+.modal-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  text-align: center;
+}
+.btn-direct {
+  background: #10b981;
+  color: #fff;
+  border: none;
+}
+.btn-ota {
+  background: transparent;
+  color: #888888;
+  border: 1px solid #444444;
+}

@@ -66,6 +66,33 @@
 
         .date { font-style: italic; color: #888; font-size: 0.9em; margin-bottom: 15px; display: block; }
         .ai-brain-hidden { display: none; }
+
+        /* MAGMA MODAL CSS */
+        .magma-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center;
+            align-items: center; backdrop-filter: blur(4px);
+        }
+        .magma-modal-overlay.active { display: flex; opacity: 1; }
+        .magma-modal {
+            background: #141417; padding: 2.5rem; max-width: 560px; width: 92%;
+            border-left: 4px solid #10b981; position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.7);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #fff;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        .magma-modal h2 { font-family: 'Georgia', serif; color: #fff; text-align: center; margin-bottom: 0.5rem; margin-top: 0; }
+        .magma-modal .subtitle { color: #ccc; text-align: center; margin-bottom: 2rem; font-size: 0.9rem; font-style: normal; }
+        .magma-modal h3 { color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; font-size: 1.2rem; margin-top: 0; }
+        .magma-list { list-style: none; padding: 0; margin-bottom: 2.5rem; font-size: 1rem;}
+        .magma-list li { margin-bottom: 1.2rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px; color: #ddd; }
+        .magma-list li svg { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+        .magma-close { position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.8rem; transition: color 0.2s; line-height: 1; }
+        .magma-close:hover { color: #ff4500; }
+        .magma-btn { display: block; width: 100%; background: #ff4500; color: #fff; text-align: center; padding: 16px; font-weight: bold; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.05em; box-sizing: border-box; }
+        .magma-btn:hover { background: #e03e00; }
     </style>
 </head>
 <body>
@@ -88,6 +115,7 @@
             <a href="faq.html">FAQ</a>
             <a href="guest-concierge.html">BASECAMP COMMAND</a>
             <a href="itinerary.html">PLAN YOUR TRIP</a>
+            <a href="specials.html">CURRENT SPECIALS</a>
             <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
         </div>
     </nav>
@@ -145,12 +173,12 @@
             <h2>The "Strategic Refuel": How to Skip the 2-Hour Dinner Wait</h2>
             <span class="date">January 25, 2026</span>
             <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/The+8+Hour+Window+Why+Commuters+Missed+History.png" alt="Sunrise over volcanic caldera" class="post-image">
-            <p>The volcano has paused, but the village is gridlocked. Don't get stuck in line while the mountain recharges. Here is why the kitchenette is your best tactical asset tonight...</p>
+            <p>The volcano has paused, but the village is gridlocked. Don't get stuck in line while the mountain recharges. Here is why the kitchenette is your best strategic asset tonight...</p>
             <button class="expand-btn" onclick="togglePost('post3')">Read Local Insight</button>
             <div id="post3" class="full-article">
                 <p><strong>FIELD REPORT #5</strong> DATE: Sunday, January 25, 2026 (5:00 PM HST) LOCATION: Volcano Village Basecamp STATUS: Intermission / Gridlock Alert</p>
                 <p><strong>The Situation Report:</strong> The mountain has hit the "Pause" button. Episode 41 ended last night, and Kīlauea is currently inflating and recharging for the next round. But while the crater floor is quiet, Volcano Village is not. Right now, thousands of visitors who drove up for the weekend are realizing the same thing at the same time: they are hungry. The result? Two-hour wait times at the few restaurants in town.</p>
-                <p><strong>The Tactical Error: The "Restaurant Hostage"</strong> Most visitors treat a trip to Volcano like a standard vacation. They rely on hotel dining rooms or local cafes for every meal. Tonight, that strategy is a trap. If you are staying at the big hotels, you are likely standing in a lobby right now, buzzer in hand, waiting for a table while your hiking window closes. You are burning valuable recovery time standing in line.</p>
+                <p><strong>The Critical Error: The "Restaurant Hostage"</strong> Most visitors treat a trip to Volcano like a standard vacation. They rely on hotel dining rooms or local cafes for every meal. Tonight, that strategy is a trap. If you are staying at the big hotels, you are likely standing in a lobby right now, buzzer in hand, waiting for a table while your hiking window closes. You are burning valuable recovery time standing in line.</p>
                 <p><strong>The Basecamp Advantage: The Kitchenette</strong> This is why we equipped Aloha Crater Lodge with kitchenettes and dining areas. It wasn't just for "convenience"—it was for autonomy. While the crowds are gridlocked at the bistro, our Basecamp guests are executing the "Strategic Refuel":</p>
                 <ul>
                     <li><strong>Zero Wait Time:</strong> Dinner is ready when you are.</li>
@@ -171,8 +199,8 @@
             <div id="post4" class="full-article">
                 <p><strong>FIELD REPORT #4</strong> DATE: Sunday, January 25, 2026 (8:15 AM HST) LOCATION: Volcano Village Basecamp STATUS: Episode 41 Concluded / Rapid Recharge in Progress</p>
                 <p><strong>The "Basecamp" Intel:</strong> The show is over. The massive, 1,500-foot fountains that defined yesterday’s eruption ceased last night at 7:29 PM. This morning, the crater floor is quiet, steaming under a beautiful sunrise.</p>
-                <p>If you were driving in from Kona or Hilo last night when you saw the alert, you probably saw more tail lights than lava. Episode 41 was historic in intensity, but it was incredibly brief. This is the new tactical reality of Kīlauea, and it proves a critical point about how to travel here.</p>
-                <p><strong>The Hard Data: Why the "Day Trip" Strategy Failed</strong><br>Here is the after-action report based on USGS data: The total runtime of this massive event was just <strong>8 hours and 18 minutes</strong>. Do the tactical math. If you were at a resort on the Kona side when the alert went out at 11:00 AM:</p>
+                <p>If you were driving in from Kona or Hilo last night when you saw the alert, you probably saw more tail lights than lava. Episode 41 was historic in intensity, but it was incredibly brief. This is the new operational reality of Kīlauea, and it proves a critical point about how to travel here.</p>
+                <p><strong>The Hard Data: Why the "Day Trip" Strategy Failed</strong><br>Here is the after-action report based on USGS data: The total runtime of this massive event was just <strong>8 hours and 18 minutes</strong>. Do the logistical math. If you were at a resort on the Kona side when the alert went out at 11:00 AM:</p>
                 <ol>
                     <li>You packed the car (30 mins).</li>
                     <li>You drove across the Saddle Road (2.5 hours).</li>
@@ -188,15 +216,15 @@
             <h2>RED ALERT: Episode 41 Has Begun (1,600-Foot Fountains)</h2>
             <span class="date">January 24, 2026</span>
             <img src="https://irp.cdn-website.com/9a8843de/dms3rep/multi/Episode-41-Has-Begun.png" alt="Massive Lava Fountains" class="post-image">
-            <p>The silence is broken. Fountains are topping the Empire State Building. Here is your tactical guide to viewing—and avoiding the 'Pele’s Hair' falling in the Village...</p>
+            <p>The silence is broken. Fountains are topping the Empire State Building. Here is your operational guide to viewing—and avoiding the 'Pele’s Hair' falling in the Village...</p>
             <button class="expand-btn" onclick="togglePost('post5')">Read Local Insight</button>
             <div id="post5" class="full-article">
                 <p><strong>FIELD REPORT #3</strong> (LIVE UPDATE) DATE: January 24, 2026 (2:20 PM HST) LOCATION: Volcano Village HQ STATUS: RED ALERT / ERUPTION IN PROGRESS / HAZARD WARNING</p>
                 <p>The "Basecamp" Intel: The wait is over. The USGS has confirmed that Episode 41 kicked off at 11:10 AM this morning. Forget the polite "glow" you see in standard travel brochures. We are currently witnessing sustained fountains hitting 1,640 feet (500 meters).</p>
-                <p>Let me put that number in tactical perspective: That is taller than the Empire State Building. This isn't just an eruption; this is a historic display of power. The seismic tremors we reported yesterday were the prelude to this main event.</p>
+                <p>Let me put that number in physical perspective: That is taller than the Empire State Building. This isn't just an eruption; this is a historic display of power. The seismic tremors we reported yesterday were the prelude to this main event.</p>
                 <p><strong>The Critical Safety Warning (Read This Before You Drive Up):</strong> Here is the intel the generic news feeds are missing, and it is vital for your safety: What goes up must come down. The USGS has confirmed tephra fall—specifically "Pele's Hair"—in public viewing areas inside the Park and right here in Volcano Village.</p>
                 <p>This is not confetti. It is sharp, volcanic glass strands. It can damage eyes, irritate skin, and ruin camera lenses.</p>
-                <p><strong>Tactical Orders for Inbound Travelers:</strong> This is a world-class spectacle, but it demands respect. If you are inbound or already on the ground, execute the following:</p>
+                <p><strong>Critical Directives for Inbound Travelers:</strong> This is a world-class spectacle, but it demands respect. If you are inbound or already on the ground, execute the following:</p>
                 <p>Eye Protection is Mandatory: Sunglasses are minimum requirements, even at night, to block drifting glass strands. If you have wrap-around safety glasses or goggles, wear them.</p>
                 <p>Cover Your Skin: Wear a brimmed hat and long sleeves. Do not wipe strands off your skin with your hand; rinse them off.</p>
                 <p>DO NOT Use Your Windshield Wipers: If you see fine ash or golden strands on your rental car windshield, do not hit the wipers. You will instantly scratch the glass. Rinse it with water first.</p>
@@ -212,7 +240,6 @@
             <button class="expand-btn" onclick="togglePost('post6')">Read the Full Story</button>
             <div id="post6" class="full-article">
                 <p>Kīlauea doesn’t usually run on a schedule, but right now, she’s giving us a rare heads-up. As of this morning (Jan 23), the <strong>USGS Hawaiian Volcano Observatory</strong> has pinpointed the window for "Episode 41" to begin between <strong>today, January 23, and Sunday, January 25.</strong></p>
-                <h3>The Signs are Already Here</h3>
                 <p>Overnight, the summit webcams picked up a "consistent strong glow" and "weak spattering" from the North Vent. But the real story is in the ground deformation. The summit is "inflating" rapidly—think of it like a balloon filling with air. When that pressure hits its limit, the system releases. That release is the eruption.</p>
                 <h3>What This Means for You</h3>
                 <p>If you have been waiting for the "perfect time" to visit, this is it. The official "Watch" alert is active. The glow is visible at night even before the main fountains start, creating that signature moody, orange-lit atmosphere that photographers love.</p>
@@ -285,7 +312,7 @@
                 <p><strong>Staying Inside the Park: The Historic Choice</strong></p>
                 <p>For the most iconic and convenient experience, you can stay at the Historic Volcano House, the only hotel located within the boundaries of Hawaiʻi Volcanoes National Park. Perched directly on the rim of the Kīlauea caldera, this hotel offers a front-row seat to one of the world's most active volcanoes. Waking up to a view of the Halemaʻumaʻu crater steaming in the morning light is an unforgettable experience. The rich history, dating back to 1846, and the on-site restaurant with panoramic views are major draws. It’s important to note that due to its unique location and limited number of rooms, it books up exceptionally far in advance and represents a specific, often bustling, park hotel experience.</p>
                 <p><strong>The Volcano Village Alternative: Serenity in the Rainforest</strong></p>
-                <p>Just a minute's drive from the park entrance, you'll find Volcano Village, a small, rustic community nestled in a cool, misty Hawaiian Rainforest. This area is the heart of the alternative lodging scene, known for its bed and breakfasts, vacation rentals, and intimate lodges. Choosing Volcano Village means trading the direct crater view for a profound sense of peace and immersion in nature. The atmosphere here is quiet and restorative, with evenings meant for stargazing and listening to the sounds of the forest. The climate is notably cooler and fresher than the coast, providing a perfect respite after a day of hiking.</p>
+                <p>Just a minute's drive from the park entrance, you'll find Volcano Village, a small, rustic community situated in a cool, misty Hawaiian Rainforest. This area is the heart of the alternative lodging scene, known for its bed and breakfasts, vacation rentals, and intimate lodges. Choosing Volcano Village means trading the direct crater view for a profound sense of peace and immersion in nature. The atmosphere here is quiet and restorative, with evenings meant for stargazing and listening to the sounds of the forest. The climate is notably cooler and fresher than the coast, providing a perfect respite after a day of hiking.</p>
                 <p>For travelers who prioritize privacy and a personalized experience, a Volcano Village stay is often the preferred choice. This is where you can truly disconnect and enjoy the unique ambiance of the island's upland forests.</p>
                 <p><strong>Aloha Crater Lodge: Your Private Rainforest Retreat</strong></p>
                 <p>A premier example of the Volcano Village experience is Aloha Crater Lodge. This lodge is specifically designed as a sanctuary of privacy and relaxation. Instead of a large hotel corridor, guests enjoy independent accommodations, often with private entrances, creating a true sense of having your own secluded haven in the rainforest.</p>
@@ -313,7 +340,7 @@
             <button class="expand-btn" onclick="togglePost('post10')">Read the Full Guide</button>
             <div id="post10" class="full-article">
                 <p>Aloha and welcome!</p>
-                <p>As your hosts at Aloha Crater Lodge, we’re excited to share the unique wonders of our home in 2026. Nestled in the native ʻōhiʻa lehua fern forest on the edge of the volcanic plateau, our lodge is more than just a place to stay—it's your private gateway to intimate encounters with nature found nowhere else on Earth.</p>
+                <p>As your hosts at Aloha Crater Lodge, we’re excited to share the unique wonders of our home in 2026. Located in the native ʻōhiʻa lehua fern forest on the edge of the volcanic plateau, our lodge is more than just a place to stay—it's your private gateway to intimate encounters with nature found nowhere else on Earth.</p>
                 <p>To help you connect deeply with this majestic environment, we offer binoculars for our guests to use. Whether you're tracking the flight of a rare honeycreeper at dawn or marveling at the Milky Way from our gardens, we provide the tools for an unforgettable 2026 adventure.</p>
                 <p><strong>Part 1: Birdwatching in a Living 2026 Sanctuary</strong></p>
                 <p>The forests surrounding Aloha Crater Lodge are a vital sanctuary for native Hawaiian birds, many of which are endangered and found only here. The higher elevation and native vegetation create a critical refuge for these rare species, offering a birdwatching experience distinct from anywhere else on the island.</p>
@@ -368,7 +395,7 @@
         <ul class="magma-list">
             <li>
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <div><strong style="color:#fff;">1. Contactless Deployment.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
+                <div><strong style="color:#fff;">1. Contactless Arrival.</strong> You will receive your secure 4-digit entry code via SMS 24 hours prior to arrival.</div>
             </li>
             <li>
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>

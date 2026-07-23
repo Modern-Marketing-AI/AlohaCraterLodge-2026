@@ -22,51 +22,71 @@
     }
   </script>
   <style>
-    .site-alert{background:#aa0000;color:#fff;text-align:center;padding:9px 12px;font-weight:bold;font-size:0.82rem;letter-spacing:.04em}
-    .site-alert a{color:#fff;text-decoration:none}
-    .site-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:#111;padding:.75rem 1.5rem;border-bottom:1px solid #222}
-    .site-nav .logo{color:#ff4500;font-weight:900;font-size:1.1rem;letter-spacing:.08em;white-space:nowrap}
-    .site-nav .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-    .site-nav .nav-links a{color:#ccc;text-decoration:none;border:1px solid #444;padding:5px 11px;border-radius:4px;font-size:.75rem;font-weight:bold;letter-spacing:.04em;transition:all .2s;white-space:nowrap}
-    .site-nav .nav-links a:hover{border-color:#ff4500;color:#ff4500}
-    .site-nav .nav-links .reserve{background:rgba(255,69,0,.15);color:#ff4500;border-color:#ff4500}
-    .site-nav .nav-links .reserve:hover{background:#ff4500;color:#fff}
+    /* GLOBAL ALERT BAR */
+    .site-alert { background: #aa0000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-size: 0.85rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .site-alert a { color: #fff; text-decoration: none; }
 
-    .vibe-btn.active,.dur-btn.active,.int-btn.active{
-      background:#d97706 !important;
-      color:#fff !important;
-      box-shadow:0 0 0 2px #d97706;
+    /* UNIVERSAL NAV MATCHING OTHER PAGES */
+    .universal-nav { 
+        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; 
+        background: #1a1a1a; text-align: center; padding: 25px 5% 25px 5%; 
+        position: relative; z-index: 10; border-bottom: 1px solid rgba(255,69,0,0.2);
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .universal-nav .logo { 
+        font-family: 'Georgia', serif; font-size: 2.2em; color: #ff4500; 
+        text-shadow: 0 0 10px rgba(255, 69, 0, 0.3); letter-spacing: 2px; 
+        margin-bottom: 5px; display: block; text-decoration: none; font-weight: normal;
+    }
+    .universal-nav .subtitle { 
+        flex: 1; text-align: center; min-width: 200px; margin: 0;
+        font-style: italic; color: #ccc; font-family: 'Georgia', serif; 
+    }
+    .header-links { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .header-links a { 
+        display: inline-block; padding: 8px 16px; border: 1px solid rgba(255,69,0,0.3); 
+        border-radius: 4px; box-shadow: 0 0 6px rgba(255,69,0,0.1); color: #fff; 
+        text-decoration: none; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s ease; font-weight: normal;
+    }
+    .header-links a:hover { 
+        border-color: #ff4500; box-shadow: 0 0 12px rgba(255,69,0,0.6), 0 0 30px rgba(255,69,0,0.2), inset 0 0 8px rgba(255,69,0,0.15); 
+        transform: translateY(-1px); text-shadow: 0 0 8px rgba(255,69,0,0.6); 
+    }
+    .nav-reserve-btn { background: rgba(255, 69, 0, 0.15); }
+
+    .vibe-btn.active, .dur-btn.active, .int-btn.active {
+      background: #d97706 !important;
+      color: #fff !important;
+      box-shadow: 0 0 0 2px #d97706;
     }
   </style>
 </head>
 <body class="bg-slate-900 text-white font-sans antialiased min-h-[100dvh] overflow-y-auto">
 
-  <!-- Site alert bar -->
   <div class="site-alert">
     <a href="live-feed.html">[ LIVE SUMMIT CAM ]</a>
     &nbsp;|&nbsp;
     <a href="volcano-guide.html#latest">[ READ THE LATEST BASECAMP DISPATCH ]</a>
   </div>
 
-  <!-- Universal nav -->
-  <nav class="site-nav">
-    <div class="logo">ALOHA CRATER LODGE</div>
-    <div class="nav-links">
-      <a href="index.html">BASECAMP (HOME)</a>
-      <a href="suites.html">SUITES</a>
-      <a href="wellness.html">WELLNESS</a>
-      <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
-      <a href="faq.html">FAQ</a>
-      <a href="guest-concierge.html">BASECAMP COMMAND</a>
-      <a href="itinerary.html" style="border-color:#ff4500;color:#ff4500;box-shadow:0 0 10px rgba(255,69,0,0.4);text-shadow:0 0 8px rgba(255,69,0,0.5);">PLAN YOUR TRIP</a>
-      <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="reserve">RESERVE BASECAMP</a>
-    </div>
+  <nav class="universal-nav">
+      <a href="index.html" class="logo">ALOHA CRATER LODGE</a>
+      <p class="subtitle">A Private Rainforest Retreat at the Edge of Kīlauea</p>
+      <div class="header-links">
+          <a href="index.html">BASECAMP (HOME)</a>
+          <a href="suites.html">SUITES</a>
+          <a href="wellness.html">WELLNESS</a>
+          <a href="volcano-guide.html">THE VOLCANO GUIDE</a>
+          <a href="faq.html">FAQ</a>
+          <a href="guest-concierge.html">BASECAMP COMMAND</a>
+          <a href="itinerary.html" style="border-color: #ff4500; box-shadow: 0 0 12px rgba(255, 69, 0, 0.6), inset 0 0 8px rgba(255, 69, 0, 0.15); text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);">PLAN YOUR TRIP</a>
+          <a href="specials.html">CURRENT SPECIALS</a>
+          <a href="https://hotels.cloudbeds.com/en/reservation/ifCVNX" target="_blank" class="nav-reserve-btn">RESERVE BASECAMP</a>
+      </div>
   </nav>
 
-  <!-- Unified vertical column -->
   <div class="max-w-4xl mx-auto px-6 py-12 md:py-20 flex flex-col gap-16 pb-64">
 
-    <!-- ── Header ── -->
     <div class="border-b border-slate-800 pb-10">
       <div class="inline-block px-3 py-1 rounded-full bg-amber-600/20 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-widest uppercase mb-5">
         ⚡ Guaranteed Travel Friction Bypass
@@ -82,10 +102,8 @@
       </p>
     </div>
 
-    <!-- ── Blueprint Engine ── -->
     <div class="bg-slate-800/40 p-6 md:p-10 rounded-2xl border border-slate-800/80 space-y-8 shadow-inner">
 
-      <!-- Step 1 -->
       <div class="step-node">
         <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">1. Primary Focus</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -94,7 +112,6 @@
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="step-node">
         <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">2. Basecamp Duration</h2>
         <div class="grid grid-cols-3 gap-2">
@@ -104,7 +121,6 @@
         </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="step-node">
         <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">3. Arrival Dates</h2>
         <div class="flex gap-4">
@@ -121,7 +137,6 @@
         </div>
       </div>
 
-      <!-- Step 4 -->
       <div class="step-node">
         <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">4. Lodging Logistics</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -130,14 +145,12 @@
         </div>
       </div>
 
-      <!-- Start Over -->
       <div id="reset-row" style="display:none">
         <button onclick="resetPlanner()" class="w-full px-4 py-2 rounded border border-slate-600 text-slate-400 hover:border-slate-400 hover:text-white text-xs font-semibold tracking-widest uppercase transition">
           ↺ Start Over
         </button>
       </div>
 
-      <!-- Step 5 -->
       <div class="step-node">
         <h2 class="text-xs font-bold tracking-widest text-emerald-300 uppercase mb-3">5. Deliver Blueprint</h2>
         <input type="email" id="email-capture" placeholder="Enter primary email…"
@@ -150,7 +163,6 @@
 
     </div>
 
-    <!-- ── Dynamic Timeline ── -->
     <div id="timeline-container" class="flex flex-col gap-10">
 
       <div class="w-full py-4 text-left max-w-3xl" id="manifesto-block">
@@ -173,7 +185,6 @@
   <div id="site-footer"></div>
   <script src="footer.js"></script>
 
-  <!-- Fixed booking footer -->
   <div class="fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur border-t border-slate-700 py-3 px-6 z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4">
       <p class="text-base text-slate-300 flex-grow text-center sm:text-left">Secure your room and e-bike access to bypass National Park vehicle gridlock.</p>
@@ -212,7 +223,7 @@
         <div class="pl-6 border-l-2 border-emerald-500/40 py-2 space-y-2">
           <div class="text-xs font-bold tracking-widest text-emerald-400 uppercase">08:00 AM — Basecamp Staging &amp; Provisioning</div>
           <h3 class="font-extrabold text-2xl text-white tracking-tight">Acquire Supplies &amp; Clear Entry Gate</h3>
-          <p class="text-base text-slate-300 leading-relaxed max-w-3xl">Target regional distribution points in Hilo (such as KTA Super Stores) for heavy exploration provisions before completing mountain ascent. Check into your retreat framework early to step past the 10:00 AM multi-hour entry gate car logjams using our direct, private 2-mile bicycle access trail.</p>
+          <p class="text-base text-slate-300 leading-relaxed max-w-3xl">Target regional distribution points in Hilo (such as KTA Super Stores) for heavy exploration provisions before completing mountain ascent. Check into your basecamp framework early to step past the 10:00 AM multi-hour entry gate car logjams using our direct, private 2-mile bicycle access trail.</p>
         </div>`,
 
       afternoon_lava: `
