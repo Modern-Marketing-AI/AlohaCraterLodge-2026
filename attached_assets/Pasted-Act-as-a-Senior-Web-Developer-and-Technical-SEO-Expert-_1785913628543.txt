@@ -1,0 +1,29 @@
+Act as a Senior Web Developer and Technical SEO Expert. We need to fix a critical Google Search Console indexing issue immediately. 
+
+Google indexed 0 pages because our XML sitemap and site routing are sending conflicting signals (redirects, noindex tags, duplicate canonicals).
+
+Please perform a full audit and code refactor across the repository to address the following issues:
+
+1. XML Sitemap Generation (`sitemap.xml` / dynamic sitemap routes):
+   - Ensure the XML sitemap ONLY lists clean, 200 OK status, canonical URLs.
+   - Automatically filter out and REMOVE any URLs from the sitemap that perform 301/302 redirects, contain a `noindex` tag, or have an alternate canonical tag.
+   - Verify all URLs in the sitemap use full absolute canonical paths (e.g., standardizing protocol `https://` and consistent trailing slashes).
+
+2. Meta Tags & Robots Headers (`noindex` audit):
+   - Search the codebase for `<meta name="robots" content="noindex">` or `X-Robots-Tag: noindex`.
+   - Remove `noindex` directives from all core public pages that are meant to be indexed by search engines. Keep `noindex` only on private/utility routes (e.g., `/admin`, `/login`, `/thank-you`).
+
+3. Canonical Tags (`<link rel="canonical">`):
+   - Ensure every indexable page dynamically or statically renders a self-referencing canonical tag pointing directly to its clean URL.
+   - Fix any duplicate or hardcoded canonical tags pointing to wrong or old domain variants.
+
+4. Redirects & Internal Links (Fixing the 17 redirected URLs):
+   - Review server routing (Express, Next.js, Fastify, static redirects, etc.) and internal links.
+   - Update all internal site navigation and footer links so they point directly to final destination URLs (200 OK) rather than triggering intermediate 301/302 redirects.
+
+5. Page Content & Meta Verification:
+   - Ensure every indexable route renders complete HTML server-side (or via SSR/static generation) with unique `<title>` and `<meta name="description">` tags.
+
+Once you have completed the changes:
+1. Run the project and generate/fetch the updated `sitemap.xml` to verify it only contains 200 OK canonical URLs.
+2. Provide a summary of the exact files changed and the fixes applied.
